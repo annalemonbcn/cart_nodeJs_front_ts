@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from '@/variables/types'
 
 interface IAuthLayoutProps extends PropsWithChildren {
   imgSrc: string

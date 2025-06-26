@@ -1,16 +1,12 @@
 import styled from 'styled-components'
 import { colors, tokens } from '@/variables'
-import type { FontSize, FontWeight, TextColor } from './types'
+import type { ITextProps } from './types'
 
-const StyledText = styled.p<{
-  fontSizeProp?: FontSize
-  fontWeightProp?: FontWeight
-  textColorProp?: TextColor
-}>`
-  font-size: ${({ fontSizeProp }) => fontSizeProp && tokens.font.size[fontSizeProp]};
-  font-weight: ${({ fontWeightProp }) => fontWeightProp && tokens.font.weight[fontWeightProp]};
+const StyledText = styled.p<Partial<ITextProps>>`
+  font-size: ${({ size }) => size && tokens.font.size[size]};
+  font-weight: ${({ weight }) => weight && tokens.font.weight[weight]};
   margin: 0;
-  color: ${({ textColorProp }) => (textColorProp ? colors[textColorProp] : 'inherit')};
+  color: ${({ color }) => (color ? colors[color] : 'inherit')};
 `
 
 export { StyledText }

@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from '@/variables/types'
 import { tokens, colors } from '@/variables'
 
 type FontSize = keyof typeof tokens.font.size

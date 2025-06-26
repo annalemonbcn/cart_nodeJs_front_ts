@@ -6,7 +6,7 @@ const colors = {
   offWhite: '#EDEEF2',
   whiteSmoke: '#F6F6F6',
   primary: '#8A33FD',
-  red: '#EE1D52'
+  danger: '#EE1D52'
 }
 
 const space = {

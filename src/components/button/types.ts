@@ -1,8 +1,8 @@
-import type { PropsWithChildren } from 'react'
+import type { ButtonHTMLAttributes } from 'react'
 
 type ButtonVariant = 'primary' | 'secondary'
 
-interface IButtonProps extends PropsWithChildren {
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
   isRounded?: boolean
 }
