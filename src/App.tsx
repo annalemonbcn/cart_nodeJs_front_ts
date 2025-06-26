@@ -3,6 +3,7 @@ import axios from 'axios'
 import { AppContainer, MainContainer } from './styles'
 import Header from './common/header'
 import { Routes, Route } from 'react-router'
+import LoginPage from './pages/loginPage'
 
 const useFetchSample = () => {
   const { data, isLoading, isError } = useQuery({
@@ -25,9 +26,8 @@ const App = () => {
       <MainContainer>
         <Routes>
           <Route path="/" element={<div>Home</div>} />
-          <Route path="/login" element={<div>Login</div>} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<div>Signup</div>} />
-          {/* <Route path="/login" element={<LoginPage />} /> */}
           {/* <Route path="/signup" element={<SignUpPage />} /> */}
         </Routes>
       </MainContainer>

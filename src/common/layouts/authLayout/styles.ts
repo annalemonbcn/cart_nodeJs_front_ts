@@ -1,0 +1,23 @@
+import styled from 'styled-components'
+import FlexContainer from '@/components/flexContainer'
+import type { IAuthLayoutProps } from './types'
+
+const StyledAuthLayout = styled(FlexContainer)`
+  height: 100%;
+`
+
+const ImageContainer = styled.div<Pick<IAuthLayoutProps, 'imgSrc'>>`
+  width: 50%;
+  background-image: url('${({ imgSrc }) => imgSrc}');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+`
+
+const FormContainer = styled(FlexContainer)`
+  flex: 0 0 50%;
+
+  padding: 60px 78px;
+`
+
+export { StyledAuthLayout, ImageContainer, FormContainer }

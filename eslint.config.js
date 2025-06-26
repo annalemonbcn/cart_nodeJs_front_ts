@@ -22,7 +22,8 @@ export default tseslint.config([
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'no-console': ['error', { allow: ['warn', 'error'] }],
-      'arrow-body-style': ['error', 'as-needed']
+      'arrow-body-style': ['error', 'as-needed'],
+      'prefer-const': 'error'
     }
   }
 ])
