@@ -6,7 +6,7 @@ import { LoginForm } from './components/loginForm'
 const LoginPage = () => (
   <AuthLayout imgSrc="/images/login.png" headerText="Sign In">
     <SocialLogin />
-    <Separator displayText={true} />
+    <Separator displayText />
     <LoginForm />
   </AuthLayout>
 )

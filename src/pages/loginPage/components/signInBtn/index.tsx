@@ -4,12 +4,14 @@ import { StyledButton } from './styles'
 import Text from '@/components/text'
 import Link from '@/components/link'
 
-// TODO: fix
 const SignInBtn = () => {
   const { handleSubmit } = useFormContext<LoginFormType>()
 
-  // eslint-disable-next-line no-console
-  const onSubmit: SubmitHandler<LoginFormType> = (data) => console.log('data', data)
+  const onSubmit: SubmitHandler<LoginFormType> = (data) => {
+    // eslint-disable-next-line no-console
+    console.log('data', data)
+    // TODO: implement API
+  }
 
   const handleClick = handleSubmit(onSubmit)
 

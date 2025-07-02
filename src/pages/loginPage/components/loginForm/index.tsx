@@ -3,9 +3,9 @@ import type { LoginFormType } from './types'
 import CustomForm from '@/components/customForm'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables'
-import FormField from '@/components/formField'
-import Input from '@/components/input'
 import { SignInBtn } from '../signInBtn'
+import EmailFormField from '@/common/emailFormField'
+import PasswordFormField from '@/common/passwordFormField'
 
 const LoginForm = () => {
   const methods = useForm<LoginFormType>()
@@ -14,15 +14,12 @@ const LoginForm = () => {
 
   return (
     <CustomForm methods={methods}>
-      <FlexContainer flexDirection="column" gap={tokens.space.md} className="parent">
-        <FormField label="Email address">
-          <Input name="email" type="text" />
-        </FormField>
+      <FlexContainer flexDirection="column" gap={tokens.space.md}>
+        <EmailFormField<LoginFormType> />
 
-        <FormField label="Password">
-          <Input name="password" type="password" />
-        </FormField>
-        <SignInBtn /> 
+        <PasswordFormField<LoginFormType> />
+
+        <SignInBtn />
       </FlexContainer>
     </CustomForm>
   )

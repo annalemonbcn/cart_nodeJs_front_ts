@@ -11,6 +11,8 @@ const StyledLink = styled(Link)<Partial<LinkProps>>`
   color: ${({ color }) => color || 'inherit'};
   margin: 0;
 
+  cursor: pointer;
+
   &:hover {
     opacity: 0.8;
   }

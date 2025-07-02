@@ -6,19 +6,15 @@ import { tokens } from '@/variables'
 
 const FormField = ({
   label,
+  inputName,
   isRequired = true,
   hasError = false,
   errorMessage,
   children,
   shouldHide = false
 }: IFormFieldProps) => (
-  <StyledFormField
-    flexDirection="column"
-    gap={tokens.space.sm2}
-    shouldHide={shouldHide}
-    className="FormField"
-  >
-    <Text as="label" size="s3" color="darkNeutral">
+  <StyledFormField flexDirection="column" gap={tokens.space.sm2} shouldHide={shouldHide} className="FormField">
+    <Text as="label" size="s3" color="darkNeutral" htmlFor={inputName}>
       {capitalize(label)}
       {isRequired && '*'}
     </Text>

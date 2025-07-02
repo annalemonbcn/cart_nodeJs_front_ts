@@ -1,6 +1,5 @@
-interface IInputProps {
-  name: string
-  type: string
+interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  placeholderText?: string
 }
 
 export type { IInputProps }
