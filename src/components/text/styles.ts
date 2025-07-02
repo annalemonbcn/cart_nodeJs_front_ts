@@ -7,6 +7,8 @@ const StyledText = styled.p<Partial<ITextProps>>`
   font-weight: ${({ weight }) => weight && tokens.font.weight[weight]};
   margin: 0;
   color: ${({ color }) => (color ? colors[color] : 'inherit')};
+
+  ${({ underline }) => underline && 'text-decoration: underline'};
 `
 
 export { StyledText }

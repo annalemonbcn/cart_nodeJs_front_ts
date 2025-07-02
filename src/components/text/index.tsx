@@ -1,8 +1,16 @@
 import type { ITextProps } from './types'
 import { StyledText } from './styles'
 
-const Text = ({ children, size = 's4', weight = 'regular', color, as = 'p', ...rest }: ITextProps) => (
-  <StyledText as={as} size={size} weight={weight} color={color} {...rest}>
+const Text = ({
+  children,
+  size = 's4',
+  weight = 'regular',
+  color,
+  as = 'p',
+  underline = false,
+  ...rest
+}: ITextProps) => (
+  <StyledText as={as} size={size} weight={weight} color={color} underline={underline} {...rest}>
     {children}
   </StyledText>
 )

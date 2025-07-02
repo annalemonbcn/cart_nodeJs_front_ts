@@ -1,9 +1,9 @@
+import { colors, tokens } from '@/variables'
 import styled from 'styled-components'
-import type { IFormFieldProps } from './types'
-import FlexContainer from '../flexContainer'
 
-const StyledFormField = styled(FlexContainer)<Partial<IFormFieldProps>>`
-  display: ${({ shouldHide }) => (shouldHide ? 'none' : 'flex')};
+const StyledLabel = styled.label`
+  font-size: ${tokens.font.size.s3};
+  color: ${colors.darkNeutral};
 `
 
-export { StyledFormField }
+export { StyledLabel }

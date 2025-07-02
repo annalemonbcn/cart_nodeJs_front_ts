@@ -11,7 +11,7 @@ const Header = () => (
         <Button variant="primary">Login</Button>
       </Link>
 
-      <Link to="/login">
+      <Link to="/signup">
         <Button variant="secondary">Register</Button>
       </Link>
     </FlexContainer>

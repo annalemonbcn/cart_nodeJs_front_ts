@@ -4,6 +4,7 @@ import { AppContainer, MainContainer } from './styles'
 import Header from './common/header'
 import { Routes, Route } from 'react-router'
 import LoginPage from './pages/loginPage'
+import SignUpPage from './pages/signUp'
 
 const useFetchSample = () => {
   const { data, isLoading, isError } = useQuery({
@@ -27,8 +28,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<div>Home</div>} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<div>Signup</div>} />
-          {/* <Route path="/signup" element={<SignUpPage />} /> */}
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
       </MainContainer>
     </AppContainer>

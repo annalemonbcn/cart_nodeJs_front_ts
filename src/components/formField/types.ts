@@ -1,12 +1,13 @@
 import type { PropsWithChildren } from '@/variables/types'
+import type { IShowPasswordIconProps } from './components/showPasswordIcon/types'
 
-interface IFormFieldProps extends PropsWithChildren {
+interface IFormFieldProps extends PropsWithChildren, IShowPasswordIconProps {
   label: string
   inputName: string
   isRequired?: boolean
   hasError?: boolean
   errorMessage?: string
-  shouldHide?: boolean
+  showIcon?: boolean
 }
 
 export type { IFormFieldProps }

@@ -1,6 +1,6 @@
 import FormField from '@/components/formField'
 import Input from '@/components/input'
-import Text from '@/components/text'
+import { useState } from 'react'
 import { type FieldValues, type Path, useFormContext } from 'react-hook-form'
 
 const PasswordFormField = <T extends FieldValues>() => {
@@ -11,8 +11,19 @@ const PasswordFormField = <T extends FieldValues>() => {
 
   const passwordFieldError = errors.password
 
+  const [showPassword, setShowPassword] = useState(false)
+  const toggleShowPassword = () => setShowPassword((prev) => !prev)
+
   return (
-    <FormField label="Password" inputName="password">
+    <FormField
+      label="Password"
+      inputName="password"
+      showIcon
+      showPassword={showPassword}
+      toggleShowPassword={toggleShowPassword}
+      hasError={!!passwordFieldError}
+      errorMessage={passwordFieldError?.message as string}
+    >
       <Input
         {...register('password' as Path<T>, {
           required: 'Password is required',
@@ -22,13 +33,9 @@ const PasswordFormField = <T extends FieldValues>() => {
               'Password must be at least 8 characters long, include one uppercase letter and one special character'
           }
         })}
-        type="password"
+        type={showPassword ? 'text' : 'password'}
+        autoComplete="current-password"
       />
-      {passwordFieldError && (
-        <Text color="danger" size="s2">
-          {passwordFieldError?.message as string}
-        </Text>
-      )}
     </FormField>
   )
 }

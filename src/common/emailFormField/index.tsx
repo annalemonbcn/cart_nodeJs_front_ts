@@ -1,6 +1,5 @@
 import FormField from '@/components/formField'
 import Input from '@/components/input'
-import Text from '@/components/text'
 import { type FieldValues, type Path, useFormContext } from 'react-hook-form'
 
 const EmailFormField = <T extends FieldValues>() => {
@@ -12,7 +11,12 @@ const EmailFormField = <T extends FieldValues>() => {
   const emailFieldError = errors.email
 
   return (
-    <FormField label="Email address" inputName="email">
+    <FormField
+      label="Email address"
+      inputName="email"
+      hasError={!!emailFieldError}
+      errorMessage={emailFieldError?.message as string}
+    >
       <Input
         {...register('email' as Path<T>, {
           required: {
@@ -25,12 +29,8 @@ const EmailFormField = <T extends FieldValues>() => {
           }
         })}
         type="text"
+        autoComplete="email"
       />
-      {emailFieldError && (
-        <Text color="danger" size="s2">
-          {emailFieldError?.message as string}
-        </Text>
-      )}
     </FormField>
   )
 }
