@@ -5,6 +5,7 @@ import Header from './common/header'
 import { Routes, Route } from 'react-router'
 import LoginPage from './pages/loginPage'
 import SignUpPage from './pages/signUp'
+import { Toaster } from 'sonner'
 
 const useFetchSample = () => {
   const { data, isLoading, isError } = useQuery({
@@ -23,6 +24,7 @@ const App = () => {
 
   return (
     <AppContainer>
+      <Toaster position="top-right" richColors />
       <Header />
       <MainContainer>
         <Routes>
