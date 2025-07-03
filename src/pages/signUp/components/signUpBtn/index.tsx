@@ -1,24 +1,24 @@
 import { useFormContext } from 'react-hook-form'
-import type { SignUpFormType } from '../signUpForm/types'
 import { StyledButton } from './styles'
 import Text from '@/components/text'
 import Link from '@/components/link'
 import { type SubmitHandler } from 'react-hook-form'
+import type { SignUpFormType } from '../signUpForm/types'
+import { useRegisterUser } from '../../hooks'
 
 const SignUpBtn = () => {
   const { handleSubmit } = useFormContext<SignUpFormType>()
 
-  const onSubmit: SubmitHandler<SignUpFormType> = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data)
-  }
+  const { mutate, isPending } = useRegisterUser()
 
-  const handleClick = handleSubmit(onSubmit)
+  const onSubmit: SubmitHandler<SignUpFormType> = async (data) => {
+    mutate(data)
+  }
 
   return (
     <>
-      <StyledButton variant="primary" onClick={handleClick}>
-        Sign Up
+      <StyledButton variant="primary" onClick={handleSubmit(onSubmit)}>
+        {isPending ? 'Registering...' : 'Sign Up'}
       </StyledButton>
       <Text size="s3" color="darkNeutral">
         Already have an account? <Link to="/login">Log In</Link>
