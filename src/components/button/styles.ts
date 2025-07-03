@@ -25,6 +25,11 @@ const StyledButton = styled.button<Partial<IButtonProps>>`
   &:hover {
     opacity: 0.8;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 `
 
 export { StyledButton }
