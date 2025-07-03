@@ -23,7 +23,7 @@ const FormField = ({
         {capitalize(label)}
         {isRequired && '*'}
       </StyledLabel>
-      {showIcon && toggleShowPassword !== undefined && showPassword !== undefined && (
+      {showIcon && showPassword !== undefined && (
         <ShowPasswordIcon showPassword={showPassword} toggleShowPassword={toggleShowPassword} />
       )}
     </FlexContainer>

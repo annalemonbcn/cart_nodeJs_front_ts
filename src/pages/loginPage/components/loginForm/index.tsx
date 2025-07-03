@@ -16,7 +16,9 @@ const LoginForm = () => {
       <FlexContainer flexDirection="column" gap={tokens.space.md}>
         <EmailFormField<LoginFormType> />
         <PasswordFormField<LoginFormType> />
+
         <Link to="_void">Forget your password?</Link>
+
         <SignInBtn />
       </FlexContainer>
     </CustomForm>

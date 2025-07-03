@@ -1,15 +1,15 @@
+import { useAuthServices } from '@/services/auth'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useAuthServices } from '@/services/auth'
 
-const useRegisterUser = () => {
-  const { registerUser } = useAuthServices()
+const useLoginUser = () => {
+  const { loginUser } = useAuthServices()
 
   const mutation = useMutation({
-    ...registerUser(),
+    ...loginUser(),
     onSuccess: () => {
       // Puedes redirigir, mostrar un toast, etc.
-      toast.success('Registration successful! 🎉')
+      toast.success('Login successful! 🎉')
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
@@ -21,4 +21,4 @@ const useRegisterUser = () => {
   return mutation
 }
 
-export { useRegisterUser }
+export { useLoginUser }

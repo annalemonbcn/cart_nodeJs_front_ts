@@ -11,13 +11,11 @@ const SignUpBtn = () => {
 
   const { mutate, isPending } = useRegisterUser()
 
-  const onSubmit: SubmitHandler<SignUpFormType> = async (data) => {
-    mutate(data)
-  }
+  const onSubmit: SubmitHandler<SignUpFormType> = (data) => mutate(data)
 
   return (
     <>
-      <StyledButton variant="primary" onClick={handleSubmit(onSubmit)}>
+      <StyledButton variant="primary" onClick={handleSubmit(onSubmit)} disabled={isPending}>
         {isPending ? 'Registering...' : 'Sign Up'}
       </StyledButton>
       <Text size="s3" color="darkNeutral">
