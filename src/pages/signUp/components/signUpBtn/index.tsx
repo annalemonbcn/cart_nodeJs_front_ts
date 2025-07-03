@@ -3,7 +3,7 @@ import { StyledButton } from './styles'
 import Text from '@/components/text'
 import Link from '@/components/link'
 import { type SubmitHandler } from 'react-hook-form'
-import type { SignUpFormType } from '../../types'
+import type { SignUpFormType } from '../signUpForm/types'
 import { useRegisterUser } from '../../hooks'
 
 const SignUpBtn = () => {

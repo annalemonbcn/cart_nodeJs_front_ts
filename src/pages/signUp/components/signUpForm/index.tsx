@@ -6,7 +6,7 @@ import EmailFormField from '@/common/emailFormField'
 import PasswordFormField from '@/common/passwordFormField'
 import { SignUpBtn } from '../signUpBtn'
 import TextFormField from '@/common/textFormField'
-import type { SignUpFormType } from '../../types'
+import type { SignUpFormType } from './types'
 
 const SignUpForm = () => {
   const methods = useForm<SignUpFormType>()

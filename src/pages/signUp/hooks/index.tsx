@@ -1,19 +1,12 @@
 import { useMutation } from '@tanstack/react-query'
-import api from '@/lib/axios'
 import { toast } from 'sonner'
-import type { SignUpFormType } from '../types'
-
-const registerUserService = () => ({
-  mutationKey: ['auth', 'register'],
-  mutationFn: async (data: SignUpFormType) => {
-    const response = await api.post('/auth/register', data)
-    return response.data
-  }
-})
+import { useAuthServices } from '@/services/auth'
 
 const useRegisterUser = () => {
+  const { registerUser } = useAuthServices()
+
   const mutation = useMutation({
-    ...registerUserService(),
+    ...registerUser(),
     onSuccess: () => {
       // Puedes redirigir, mostrar un toast, etc.
       toast.success('User registered successfully! 🎉')
