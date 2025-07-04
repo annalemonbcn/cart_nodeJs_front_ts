@@ -505,6 +505,16 @@ export interface paths {
                             /** @example User successfully logged in */
                             message?: string;
                             payload?: {
+                                user?: {
+                                    /** @example 64e3f4... */
+                                    _id?: string;
+                                    /** @example Alice */
+                                    firstName?: string;
+                                    /** @example Smith */
+                                    lastName?: string;
+                                    /** @example alice@example.com */
+                                    email?: string;
+                                };
                                 /** @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... */
                                 token?: string;
                             };

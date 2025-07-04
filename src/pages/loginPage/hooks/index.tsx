@@ -7,12 +7,13 @@ const useLoginUser = () => {
 
   const mutation = useMutation({
     ...loginUser(),
-    onSuccess: () => {
-      // Puedes redirigir, mostrar un toast, etc.
+    onSuccess: (data) => {
+      localStorage.setItem('token', data.payload?.token || '')
       toast.success('Login successful! 🎉')
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
+      localStorage.removeItem('token')
       const errorMsg = error?.response?.data?.message || 'Unexpected error occurred'
       toast.error(errorMsg)
     }
