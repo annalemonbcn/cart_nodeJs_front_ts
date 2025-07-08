@@ -4,7 +4,7 @@ import apiClient from '@/lib/axios'
 const COMMON_KEYS = ['auth']
 
 const registerUser = () => ({
-  mutationKey: [...COMMON_KEYS, 'register'],
+  mutationKey: [...COMMON_KEYS, 'registerUser'],
   mutationFn: async (data: SignUpFormType) => {
     const response = await apiClient.post('/auth/register', data)
     return response.data
@@ -12,7 +12,7 @@ const registerUser = () => ({
 })
 
 const loginUser = () => ({
-  mutationKey: [...COMMON_KEYS, 'login'],
+  mutationKey: [...COMMON_KEYS, 'loginUser'],
   mutationFn: async (data: LoginFormType): Promise<LoginResponse> => {
     const response = await apiClient.post('/auth/login', data)
     return response.data

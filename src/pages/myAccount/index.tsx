@@ -1,20 +1,25 @@
+import { useAuthContext } from '@/auth/provider/useAuthContext'
 import Loader from '@/components/loader'
 import { useUserServices } from '@/services/user'
 import { useQuery } from '@tanstack/react-query'
 
 const useLoadUser = () => {
+  const { isAuthenticated } = useAuthContext()
+
   const { getUserInfo } = useUserServices()
-  const { data, isLoading } = useQuery(getUserInfo())
+  const { data, isLoading } = useQuery({ ...getUserInfo(), enabled: isAuthenticated })
 
   return { data, isLoading }
 }
 
 const MyAccount = () => {
-  const { isLoading } = useLoadUser()
+  const { data, isLoading } = useLoadUser()
 
   if (isLoading) return <Loader />
 
-  return <div>MyAccount</div>
+  if(!data) return <div>No Data</div>
+
+  return <div>Welcome, {data.payload?.firstName}</div>
 }
 
-export default MyAccount
+export { MyAccount }

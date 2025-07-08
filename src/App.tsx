@@ -1,42 +1,16 @@
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import { AppContainer, MainContainer } from './styles'
-import Header from './common/header'
-import { Routes, Route } from 'react-router'
-import LoginPage from './pages/loginPage'
-import SignUpPage from './pages/signUp'
 import { Toaster } from 'sonner'
-import MyAccount from './pages/myAccount'
+import Header from './common/header'
+import Router from './routes'
 
-// const useFetchSample = () => {
-//   const { data, isLoading, isError } = useQuery({
-//     queryKey: ['products'],
-//     queryFn: async () => {
-//       const res = await axios.get('http://localhost:8080/api/products')
-//       return res.data
-//     }
-//   })
-
-//   return { data, isLoading, isError }
-// }
-
-const App = () => {
-  // useFetchSample()
-
-  return (
-    <AppContainer>
-      <Toaster position="top-right" richColors />
-      <Header />
-      <MainContainer>
-        <Routes>
-          <Route path="/" element={<div>Home</div>} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/my-account" element={<MyAccount />} />
-        </Routes>
-      </MainContainer>
-    </AppContainer>
-  )
-}
+const App = () => (
+  <AppContainer>
+    <Toaster position="top-right" richColors />
+    <Header />
+    <MainContainer>
+      <Router />
+    </MainContainer>
+  </AppContainer>
+)
 
 export default App
