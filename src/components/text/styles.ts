@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, tokens } from '@/variables'
+import { colors, tokens } from '@/variables/styles'
 import type { ITextProps } from './types'
 
 const StyledText = styled.p<Partial<ITextProps>>`

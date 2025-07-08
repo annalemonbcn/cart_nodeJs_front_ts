@@ -1,5 +1,5 @@
-import type { PropsWithChildren } from '@/variables/types'
-import { tokens, colors } from '@/variables'
+import type { PropsWithChildren } from '@/variables/types/global.types'
+import { tokens, colors } from '@/variables/styles'
 
 type FontSize = keyof typeof tokens.font.size
 type FontWeight = keyof typeof tokens.font.weight

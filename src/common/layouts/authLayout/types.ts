@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from '@/variables/types'
+import type { PropsWithChildren } from '@/variables/types/global.types'
 
 interface IAuthLayoutProps extends PropsWithChildren {
   imgSrc: string

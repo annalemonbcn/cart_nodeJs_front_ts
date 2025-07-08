@@ -1,6 +1,6 @@
 import CustomForm from '@/components/customForm'
 import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables'
+import { tokens } from '@/variables/styles'
 import { useForm } from 'react-hook-form'
 import EmailFormField from '@/common/emailFormField'
 import PasswordFormField from '@/common/passwordFormField'

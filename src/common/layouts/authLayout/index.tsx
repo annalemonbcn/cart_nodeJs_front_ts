@@ -1,4 +1,4 @@
-import { tokens } from '@/variables'
+import { tokens } from '@/variables/styles'
 import type { IAuthLayoutProps } from './types'
 import { FormContainer, ImageContainer, StyledAuthLayout } from './styles'
 import FlexContainer from '@/components/flexContainer'

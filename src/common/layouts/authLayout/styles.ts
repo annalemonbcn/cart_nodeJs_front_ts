@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
 import type { IAuthLayoutProps } from './types'
-import { tokens } from '@/variables'
+import { tokens } from '@/variables/styles'
 
 const StyledAuthLayout = styled(FlexContainer)`
   height: 100%;

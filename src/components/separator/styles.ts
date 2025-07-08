@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import FlexContainer from '../flexContainer'
-import { colors, tokens } from '@/variables'
+import { colors, tokens } from '@/variables/styles'
 import type { ISeparatorProps } from './types'
 
 const StyledSeparator = styled(FlexContainer)<ISeparatorProps>`
