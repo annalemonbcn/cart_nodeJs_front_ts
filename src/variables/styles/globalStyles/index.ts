@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { colors } from '../../index.ts'
+import { colors } from '../index.ts'
 
 const GlobalStyles = createGlobalStyle`
   *, *::before, *::after {

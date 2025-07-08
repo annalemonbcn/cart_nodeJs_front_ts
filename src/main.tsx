@@ -7,9 +7,11 @@ import GlobalStyles from './variables/styles/globalStyles/index.ts'
 import isPropValid from '@emotion/is-prop-valid'
 import { StyleSheetManager } from 'styled-components'
 import type { ComponentType } from 'react'
+import { AuthProvider } from './auth/provider/authContext.tsx'
 
 const queryClient = new QueryClient()
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function shouldForwardProp(propName: string, target: string | ComponentType<any>) {
   if (typeof target === 'string') {
     // For HTML elements, forward the prop if it is a valid HTML attribute
@@ -22,12 +24,14 @@ function shouldForwardProp(propName: string, target: string | ComponentType<any>
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-          <GlobalStyles />
-          <App />
-        </StyleSheetManager>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+            <GlobalStyles />
+            <App />
+          </StyleSheetManager>
+        </BrowserRouter>
+      </AuthProvider>
     </QueryClientProvider>
   </StrictMode>
 )

@@ -1,7 +1,7 @@
 import type { IFormFieldProps } from './types'
 import Text from '@/components/text'
 import { capitalize } from '@/utils/string'
-import { tokens } from '@/variables'
+import { tokens } from '@/variables/styles'
 import FlexContainer from '../flexContainer'
 import { ShowPasswordIcon } from './components/showPasswordIcon'
 import { StyledLabel } from './styles'

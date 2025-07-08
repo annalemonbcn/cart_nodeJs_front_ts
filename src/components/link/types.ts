@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from '@/variables/types'
+import type { PropsWithChildren } from '@/variables/types/global.types'
 import type { FontSize } from '../text/types'
 import type { FontWeight } from '../text/types'
 import type { TextColor } from '../text/types'

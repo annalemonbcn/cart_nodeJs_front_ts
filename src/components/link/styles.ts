@@ -1,4 +1,4 @@
-import { tokens } from '@/variables'
+import { tokens } from '@/variables/styles'
 import { Link } from 'react-router'
 import styled from 'styled-components'
 import type { LinkProps } from './types'

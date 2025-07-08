@@ -1,5 +1,5 @@
 import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables'
+import { tokens } from '@/variables/styles'
 import styled from 'styled-components'
 
 const StyledShowPasswordIcon = styled(FlexContainer)`

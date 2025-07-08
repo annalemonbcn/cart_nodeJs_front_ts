@@ -1,13 +1,12 @@
-// import type { LoginResponse } from '@/types/api'
 import type { LoginFormType, LoginResponse, SignUpFormType } from './types'
-import api from '@/lib/axios'
+import apiClient from '@/lib/axios'
 
 const COMMON_KEYS = ['auth']
 
 const registerUser = () => ({
   mutationKey: [...COMMON_KEYS, 'register'],
   mutationFn: async (data: SignUpFormType) => {
-    const response = await api.post('/auth/register', data)
+    const response = await apiClient.post('/auth/register', data)
     return response.data
   }
 })
@@ -15,7 +14,7 @@ const registerUser = () => ({
 const loginUser = () => ({
   mutationKey: [...COMMON_KEYS, 'login'],
   mutationFn: async (data: LoginFormType): Promise<LoginResponse> => {
-    const response = await api.post('/auth/login', data)
+    const response = await apiClient.post('/auth/login', data)
     return response.data
   }
 })

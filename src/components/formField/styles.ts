@@ -1,4 +1,4 @@
-import { colors, tokens } from '@/variables'
+import { colors, tokens } from '@/variables/styles'
 import styled from 'styled-components'
 
 const StyledLabel = styled.label`

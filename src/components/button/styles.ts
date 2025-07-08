@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import type { IButtonProps } from './types'
-import { colors, tokens } from '@/variables'
+import { colors, tokens } from '@/variables/styles'
 
 const primaryStyles = css`
   background-color: ${colors.primary};

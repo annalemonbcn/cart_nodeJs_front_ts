@@ -1,7 +1,7 @@
 import { StyledIcon, StyledShowPasswordIcon } from './styles'
 import type { IShowPasswordIconProps } from './types'
 import Text from '@/components/text'
-import { tokens } from '@/variables'
+import { tokens } from '@/variables/styles'
 
 const ShowPasswordIcon = ({ showPassword, toggleShowPassword }: IShowPasswordIconProps) => {
   const iconSrc = showPassword ? '/icons/eye_hide.svg' : '/icons/eye_show.svg'

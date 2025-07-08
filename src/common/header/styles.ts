@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, tokens } from '@/variables'
+import { colors, tokens } from '@/variables/styles'
 
 const StyledHeader = styled.header`
   grid-area: header;
