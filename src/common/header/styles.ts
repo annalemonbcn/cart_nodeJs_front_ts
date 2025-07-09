@@ -7,6 +7,10 @@ const StyledHeader = styled.header`
   padding: 30px 100px;
 
   border-bottom: ${tokens.borders.size.xs} solid ${colors.lightNeutral};
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 `
 
 export { StyledHeader }

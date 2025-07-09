@@ -3,7 +3,7 @@ import { HomePage } from './index.tsx'
 
 const HomePageRoute: Route = {
   name: 'home',
-  path: '/',
+  path: '/shop',
   displayText: 'Home',
   component: HomePage
 }

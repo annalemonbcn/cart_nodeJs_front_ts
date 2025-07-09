@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     background-color: ${colors.white};
     color: ${colors.mediumNeutral};
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
   }
 
