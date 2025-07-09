@@ -8,6 +8,8 @@ interface LinkProps extends PropsWithChildren {
   size?: FontSize
   weight?: FontWeight
   color?: TextColor
+  underline?: boolean
+  className?: string
 }
 
 export type { LinkProps }

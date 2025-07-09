@@ -1,4 +1,5 @@
 import { useAuthContext } from '@/auth/provider/useAuthContext'
+import Breadcrumb from '@/components/breadcrumb'
 import Loader from '@/components/loader'
 import { useUserServices } from '@/services/user'
 import { useQuery } from '@tanstack/react-query'
@@ -17,9 +18,14 @@ const MyAccount = () => {
 
   if (isLoading) return <Loader />
 
-  if(!data) return <div>No Data</div>
+  if (!data) return <div>No Data</div>
 
-  return <div>Welcome, {data.payload?.firstName}</div>
+  return (
+    <div>
+      <Breadcrumb />
+      <div>Welcome, {data.payload?.firstName}</div>
+    </div>
+  )
 }
 
 export { MyAccount }
