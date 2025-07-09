@@ -545,14 +545,17 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/user": {
+    "/api/users/me": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Get user profile */
+        /**
+         * Get user profile
+         * @description Returns the authenticated user's profile, excluding password and internal fields.
+         */
         get: {
             parameters: {
                 query?: never;
@@ -573,16 +576,39 @@ export interface paths {
                             status?: string;
                             /** @example 200 */
                             code?: number;
-                            payload?: {
-                                /** @example 64e3f4... */
-                                _id?: string;
-                                /** @example Alice */
-                                firstName?: string;
-                                /** @example Smith */
-                                lastName?: string;
-                                /** @example alice@example.com */
-                                email?: string;
-                            };
+                            payload?: components["schemas"]["User"];
+                        };
+                    };
+                };
+                /** @description Unauthorized */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @example error */
+                            status?: string;
+                            /** @example 401 */
+                            code?: number;
+                            /** @example Unauthorized */
+                            message?: string;
+                        };
+                    };
+                };
+                /** @description User not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @example error */
+                            status?: string;
+                            /** @example 404 */
+                            code?: number;
+                            /** @example User not found */
+                            message?: string;
                         };
                     };
                 };
@@ -614,11 +640,24 @@ export interface components {
             }[];
         };
         User: {
+            /** @example 60d0fe4f5311236168a109ca */
+            _id: string;
+            /** @example Jane */
             firstName: string;
+            /** @example Doe */
             lastName: string;
-            /** Format: email */
+            /** @example jane.doe@example.com */
             email: string;
-            password: string;
+            /** @example 30 */
+            age?: number;
+            /** @example 60d0fe4f5311236168a109cb */
+            cart?: string | null;
+            /**
+             * @default user
+             * @example user
+             * @enum {string}
+             */
+            role: "admin" | "user";
         };
     };
     responses: never;

@@ -11,4 +11,4 @@ const LoginPage = () => (
   </AuthLayout>
 )
 
-export default LoginPage
+export { LoginPage }

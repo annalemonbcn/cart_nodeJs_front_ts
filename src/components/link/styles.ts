@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import type { LinkProps } from './types'
 
 const StyledLink = styled(Link)<Partial<LinkProps>>`
-  text-decoration: underline;
+  text-decoration: ${({ underline }) => underline && 'underline'};
 
   font-size: ${({ size }) => size && tokens.font.size[size]};
   font-weight: ${({ weight }) => weight && tokens.font.weight[weight]};

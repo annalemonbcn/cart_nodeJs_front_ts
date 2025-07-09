@@ -13,4 +13,4 @@ const SignUpPage = () => (
   </AuthLayout>
 )
 
-export default SignUpPage
+export { SignUpPage }
