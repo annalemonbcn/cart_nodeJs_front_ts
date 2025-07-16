@@ -1,7 +1,7 @@
-import type { Route } from '@/utils/routes'
+import type { PageRoute } from '@/utils/routes'
 import { HomePage } from './index.tsx'
 
-const HomePageRoute: Route = {
+const HomePageRoute: PageRoute = {
   name: 'home',
   path: '/shop',
   displayText: 'Home',

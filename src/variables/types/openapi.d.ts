@@ -658,6 +658,8 @@ export interface components {
              * @enum {string}
              */
             role: "admin" | "user";
+            /** @example 1234567890 */
+            googleId: string | null;
         };
     };
     responses: never;

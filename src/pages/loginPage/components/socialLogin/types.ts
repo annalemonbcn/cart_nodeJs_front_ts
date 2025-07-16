@@ -1,6 +1,4 @@
-import type { SOCIAL_PLATFORMS } from '@/utils/constants'
-
-type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number]
+import type { SocialPlatform } from '@/utils/constants'
 
 interface ISocialBtnProps {
   socialPlatform: SocialPlatform
