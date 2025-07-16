@@ -1,38 +1,18 @@
-import Button from '@/components/button'
-import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
 import { StyledHeader } from './styles'
-import Link from '@/components/link'
-import { useAuthContext } from '@/auth/provider/useAuthContext'
+import { Navbar } from './components/navbar'
+import { Buttons } from './components/buttons'
+import { Highlights } from './components/highlights'
 
-const LoginButtons = () => (
-  <>
-    <Link to="/login">
-      <Button variant="primary">Login</Button>
-    </Link>
+const Header = () => (
+  <StyledHeader>
+    <img src="/images/euphoria-logo.svg" alt="euphoria-logo" />
 
-    <Link to="/signup">
-      <Button variant="secondary">Register</Button>
-    </Link>
-  </>
+    <Navbar />
+
+    <Highlights />
+
+    <Buttons />
+  </StyledHeader>
 )
-
-const Header = () => {
-  const { isAuthenticated, logout } = useAuthContext()
-
-  return (
-    <StyledHeader>
-      <FlexContainer justifyContent="flex-end" gap={tokens.space.md}>
-        {!isAuthenticated && <LoginButtons />}
-
-        {isAuthenticated && (
-          <Button variant="secondary" onClick={logout}>
-            Logout
-          </Button>
-        )}
-      </FlexContainer>
-    </StyledHeader>
-  )
-}
 
 export default Header

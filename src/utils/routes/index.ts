@@ -1,4 +1,4 @@
-type Route = {
+type PageRoute = {
   name: string
   path: string
   fullPath?: string
@@ -6,4 +6,4 @@ type Route = {
   component: React.ComponentType
 }
 
-export type { Route }
+export type { PageRoute }

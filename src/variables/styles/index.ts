@@ -37,7 +37,7 @@ const fontSize = {
 const fontWeight = {
   regular: '400',
   medium: '500',
-  bold: '700'
+  bold: '600'
 }
 
 const borderSize = {

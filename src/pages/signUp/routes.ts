@@ -1,7 +1,7 @@
-import type { Route } from '@/utils/routes'
+import type { PageRoute } from '@/utils/routes'
 import { SignUpPage } from './index.tsx'
 
-const SignUpRoute: Route = {
+const SignUpRoute: PageRoute = {
   name: 'signup',
   path: '/signup',
   displayText: 'Sign Up',

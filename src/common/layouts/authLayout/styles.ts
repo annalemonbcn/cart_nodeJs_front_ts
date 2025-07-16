@@ -7,6 +7,10 @@ const StyledAuthLayout = styled(FlexContainer)`
   height: 100%;
 `
 
+const StyledInnerContent = styled(FlexContainer)`
+  height: 100%;
+`
+
 const ImageContainer = styled.div<Pick<IAuthLayoutProps, 'imgSrc'>>`
   width: 50%;
   background-image: url('${({ imgSrc }) => imgSrc}');
@@ -21,4 +25,4 @@ const FormContainer = styled(FlexContainer)`
   padding: ${tokens.space.xl2} ${tokens.space.xl5};
 `
 
-export { StyledAuthLayout, ImageContainer, FormContainer }
+export { StyledAuthLayout, StyledInnerContent, ImageContainer, FormContainer }
