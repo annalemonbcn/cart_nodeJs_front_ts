@@ -1,27 +1,24 @@
-import { useAuthContext } from "@/auth/provider/useAuthContext"
-import Button from "@/components/button"
-import FlexContainer from "@/components/flexContainer"
-import Link from "@/components/link"
-import { tokens } from "@/variables/styles"
-
-const LoginButtons = () => (
-    <>
-      <Link to="/login">
-        <Button variant="primary">Login</Button>
-      </Link>
-  
-      <Link to="/signup">
-        <Button variant="secondary">Register</Button>
-      </Link>
-    </>
-  )
+import { useAuthContext } from '@/auth/provider/useAuthContext'
+import Button from '@/components/button'
+import FlexContainer from '@/components/flexContainer'
+import routes from '@/routes/routes'
+import { tokens } from '@/variables/styles'
+import { useNavigate } from 'react-router'
 
 const Buttons = () => {
   const { isAuthenticated, logout } = useAuthContext()
 
+  const navigate = useNavigate()
+
+  const goToLogin = () => navigate(routes.login.path)
+
   return (
     <FlexContainer justifyContent="flex-end" gap={tokens.space.md}>
-      {!isAuthenticated && <LoginButtons />}
+      {!isAuthenticated && (
+        <Button variant="primary" onClick={goToLogin}>
+          Login
+        </Button>
+      )}
 
       {isAuthenticated && (
         <Button variant="secondary" onClick={logout}>

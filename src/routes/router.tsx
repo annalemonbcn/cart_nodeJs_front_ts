@@ -1,13 +1,14 @@
 import LoginRoute from '@/pages/loginPage/routes'
 import SignUpRoute from '@/pages/signUp/routes'
 import MyAccountRoute from '@/pages/myAccount/routes'
-import { Routes, Route } from 'react-router'
+import { Routes, Route, Navigate } from 'react-router'
 import ProtectedRoute from './protectedRoute'
 import HomePageRoute from '@/pages/home/routes'
 import AuthSuccessRoute from '@/pages/authSuccess/routes'
 
 const Router = () => (
   <Routes>
+    <Route path="/" element={<Navigate to={HomePageRoute.path} replace />} />
     <Route path={HomePageRoute.path} element={<HomePageRoute.component />} />
     <Route path="/products" element={<div>Products</div>} />
     <Route path="/cart" element={<div>Cart</div>} />
