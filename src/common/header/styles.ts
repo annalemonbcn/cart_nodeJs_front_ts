@@ -11,6 +11,8 @@ const StyledHeader = styled.header`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  align-items: center;
+  gap: ${tokens.space.xl2};
 `
 
 export { StyledHeader }

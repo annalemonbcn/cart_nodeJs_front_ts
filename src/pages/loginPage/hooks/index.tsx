@@ -3,6 +3,7 @@ import { useAuthServices } from '@/services/auth'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
+import routes from '@/routes/routes'
 
 const useLoginUser = () => {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ const useLoginUser = () => {
       localStorage.setItem('token', token)
       setToken(token)
       toast.success('Login successful! 🎉')
-      navigate('/my-account') // TODO: create routes.ts and grab routes from there
+      navigate(routes.myAccount.path, { replace: true })
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {

@@ -3,6 +3,7 @@ import Loader from '@/components/loader'
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
+import routes from '@/routes/routes'
 
 const AuthSuccess = () => {
   const navigate = useNavigate()
@@ -19,14 +20,14 @@ const AuthSuccess = () => {
 
     if (!token) {
       toast.error('Unauthorized. Please, log in again.')
-      navigate('/login', { replace: true })
+      navigate(routes.login.path, { replace: true })
       return
     }
 
     localStorage.setItem('token', token)
     setToken(token)
     toast.success('Login successful! 🎉')
-    navigate('/my-account', { replace: true }) // TODO: create routes.ts and grab routes from there
+    navigate(routes.myAccount.path, { replace: true })
   }, [navigate, setToken])
 
   return <Loader />
