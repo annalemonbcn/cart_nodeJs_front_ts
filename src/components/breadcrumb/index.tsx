@@ -19,8 +19,8 @@ const Breadcrumb = () => {
         const linkColor = isLast ? 'darkNeutral' : 'mediumNeutral'
 
         return (
-          <FlexContainer alignItems="center" gap={tokens.space.xs}>
-            <Link key={step.name} to={step.linkto} size="s3" underline={false} color={linkColor}>
+          <FlexContainer alignItems="center" gap={tokens.space.xs} key={step.name}>
+            <Link to={step.linkto} size="s3" underline={false} color={linkColor}>
               {step.name}
             </Link>
             {!isLast && <img src="/icons/chevron-right.svg" alt="chevron-right" style={{ width: tokens.space.md }} />}

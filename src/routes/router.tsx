@@ -5,6 +5,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import ProtectedRoute from './protectedRoute'
 import HomePageRoute from '@/pages/home/routes'
 import AuthSuccessRoute from '@/pages/authSuccess/routes'
+import ProfileRoute from '@/pages/profile/routes'
 
 const Router = () => (
   <Routes>
@@ -25,7 +26,7 @@ const Router = () => (
       }
     >
       <Route index element={<Navigate to="profile" replace />} />
-      <Route path="profile" element={<div>Profile</div>} />
+      <Route path={ProfileRoute.path} element={<ProfileRoute.component />} />
       <Route path="favourites" element={<div>Favourites</div>} />
       <Route path="orders" element={<div>orders</div>} />
       <Route path="sign-out" element={<div>sign-out</div>} />

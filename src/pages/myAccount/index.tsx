@@ -1,29 +1,16 @@
 import { useAuthContext } from '@/auth/provider/useAuthContext'
 import BaseLayout from '@/common/layouts/baseLayout'
-import Loader from '@/components/loader'
-import { useUserServices } from '@/services/user'
-import { useQuery } from '@tanstack/react-query'
 import { Outlet } from 'react-router-dom'
-
-const useLoadUser = () => {
-  const { isAuthenticated } = useAuthContext()
-
-  const { getUserInfo } = useUserServices()
-  const { data, isLoading } = useQuery({ ...getUserInfo(), enabled: isAuthenticated })
-
-  return { isAuthenticated, data, isLoading }
-}
+import { SideMenu } from './components/sideMenu'
 
 const MyAccount = () => {
-  const { isAuthenticated, data, isLoading } = useLoadUser()
+  const { isAuthenticated } = useAuthContext()
 
-  if (isLoading) return <Loader />
-
-  if (!isAuthenticated || !data) return <div>You must login to access this page</div>
+  if (!isAuthenticated) return <div>You must login to access this page</div>
 
   return (
     <BaseLayout>
-      <div>Welcome, {data.payload?.firstName}</div>
+      <SideMenu />
       <Outlet />
     </BaseLayout>
   )

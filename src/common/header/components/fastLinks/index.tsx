@@ -9,6 +9,7 @@ import { StyledButton } from './styles'
 import type { ButtonVariant } from '@/components/button/types'
 import routes from '@/routes/routes'
 
+// TODO: move to common (?)
 const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {
   const navigate = useNavigate()
 
@@ -26,6 +27,7 @@ const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {
 
   return (
     <StyledButton {...buttonProps}>
+      {/* TODO: style it */}
       <Icon width={16} height={16} />
     </StyledButton>
   )
