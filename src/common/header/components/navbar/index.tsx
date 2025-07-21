@@ -2,7 +2,7 @@ import FlexContainer from '@/components/flexContainer'
 import Link from '@/components/link'
 import type { FontSize, FontWeight, TextColor } from '@/components/text/types'
 import { tokens } from '@/variables/styles'
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
 import { navLinks } from '../../constants'
 
 const Navbar = () => {

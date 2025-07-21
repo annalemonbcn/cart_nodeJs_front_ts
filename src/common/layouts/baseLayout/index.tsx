@@ -1,12 +1,16 @@
 import Header from '@/common/header'
-import type { PropsWithChildren } from '@/variables/types/global.types'
 import { StyledBaseLayout } from './styles'
+import Breadcrumb from '@/components/breadcrumb'
+import type { IBaseLayoutProps } from './types'
 
-const BaseLayout = ({ children }: PropsWithChildren) => (
-  <StyledBaseLayout flexDirection="column">
+const BaseLayout = ({ showBreadcrumb = true, children }: IBaseLayoutProps) => (
+  <>
     <Header />
-    {children}
-  </StyledBaseLayout>
+    <StyledBaseLayout flexDirection="column">
+      {showBreadcrumb && <Breadcrumb />}
+      {children}
+    </StyledBaseLayout>
+  </>
 )
 
 export default BaseLayout

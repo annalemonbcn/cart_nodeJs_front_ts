@@ -3,7 +3,7 @@ import Button from '@/components/button'
 import FlexContainer from '@/components/flexContainer'
 import routes from '@/routes/routes'
 import { tokens } from '@/variables/styles'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 const Buttons = () => {
   const { isAuthenticated, logout } = useAuthContext()

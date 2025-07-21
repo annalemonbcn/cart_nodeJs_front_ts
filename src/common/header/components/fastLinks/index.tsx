@@ -1,7 +1,7 @@
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import type { IHighlightedItem } from './types'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router-dom'
 import HeartIcon from '@/icons/heart.svg?react'
 import ProfileIcon from '@/icons/profile.svg?react'
 import CartIcon from '@/icons/cart.svg?react'
@@ -39,7 +39,7 @@ const FastLinks = () => {
     },
     {
       icon: ProfileIcon,
-      path: routes.myAccount.path
+      path: routes.profile.path
     },
     {
       icon: CartIcon,

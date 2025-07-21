@@ -1,7 +1,7 @@
 import { useAuthContext } from '@/auth/provider/useAuthContext'
 import Loader from '@/components/loader'
 import { useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import routes from '@/routes/routes'
 

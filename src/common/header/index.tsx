@@ -4,7 +4,7 @@ import { Buttons } from './components/buttons'
 import { FastLinks } from './components/fastLinks'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import routes from '@/routes/routes'
 
 const Header = () => (

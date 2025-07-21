@@ -3,6 +3,7 @@ import BaseLayout from '@/common/layouts/baseLayout'
 import Loader from '@/components/loader'
 import { useUserServices } from '@/services/user'
 import { useQuery } from '@tanstack/react-query'
+import { Outlet } from 'react-router-dom'
 
 const useLoadUser = () => {
   const { isAuthenticated } = useAuthContext()
@@ -23,6 +24,7 @@ const MyAccount = () => {
   return (
     <BaseLayout>
       <div>Welcome, {data.payload?.firstName}</div>
+      <Outlet />
     </BaseLayout>
   )
 }

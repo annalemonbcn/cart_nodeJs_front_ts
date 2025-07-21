@@ -1,7 +1,7 @@
 import { useAuthContext } from '@/auth/provider/useAuthContext'
 import type { PropsWithChildren } from '@/variables/types/global.types'
 import { useEffect, useRef } from 'react'
-import { Navigate, useLocation } from 'react-router'
+import { Navigate, useLocation } from 'react-router-dom'
 import { toast } from 'sonner'
 
 const ProtectedRoute = ({ children }: PropsWithChildren) => {
@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (!isAuthenticated && !hasShownToast.current) {
-      toast.error('You must be logged in to access this page.')
+      toast.warning('You must be logged in to access this page.')
       hasShownToast.current = true
     }
   }, [isAuthenticated])

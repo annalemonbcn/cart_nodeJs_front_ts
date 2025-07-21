@@ -1,7 +1,7 @@
 import { useAuthContext } from '@/auth/provider/useAuthContext'
 import { useAuthServices } from '@/services/auth'
 import { useMutation } from '@tanstack/react-query'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import routes from '@/routes/routes'
 

@@ -1,5 +1,5 @@
 import { colors, tokens } from '@/variables/styles'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import type { LinkProps } from './types'
 

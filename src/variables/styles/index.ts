@@ -20,7 +20,8 @@ const space = {
   xl2: '2.5rem', // 40px
   xl3: '3rem', // 48px
   xl4: '4rem', // 64px
-  xl5: '5rem' // 80px
+  xl5: '5rem', // 80px
+  xl6: '6rem' // 96px
 }
 
 const fontSize = {
