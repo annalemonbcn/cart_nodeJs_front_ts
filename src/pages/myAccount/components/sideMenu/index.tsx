@@ -6,6 +6,7 @@ import { tokens } from '@/variables/styles'
 import { useGenerateMenuOptions } from './hooks'
 import { VerticalMenu } from '@/components/verticalMenu'
 import { useLoadUser } from '../../hooks'
+import { StyledSideMenu } from './styles'
 
 const SideMenu = () => {
   const { data, isLoading } = useLoadUser()
@@ -16,7 +17,7 @@ const SideMenu = () => {
   if (!data) return <div>No data</div>
 
   return (
-    <FlexContainer flexDirection="column" gap={tokens.space.xl2}>
+    <StyledSideMenu flexDirection="column" gap={tokens.space.xl2}>
       <FlexContainer flexDirection="column" gap={tokens.space.sm}>
         <VerticalBarDecorator>
           <Text size="s6" weight="bold" color="darkNeutral">
@@ -28,7 +29,7 @@ const SideMenu = () => {
       </FlexContainer>
 
       <VerticalMenu options={options} />
-    </FlexContainer>
+    </StyledSideMenu>
   )
 }
 

@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 
 const isActiveStyles = css`
   background-color: ${colors.whiteSmoke};
+  border-top-right-radius: ${tokens.borders.radius.sm};
+  border-bottom-right-radius: ${tokens.borders.radius.sm};
 
   &::before {
     content: '';

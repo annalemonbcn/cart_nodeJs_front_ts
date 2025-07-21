@@ -18,6 +18,12 @@ const tertiaryStyles = css`
   background-color: ${colors.whiteSmoke};
 `
 
+const textStyles = css`
+  font-weight: ${tokens.font.weight.bold};
+  padding: 0;
+  min-width: fit-content;
+`
+
 const fitContentStyles = css`
   min-width: fit-content;
   padding: ${tokens.space.md};
@@ -31,11 +37,13 @@ const StyledButton = styled.button<Partial<IButtonProps>>`
 
   min-width: 140px;
   padding: ${tokens.space.sm} ${tokens.space.xl2};
-  ${({ fitContent }) => fitContent && fitContentStyles}
 
   ${({ variant }) => variant === 'primary' && primaryStyles};
   ${({ variant }) => variant === 'secondary' && secondaryStyles};
   ${({ variant }) => variant === 'tertiary' && tertiaryStyles};
+  ${({ variant }) => variant === 'text' && textStyles};
+
+  ${({ fitContent }) => fitContent && fitContentStyles}
   ${({ isRounded }) => isRounded && `border-radius: ${tokens.borders.radius.full}`}
 
   &:hover {
