@@ -1,7 +1,7 @@
 import { StyledHeader } from './styles'
 import { Navbar } from './components/navbar'
 import { Buttons } from './components/buttons'
-import { Highlights } from './components/highlights'
+import { FastLinks } from './components/fastLinks'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import { Link } from 'react-router'
@@ -16,7 +16,7 @@ const Header = () => (
     <FlexContainer alignItems="center" gap={tokens.space.xl5}>
       <Navbar />
 
-      <Highlights />
+      <FastLinks />
 
       <Buttons />
     </FlexContainer>

@@ -8,8 +8,16 @@ const routes = {
     title: 'Login'
   },
   myAccount: {
-    path: '/my-account',    
+    path: '/my-account',
     title: 'My Account'
+  },
+  favourites: {
+    path: ['/my-account', 'favourites'].join('/'),
+    title: 'Favourites'
+  },
+  cart: {
+    path: '/cart',
+    title: 'Cart'
   }
 } as const
 

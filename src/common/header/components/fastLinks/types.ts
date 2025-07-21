@@ -1,5 +1,5 @@
 interface IHighlightedItem {
-  icon: string
+  icon: React.FC<React.SVGProps<SVGSVGElement>>
   path: string
 }
 

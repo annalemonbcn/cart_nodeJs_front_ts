@@ -1,5 +1,5 @@
 import { useAuthContext } from '@/auth/provider/useAuthContext'
-import Breadcrumb from '@/components/breadcrumb'
+import BaseLayout from '@/common/layouts/baseLayout'
 import Loader from '@/components/loader'
 import { useUserServices } from '@/services/user'
 import { useQuery } from '@tanstack/react-query'
@@ -10,21 +10,20 @@ const useLoadUser = () => {
   const { getUserInfo } = useUserServices()
   const { data, isLoading } = useQuery({ ...getUserInfo(), enabled: isAuthenticated })
 
-  return { data, isLoading }
+  return { isAuthenticated, data, isLoading }
 }
 
 const MyAccount = () => {
-  const { data, isLoading } = useLoadUser()
+  const { isAuthenticated, data, isLoading } = useLoadUser()
 
   if (isLoading) return <Loader />
 
-  if (!data) return <div>No Data</div>
+  if (!isAuthenticated || !data) return <div>You must login to access this page</div>
 
   return (
-    <div>
-      <Breadcrumb />
+    <BaseLayout>
       <div>Welcome, {data.payload?.firstName}</div>
-    </div>
+    </BaseLayout>
   )
 }
 
