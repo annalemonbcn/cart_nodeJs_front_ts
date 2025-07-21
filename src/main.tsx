@@ -8,6 +8,7 @@ import isPropValid from '@emotion/is-prop-valid'
 import { StyleSheetManager } from 'styled-components'
 import type { ComponentType } from 'react'
 import { AuthProvider } from './auth/provider/authContext.tsx'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient()
 
@@ -32,6 +33,7 @@ createRoot(document.getElementById('root')!).render(
           </StyleSheetManager>
         </BrowserRouter>
       </AuthProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>
 )
