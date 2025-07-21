@@ -1,26 +1,14 @@
-import { useAuthContext } from '@/auth/provider/useAuthContext'
 import FlexContainer from '@/components/flexContainer'
 import Loader from '@/components/loader'
 import Text from '@/components/text'
-import { useUserServices } from '@/services/user'
-import { useQuery } from '@tanstack/react-query'
 import VerticalBarDecorator from '@/components/verticalBarDecorator'
 import { tokens } from '@/variables/styles'
 import { useGenerateMenuOptions } from './hooks'
 import { VerticalMenu } from '@/components/verticalMenu'
-
-const useLoadUser = () => {
-  const { isAuthenticated } = useAuthContext()
-
-  const { getUserInfo } = useUserServices()
-  const { data, isLoading } = useQuery({ ...getUserInfo(), enabled: isAuthenticated })
-
-  return { data, isLoading }
-}
+import { useLoadUser } from '../../hooks'
 
 const SideMenu = () => {
   const { data, isLoading } = useLoadUser()
-
   const options = useGenerateMenuOptions()
 
   if (isLoading) return <Loader />

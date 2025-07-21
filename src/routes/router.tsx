@@ -27,7 +27,7 @@ const Router = () => (
     >
       <Route index element={<Navigate to="profile" replace />} />
       <Route path={ProfileRoute.path} element={<ProfileRoute.component />} />
-      <Route path="favourites" element={<div>Favourites</div>} />
+      <Route path="wishlist" element={<div>Wishlist</div>} />
       <Route path="orders" element={<div>orders</div>} />
       <Route path="sign-out" element={<div>sign-out</div>} />
     </Route>

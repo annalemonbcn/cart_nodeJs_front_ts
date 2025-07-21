@@ -37,7 +37,7 @@ const FastLinks = () => {
   const highlights: IHighlightedItem[] = [
     {
       icon: HeartIcon,
-      path: routes.favourites.path
+      path: routes.wishlist.path
     },
     {
       icon: ProfileIcon,

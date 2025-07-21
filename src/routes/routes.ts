@@ -19,9 +19,9 @@ const routes = {
     path: ['/my-account', 'profile'].join('/'),
     title: 'Profile'
   },
-  favourites: {
-    path: ['/my-account', 'favourites'].join('/'),
-    title: 'Favourites'
+  wishlist: {
+    path: ['/my-account', 'wishlist'].join('/'),
+    title: 'Wishlist'
   },
   orders: {
     path: ['/my-account', 'orders'].join('/'),

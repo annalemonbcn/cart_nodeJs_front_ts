@@ -6,12 +6,12 @@ import SignOutIcon from '@/icons/sign-out.svg?react'
 import routes from '@/routes/routes'
 import { useLocation } from 'react-router-dom'
 
-const menuOptions = ['favourites', 'profile', 'orders', 'signOut'] as const
+const menuOptions = ['wishlist', 'orders', 'profile', 'signOut'] as const
 type MenuOption = (typeof menuOptions)[number]
 
 const getOptionIcon = (option: MenuOption) => {
   const iconsMap: Record<MenuOption, VerticalMenuOption['icon']> = {
-    favourites: HeartIcon,
+    wishlist: HeartIcon,
     profile: ProfileIcon,
     orders: OrdersIcon,
     signOut: SignOutIcon
