@@ -1,3 +1,5 @@
+// TODO: unify as unique source of truth
+
 const routes = {
   homePage: {
     path: '/shop',
@@ -6,6 +8,10 @@ const routes = {
   login: {
     path: '/login',
     title: 'Login'
+  },
+  changePassword: {
+    path: '/change-password',
+    title: 'Change Password'
   },
   cart: {
     path: '/cart',

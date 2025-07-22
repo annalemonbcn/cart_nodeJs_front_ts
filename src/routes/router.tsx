@@ -6,6 +6,7 @@ import ProtectedRoute from './protectedRoute'
 import HomePageRoute from '@/pages/home/routes'
 import AuthSuccessRoute from '@/pages/authSuccess/routes'
 import ProfileRoute from '@/pages/profile/routes'
+import ChangePasswordRoute from '@/pages/changePasswordPage/routes'
 
 const Router = () => (
   <Routes>
@@ -15,6 +16,7 @@ const Router = () => (
     <Route path="/cart" element={<div>Cart</div>} />
     <Route path={LoginRoute.path} element={<LoginRoute.component />} />
     <Route path={SignUpRoute.path} element={<SignUpRoute.component />} />
+    <Route path={ChangePasswordRoute.path} element={<ChangePasswordRoute.component />} />
     <Route path={AuthSuccessRoute.path} element={<AuthSuccessRoute.component />} />
 
     <Route
