@@ -5,7 +5,7 @@ import VerticalBarDecorator from '@/components/verticalBarDecorator'
 import { tokens } from '@/variables/styles'
 import { useGenerateMenuOptions } from './hooks'
 import { VerticalMenu } from '@/components/verticalMenu'
-import { useLoadUser } from '../../hooks'
+import { useLoadUser } from '@/hooks/useLoadUser'
 import { StyledSideMenu } from './styles'
 
 const SideMenu = () => {

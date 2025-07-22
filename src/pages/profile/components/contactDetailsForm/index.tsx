@@ -1,100 +1,52 @@
-import { useForm } from 'react-hook-form'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import type { ProfileFormType } from './types'
 import CustomForm from '@/components/customForm'
-import TextFormField from '@/common/form/textFormField'
-import EmailFormField from '@/common/form/emailFormField'
-import PasswordFormField from '@/common/form/passwordFormField'
-import { Separator } from '@/components/separator'
-import { cloneElement, isValidElement, useEffect, useRef, useState, type Ref } from 'react'
-import FlexContainer from '@/components/flexContainer'
-import Button from '@/components/button'
 import { StyledFormWrapper } from './styles'
 import { tokens } from '@/variables/styles'
+import Button from '@/components/button'
+import FlexContainer from '@/components/flexContainer'
+import { renderFormFields } from './utils'
+import { useLoadUser } from '@/hooks/useLoadUser'
+import Loader from '@/components/loader'
 
-type EditableInputProps = {
-  children: React.ReactElement<{ disabled?: boolean; inputRef?: Ref<HTMLInputElement> }>
-}
+const useGetDefaultValues = (): { isLoading: boolean; data: ProfileFormType } => {
+  const { data, isLoading } = useLoadUser()
 
-const EditableInput = ({ children }: EditableInputProps) => {
-  const [isEdit, setIsEdit] = useState(false)
-  const inputRef = useRef<HTMLInputElement | null>(null)
-
-  useEffect(() => {
-    if (isEdit) {
-      inputRef.current?.focus()
+  return {
+    isLoading,
+    data: {
+      firstName: data?.payload?.firstName ?? '',
+      lastName: data?.payload?.lastName ?? '',
+      email: data?.payload?.email ?? '',
+      phoneNumber: undefined
     }
-  }, [isEdit])
-
-  const enhancedChild = isValidElement(children)
-    ? cloneElement(children, {
-        disabled: !isEdit,
-        inputRef
-      })
-    : children
-
-  return (
-    <FlexContainer justifyContent="space-between" alignItems="center">
-      {enhancedChild}
-      <Button variant="text" onClick={() => setIsEdit((prev) => !prev)}>
-        {isEdit ? 'Cancel' : 'Change'}
-      </Button>
-    </FlexContainer>
-  )
+  }
 }
 
 const ContactDetailsForm = () => {
-  const defaultValues: ProfileFormType = {
-    firstName: 'Annaaaaa',
-    lastName: 'Esteve',
-    email: 'test@test.com',
-    phoneNumber: '123456789',
-    password: '12345678'
-  }
+  const { isLoading, data: defaultValues } = useGetDefaultValues()
 
-  const methods = useForm<ProfileFormType>({ defaultValues })
+  const methods = useForm<ProfileFormType>({ values: defaultValues })
+
+  if (isLoading) return <Loader />
+
+  const {
+    handleSubmit,
+    formState: { isDirty, dirtyFields }
+  } = methods
+
+  // TODO: hook api
+  const onSubmit: SubmitHandler<ProfileFormType> = (data) => console.log(data)
 
   return (
-    <StyledFormWrapper flexDirection="column" gap={tokens.space.xs}>
-      <CustomForm methods={methods}>
-        <EditableInput>
-          <TextFormField<ProfileFormType>
-            label="First Name"
-            inputName="firstName"
-            variant="secondary"
-            isRequired={false}
-          />
-        </EditableInput>
-        <Separator />
+    <StyledFormWrapper flexDirection="column" gap={tokens.space.md}>
+      <CustomForm methods={methods}>{renderFormFields()}</CustomForm>
 
-        <EditableInput>
-          <TextFormField<ProfileFormType>
-            label="Last Name"
-            inputName="lastName"
-            variant="secondary"
-            isRequired={false}
-          />
-        </EditableInput>
-        <Separator />
-
-        <EditableInput>
-          <EmailFormField<ProfileFormType> variant="secondary" isRequired={false} />
-        </EditableInput>
-        <Separator />
-
-        <EditableInput>
-          <TextFormField<ProfileFormType>
-            label="Phone Number"
-            inputName="phoneNumber"
-            variant="secondary"
-            isRequired={false}
-          />
-        </EditableInput>
-        <Separator />
-
-        <EditableInput>
-          <PasswordFormField<ProfileFormType> isRequired={false} variant="secondary" showIcon={false} />
-        </EditableInput>
-      </CustomForm>
+      <FlexContainer justifyContent="flex-start">
+        <Button onClick={handleSubmit(onSubmit)} disabled={!isDirty || !dirtyFields}>
+          Save
+        </Button>
+      </FlexContainer>
     </StyledFormWrapper>
   )
 }

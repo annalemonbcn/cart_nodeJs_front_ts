@@ -1,3 +1,9 @@
+const dangerShades = {
+  100: '#FDE8EE',
+  200: '#FCD2DC',
+  800: '#EE1D52'
+}
+
 const colors = {
   darkNeutral: '#3C4242',
   mediumNeutral: '#807D7E',
@@ -6,7 +12,7 @@ const colors = {
   offWhite: '#EDEEF2',
   whiteSmoke: '#F6F6F6',
   primary: '#8A33FD',
-  danger: '#EE1D52'
+  danger: dangerShades
 }
 
 const space = {

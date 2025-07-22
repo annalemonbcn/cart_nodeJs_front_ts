@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { tokens, colors } from '@/variables/styles'
-import type { InputVariant } from './types'
+import type { IInputProps } from './types'
 
 const primaryStyles = css`
   border-radius: ${tokens.borders.radius.sm};
@@ -15,7 +15,7 @@ const secondaryStyles = css`
   color: ${colors.darkNeutral};
 `
 
-const StyledInput = styled.input<{ variant: InputVariant }>`
+const StyledInput = styled.input<Pick<IInputProps, 'variant'>>`
   min-width: 140px;
   padding: ${tokens.space.sm};
   background-color: ${colors.white};

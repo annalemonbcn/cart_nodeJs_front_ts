@@ -2,8 +2,8 @@ import { useFormContext, type FieldValues, type Path, type RegisterOptions } fro
 import type { BaseFormFieldProps } from './types'
 import { useState } from 'react'
 import FormField from '@/components/formField'
-import Input from '@/components/input'
 import { mergeRefs } from './utils'
+import { StyledInput } from './styles'
 
 const BaseFormField = <T extends FieldValues>({
   label,
@@ -15,7 +15,8 @@ const BaseFormField = <T extends FieldValues>({
   disabled = false,
   inputRef,
   showIcon = false,
-  validationRules = {}
+  validationRules = {},
+  placeholderText
 }: BaseFormFieldProps<T>) => {
   const {
     register,
@@ -55,13 +56,15 @@ const BaseFormField = <T extends FieldValues>({
       showPassword={showPassword}
       toggleShowPassword={toggleShowPassword}
     >
-      <Input
+      <StyledInput
         {...restRegister}
         type={resolvedType}
         autoComplete={autoComplete}
         variant={variant}
         disabled={disabled}
         ref={mergeRefs(ref, inputRef)}
+        hasError={!!fieldError}
+        placeholderText={placeholderText}
       />
     </FormField>
   )

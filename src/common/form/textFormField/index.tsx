@@ -9,6 +9,7 @@ const TextFormField = <T extends FieldValues>(props: {
   variant?: FormFieldVariant
   disabled?: boolean
   inputRef?: React.RefObject<HTMLInputElement>
+  placeholderText?: string
 }) => <BaseFormField<T> {...props} type="text" autoComplete="off" />
 
 export default TextFormField
