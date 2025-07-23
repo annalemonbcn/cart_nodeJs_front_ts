@@ -16,24 +16,28 @@ const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   signUp: <SignUpPage />,
   changePassword: <ChangePasswordPage />,
   authSuccess: <AuthSuccess />,
-  'my-account': <MyAccountPage />,
+  myAccount: <MyAccountPage />,
   profile: <ProfilePage />,
   wishlist: <div>Wishlist</div>,
   orders: <div>Orders</div>,
-  'sign-out': <div>Sign Out</div>
+  signOut: <div>Sign Out</div>
 }
 
-const routes: PageRoute[] = routesData.map((r) => {
-  const component = routeComponentMap[r.name as RouteName]
+const attachComponents = (routes: Omit<PageRoute, 'component'>[]): PageRoute[] =>
+  routes.map((route) => {
+    const component = routeComponentMap[route.name as RouteName]
 
-  if (!component) {
-    throw new Error(`Missing component for route "${r.name}"`)
-  }
+    if (!component) {
+      throw new Error(`Missing component for route "${route.name}"`)
+    }
 
-  return {
-    ...r,
-    component: () => component
-  }
-})
+    return {
+      ...route,
+      component: () => component,
+      children: route.children ? attachComponents(route.children) : undefined
+    }
+  })
+
+const routes: PageRoute[] = attachComponents(routesData)
 
 export { routes }

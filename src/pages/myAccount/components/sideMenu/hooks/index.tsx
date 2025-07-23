@@ -5,9 +5,10 @@ import OrdersIcon from '@/icons/orders.svg?react'
 import SignOutIcon from '@/icons/sign-out.svg?react'
 import { useLocation } from 'react-router-dom'
 import { routeMap } from '@/routes/utils'
+import type { RouteName } from '@/routes/routesData'
 
-const menuOptions = ['wishlist', 'orders', 'profile', 'signOut'] as const
-type MenuOption = (typeof menuOptions)[number]
+type MenuOption = Extract<RouteName, 'wishlist' | 'orders' | 'profile' | 'signOut'>
+const menuOptions = ['wishlist', 'orders', 'profile', 'signOut'] as const satisfies readonly MenuOption[]
 
 const getOptionIcon = (option: MenuOption) => {
   const iconsMap: Record<MenuOption, VerticalMenuOption['icon']> = {

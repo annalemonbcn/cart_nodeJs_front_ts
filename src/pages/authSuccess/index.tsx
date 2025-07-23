@@ -4,7 +4,16 @@ import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { routeMap } from '@/routes/utils'
+import { STORAGE_KEYS } from '@/variables/constants'
 
+/**
+ * 🔐 AuthSuccess page
+ *
+ * This component is necessary for the backend — it's used by the passport-google strategy.
+ * The BE expects the route `/auth/success` to exist and return 200.
+ *
+ * ⚠️ Do NOT remove or rename.
+ */
 const AuthSuccess = () => {
   const navigate = useNavigate()
   const { setToken } = useAuthContext()
@@ -16,7 +25,7 @@ const AuthSuccess = () => {
     hasRunRef.current = true
 
     const params = new URLSearchParams(window.location.search)
-    const token = params.get('token')
+    const token = params.get(STORAGE_KEYS.token)
 
     if (!token) {
       toast.error('Unauthorized. Please, log in again.')
@@ -24,7 +33,7 @@ const AuthSuccess = () => {
       return
     }
 
-    localStorage.setItem('token', token)
+    localStorage.setItem(STORAGE_KEYS.token, token)
     setToken(token)
     toast.success('Login successful! 🎉')
     navigate(routeMap.myAccount.path, { replace: true })
