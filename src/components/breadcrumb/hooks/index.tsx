@@ -1,6 +1,6 @@
 import type { IBreadcrumbItem } from '../types'
 import { homeStep } from '../constants'
-import { routeMap } from '@/routes/routeMap'
+import { routeMap } from '@/routes/utils'
 
 const useGenerateBreadcrumbSteps = (pathname: string) => {
   const segments = pathname.split('/').filter(Boolean)

@@ -1,5 +1,5 @@
 import type { IBreadcrumbItem } from './types'
-import { routeMap } from '@/routes/routeMap'
+import { routeMap } from '@/routes/utils'
 
 const homeStep: IBreadcrumbItem = {
   name: 'Home',

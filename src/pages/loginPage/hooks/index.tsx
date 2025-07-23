@@ -3,7 +3,7 @@ import { useAuthServices } from '@/services/auth'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
-import { routeMap } from '@/routes/routeMap'
+import { routeMap } from '@/routes/utils'
 
 const useLoginUser = () => {
   const navigate = useNavigate()

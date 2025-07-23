@@ -4,7 +4,7 @@ import ProfileIcon from '@/icons/profile.svg?react'
 import OrdersIcon from '@/icons/orders.svg?react'
 import SignOutIcon from '@/icons/sign-out.svg?react'
 import { useLocation } from 'react-router-dom'
-import { routeMap } from '@/routes/routeMap'
+import { routeMap } from '@/routes/utils'
 
 const menuOptions = ['wishlist', 'orders', 'profile', 'signOut'] as const
 type MenuOption = (typeof menuOptions)[number]

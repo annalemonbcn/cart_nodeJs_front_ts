@@ -3,7 +3,7 @@ import Loader from '@/components/loader'
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
-import { routeMap } from '@/routes/routeMap'
+import { routeMap } from '@/routes/utils'
 
 const AuthSuccess = () => {
   const navigate = useNavigate()

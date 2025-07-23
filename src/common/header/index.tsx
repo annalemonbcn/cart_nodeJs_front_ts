@@ -5,7 +5,7 @@ import { FastLinks } from './components/fastLinks'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import { Link } from 'react-router-dom'
-import { routeMap } from '@/routes/routeMap'
+import { routeMap } from '@/routes/utils'
 
 const Header = () => (
   <StyledHeader>

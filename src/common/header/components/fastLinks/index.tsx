@@ -7,7 +7,7 @@ import ProfileIcon from '@/icons/profile.svg?react'
 import CartIcon from '@/icons/cart.svg?react'
 import { StyledButton } from './styles'
 import type { ButtonVariant } from '@/components/button/types'
-import { routeMap } from '@/routes/routeMap'
+import { routeMap } from '@/routes/utils'
 
 // TODO: move to common (?)
 const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {

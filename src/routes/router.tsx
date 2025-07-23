@@ -2,7 +2,7 @@ import type { JSX } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import ProtectedRoute from './protectedRoute'
 import type { PageRoute } from './types'
-import { routes } from './allRoutes'
+import { routes } from './routes'
 
 const renderRoutes = (routeList: PageRoute[], basePath = ''): JSX.Element[] =>
   routeList.flatMap((route) => {

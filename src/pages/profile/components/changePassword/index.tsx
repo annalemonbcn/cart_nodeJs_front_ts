@@ -1,7 +1,7 @@
 import FlexContainer from '@/components/flexContainer'
 import { InnerTitle } from '../innerTitle'
 import Link from '@/components/link'
-import { routeMap } from '@/routes/routeMap'
+import { routeMap } from '@/routes/utils'
 
 const ChangePassword = () => (
   <FlexContainer justifyContent="space-between" alignItems="center">
