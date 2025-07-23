@@ -25,14 +25,14 @@ function shouldForwardProp(propName: string, target: string | ComponentType<any>
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
           <StyleSheetManager shouldForwardProp={shouldForwardProp}>
             <GlobalStyles />
             <App />
           </StyleSheetManager>
-        </BrowserRouter>
-      </AuthProvider>
+        </AuthProvider>
+      </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>

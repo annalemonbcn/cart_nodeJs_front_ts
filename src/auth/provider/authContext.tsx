@@ -1,3 +1,4 @@
+import { STORAGE_KEYS } from '@/variables/constants'
 import type { PropsWithChildren } from '@/variables/types/global.types'
 import { createContext, useState } from 'react'
 import { toast } from 'sonner'
@@ -12,12 +13,13 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [token, setToken] = useState(() => localStorage.getItem('token') || null)
+  const [token, setToken] = useState(() => localStorage.getItem(STORAGE_KEYS.token) || null)
 
   const isAuthenticated = !!token
 
   const logout = () => {
-    localStorage.removeItem('token')
+    localStorage.setItem(STORAGE_KEYS.manualLogout, 'true')
+    localStorage.removeItem(STORAGE_KEYS.token)
     setToken(null)
     toast.success('Logout successful')
   }
