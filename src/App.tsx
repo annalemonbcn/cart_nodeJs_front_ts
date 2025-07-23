@@ -1,12 +1,12 @@
 import { AppContainer, MainContainer } from './styles'
 import { Toaster } from 'sonner'
-import Router from './routes/router'
+import AppRouter from './routes/Router'
 
 const App = () => (
   <AppContainer>
     <Toaster position="top-right" richColors />
     <MainContainer>
-      <Router />
+      <AppRouter />
     </MainContainer>
   </AppContainer>
 )

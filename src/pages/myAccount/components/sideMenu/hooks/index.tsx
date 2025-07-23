@@ -3,8 +3,8 @@ import HeartIcon from '@/icons/heart.svg?react'
 import ProfileIcon from '@/icons/profile.svg?react'
 import OrdersIcon from '@/icons/orders.svg?react'
 import SignOutIcon from '@/icons/sign-out.svg?react'
-import routes from '@/routes/routes'
 import { useLocation } from 'react-router-dom'
+import { routeMap } from '@/routes/utils'
 
 const menuOptions = ['wishlist', 'orders', 'profile', 'signOut'] as const
 type MenuOption = (typeof menuOptions)[number]
@@ -24,9 +24,9 @@ const useGenerateMenuOptions = () => {
 
   const options: VerticalMenuOption[] = menuOptions.map((option) => ({
     icon: getOptionIcon(option),
-    path: routes[option].path,
-    label: routes[option].title,
-    isActive: pathname === routes[option].path
+    path: routeMap[option].path,
+    label: routeMap[option].title,
+    isActive: pathname === routeMap[option].path
   }))
 
   return options
