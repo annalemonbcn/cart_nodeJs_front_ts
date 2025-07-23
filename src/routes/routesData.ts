@@ -8,11 +8,11 @@ type RouteName =
   | 'signUp'
   | 'changePassword'
   | 'authSuccess'
-  | 'my-account'
+  | 'myAccount'
   | 'profile'
   | 'wishlist'
   | 'orders'
-  | 'sign-out'
+  | 'signOut'
 
 const routesData: Omit<PageRoute, 'component'>[] = [
   {
@@ -47,10 +47,10 @@ const routesData: Omit<PageRoute, 'component'>[] = [
   },
   {
     name: 'authSuccess',
-    path: '/auth-success'
+    path: '/auth/success'
   },
   {
-    name: 'my-account',
+    name: 'myAccount',
     path: '/my-account',
     title: 'My Account',
     protected: true,
@@ -71,7 +71,7 @@ const routesData: Omit<PageRoute, 'component'>[] = [
         title: 'Orders'
       },
       {
-        name: 'sign-out',
+        name: 'signOut',
         path: 'sign-out',
         title: 'Sign Out'
       }
