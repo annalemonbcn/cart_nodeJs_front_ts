@@ -1,4 +1,4 @@
-import { ContactDetailsForm } from '../contactDetailsForm'
+import { ContactDetailsForm } from './components/contactDetailsForm'
 import { InnerTitle } from '../innerTitle'
 
 const ContactDetails = () => (

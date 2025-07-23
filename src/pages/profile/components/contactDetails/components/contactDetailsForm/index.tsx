@@ -6,7 +6,7 @@ import Button from '@/components/button'
 import FlexContainer from '@/components/flexContainer'
 import { renderFormFields } from './utils'
 import Loader from '@/components/loader'
-import { useGetDefaultValues } from './hooks'
+import { useGetDefaultValues } from '../../hooks'
 
 const ContactDetailsForm = () => {
   const { isLoading, data: defaultValues } = useGetDefaultValues()
