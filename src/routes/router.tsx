@@ -1,30 +1,31 @@
-import LoginRoute from '@/pages/loginPage/routes'
-import SignUpRoute from '@/pages/signUp/routes'
-import MyAccountRoute from '@/pages/myAccount/routes'
-import { Routes, Route, Navigate } from 'react-router'
+import type { JSX } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import ProtectedRoute from './protectedRoute'
-import HomePageRoute from '@/pages/home/routes'
-import AuthSuccessRoute from '@/pages/authSuccess/routes'
+import type { PageRoute } from './types'
+import { routes } from './routes'
 
-const Router = () => (
+const renderRoutes = (routeList: PageRoute[], basePath = ''): JSX.Element[] =>
+  routeList.flatMap((route) => {
+    const fullPath = basePath + route.path
+
+    const element = route.component ? <route.component /> : <div>Not Found</div>
+    const wrappedElement = route.protected ? <ProtectedRoute>{element}</ProtectedRoute> : element
+
+    const children = route.children ? renderRoutes(route.children, fullPath + '/') : null
+
+    return (
+      <Route key={fullPath} path={fullPath} element={wrappedElement}>
+        {children}
+        {route.children && <Route index element={<Navigate to={route.children[0].path} replace />} />}
+      </Route>
+    )
+  })
+
+const AppRouter = () => (
   <Routes>
-    <Route path="/" element={<Navigate to={HomePageRoute.path} replace />} />
-    <Route path={HomePageRoute.path} element={<HomePageRoute.component />} />
-    <Route path="/products" element={<div>Products</div>} />
-    <Route path="/cart" element={<div>Cart</div>} />
-    <Route path={LoginRoute.path} element={<LoginRoute.component />} />
-    <Route path={SignUpRoute.path} element={<SignUpRoute.component />} />
-    <Route path={AuthSuccessRoute.path} element={<AuthSuccessRoute.component />} />
-
-    <Route
-      path={MyAccountRoute.path}
-      element={
-        <ProtectedRoute>
-          <MyAccountRoute.component />
-        </ProtectedRoute>
-      }
-    />
+    <Route path="/" element={<Navigate to="/shop" replace />} />
+    {renderRoutes(routes)}
   </Routes>
 )
 
-export default Router
+export default AppRouter

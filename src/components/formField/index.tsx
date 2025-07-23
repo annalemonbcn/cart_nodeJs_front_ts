@@ -15,11 +15,12 @@ const FormField = ({
   children,
   showIcon = false,
   showPassword,
-  toggleShowPassword
+  toggleShowPassword,
+  variant = 'primary'
 }: IFormFieldProps) => (
-  <FlexContainer flexDirection="column" gap={tokens.space.sm2}>
+  <FlexContainer flexDirection="column" gap={variant === 'primary' ? tokens.space.sm2 : undefined}>
     <FlexContainer justifyContent="space-between" alignItems="center">
-      <StyledLabel htmlFor={inputName}>
+      <StyledLabel htmlFor={inputName} variant={variant}>
         {capitalize(label)}
         {isRequired && '*'}
       </StyledLabel>

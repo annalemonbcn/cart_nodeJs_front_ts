@@ -1,6 +1,8 @@
 import type { PropsWithChildren } from '@/variables/types/global.types'
 import type { IShowPasswordIconProps } from './components/showPasswordIcon/types'
 
+type FormFieldVariant = 'primary' | 'secondary'
+
 interface IFormFieldProps extends PropsWithChildren, IShowPasswordIconProps {
   label: string
   inputName: string
@@ -8,6 +10,7 @@ interface IFormFieldProps extends PropsWithChildren, IShowPasswordIconProps {
   hasError?: boolean
   errorMessage?: string
   showIcon?: boolean
+  variant?: FormFieldVariant
 }
 
-export type { IFormFieldProps }
+export type { IFormFieldProps, FormFieldVariant }

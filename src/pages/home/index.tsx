@@ -1,7 +1,7 @@
-import BaseLayout from "@/common/layouts/baseLayout"
+import BaseLayout from '@/common/layouts/baseLayout'
 
 const HomePage = () => {
-  return <BaseLayout>Home Page</BaseLayout>
+  return <BaseLayout showBreadcrumb={false}>Home Page</BaseLayout>
 }
 
 export { HomePage }

@@ -1,6 +1,11 @@
 import { colors } from '@/variables/styles'
 import { ClipLoader } from 'react-spinners'
+import { StyledLoaderContainer } from './styles'
 
-const Loader = () => <ClipLoader color={colors.primary} />
+const Loader = () => (
+  <StyledLoaderContainer justifyContent="center">
+    <ClipLoader color={colors.primary} />
+  </StyledLoaderContainer>
+)
 
 export default Loader

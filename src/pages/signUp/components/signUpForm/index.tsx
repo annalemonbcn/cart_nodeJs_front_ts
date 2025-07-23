@@ -2,10 +2,10 @@ import CustomForm from '@/components/customForm'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import { useForm } from 'react-hook-form'
-import EmailFormField from '@/common/emailFormField'
-import PasswordFormField from '@/common/passwordFormField'
+import EmailFormField from '@/common/form/emailFormField'
+import PasswordFormField from '@/common/form/passwordFormField'
 import { SignUpBtn } from '../signUpBtn'
-import TextFormField from '@/common/textFormField'
+import TextFormField from '@/common/form/textFormField'
 import type { SignUpFormType } from './types'
 
 const SignUpForm = () => {

@@ -4,8 +4,8 @@ import CustomForm from '@/components/customForm'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import { SignInBtn } from '../signInBtn'
-import EmailFormField from '@/common/emailFormField'
-import PasswordFormField from '@/common/passwordFormField'
+import EmailFormField from '@/common/form/emailFormField'
+import PasswordFormField from '@/common/form/passwordFormField'
 import Link from '@/components/link'
 
 const LoginForm = () => {
