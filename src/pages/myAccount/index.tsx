@@ -5,7 +5,7 @@ import { SideMenu } from './components/sideMenu'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 
-const MyAccount = () => {
+const MyAccountPage = () => {
   const { isAuthenticated } = useAuthContext()
 
   if (!isAuthenticated) return <div>You must login to access this page</div>
@@ -20,4 +20,4 @@ const MyAccount = () => {
   )
 }
 
-export { MyAccount }
+export { MyAccountPage }

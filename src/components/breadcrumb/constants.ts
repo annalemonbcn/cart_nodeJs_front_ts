@@ -1,9 +1,9 @@
-import routes from '@/routes/routes'
 import type { IBreadcrumbItem } from './types'
+import { routeMap } from '@/routes/routeMap'
 
 const homeStep: IBreadcrumbItem = {
   name: 'Home',
-  linkto: routes.homePage.path
+  linkto: routeMap.home.path
 }
 
 export { homeStep }

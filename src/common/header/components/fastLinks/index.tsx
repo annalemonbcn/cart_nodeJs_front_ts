@@ -7,7 +7,7 @@ import ProfileIcon from '@/icons/profile.svg?react'
 import CartIcon from '@/icons/cart.svg?react'
 import { StyledButton } from './styles'
 import type { ButtonVariant } from '@/components/button/types'
-import routes from '@/routes/routes'
+import { routeMap } from '@/routes/routeMap'
 
 // TODO: move to common (?)
 const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {
@@ -37,15 +37,15 @@ const FastLinks = () => {
   const highlights: IHighlightedItem[] = [
     {
       icon: HeartIcon,
-      path: routes.wishlist.path
+      path: routeMap.wishlist.path
     },
     {
       icon: ProfileIcon,
-      path: routes.profile.path
+      path: routeMap.profile.path
     },
     {
       icon: CartIcon,
-      path: routes.cart.path
+      path: routeMap.cart.path
     }
   ]
 

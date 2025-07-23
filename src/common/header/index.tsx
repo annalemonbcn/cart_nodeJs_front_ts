@@ -5,11 +5,11 @@ import { FastLinks } from './components/fastLinks'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import { Link } from 'react-router-dom'
-import routes from '@/routes/routes'
+import { routeMap } from '@/routes/routeMap'
 
 const Header = () => (
   <StyledHeader>
-    <Link to={routes.homePage.path}>
+    <Link to={routeMap.home.path}>
       <img src="/images/euphoria-logo.svg" alt="euphoria-logo" />
     </Link>
 
