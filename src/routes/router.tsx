@@ -4,19 +4,35 @@ import ProtectedRoute from './protectedRoute'
 import type { PageRoute } from './types'
 import { routes } from './routes'
 
-const renderRoutes = (routeList: PageRoute[], basePath = ''): JSX.Element[] =>
-  routeList.flatMap((route) => {
-    const fullPath = basePath + route.path
-
-    const element = route.component ? <route.component /> : <div>Not Found</div>
-    const wrappedElement = route.protected ? <ProtectedRoute>{element}</ProtectedRoute> : element
-
-    const children = route.children ? renderRoutes(route.children, fullPath + '/') : null
+const renderRoutes = (routeList: PageRoute[]): JSX.Element[] =>
+  routeList.map((route) => {
+    const element =
+      route.isWrapper || !route.component ? undefined : route.protected ? (
+        <ProtectedRoute>{<route.component />}</ProtectedRoute>
+      ) : (
+        <route.component />
+      )
 
     return (
-      <Route key={fullPath} path={fullPath} element={wrappedElement}>
-        {children}
-        {route.children && <Route index element={<Navigate to={route.children[0].path} replace />} />}
+      <Route key={route.name} path={route.path} element={element}>
+        {route.children && (
+          <>
+            {renderRoutes(route.children)}
+            {route.isWrapper && (
+              <Route
+                index
+                element={
+                  <Navigate
+                    to={
+                      route.redirectTo ? route.redirectTo : route.children?.[0]?.path ? route.children[0].path : '/home'
+                    }
+                    replace
+                  />
+                }
+              />
+            )}
+          </>
+        )}
       </Route>
     )
   })

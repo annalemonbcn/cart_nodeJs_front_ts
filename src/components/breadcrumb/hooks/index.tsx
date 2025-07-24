@@ -13,15 +13,10 @@ const useGenerateBreadcrumbSteps = (pathname: string) => {
 
     const matchingRoute = Object.values(routeMap).find((route) => route.path === currentPath)
 
-    if (matchingRoute) {
+    if (matchingRoute && !matchingRoute.isWrapper) {
       breadcrumbSteps.push({
         name: matchingRoute.title || segment,
         linkto: matchingRoute.path
-      })
-    } else {
-      breadcrumbSteps.push({
-        name: segment,
-        linkto: currentPath
       })
     }
   })

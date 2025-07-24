@@ -8,6 +8,8 @@ type PageRoute = {
   component?: () => React.JSX.Element
   children?: PageRoute[]
   protected?: boolean
+  isWrapper?: boolean
+  redirectTo?: string
 }
 
 export type { PageRoute }

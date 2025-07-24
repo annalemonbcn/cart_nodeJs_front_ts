@@ -20,7 +20,9 @@ const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   profile: <ProfilePage />,
   wishlist: <div>Wishlist</div>,
   orders: <div>Orders</div>,
-  signOut: <div>Sign Out</div>
+  signOut: <div>Sign Out</div>,
+  address: <div>Not to be rendered</div>,
+  addressAdd: <div>Add new address</div>
 }
 
 const attachComponents = (routes: Omit<PageRoute, 'component'>[]): PageRoute[] =>
@@ -38,6 +40,10 @@ const attachComponents = (routes: Omit<PageRoute, 'component'>[]): PageRoute[] =
     }
   })
 
+/**
+ * @description Routes
+ * This is an array of routes + it's corresponding component
+ */
 const routes: PageRoute[] = attachComponents(routesData)
 
 export { routes }
