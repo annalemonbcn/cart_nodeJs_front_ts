@@ -1,5 +1,5 @@
 type TDeliveryAddress = {
-  road: string
+  street: string
   additionalInfo?: string
   zipCode: string
   city: string

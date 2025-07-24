@@ -7,6 +7,7 @@ import { AuthSuccess } from '@/pages/authSuccess'
 import { MyAccountPage } from '@/pages/myAccount'
 import { ProfilePage } from '@/pages/profile'
 import { routesData, type RouteName } from './routesData'
+import { AddressAdd } from '@/pages/addressAdd'
 
 const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   home: <HomePage />,
@@ -22,7 +23,7 @@ const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   orders: <div>Orders</div>,
   signOut: <div>Sign Out</div>,
   address: <div>Not to be rendered</div>,
-  addressAdd: <div>Add new address</div>
+  addressAdd: <AddressAdd />
 }
 
 const attachComponents = (routes: Omit<PageRoute, 'component'>[]): PageRoute[] =>

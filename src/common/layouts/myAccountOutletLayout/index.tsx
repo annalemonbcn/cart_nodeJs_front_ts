@@ -1,15 +1,13 @@
-import Text from '@/components/text'
 import { tokens } from '@/variables/styles'
 import type { IMyAccountLayoutProps } from './types'
 import { StyledContainer } from './styles'
+import Title from '@/common/titles/title'
 
-const MyAccountLayout = ({ title, children }: IMyAccountLayoutProps) => (
+const MyAccountOutletLayout = ({ title, children }: IMyAccountLayoutProps) => (
   <StyledContainer flexDirection="column" gap={tokens.space.lg}>
-    <Text size="s6" weight="bold" color="darkNeutral">
-      {title}
-    </Text>
+    <Title title={title} />
     {children}
   </StyledContainer>
 )
 
-export { MyAccountLayout }
+export { MyAccountOutletLayout }

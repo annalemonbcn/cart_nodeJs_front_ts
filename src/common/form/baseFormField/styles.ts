@@ -11,13 +11,6 @@ const errorStyles = css`
 const StyledInput = styled(Input)<{ hasError?: boolean }>`
   margin-top: ${tokens.space.xs};
 
-  transition: all 0.2s ease-in-out;
-
-  &:focus {
-    background-color: ${colors.whiteSmoke};
-    padding-left: ${tokens.space.sm2};
-  }
-
   ${({ hasError }) => hasError && errorStyles};
 `
 

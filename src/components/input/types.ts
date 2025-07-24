@@ -1,4 +1,4 @@
-type InputVariant = 'primary' | 'secondary'
+type InputVariant = 'primary' | 'secondary' | 'tertiary'
 
 interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholderText?: string

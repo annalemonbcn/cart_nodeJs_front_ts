@@ -13,6 +13,19 @@ const secondaryStyles = css`
   font-size: ${tokens.font.size.s4};
   font-weight: ${tokens.font.weight.bold};
   color: ${colors.darkNeutral};
+
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    background-color: ${colors.whiteSmoke};
+    padding-left: ${tokens.space.sm2};
+  }
+`
+
+const tertiaryStyles = css`
+  border: none;
+  background-color: ${colors.whiteSmoke};
+  padding-left: ${tokens.space.sm2};
 `
 
 const StyledInput = styled.input<Pick<IInputProps, 'variant'>>`
@@ -22,6 +35,7 @@ const StyledInput = styled.input<Pick<IInputProps, 'variant'>>`
 
   ${({ variant }) => variant === 'primary' && primaryStyles};
   ${({ variant }) => variant === 'secondary' && secondaryStyles};
+  ${({ variant }) => variant === 'tertiary' && tertiaryStyles};
 
   &:focus {
     outline: none;

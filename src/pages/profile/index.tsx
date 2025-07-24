@@ -1,20 +1,18 @@
 import FlexContainer from '@/components/flexContainer'
-import { MyAccountLayout } from '../myAccount/components/header'
+import { MyAccountOutletLayout } from '../../common/layouts/myAccountOutletLayout'
 import { ChangePassword } from './components/changePassword'
 import { tokens } from '@/variables/styles'
 import { AddressSection } from './components/addressSection'
 import { ContactDetails } from './components/contactDetails'
 
 const ProfilePage = () => (
-  <MyAccountLayout title="My Info">
+  <MyAccountOutletLayout title="My Info">
     <FlexContainer flexDirection="column" gap={tokens.space.xl}>
       <ContactDetails />
-
       <ChangePassword />
-
       <AddressSection />
     </FlexContainer>
-  </MyAccountLayout>
+  </MyAccountOutletLayout>
 )
 
 export { ProfilePage }
