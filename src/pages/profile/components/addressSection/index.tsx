@@ -1,11 +1,12 @@
 import FlexContainer from '@/components/flexContainer'
 import { InnerTitle } from '../innerTitle'
-import Button from '@/components/button'
 import { useGetAddress } from './hooks'
 import Text from '@/components/text'
 import { tokens } from '@/variables/styles'
 import { AddressRender } from './components/addressRender'
 import { StyledContainer } from './styles'
+import Link from '@/components/link'
+import { routeMap } from '@/routes/utils'
 
 const AddressSection = () => {
   const { data } = useGetAddress()
@@ -16,7 +17,9 @@ const AddressSection = () => {
     <FlexContainer flexDirection="column" gap={tokens.space.md}>
       <FlexContainer justifyContent="space-between" alignItems="center">
         <InnerTitle title="Address" />
-        <Button variant="text">Add new</Button>
+        <Link to={routeMap.addressAdd.path} weight="bold" color="darkNeutral" underline={false}>
+          Add new
+        </Link>
       </FlexContainer>
 
       {noData && <Text>No addresses found</Text>}

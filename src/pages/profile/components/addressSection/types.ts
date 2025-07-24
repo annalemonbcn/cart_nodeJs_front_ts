@@ -9,7 +9,8 @@ type TDeliveryAddress = {
 
 interface IAddressProps {
   id: string
-  name: string
+  firstName: string
+  lastName: string
   phoneNumber: string
   deliveryAddress: TDeliveryAddress
   isDefault: boolean

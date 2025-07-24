@@ -6,10 +6,10 @@ import { ActionButtons } from '../actionButtons'
 import { Tags } from '../tags'
 import { DeliveryAddress } from '../deliveryAddress'
 
-const AddressRender = ({ name, phoneNumber, deliveryAddress, isDefault, tags }: IAddressProps) => (
+const AddressRender = ({ firstName, lastName, phoneNumber, deliveryAddress, isDefault, tags }: IAddressProps) => (
   <StyledAddressContainer flexDirection="column" gap={tokens.space.md}>
     <Text size="s5" weight="medium" color="darkNeutral">
-      {name}
+      {firstName} {lastName}
     </Text>
 
     <Text>{phoneNumber}</Text>
