@@ -16,6 +16,7 @@ const secondaryStyles = css`
 const tertiaryStyles = css`
   border: none;
   background-color: ${colors.whiteSmoke};
+  font-weight: ${tokens.font.weight.medium};
 `
 
 const textStyles = css`
@@ -45,6 +46,7 @@ const StyledButton = styled.button<Partial<IButtonProps>>`
 
   ${({ fitContent }) => fitContent && fitContentStyles}
   ${({ isRounded }) => isRounded && `border-radius: ${tokens.borders.radius.full}`}
+  font-weight: ${({ fontWeight }) => fontWeight && tokens.font.weight[fontWeight]};
 
   &:hover {
     opacity: 0.8;

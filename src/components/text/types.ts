@@ -3,7 +3,11 @@ import { tokens, colors } from '@/variables/styles'
 
 type FontSize = keyof typeof tokens.font.size
 type FontWeight = keyof typeof tokens.font.weight
-type TextColor = keyof typeof colors
+type TextColor =
+  | keyof typeof colors
+  | `${keyof typeof colors}.100`
+  | `${keyof typeof colors}.200`
+  | `${keyof typeof colors}.800`
 
 interface ITextProps extends PropsWithChildren {
   size?: FontSize

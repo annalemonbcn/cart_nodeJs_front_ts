@@ -3,7 +3,7 @@ import type { IInputProps } from './types'
 import { forwardRef } from 'react'
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(
-  ({ name, type, placeholderText = '', variant = 'primary', ...rest }, ref) => (
+  ({ name, type, placeholderText = '', variant = 'primary', fitContent = false, hasError = false, ...rest }, ref) => (
     <StyledInput
       ref={ref}
       type={type}
@@ -11,6 +11,8 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
       name={name}
       placeholder={placeholderText}
       variant={variant}
+      fitContent={fitContent}
+      hasError={hasError}
       {...rest}
     />
   )
