@@ -8,10 +8,10 @@ const IsDefaultField = () => {
 
   return (
     <>
-      <Text weight="medium" color="darkNeutral">
+      <Text size="s3" weight="medium" color="darkNeutral">
         Set as default address
       </Text>
-      <Input type="checkbox" fitContent {...register('Field')} />
+      <Input type="checkbox" fitContent {...register('isDefault')} />
     </>
   )
 }

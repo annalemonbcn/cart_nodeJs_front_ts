@@ -11,6 +11,7 @@ import {
   PhoneNumber,
   Province,
   StreetAddress,
+  Tags,
   ZipCode
 } from './styles'
 
@@ -29,7 +30,7 @@ const wrapperMap: Record<DotNestedKeys<AddAddressFormShape>, React.FC<any>> = {
   'deliveryAddress.country': Country,
   phoneNumber: PhoneNumber,
   isDefault: IsDefault,
-  tags: () => <div>TODO</div>
+  tags: Tags
 }
 
 const renderForm = () => (

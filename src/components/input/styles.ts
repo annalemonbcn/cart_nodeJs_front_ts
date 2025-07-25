@@ -12,7 +12,6 @@ const secondaryStyles = (hasError?: boolean) => css`
   padding-left: 0;
   font-size: ${tokens.font.size.s4};
   font-weight: ${tokens.font.weight.bold};
-  color: ${colors.darkNeutral};
 
   transition: all 0.2s ease-in-out;
 
@@ -46,6 +45,7 @@ const tertiaryErrorStyles = css`
 const StyledInput = styled.input<Pick<IInputProps, 'variant' | 'fitContent' | 'hasError'>>`
   min-width: 140px;
   padding: ${tokens.space.sm};
+  color: ${colors.darkNeutral};
   background-color: ${colors.white};
 
   ${({ variant }) => variant === 'primary' && primaryStyles};

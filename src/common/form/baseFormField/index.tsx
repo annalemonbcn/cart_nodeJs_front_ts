@@ -4,6 +4,7 @@ import { useState } from 'react'
 import FormField from '@/components/formField'
 import { mergeRefs } from './utils'
 import { StyledInput } from './styles'
+import { getNestedValue } from '@/utils/objects'
 
 const BaseFormField = <T extends FieldValues>({
   label,
@@ -23,7 +24,7 @@ const BaseFormField = <T extends FieldValues>({
     formState: { errors }
   } = useFormContext<T>()
 
-  const fieldError = errors[inputName]
+  const fieldError = getNestedValue(errors, inputName)
 
   const [showPassword, setShowPassword] = useState(false)
   const toggleShowPassword = () => setShowPassword((prev) => !prev)

@@ -12,7 +12,7 @@ const FormWrapper = styled.div`
     'streetAddress additionalInfo'
     'zipCode city'
     'province country'
-    'phoneNumber .'
+    'phoneNumber tags'
     'isDefault .';
 `
 
@@ -61,6 +61,10 @@ const IsDefault = styled.div`
   gap: ${tokens.space.sm};
 `
 
+const Tags = styled.div`
+  grid-area: tags;
+`
+
 export {
   FormWrapper,
   FirstName,
@@ -72,5 +76,6 @@ export {
   Province,
   Country,
   PhoneNumber,
-  IsDefault
+  IsDefault,
+  Tags
 }

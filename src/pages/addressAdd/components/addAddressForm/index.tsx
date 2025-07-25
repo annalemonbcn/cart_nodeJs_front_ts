@@ -7,7 +7,23 @@ import { tokens } from '@/variables/styles'
 import Button from '@/components/button'
 
 const AddAddressForm = () => {
-  const methods = useForm<AddAddressFormShape>()
+  const methods = useForm<AddAddressFormShape>({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      deliveryAddress: {
+        street: '',
+        zipCode: '',
+        city: '',
+        province: '',
+        country: '',
+        additionalInfo: ''
+      },
+      phoneNumber: '',
+      isDefault: false,
+      tags: []
+    }
+  })
   const { handleSubmit } = methods
 
   const onSubmit: SubmitHandler<AddAddressFormShape> = (data) => console.log(data)
@@ -17,7 +33,9 @@ const AddAddressForm = () => {
       {renderForm()}
 
       <FlexContainer alignItems="center" gap={tokens.space.xl}>
-        <Button fontWeight="medium" onClick={handleSubmit(onSubmit)}>Save</Button>
+        <Button fontWeight="medium" onClick={handleSubmit(onSubmit)}>
+          Save
+        </Button>
         <Button variant="tertiary">Cancel</Button>
       </FlexContainer>
     </CustomForm>

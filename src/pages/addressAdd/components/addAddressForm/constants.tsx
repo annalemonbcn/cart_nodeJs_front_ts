@@ -76,6 +76,13 @@ const formFields: {
     label: 'Set as default address',
     component: IsDefaultField,
     isRequired: false
+  },
+  {
+    name: 'tags',
+    label: 'Tags',
+    placeholderText: 'Separated by commas: home, work, etc.',
+    component: TextFormField,
+    isRequired: false
   }
 ]
 
