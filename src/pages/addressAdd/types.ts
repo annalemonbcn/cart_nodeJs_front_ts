@@ -14,7 +14,7 @@ type AddAddressFormShape = {
   deliveryAddress: TDeliveryAddress
   phoneNumber: string
   isDefault: boolean
-  tags?: string[]
+  tags?: string
 }
 
 export type { AddAddressFormShape }

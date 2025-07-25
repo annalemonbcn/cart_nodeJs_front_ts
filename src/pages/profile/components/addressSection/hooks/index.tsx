@@ -1,13 +1,15 @@
-import type { IAddressProps } from '../types'
+import { useQuery } from '@tanstack/react-query'
 import { mockAddress } from './mock.data'
+import { useAddressServices } from '@/services/address'
 
 const useGetAddress = () => {
-  const address: IAddressProps[] = mockAddress
-  const isLoading = false
+  const { getAllAddresses } = useAddressServices()
+
+  const { data, isLoading } = useQuery(getAllAddresses())
 
   return {
     isLoading,
-    data: address
+    data
   }
 }
 

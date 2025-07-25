@@ -14,10 +14,7 @@ import {
   Tags,
   ZipCode
 } from './styles'
-
-type DotNestedKeys<T> = {
-  [K in keyof T & string]: T[K] extends object ? (T[K] extends Array<any> ? K : `${K}.${DotNestedKeys<T[K]>}`) : K
-}[keyof T & string]
+import type { DotNestedKeys } from './types'
 
 const wrapperMap: Record<DotNestedKeys<AddAddressFormShape>, React.FC<any>> = {
   firstName: FirstName,

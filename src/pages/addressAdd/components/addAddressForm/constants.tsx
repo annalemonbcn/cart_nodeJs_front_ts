@@ -2,10 +2,7 @@ import TextFormField from '@/common/form/textFormField'
 import type { AddAddressFormShape } from '../../types'
 import type { RegisterOptions } from 'react-hook-form'
 import { IsDefaultField } from '../isDefaultField'
-
-type DotNestedKeys<T> = {
-  [K in keyof T & string]: T[K] extends object ? `${K}` | `${K}.${DotNestedKeys<T[K]>}` : `${K}`
-}[keyof T & string]
+import type { DotNestedKeys } from './types'
 
 // TODO: same as in src/pages/profile/components/contactDetails/components/contactDetailsForm/constants.ts
 // TODO: make it global?
