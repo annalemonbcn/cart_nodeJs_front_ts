@@ -5,6 +5,7 @@ type RouteEntry = {
   name: string
   path: string
   title: string
+  isWrapper?: boolean
 }
 
 const flattenRoutes = (routes: PageRoute[], basePath = ''): Record<string, RouteEntry> =>
@@ -13,7 +14,8 @@ const flattenRoutes = (routes: PageRoute[], basePath = ''): Record<string, Route
     acc[route.name] = {
       name: route.name,
       path: fullPath,
-      title: route.title || ''
+      title: route.title || '',
+      isWrapper: route.isWrapper
     }
 
     if (route.children) {

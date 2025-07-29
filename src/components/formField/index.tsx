@@ -20,7 +20,7 @@ const FormField = ({
 }: IFormFieldProps) => (
   <FlexContainer flexDirection="column" gap={variant === 'primary' ? tokens.space.sm2 : undefined}>
     <FlexContainer justifyContent="space-between" alignItems="center">
-      <StyledLabel htmlFor={inputName} variant={variant}>
+      <StyledLabel htmlFor={inputName} variant={variant} hasError={hasError}>
         {capitalize(label)}
         {isRequired && '*'}
       </StyledLabel>
@@ -30,7 +30,7 @@ const FormField = ({
     </FlexContainer>
     {children}
     {hasError && errorMessage && (
-      <Text size="s2" color="danger">
+      <Text size="s2" color="danger.800">
         {errorMessage}
       </Text>
     )}

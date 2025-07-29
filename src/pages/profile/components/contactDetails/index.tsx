@@ -1,9 +1,9 @@
-import { ContactDetailsForm } from '../contactDetailsForm'
-import { InnerTitle } from '../innerTitle'
+import { SubTitle } from '@/common/titles/subTitle'
+import { ContactDetailsForm } from './components/contactDetailsForm'
 
 const ContactDetails = () => (
   <>
-    <InnerTitle title="Contact Details" />
+    <SubTitle title="Contact Details" />
     <ContactDetailsForm />
   </>
 )

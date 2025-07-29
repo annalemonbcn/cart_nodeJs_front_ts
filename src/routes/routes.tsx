@@ -7,6 +7,7 @@ import { AuthSuccess } from '@/pages/authSuccess'
 import { MyAccountPage } from '@/pages/myAccount'
 import { ProfilePage } from '@/pages/profile'
 import { routesData, type RouteName } from './routesData'
+import { AddressAdd } from '@/pages/addressAdd'
 
 const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   home: <HomePage />,
@@ -20,7 +21,9 @@ const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   profile: <ProfilePage />,
   wishlist: <div>Wishlist</div>,
   orders: <div>Orders</div>,
-  signOut: <div>Sign Out</div>
+  signOut: <div>Sign Out</div>,
+  address: <div>Not to be rendered</div>,
+  addressAdd: <AddressAdd />
 }
 
 const attachComponents = (routes: Omit<PageRoute, 'component'>[]): PageRoute[] =>
@@ -38,6 +41,10 @@ const attachComponents = (routes: Omit<PageRoute, 'component'>[]): PageRoute[] =
     }
   })
 
+/**
+ * @description Routes
+ * This is an array of routes + it's corresponding component
+ */
 const routes: PageRoute[] = attachComponents(routesData)
 
 export { routes }

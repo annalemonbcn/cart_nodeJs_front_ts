@@ -75,4 +75,4 @@ const tokens = {
   space
 }
 
-export { colors, tokens }
+export { colors, dangerShades, tokens }

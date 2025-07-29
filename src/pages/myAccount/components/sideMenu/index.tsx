@@ -7,6 +7,7 @@ import { useGenerateMenuOptions } from './hooks'
 import { VerticalMenu } from '@/components/verticalMenu'
 import { useLoadUser } from '@/hooks/useLoadUser'
 import { StyledSideMenu } from './styles'
+import Title from '@/common/titles/title'
 
 const SideMenu = () => {
   const { data, isLoading } = useLoadUser()
@@ -20,9 +21,7 @@ const SideMenu = () => {
     <StyledSideMenu flexDirection="column" gap={tokens.space.xl2}>
       <FlexContainer flexDirection="column" gap={tokens.space.sm}>
         <VerticalBarDecorator>
-          <Text size="s6" weight="bold" color="darkNeutral">
-            Hello&nbsp;{data.payload?.firstName}
-          </Text>
+          <Title title={`Hello, ${data.payload?.firstName}`} />
         </VerticalBarDecorator>
 
         <Text>Welcome to your account</Text>

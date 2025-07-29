@@ -13,7 +13,13 @@ type RouteName =
   | 'wishlist'
   | 'orders'
   | 'signOut'
+  | 'address'
+  | 'addressAdd'
 
+/**
+ * @description Routes data
+ * This is a flat array of routes + paths + titles
+ */
 const routesData: Omit<PageRoute, 'component'>[] = [
   {
     name: 'home',
@@ -74,6 +80,19 @@ const routesData: Omit<PageRoute, 'component'>[] = [
         name: 'signOut',
         path: 'sign-out',
         title: 'Sign Out'
+      },
+      {
+        name: 'address',
+        path: 'address',
+        isWrapper: true,
+        redirectTo: '/my-account/profile',
+        children: [
+          {
+            name: 'addressAdd',
+            path: 'add',
+            title: 'Add New Address'
+          }
+        ]
       }
     ]
   }

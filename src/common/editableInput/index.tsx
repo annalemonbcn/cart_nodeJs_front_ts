@@ -11,7 +11,6 @@ const StyledEditableContainer = styled(FlexContainer)`
   }
 `
 
-// TODO: move to common (?)
 // TODO: delete (?)
 const EditableInput = ({ children }: EditableInputProps) => {
   const [isEdit, setIsEdit] = useState(false)
