@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import { mockAddress } from './mock.data'
 import { useAddressServices } from '@/services/address'
 
 const useGetAddress = () => {

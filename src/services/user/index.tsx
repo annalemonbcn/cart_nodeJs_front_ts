@@ -7,7 +7,7 @@ const COMMON_KEYS = ['user']
 const getUserInfo = () => ({
   queryKey: [...COMMON_KEYS, 'getUserInfo'],
   queryFn: async (): Promise<UserResponseDto> => {
-    const response = await apiClient.get('/users/me')
+    const response = await apiClient.get('/user/me')
     return response.data
   }
 })

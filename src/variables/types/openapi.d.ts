@@ -29,12 +29,45 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": {
+                            /** @example success */
+                            status?: string;
+                            /** @example 200 */
+                            code?: number;
+                            payload?: components["schemas"]["Product"][];
+                            /** @description Pagination context */
+                            pageContext?: {
+                                page?: number;
+                                totalPages?: number;
+                                totalDocs?: number;
+                            };
+                        };
+                    };
+                };
+                /** @description Internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @example error */
+                            status?: string;
+                            /** @example 500 */
+                            code?: number;
+                            /** @example Internal server error */
+                            message?: string;
+                        };
+                    };
                 };
             };
         };
         put?: never;
-        /** Create a new product */
+        /**
+         * Create a new product
+         * @description Creates a new product from the request body
+         */
         post: {
             parameters: {
                 query?: never;
@@ -48,13 +81,9 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description Product created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                201: components["responses"]["ProductCreated"];
+                400: components["responses"]["BadRequest"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         delete?: never;
@@ -63,48 +92,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/products/{id}": {
+    "/api/products/{pid}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Get product by ID */
+        /**
+         * Get product by ID
+         * @description Returns a product by ID
+         */
         get: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
+                    /** @description The ID of the product */
                     id: string;
                 };
                 cookie?: never;
             };
             requestBody?: never;
             responses: {
-                /** @description Product found */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Product not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                200: components["responses"]["ProductFound"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
-        /** Update product by ID */
+        /**
+         * Update product by ID
+         * @description Updates a product by ID
+         */
         put: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
-                    id: string;
+                    /** @description The ID of the product */
+                    pid: string;
                 };
                 cookie?: never;
             };
@@ -114,35 +141,33 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description Product updated */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                200: components["responses"]["ProductUpdated"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         post?: never;
-        /** Delete product by ID */
+        /**
+         * Delete product by ID
+         * @description Deletes a product by ID
+         */
         delete: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
-                    id: string;
+                    /** @description The ID of the product */
+                    pid: string;
                 };
                 cookie?: never;
             };
             requestBody?: never;
             responses: {
-                /** @description Product deleted */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                200: components["responses"]["ProductDeleted"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         options?: never;
@@ -157,27 +182,12 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get all carts */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description A list of carts */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        get?: never;
         put?: never;
-        /** Create a new cart */
+        /**
+         * Create a new empty cart
+         * @description Creates a new shopping cart with an empty product list.
+         */
         post: {
             parameters: {
                 query?: never;
@@ -185,15 +195,15 @@ export interface paths {
                 path?: never;
                 cookie?: never;
             };
-            requestBody?: never;
-            responses: {
-                /** @description Cart created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
+            requestBody?: {
+                content: {
+                    "*/*"?: never;
                 };
+            };
+            responses: {
+                201: components["responses"]["CartCreated"];
+                400: components["responses"]["BadRequest"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         delete?: never;
@@ -202,86 +212,82 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/carts/{id}": {
+    "/api/carts/{cid}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Get cart by ID */
+        /**
+         * Get cart by ID
+         * @description Returns a cart by ID
+         */
         get: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
+                    /** @description The ID of the cart */
                     id: string;
                 };
                 cookie?: never;
             };
             requestBody?: never;
             responses: {
-                /** @description Cart found */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Cart not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                200: components["responses"]["CartFound"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
-        /** Update cart by ID */
+        /**
+         * Replace all products in a cart
+         * @description Replaces all products in a cart
+         */
         put: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
-                    id: string;
+                    /** @description The ID of the cart */
+                    cid: string;
                 };
                 cookie?: never;
             };
-            requestBody?: {
+            requestBody: {
                 content: {
                     "application/json": components["schemas"]["Cart"];
                 };
             };
             responses: {
-                /** @description Cart updated */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                200: components["responses"]["CartUpdated"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         post?: never;
-        /** Delete cart by ID */
+        /**
+         * Delete cart by ID
+         * @description Deletes a cart by ID
+         */
         delete: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
-                    id: string;
+                    /** @description The ID of the cart */
+                    cid: string;
                 };
                 cookie?: never;
             };
             requestBody?: never;
             responses: {
-                /** @description Cart deleted */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                200: components["responses"]["CartDeleted"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         options?: never;
@@ -289,7 +295,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/carts/{id}/products": {
+    "/api/carts/{cid}/product/{pid}": {
         parameters: {
             query?: never;
             header?: never;
@@ -297,71 +303,83 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        put?: never;
-        /** Add a product to cart */
-        post: {
+        /**
+         * Update quantity of a product in a cart
+         * @description Updates the quantity of a specific product in a given cart.
+         */
+        put: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
-                    id: string;
+                    /** @description The ID of the cart */
+                    cid: string;
+                    /** @description The ID of the product */
+                    pid: string;
                 };
                 cookie?: never;
             };
             requestBody: {
                 content: {
                     "application/json": {
-                        productId?: string;
-                        quantity?: number;
+                        /** @example 3 */
+                        quantity: number;
                     };
                 };
             };
             responses: {
-                /** @description Product added to cart */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                200: components["responses"]["CartProductUpdated"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/carts/{id}/products/{prodId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /** Remove product from cart */
-        delete: {
+        /**
+         * Add a product to a cart
+         * @description Adds a product to an existing cart. If the product is already in the cart, it may increase the quantity (según la lógica del servicio).
+         */
+        post: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
-                    id: string;
-                    prodId: string;
+                    /** @description The ID of the cart */
+                    cid: string;
+                    /** @description The ID of the product */
+                    pid: string;
                 };
                 cookie?: never;
             };
             requestBody?: never;
             responses: {
-                /** @description Product removed from cart */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
+                201: components["responses"]["CartProductAdded"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        /**
+         * Remove a product from a cart
+         * @description Deletes a product from the specified cart.
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the cart */
+                    cid: string;
+                    /** @description The ID of the product */
+                    pid: string;
                 };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["CartProductDeleted"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         options?: never;
@@ -378,7 +396,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Register a new user */
+        /**
+         * Register a new user
+         * @description Creates a new user with local authentication
+         */
         post: {
             parameters: {
                 query?: never;
@@ -388,67 +409,13 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": {
-                        /** @example Alice */
-                        firstName: string;
-                        /** @example Smith */
-                        lastName: string;
-                        /**
-                         * Format: email
-                         * @example alice@example.com
-                         */
-                        email: string;
-                        /**
-                         * Format: password
-                         * @example StrongPass123!
-                         */
-                        password: string;
-                    };
+                    "application/json": components["schemas"]["User"];
                 };
             };
             responses: {
-                /** @description User successfully created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example success */
-                            status?: string;
-                            /** @example 201 */
-                            code?: number;
-                            /** @example User successfully created */
-                            message?: string;
-                            payload?: {
-                                /** @example 64e3f4... */
-                                _id?: string;
-                                /** @example Alice */
-                                firstName?: string;
-                                /** @example Smith */
-                                lastName?: string;
-                                /** @example alice@example.com */
-                                email?: string;
-                            };
-                        };
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example error */
-                            status?: string;
-                            /** @example 400 */
-                            code?: number;
-                            /** @example Email already in use */
-                            message?: string;
-                        };
-                    };
-                };
+                201: components["responses"]["AuthRegister"];
+                400: components["responses"]["RegisterBadRequest"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         delete?: never;
@@ -466,7 +433,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Log in an existing user */
+        /**
+         * Log in an existing user
+         * @description Logs in an existing user with local authentication
+         */
         post: {
             parameters: {
                 query?: never;
@@ -476,67 +446,14 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": {
-                        /**
-                         * Format: email
-                         * @example alice@example.com
-                         */
-                        email: string;
-                        /**
-                         * Format: password
-                         * @example StrongPass123!
-                         */
-                        password: string;
-                    };
+                    "application/json": components["schemas"]["LoginUser"];
                 };
             };
             responses: {
-                /** @description User successfully logged in */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example success */
-                            status?: string;
-                            /** @example 200 */
-                            code?: number;
-                            /** @example User successfully logged in */
-                            message?: string;
-                            payload?: {
-                                user?: {
-                                    /** @example 64e3f4... */
-                                    _id?: string;
-                                    /** @example Alice */
-                                    firstName?: string;
-                                    /** @example Smith */
-                                    lastName?: string;
-                                    /** @example alice@example.com */
-                                    email?: string;
-                                };
-                                /** @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... */
-                                token?: string;
-                            };
-                        };
-                    };
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example error */
-                            status?: string;
-                            /** @example 401 */
-                            code?: number;
-                            /** @example Unauthorized */
-                            message?: string;
-                        };
-                    };
-                };
+                200: components["responses"]["AuthLogin"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         delete?: never;
@@ -545,7 +462,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/users/me": {
+    "/api/user/me": {
         parameters: {
             query?: never;
             header?: never;
@@ -553,7 +470,7 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Get user profile
+         * Get currently authenticated user profile
          * @description Returns the authenticated user's profile, excluding password and internal fields.
          */
         get: {
@@ -565,53 +482,10 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description User profile */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example success */
-                            status?: string;
-                            /** @example 200 */
-                            code?: number;
-                            payload?: components["schemas"]["User"];
-                        };
-                    };
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example error */
-                            status?: string;
-                            /** @example 401 */
-                            code?: number;
-                            /** @example Unauthorized */
-                            message?: string;
-                        };
-                    };
-                };
-                /** @description User not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example error */
-                            status?: string;
-                            /** @example 404 */
-                            code?: number;
-                            /** @example User not found */
-                            message?: string;
-                        };
-                    };
-                };
+                200: components["responses"]["UserProfileFound"];
+                401: components["responses"]["Unauthorized"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         put?: never;
@@ -629,40 +503,330 @@ export interface components {
         Product: {
             title: string;
             description: string;
+            code: string;
             price: number;
-            stock?: number;
-            category?: string;
-        };
-        Cart: {
-            products?: {
-                product?: string;
-                quantity?: number;
+            /**
+             * @default in_stock
+             * @enum {string}
+             */
+            status: "in_stock" | "out_of_stock";
+            stock: number;
+            /** @enum {string} */
+            category: "electronics" | "fashion" | "home" | "sports" | "beauty" | "games" | "books" | "music";
+            thumbnails: {
+                url?: string;
             }[];
         };
+        CartProduct: {
+            /**
+             * @description Product ID (MongoDB ObjectId)
+             * @example 64e3cfc2b567b3c5fcd36b92
+             */
+            product: string;
+            /** @example 2 */
+            quantity: number;
+        };
+        Cart: {
+            products: components["schemas"]["CartProduct"][];
+        };
+        LoginUser: {
+            /**
+             * Format: email
+             * @example alice@example.com
+             */
+            email: string;
+            /**
+             * Format: password
+             * @example StrongPass123!
+             */
+            password: string;
+        };
         User: {
-            /** @example 60d0fe4f5311236168a109ca */
-            _id: string;
             /** @example Jane */
-            firstName: string;
+            firstName?: string;
             /** @example Doe */
-            lastName: string;
+            lastName?: string;
             /** @example jane.doe@example.com */
             email: string;
-            /** @example 30 */
-            age?: number;
-            /** @example 60d0fe4f5311236168a109cb */
-            cart?: string | null;
+            /** @example StrongPass123! */
+            password?: string;
+            /** @example 666666666 */
+            phoneNumber?: string;
             /**
              * @default user
              * @example user
              * @enum {string}
              */
             role: "admin" | "user";
-            /** @example 1234567890 */
-            googleId: string | null;
+            /**
+             * @default local
+             * @example local
+             * @enum {string}
+             */
+            authProvider: "local" | "google" | "github";
+            /** @example 1098247023048234028304 */
+            googleId?: string;
+            /**
+             * @description ObjectId referencing the cart
+             * @example 64f1a2cfe2a83c0012345679
+             */
+            cart?: string;
+            /** @description ObjectId referencing an address */
+            addresses?: string[];
+        };
+        ProductOutput: components["schemas"]["Product"] & {
+            /** @example 64e3cfc2b567b3c5fcd36b92 */
+            _id?: string;
+        };
+        CartOutput: components["schemas"]["Cart"] & {
+            /** @example 64e3cfc2b567b3c5fcd36b92 */
+            _id?: string;
+        };
+        UserProfileOutput: {
+            /** @example Jane */
+            firstName?: string;
+            /** @example Doe */
+            lastName?: string;
+            /** @example jane.doe@example.com */
+            email?: string;
+            /** @example 666666666 */
+            phoneNumber?: string;
+            /** @description ObjectId referencing an address */
+            addresses?: string[];
+            /** @example 64f1a2cfe2a83c0012345679 */
+            _id?: string;
+        };
+        UserInternalOutput: {
+            /** @example jane.doe@example.com */
+            email?: string;
+            /**
+             * @default user
+             * @example user
+             * @enum {string}
+             */
+            role: "admin" | "user";
+            /**
+             * @default local
+             * @example local
+             * @enum {string}
+             */
+            authProvider: "local" | "google" | "github";
+            /** @example 1098247023048234028304 */
+            googleId?: string;
+            /**
+             * Format: date-time
+             * @example 2024-01-01T00:00:00.000Z
+             */
+            createdAt?: string;
+            /**
+             * Format: date-time
+             * @example 2024-01-01T00:00:00.000Z
+             */
+            updatedAt?: string;
+        };
+        BaseResponse: {
+            /** @example success */
+            status?: string;
+            /** @example 200 */
+            code?: number;
+            /** @example Operation successful */
+            message?: string;
+        };
+        DeleteResponse: components["schemas"]["BaseResponse"];
+        ErrorResponse: {
+            /** @example error */
+            status?: string;
+            /** @example 400 */
+            code?: number;
+            /** @example Something went wrong */
+            message?: string;
+        };
+        ProductResponse: components["schemas"]["BaseResponse"] & {
+            payload?: components["schemas"]["ProductOutput"];
+        };
+        CartResponse: components["schemas"]["BaseResponse"] & {
+            payload?: components["schemas"]["CartOutput"];
+        };
+        UserResponse: components["schemas"]["BaseResponse"] & {
+            payload?: components["schemas"]["UserProfileOutput"];
         };
     };
-    responses: never;
+    responses: {
+        /** @description Bad request – invalid or missing data */
+        BadRequest: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Not found */
+        NotFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Unauthorized */
+        Unauthorized: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Bad request – invalid or missing data */
+        RegisterBadRequest: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Internal server error */
+        InternalServerError: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Product successfully created */
+        ProductCreated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ProductResponse"];
+            };
+        };
+        /** @description Product found */
+        ProductFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ProductResponse"];
+            };
+        };
+        /** @description Product successfully updated */
+        ProductUpdated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ProductResponse"];
+            };
+        };
+        /** @description Product successfully deleted */
+        ProductDeleted: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["DeleteResponse"];
+            };
+        };
+        /** @description Cart successfully created */
+        CartCreated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["CartResponse"];
+            };
+        };
+        /** @description Cart found */
+        CartFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["CartResponse"];
+            };
+        };
+        /** @description Cart successfully updated */
+        CartUpdated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["CartResponse"];
+            };
+        };
+        /** @description Cart successfully deleted */
+        CartDeleted: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["DeleteResponse"];
+            };
+        };
+        /** @description Product successfully added to the cart */
+        CartProductAdded: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["CartResponse"];
+            };
+        };
+        /** @description Product quantity successfully updated in the cart */
+        CartProductUpdated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["CartResponse"];
+            };
+        };
+        /** @description Product successfully deleted from the cart */
+        CartProductDeleted: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["DeleteResponse"];
+            };
+        };
+        /** @description User successfully created */
+        AuthRegister: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["UserResponse"];
+            };
+        };
+        /** @description User successfully logged in */
+        AuthLogin: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": {
+                    /** @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c */
+                    token?: string;
+                };
+            };
+        };
+        /** @description User profile found */
+        UserProfileFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["UserProfileOutput"];
+            };
+        };
+    };
     parameters: never;
     requestBodies: never;
     headers: never;
