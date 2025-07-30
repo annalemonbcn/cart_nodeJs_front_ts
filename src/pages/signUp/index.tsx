@@ -1,5 +1,5 @@
 import { AuthLayout } from '@/common/layouts/authLayout'
-import { SocialLogin } from '../../common/socialLogin'
+import { SocialLogin } from '../loginPage/components/socialLogin'
 import { SignUpForm } from './components/signUpForm'
 
 const SignUpPage = () => (

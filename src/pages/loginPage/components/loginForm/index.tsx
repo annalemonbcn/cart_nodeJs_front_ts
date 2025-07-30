@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import type { LoginFormShape } from './types'
+import type { LoginFormType } from './types'
 import CustomForm from '@/components/customForm'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
@@ -9,13 +9,13 @@ import PasswordFormField from '@/common/form/passwordFormField'
 import Link from '@/components/link'
 
 const LoginForm = () => {
-  const methods = useForm<LoginFormShape>()
+  const methods = useForm<LoginFormType>()
 
   return (
     <CustomForm methods={methods}>
       <FlexContainer flexDirection="column" gap={tokens.space.md}>
-        <EmailFormField<LoginFormShape> />
-        <PasswordFormField<LoginFormShape> />
+        <EmailFormField<LoginFormType> />
+        <PasswordFormField<LoginFormType> />
 
         <Link to="_void">Forget your password?</Link>
 

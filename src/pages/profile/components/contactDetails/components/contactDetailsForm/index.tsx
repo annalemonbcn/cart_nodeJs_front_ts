@@ -7,34 +7,11 @@ import FlexContainer from '@/components/flexContainer'
 import { renderFormFields } from './utils'
 import Loader from '@/components/loader'
 import { useGetDefaultValues } from '../../hooks'
-import { useUserServices } from '@/services/user'
-import { useMutation } from '@tanstack/react-query'
-import { useGetUserId } from '@/hooks/useLoadUser'
-import { toast } from 'sonner'
-
-const useUpdateUser = () => {
-  const { updateUserInfo } = useUserServices()
-  const userId = useGetUserId()
-
-  const { mutate, isPending } = useMutation({
-    ...updateUserInfo(userId),
-    onSuccess: () => {
-      toast.success('User updated successfully')
-    },
-    onError: () => {
-      toast.error('User update failed')
-    }
-  })
-
-  return { mutate, isPending }
-}
 
 const ContactDetailsForm = () => {
   const { isLoading, data: defaultValues } = useGetDefaultValues()
 
   const methods = useForm<ProfileFormType>({ values: defaultValues })
-
-  const { mutate, isPending } = useUpdateUser()
 
   if (isLoading) return <Loader />
 
@@ -43,17 +20,16 @@ const ContactDetailsForm = () => {
     formState: { isDirty, dirtyFields }
   } = methods
 
-  const onSubmit: SubmitHandler<ProfileFormType> = (data) => mutate(data)
-
-  const shouldDisable = !isDirty || !dirtyFields || isPending
+  // TODO: hook api
+  const onSubmit: SubmitHandler<ProfileFormType> = (data) => console.log(data)
 
   return (
     <FlexContainer flexDirection="column" gap={tokens.space.md}>
       <CustomForm methods={methods}>{renderFormFields()}</CustomForm>
 
       <FlexContainer justifyContent="flex-start">
-        <Button onClick={handleSubmit(onSubmit)} disabled={shouldDisable}>
-          {isPending ? 'Saving...' : 'Save'}
+        <Button onClick={handleSubmit(onSubmit)} disabled={!isDirty || !dirtyFields}>
+          Save
         </Button>
       </FlexContainer>
     </FlexContainer>

@@ -1,8 +1,5 @@
-import type { components } from '@/variables/types/openapi'
+import type { paths } from '@/variables/types/openapi'
 
-type UserProfileDto = components['schemas']['UserProfileOutput']
-type UserResponseDto = components['responses']['UserProfileFound']['content']['application/json']
+type UserResponseDto = paths['/api/users/me']['get']['responses']['200']['content']['application/json']
 
-type UpdateUserResponseDto = components['responses']['UserProfileUpdated']['content']['application/json']
-
-export type { UserProfileDto, UserResponseDto, UpdateUserResponseDto }
+export type { UserResponseDto }

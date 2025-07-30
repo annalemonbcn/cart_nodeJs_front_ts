@@ -1,9 +1,7 @@
-import type { components } from '@/variables/types/openapi'
+import type { paths } from '@/variables/types/openapi'
 
-type SignUpType = components['schemas']['RegisterUserInput']
-type SignUpApiResponse = components['responses']['AuthRegister']['content']['application/json']
+type SignUpFormType = paths['/api/auth/register']['post']['requestBody']['content']['application/json']
+type LoginFormType = paths['/api/auth/login']['post']['requestBody']['content']['application/json']
+type LoginResponse = paths['/api/auth/login']['post']['responses']['200']['content']['application/json']
 
-type LoginType = components['schemas']['LoginUserInput']
-type LoginApiResponse = components['responses']['AuthLogin']['content']['application/json']
-
-export type { SignUpType, SignUpApiResponse, LoginType, LoginApiResponse }
+export type { SignUpFormType, LoginFormType, LoginResponse }

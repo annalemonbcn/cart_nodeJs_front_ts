@@ -1,6 +1,19 @@
-import type { AddressDto } from '@/services/address/types'
+// TODO: check types, make them global
+type TDeliveryAddress = {
+  street: string
+  zipCode: string
+  city: string
+  province: string
+  country: string
+  additionalInfo?: string
+}
 
-type AddAddressFormShape = Omit<AddressDto, 'tags'> & {
+type AddAddressFormShape = {
+  firstName: string
+  lastName: string
+  deliveryAddress: TDeliveryAddress
+  phoneNumber: string
+  isDefault: boolean
   tags?: string
 }
 

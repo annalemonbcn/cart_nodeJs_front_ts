@@ -6,15 +6,12 @@ import { routes } from './routes'
 
 const renderRoutes = (routeList: PageRoute[]): JSX.Element[] =>
   routeList.map((route) => {
-    let element
-
-    if (route.isWrapper || !route.component) {
-      element = undefined
-    } else if (route.protected) {
-      element = <ProtectedRoute>{<route.component />}</ProtectedRoute>
-    } else {
-      element = <route.component />
-    }
+    const element =
+      route.isWrapper || !route.component ? undefined : route.protected ? (
+        <ProtectedRoute>{<route.component />}</ProtectedRoute>
+      ) : (
+        <route.component />
+      )
 
     return (
       <Route key={route.name} path={route.path} element={element}>

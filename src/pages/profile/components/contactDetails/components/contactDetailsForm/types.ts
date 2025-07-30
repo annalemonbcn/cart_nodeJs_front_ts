@@ -1,5 +1,8 @@
-import type { UserProfileDto } from '@/services/user/types'
-
-type ProfileFormType = UserProfileDto
+type ProfileFormType = {
+  firstName: string
+  lastName: string
+  email: string
+  phoneNumber?: string
+}
 
 export type { ProfileFormType }

@@ -6,11 +6,9 @@ const useGetAddress = () => {
 
   const { data, isLoading } = useQuery(getAllAddresses())
 
-  // TODO: logic: if no data
-
   return {
     isLoading,
-    data: data?.payload
+    data
   }
 }
 

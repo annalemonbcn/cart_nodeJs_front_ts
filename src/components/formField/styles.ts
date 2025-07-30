@@ -29,8 +29,4 @@ const StyledLabel = styled.label<{ variant: FormFieldVariant; hasError?: boolean
   ${({ hasError }) => hasError && errorStyles};
 `
 
-const StyledErrorTextContainer = styled.div`
-  margin-top: ${tokens.space.xs2};
-`
-
-export { StyledLabel, StyledErrorTextContainer }
+export { StyledLabel }

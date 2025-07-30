@@ -1,5 +1,5 @@
 import { AuthLayout } from '@/common/layouts/authLayout'
-import { SocialLogin } from '../../common/socialLogin'
+import { SocialLogin } from './components/socialLogin'
 import { Separator } from '@/components/separator'
 import { LoginForm } from './components/loginForm'
 

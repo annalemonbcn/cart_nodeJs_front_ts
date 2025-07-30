@@ -1,8 +1,9 @@
 import apiClient from '@/lib/axios'
-import type { UpdateUserResponseDto, UserProfileDto, UserResponseDto } from './types'
+import type { UserResponseDto } from './types'
 
 const COMMON_KEYS = ['user']
 
+// TODO: update UserResponseDto, not correct
 const getUserInfo = () => ({
   queryKey: [...COMMON_KEYS, 'getUserInfo'],
   queryFn: async (): Promise<UserResponseDto> => {
@@ -11,17 +12,8 @@ const getUserInfo = () => ({
   }
 })
 
-const updateUserInfo = (uid: string) => ({
-  mutationKey: [...COMMON_KEYS, 'updateUserInfo', uid],
-  mutationFn: async (data: UserProfileDto): Promise<UpdateUserResponseDto> => {
-    const response = await apiClient.put(`/user/${uid}`, data)
-    return response.data
-  }
-})
-
 const useUserServices = () => ({
-  getUserInfo,
-  updateUserInfo
+  getUserInfo
 })
 
 export { useUserServices }

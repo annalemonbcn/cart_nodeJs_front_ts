@@ -1,5 +1,5 @@
-import type { SignUpType } from '@/services/auth/types'
+import type { paths } from '@/variables/types/openapi'
 
-type SignUpFormShape = SignUpType
+type SignUpFormType = paths['/api/auth/register']['post']['requestBody']['content']['application/json']
 
-export type { SignUpFormShape }
+export type { SignUpFormType }

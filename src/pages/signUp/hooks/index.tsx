@@ -1,25 +1,20 @@
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { useAuthServices } from '@/services/auth'
-import { routeMap } from '@/routes/utils'
-import { useNavigate } from 'react-router-dom'
-import type { AxiosError } from 'axios'
-import type { ApiErrorResponse } from '@/variables/types/global.types'
-import { getErrorMessage } from '@/utils/objects'
 
 const useRegisterUser = () => {
   const { registerUser } = useAuthServices()
 
-  const navigate = useNavigate()
-
   const mutation = useMutation({
     ...registerUser(),
     onSuccess: () => {
+      // Puedes redirigir, mostrar un toast, etc.
       toast.success('Registration successful! 🎉')
-      navigate(routeMap.login.path)
     },
-    onError: (error: AxiosError<ApiErrorResponse>) => {
-      toast.error(getErrorMessage(error))
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError: (error: any) => {
+      const errorMsg = error?.response?.data?.message || 'Unexpected error occurred'
+      toast.error(errorMsg)
     }
   })
 
