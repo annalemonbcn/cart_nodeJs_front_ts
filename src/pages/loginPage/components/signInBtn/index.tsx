@@ -1,16 +1,17 @@
 import { useFormContext, type SubmitHandler } from 'react-hook-form'
-import type { LoginFormType } from '../loginForm/types'
+import type { LoginFormShape } from '../loginForm/types'
 import { StyledButton } from './styles'
 import Text from '@/components/text'
 import Link from '@/components/link'
 import { useLoginUser } from '../../hooks'
+import { routeMap } from '@/routes/utils'
 
 const SignInBtn = () => {
-  const { handleSubmit } = useFormContext<LoginFormType>()
+  const { handleSubmit } = useFormContext<LoginFormShape>()
 
   const { mutate, isPending } = useLoginUser()
 
-  const onSubmit: SubmitHandler<LoginFormType> = (data) => mutate(data)
+  const onSubmit: SubmitHandler<LoginFormShape> = (data) => mutate(data)
 
   const handleClick = handleSubmit(onSubmit)
 
@@ -20,7 +21,7 @@ const SignInBtn = () => {
         {isPending ? 'Logging in...' : 'Sign In'}
       </StyledButton>
       <Text size="s3" color="darkNeutral">
-        Don't have an account? <Link to="/signup">Sign Up</Link>
+        Don't have an account? <Link to={routeMap.signUp.path}>Sign Up</Link>
       </Text>
     </>
   )

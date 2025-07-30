@@ -3,15 +3,15 @@ import { StyledButton } from './styles'
 import Text from '@/components/text'
 import Link from '@/components/link'
 import { type SubmitHandler } from 'react-hook-form'
-import type { SignUpFormType } from '../signUpForm/types'
+import type { SignUpFormShape } from '../signUpForm/types'
 import { useRegisterUser } from '../../hooks'
 
 const SignUpBtn = () => {
-  const { handleSubmit } = useFormContext<SignUpFormType>()
+  const { handleSubmit } = useFormContext<SignUpFormShape>()
 
   const { mutate, isPending } = useRegisterUser()
 
-  const onSubmit: SubmitHandler<SignUpFormType> = (data) => mutate(data)
+  const onSubmit: SubmitHandler<SignUpFormShape> = (data) => mutate(data)
 
   return (
     <>
