@@ -11,7 +11,7 @@ import { SubTitle } from '@/common/titles/subTitle'
 const AddressSection = () => {
   const { data } = useGetAddress()
 
-  const noData = !data?.payload || data.payload.length === 0
+  const noData = !data || data.length === 0
 
   return (
     <FlexContainer flexDirection="column" gap={tokens.space.md}>
@@ -25,7 +25,7 @@ const AddressSection = () => {
       {noData && <Text>No addresses found</Text>}
       {!noData && (
         <StyledContainer>
-          {data.payload?.map((address) => (
+          {data?.map((address) => (
             <AddressRender key={`address-${address._id}`} id={address._id} {...address} />
           ))}
         </StyledContainer>

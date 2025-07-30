@@ -1,5 +1,5 @@
-import type { paths } from '@/variables/types/openapi'
+import type { LoginType } from '@/services/auth/types'
 
-type LoginFormType = paths['/api/auth/login']['post']['requestBody']['content']['application/json']
+type LoginFormShape = LoginType
 
-export type { LoginFormType }
+export type { LoginFormShape }

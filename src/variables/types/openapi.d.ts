@@ -409,7 +409,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["User"];
+                    "application/json": components["schemas"]["RegisterUserInput"];
                 };
             };
             responses: {
@@ -446,7 +446,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["LoginUser"];
+                    "application/json": components["schemas"]["LoginUserInput"];
                 };
             };
             responses: {
@@ -483,7 +483,140 @@ export interface paths {
             requestBody?: never;
             responses: {
                 200: components["responses"]["UserProfileFound"];
+                400: components["responses"]["BadRequest"];
                 401: components["responses"]["Unauthorized"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user/{uid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update user profile
+         * @description Updates the authenticated user's profile, excluding password and internal fields.
+         */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the user */
+                    uid: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UserProfileInput"];
+                };
+            };
+            responses: {
+                200: components["responses"]["UserProfileUpdated"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/address": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get all addresses
+         * @description Returns all addresses from all users in DB
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["AllAddressFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        put?: never;
+        /**
+         * Create a new address
+         * @description Creates a new address for the authenticated user
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["Address"];
+                };
+            };
+            responses: {
+                201: components["responses"]["AddressCreated"];
+                400: components["responses"]["BadRequest"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/adress/{addressId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get address by ID
+         * @description Returns an address by ID
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the address */
+                    addressId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["AddressFound"];
+                400: components["responses"]["BadRequest"];
                 404: components["responses"]["NotFound"];
                 500: components["responses"]["InternalServerError"];
             };
@@ -529,26 +662,20 @@ export interface components {
         Cart: {
             products: components["schemas"]["CartProduct"][];
         };
-        LoginUser: {
-            /**
-             * Format: email
-             * @example alice@example.com
-             */
-            email: string;
-            /**
-             * Format: password
-             * @example StrongPass123!
-             */
-            password: string;
-        };
         User: {
             /** @example Jane */
             firstName?: string;
             /** @example Doe */
             lastName?: string;
-            /** @example jane.doe@example.com */
-            email: string;
-            /** @example StrongPass123! */
+            /**
+             * Format: email
+             * @example jane.doe@example.com
+             */
+            email?: string;
+            /**
+             * Format: password
+             * @example StrongPass123!
+             */
             password?: string;
             /** @example 666666666 */
             phoneNumber?: string;
@@ -574,31 +701,124 @@ export interface components {
             /** @description ObjectId referencing an address */
             addresses?: string[];
         };
-        ProductOutput: components["schemas"]["Product"] & {
-            /** @example 64e3cfc2b567b3c5fcd36b92 */
-            _id?: string;
+        DeliveryAddress: {
+            /** @example 123 Main St */
+            street: string;
+            /** @example Apt 4B */
+            additionalInfo?: string;
+            /** @example 12345 */
+            zipCode: string;
+            /** @example Springfield */
+            city: string;
+            /** @example Springfield */
+            province: string;
+            /** @example Springfield */
+            country: string;
         };
-        CartOutput: components["schemas"]["Cart"] & {
-            /** @example 64e3cfc2b567b3c5fcd36b92 */
-            _id?: string;
-        };
-        UserProfileOutput: {
+        Address: {
+            /**
+             * @description ObjectId referencing the user
+             * @example 64f1a2cfe2a83c0012345679
+             */
+            user: string;
             /** @example Jane */
-            firstName?: string;
+            firstName: string;
             /** @example Doe */
-            lastName?: string;
+            lastName: string;
+            deliveryAddress: components["schemas"]["DeliveryAddress"];
+            /** @example 666666666 */
+            phoneNumber: string;
+            /**
+             * @default false
+             * @example false
+             */
+            isDefault: boolean;
+            tags?: string[];
+        };
+        RegisterUserInput: {
+            /** @example Jane */
+            firstName: string;
+            /** @example Doe */
+            lastName: string;
+            /**
+             * Format: email
+             * @example jane.doe@example.com
+             */
+            email: string;
+            /**
+             * Format: password
+             * @example StrongPass123!
+             */
+            password: string;
+        };
+        LoginUserInput: {
+            /**
+             * Format: email
+             * @example alice@example.com
+             */
+            email: string;
+            /**
+             * Format: password
+             * @example StrongPass123!
+             */
+            password: string;
+        };
+        UserProfileInput: {
+            /**
+             * @description ObjectId of the user
+             * @example 64f1a2cfe2a83c0012345679
+             */
+            _id: string;
+            /** @example Jane */
+            firstName: string;
+            /** @example Doe */
+            lastName: string;
             /** @example jane.doe@example.com */
-            email?: string;
+            email: string;
             /** @example 666666666 */
             phoneNumber?: string;
             /** @description ObjectId referencing an address */
-            addresses?: string[];
-            /** @example 64f1a2cfe2a83c0012345679 */
-            _id?: string;
+            addresses: string[];
+        };
+        ProductOutput: components["schemas"]["Product"] & {
+            /**
+             * @description ObjectId of the product
+             * @example 64e3cfc2b567b3c5fcd36b92
+             */
+            _id: string;
+        };
+        CartOutput: components["schemas"]["Cart"] & {
+            /**
+             * @description ObjectId of the cart
+             * @example 64e3cfc2b567b3c5fcd36b92
+             */
+            _id: string;
+        };
+        UserProfileOutput: {
+            /**
+             * @description ObjectId of the user
+             * @example 64f1a2cfe2a83c0012345679
+             */
+            _id: string;
+            /** @example Jane */
+            firstName: string;
+            /** @example Doe */
+            lastName: string;
+            /** @example jane.doe@example.com */
+            email: string;
+            /** @example 666666666 */
+            phoneNumber?: string;
+            /** @description ObjectId referencing an address */
+            addresses: string[];
         };
         UserInternalOutput: {
+            /**
+             * @description ObjectId of the user
+             * @example 64f1a2cfe2a83c0012345679
+             */
+            _id: string;
             /** @example jane.doe@example.com */
-            email?: string;
+            email: string;
             /**
              * @default user
              * @example user
@@ -617,38 +837,63 @@ export interface components {
              * Format: date-time
              * @example 2024-01-01T00:00:00.000Z
              */
-            createdAt?: string;
+            createdAt: string;
             /**
              * Format: date-time
              * @example 2024-01-01T00:00:00.000Z
              */
-            updatedAt?: string;
+            updatedAt: string;
         };
+        AddressOutput: components["schemas"]["Address"] & {
+            /**
+             * @description ObjectId of the address
+             * @example 64f1a2cfe2a83c0012345680
+             */
+            _id: string;
+        };
+        AllAddressOutput: components["schemas"]["AddressOutput"][];
         BaseResponse: {
             /** @example success */
-            status?: string;
+            status: string;
             /** @example 200 */
-            code?: number;
+            code: number;
             /** @example Operation successful */
             message?: string;
         };
         DeleteResponse: components["schemas"]["BaseResponse"];
         ErrorResponse: {
             /** @example error */
-            status?: string;
+            status: string;
             /** @example 400 */
-            code?: number;
+            code: number;
             /** @example Something went wrong */
-            message?: string;
+            message: string;
         };
         ProductResponse: components["schemas"]["BaseResponse"] & {
-            payload?: components["schemas"]["ProductOutput"];
+            payload: components["schemas"]["ProductOutput"];
         };
         CartResponse: components["schemas"]["BaseResponse"] & {
-            payload?: components["schemas"]["CartOutput"];
+            payload: components["schemas"]["CartOutput"];
         };
         UserResponse: components["schemas"]["BaseResponse"] & {
-            payload?: components["schemas"]["UserProfileOutput"];
+            payload: components["schemas"]["UserProfileOutput"];
+        };
+        LoginPayload: {
+            /**
+             * Format: jwt
+             * @description JWT token
+             * @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+             */
+            token: string;
+        };
+        LoginResponse: components["schemas"]["BaseResponse"] & {
+            payload: components["schemas"]["LoginPayload"];
+        };
+        AllAddressResponse: components["schemas"]["BaseResponse"] & {
+            payload: components["schemas"]["AllAddressOutput"];
+        };
+        AddressResponse: components["schemas"]["BaseResponse"] & {
+            payload: components["schemas"]["AddressOutput"];
         };
     };
     responses: {
@@ -811,10 +1056,7 @@ export interface components {
                 [name: string]: unknown;
             };
             content: {
-                "application/json": {
-                    /** @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c */
-                    token?: string;
-                };
+                "application/json": components["schemas"]["LoginResponse"];
             };
         };
         /** @description User profile found */
@@ -823,7 +1065,43 @@ export interface components {
                 [name: string]: unknown;
             };
             content: {
-                "application/json": components["schemas"]["UserProfileOutput"];
+                "application/json": components["schemas"]["UserResponse"];
+            };
+        };
+        /** @description User profile successfully updated */
+        UserProfileUpdated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["UserResponse"];
+            };
+        };
+        /** @description Address found */
+        AllAddressFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AllAddressResponse"];
+            };
+        };
+        /** @description Address found */
+        AddressFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AddressResponse"];
+            };
+        };
+        /** @description Address successfully created */
+        AddressCreated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AddressResponse"];
             };
         };
     };

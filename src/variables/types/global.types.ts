@@ -1,5 +1,8 @@
 import type { ReactNode } from 'react'
+import type { components } from './openapi'
 
 type PropsWithChildren<P = unknown> = P & { children: ReactNode }
 
-export type { PropsWithChildren }
+type ApiErrorResponse = components['schemas']['ErrorResponse']
+
+export type { PropsWithChildren, ApiErrorResponse }

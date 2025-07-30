@@ -5,8 +5,9 @@ import { renderForm } from './utils'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import Button from '@/components/button'
-import { useAddressServices, type SampleAddress } from '@/services/address'
+import { useAddressServices } from '@/services/address'
 import { useMutation } from '@tanstack/react-query'
+import type { AddressDto } from '@/services/address/types'
 
 const AddAddressForm = () => {
   const methods = useForm<AddAddressFormShape>({
@@ -38,7 +39,7 @@ const AddAddressForm = () => {
       tags: data.tags?.split(',').map((tag) => tag.trim()),
       user: '6866924897deb033bba8e284'
     }
-    mutate(convertedData as SampleAddress)
+    mutate(convertedData as AddressDto)
   }
 
   return (
