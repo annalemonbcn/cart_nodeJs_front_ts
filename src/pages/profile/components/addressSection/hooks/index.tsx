@@ -1,16 +1,19 @@
-import { useQuery } from '@tanstack/react-query'
-import { useAddressServices } from '@/services/address'
+import { useLoadUser } from '@/hooks/useLoadUser'
+import type { UserAddressDto } from '@/services/user/types'
+import { useMemo } from 'react'
 
 const useGetAddress = () => {
-  const { getAllAddresses } = useAddressServices()
+  const { data, isLoading } = useLoadUser()
 
-  const { data, isLoading } = useQuery(getAllAddresses())
+  const userAddresses: UserAddressDto[] = useMemo(() => {
+    if (!data) return []
 
-  // TODO: logic: if no data
+    return data.addresses
+  }, [data])
 
   return {
-    isLoading,
-    data: data?.payload
+    data: userAddresses,
+    isLoading
   }
 }
 

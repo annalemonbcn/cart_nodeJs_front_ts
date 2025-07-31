@@ -3,6 +3,7 @@ import type { AddAddressApiResponse, AddressDto, GetAddressByIdApiResponse, GetA
 
 const COMMON_KEYS = ['address']
 
+// TODO: i don't think it will be used
 const getAllAddresses = () => ({
   queryKey: [...COMMON_KEYS, 'getAllAddresses'],
   queryFn: async (): Promise<GetAllAddressApiResponse> => {

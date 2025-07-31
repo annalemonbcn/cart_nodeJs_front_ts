@@ -529,11 +529,34 @@ export interface paths {
                 400: components["responses"]["BadRequest"];
                 401: components["responses"]["Unauthorized"];
                 404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
                 500: components["responses"]["InternalServerError"];
             };
         };
         post?: never;
-        delete?: never;
+        /**
+         * Delete user profile
+         * @description Deletes the authenticated user's profile.
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the user */
+                    uid: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["UserProfileDeleted"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -770,15 +793,15 @@ export interface components {
              */
             _id: string;
             /** @example Jane */
-            firstName: string;
+            firstName?: string;
             /** @example Doe */
-            lastName: string;
+            lastName?: string;
             /** @example jane.doe@example.com */
-            email: string;
+            email?: string;
             /** @example 666666666 */
             phoneNumber?: string;
             /** @description ObjectId referencing an address */
-            addresses: string[];
+            addresses?: string[];
         };
         ProductOutput: components["schemas"]["Product"] & {
             /**
@@ -808,8 +831,7 @@ export interface components {
             email: string;
             /** @example 666666666 */
             phoneNumber?: string;
-            /** @description ObjectId referencing an address */
-            addresses: string[];
+            addresses: components["schemas"]["AddressOutput"][];
         };
         UserInternalOutput: {
             /**
@@ -935,6 +957,15 @@ export interface components {
         };
         /** @description Internal server error */
         InternalServerError: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Conflict */
+        Conflict: {
             headers: {
                 [name: string]: unknown;
             };
@@ -1075,6 +1106,15 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["UserResponse"];
+            };
+        };
+        /** @description User profile successfully deleted */
+        UserProfileDeleted: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["DeleteResponse"];
             };
         };
         /** @description Address found */
