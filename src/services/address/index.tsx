@@ -1,27 +1,20 @@
 import apiClient from '@/lib/axios'
 import type {
   AddAddressApiResponse,
-  AddressDeleteApiResponse,
+  DeleteAddressApiResponse,
   AddressDto,
   GetAddressByIdApiResponse,
-  GetAllAddressApiResponse
+  UpdateAddressApiResponse,
+  UpdateIsDefaultAddressApiResponse,
+  DefaultAddressDto
 } from './types'
 
 const COMMON_KEYS = ['address']
 
-// TODO: i don't think it will be used
-const getAllAddresses = () => ({
-  queryKey: [...COMMON_KEYS, 'getAllAddresses'],
-  queryFn: async (): Promise<GetAllAddressApiResponse> => {
-    const response = await apiClient.get('/address')
-    return response.data
-  }
-})
-
 const getAddressById = () => ({
   queryKey: [...COMMON_KEYS, 'getAddressById'],
-  queryFn: async (): Promise<GetAddressByIdApiResponse> => {
-    const response = await apiClient.get('/address')
+  queryFn: async (addressId: string): Promise<GetAddressByIdApiResponse> => {
+    const response = await apiClient.get(`/address/${addressId}`)
     return response.data
   }
 })
@@ -34,18 +27,38 @@ const addAddress = () => ({
   }
 })
 
+const updateAddress = () => ({
+  mutationKey: [...COMMON_KEYS, 'updateAddress'],
+  mutationFn: async (addressId: string, data: AddressDto): Promise<UpdateAddressApiResponse> => {
+    const response = await apiClient.put(`/address/${addressId}`, data)
+    return response.data
+  }
+})
+
+const updateIsDefault = () => ({
+  mutationKey: [...COMMON_KEYS, 'updateIsDefault'],
+  mutationFn: async ({
+    addressId,
+    isDefault
+  }: DefaultAddressDto & { addressId: string }): Promise<UpdateIsDefaultAddressApiResponse> => {
+    const response = await apiClient.patch(`/address/${addressId}/default`, { isDefault })
+    return response.data
+  }
+})
+
 const deleteAddress = () => ({
   mutationKey: [...COMMON_KEYS, 'deleteAddress'],
-  mutationFn: async (addressId: string): Promise<AddressDeleteApiResponse> => {
+  mutationFn: async (addressId: string): Promise<DeleteAddressApiResponse> => {
     const response = await apiClient.delete(`/address/${addressId}`)
     return response.data
   }
 })
 
 const useAddressServices = () => ({
-  getAllAddresses,
   getAddressById,
   addAddress,
+  updateAddress,
+  updateIsDefault,
   deleteAddress
 })
 

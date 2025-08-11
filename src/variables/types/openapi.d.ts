@@ -563,23 +563,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * Get all addresses
-         * @description Returns all addresses from all users in DB
-         */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                200: components["responses"]["AllAddressFound"];
-                500: components["responses"]["InternalServerError"];
-            };
-        };
+        get?: never;
         put?: never;
         /**
          * Create a new address
@@ -690,6 +674,47 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/api/adress/{addressId}/default": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update default address
+         * @description Updates an address as default for the authenticated user
+         */
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the address */
+                    addressId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AddressDefaultInput"];
+                };
+            };
+            responses: {
+                200: components["responses"]["AddressDefaultSet"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
         trace?: never;
     };
 }
@@ -844,6 +869,10 @@ export interface components {
             addresses?: string[];
         };
         AddressAddInput: components["schemas"]["Address"];
+        AddressDefaultInput: {
+            /** @example true */
+            isDefault: boolean;
+        };
         ProductOutput: components["schemas"]["Product"] & {
             /**
              * @description ObjectId of the product
@@ -914,7 +943,6 @@ export interface components {
              */
             _id: string;
         };
-        AllAddressOutput: components["schemas"]["AddressOutput"][];
         BaseResponse: {
             /** @example success */
             status: string;
@@ -951,9 +979,6 @@ export interface components {
         };
         LoginResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["LoginPayload"];
-        };
-        AllAddressResponse: components["schemas"]["BaseResponse"] & {
-            payload: components["schemas"]["AllAddressOutput"];
         };
         AddressResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["AddressOutput"];
@@ -1159,15 +1184,6 @@ export interface components {
             };
         };
         /** @description Address found */
-        AllAddressFound: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": components["schemas"]["AllAddressResponse"];
-            };
-        };
-        /** @description Address found */
         AddressFound: {
             headers: {
                 [name: string]: unknown;
@@ -1187,6 +1203,15 @@ export interface components {
         };
         /** @description Address successfully updated */
         AddressUpdated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AddressResponse"];
+            };
+        };
+        /** @description Default address successfully updated */
+        AddressDefaultSet: {
             headers: {
                 [name: string]: unknown;
             };

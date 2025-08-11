@@ -30,39 +30,52 @@ const useEditAddress = () => ({
   isPending: false
 })
 
-const useSetAsDefault = () => ({
-  mutate: () => console.log('setAsDefault'),
-  isPending: false
-})
+const useSetAsDefault = () => {
+  const { refetch } = useLoadUser()
+  const { updateIsDefault } = useAddressServices()
 
-const useGetActionButtons = (id: string, isDefault: boolean): { actionButtons: ActionButton[]; isPending: boolean } => {
+  const { mutate, isPending } = useMutation({
+    ...updateIsDefault(),
+    onSuccess: (_data, variables) => {
+      const { isDefault } = variables
+      const message = !isDefault ? 'Address removed from default' : 'Address set as default successfully'
+      toast.success(message)
+      refetch()
+    },
+    onError: (error: AxiosError<ApiErrorResponse>) => {
+      toast.error(getErrorMessage(error, true))
+    }
+  })
+
+  return { mutate, isPending }
+}
+
+const useGetActionButtons = (addressId: string, isDefault: boolean) => {
   const { mutate: deleteAddress, isPending: deletePending } = useDeleteAddress()
   const { mutate: editAddress, isPending: editPending } = useEditAddress()
   const { mutate: setAsDefault, isPending: setAsDefaultPending } = useSetAsDefault()
 
-  const baseActions: ActionButton[] = [
+  const actionButtons: ActionButton[] = [
     {
       action: 'edit',
+      label: 'Edit',
       onClick: () => editAddress()
     },
     {
       action: 'delete',
-      onClick: () => deleteAddress(id)
+      label: 'Delete',
+      onClick: () => deleteAddress(addressId)
+    },
+    {
+      action: 'setAsDefault',
+      label: isDefault ? 'Remove default' : 'Set as default',
+      onClick: () => setAsDefault({ addressId, isDefault: !isDefault })
     }
   ]
 
-  const extraActions: ActionButton[] = !isDefault
-    ? [
-        {
-          action: 'setAsDefault',
-          onClick: () => setAsDefault()
-        }
-      ]
-    : []
+  const isPending = deletePending || editPending || setAsDefaultPending
 
-  const actionButtons: ActionButton[] = [...baseActions, ...extraActions]
-
-  return { actionButtons, isPending: deletePending || editPending || setAsDefaultPending }
+  return { actionButtons, isPending }
 }
 
 export { useGetActionButtons }

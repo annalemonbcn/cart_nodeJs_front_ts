@@ -3,6 +3,7 @@ type Action = (typeof actions)[number]
 
 type ActionButton = {
   action: Action
+  label: string
   onClick: () => void
 }
 
