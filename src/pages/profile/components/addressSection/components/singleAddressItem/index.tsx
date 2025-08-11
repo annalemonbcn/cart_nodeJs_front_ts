@@ -1,5 +1,4 @@
-import { tokens } from '@/variables/styles'
-import { StyledAddressContainer } from './styles'
+import { StyledAddressContainer, NameArea, PhoneNumberArea, AddressArea, TagsArea, ActionsArea } from './styles'
 import Text from '@/components/text'
 import { ActionButtons } from '../actionButtons'
 import { Tags } from '../tags'
@@ -15,18 +14,28 @@ const SingleAddressItem = ({
   isDefault,
   tags
 }: UserAddressDto) => (
-  <StyledAddressContainer flexDirection="column" gap={tokens.space.md}>
-    <Text size="s5" weight="medium" color="darkNeutral">
-      {firstName} {lastName}
-    </Text>
+  <StyledAddressContainer>
+    <NameArea>
+      <Text size="s5" weight="medium" color="darkNeutral">
+        {firstName} {lastName}
+      </Text>
+    </NameArea>
 
-    <Text>{phoneNumber}</Text>
+    <PhoneNumberArea>
+      <Text>{phoneNumber}</Text>
+    </PhoneNumberArea>
 
-    <DeliveryAddress {...deliveryAddress} />
+    <AddressArea>
+      <DeliveryAddress {...deliveryAddress} />
+    </AddressArea>
 
-    <Tags isDefault={isDefault} tags={tags} />
+    <TagsArea>
+      <Tags isDefault={isDefault} tags={tags} />
+    </TagsArea>
 
-    <ActionButtons id={_id} isDefault={isDefault} />
+    <ActionsArea>
+      <ActionButtons id={_id} isDefault={isDefault} />
+    </ActionsArea>
   </StyledAddressContainer>
 )
 
