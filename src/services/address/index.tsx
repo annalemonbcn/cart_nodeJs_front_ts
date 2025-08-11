@@ -1,5 +1,11 @@
 import apiClient from '@/lib/axios'
-import type { AddAddressApiResponse, AddressDto, GetAddressByIdApiResponse, GetAllAddressApiResponse } from './types'
+import type {
+  AddAddressApiResponse,
+  AddressDeleteApiResponse,
+  AddressDto,
+  GetAddressByIdApiResponse,
+  GetAllAddressApiResponse
+} from './types'
 
 const COMMON_KEYS = ['address']
 
@@ -28,10 +34,19 @@ const addAddress = () => ({
   }
 })
 
+const deleteAddress = () => ({
+  mutationKey: [...COMMON_KEYS, 'deleteAddress'],
+  mutationFn: async (addressId: string): Promise<AddressDeleteApiResponse> => {
+    const response = await apiClient.delete(`/address/${addressId}`)
+    return response.data
+  }
+})
+
 const useAddressServices = () => ({
   getAllAddresses,
   getAddressById,
-  addAddress
+  addAddress,
+  deleteAddress
 })
 
 export { useAddressServices }

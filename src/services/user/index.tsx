@@ -11,13 +11,15 @@ const getUserInfo = () => ({
   }
 })
 
-const updateUserInfo = (uid: string) => ({
-  mutationKey: [...COMMON_KEYS, 'updateUserInfo', uid],
+const updateUserInfo = () => ({
+  mutationKey: [...COMMON_KEYS, 'updateUserInfo'],
   mutationFn: async (data: UpdateUserDto): Promise<UpdateUserResponseDto> => {
-    const response = await apiClient.put(`/user/${uid}`, data)
+    const response = await apiClient.put(`/user`, data)
     return response.data
   }
 })
+
+// TODO: delete user
 
 const useUserServices = () => ({
   getUserInfo,

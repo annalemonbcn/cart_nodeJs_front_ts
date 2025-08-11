@@ -1,12 +1,20 @@
 import { tokens } from '@/variables/styles'
 import { StyledAddressContainer } from './styles'
-import type { IAddressProps } from '../../types'
 import Text from '@/components/text'
 import { ActionButtons } from '../actionButtons'
 import { Tags } from '../tags'
 import { DeliveryAddress } from '../deliveryAddress'
+import type { UserAddressDto } from '@/services/address/types'
 
-const AddressRender = ({ firstName, lastName, phoneNumber, deliveryAddress, isDefault, tags }: IAddressProps) => (
+const SingleAddressItem = ({
+  _id,
+  firstName,
+  lastName,
+  phoneNumber,
+  deliveryAddress,
+  isDefault,
+  tags
+}: UserAddressDto) => (
   <StyledAddressContainer flexDirection="column" gap={tokens.space.md}>
     <Text size="s5" weight="medium" color="darkNeutral">
       {firstName} {lastName}
@@ -18,8 +26,8 @@ const AddressRender = ({ firstName, lastName, phoneNumber, deliveryAddress, isDe
 
     <Tags isDefault={isDefault} tags={tags} />
 
-    <ActionButtons isDefault={isDefault} />
+    <ActionButtons id={_id} isDefault={isDefault} />
   </StyledAddressContainer>
 )
 
-export { AddressRender }
+export { SingleAddressItem }

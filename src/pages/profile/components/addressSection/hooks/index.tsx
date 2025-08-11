@@ -1,5 +1,5 @@
 import { useLoadUser } from '@/hooks/useLoadUser'
-import type { UserAddressDto } from '@/services/user/types'
+import type { UserAddressDto } from '@/services/address/types'
 import { useMemo } from 'react'
 
 const useGetAddress = () => {

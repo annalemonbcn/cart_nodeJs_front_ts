@@ -497,7 +497,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/user/{uid}": {
+    "/api/user": {
         parameters: {
             query?: never;
             header?: never;
@@ -513,10 +513,7 @@ export interface paths {
             parameters: {
                 query?: never;
                 header?: never;
-                path: {
-                    /** @description The ID of the user */
-                    uid: string;
-                };
+                path?: never;
                 cookie?: never;
             };
             requestBody: {
@@ -542,10 +539,7 @@ export interface paths {
             parameters: {
                 query?: never;
                 header?: never;
-                path: {
-                    /** @description The ID of the user */
-                    uid: string;
-                };
+                path?: never;
                 cookie?: never;
             };
             requestBody?: never;
@@ -644,9 +638,55 @@ export interface paths {
                 500: components["responses"]["InternalServerError"];
             };
         };
-        put?: never;
+        /**
+         * Update address by ID
+         * @description Updates an address by ID
+         */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the address */
+                    addressId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AddressAddInput"];
+                };
+            };
+            responses: {
+                200: components["responses"]["AddressUpdated"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
         post?: never;
-        delete?: never;
+        /**
+         * Delete address by ID
+         * @description Deletes an address by ID
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the address */
+                    addressId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["AddressDeleted"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -803,6 +843,7 @@ export interface components {
             /** @description ObjectId referencing an address */
             addresses?: string[];
         };
+        AddressAddInput: components["schemas"]["Address"];
         ProductOutput: components["schemas"]["Product"] & {
             /**
              * @description ObjectId of the product
@@ -1142,6 +1183,24 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["AddressResponse"];
+            };
+        };
+        /** @description Address successfully updated */
+        AddressUpdated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AddressResponse"];
+            };
+        };
+        /** @description Address successfully deleted */
+        AddressDeleted: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["DeleteResponse"];
             };
         };
     };
