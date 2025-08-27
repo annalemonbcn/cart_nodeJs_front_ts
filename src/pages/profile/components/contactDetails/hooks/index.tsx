@@ -66,7 +66,7 @@ const useContactDetailsFrom = () => {
     mutate(buildPayload(data))
   }
 
-  const shouldDisable = !isDirty || !dirtyFields || isPending
+  const shouldDisable = !isDirty || isPending
 
   return {
     isLoading,

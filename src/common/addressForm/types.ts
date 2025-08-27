@@ -1,5 +1,5 @@
 import type { RegisterOptions } from 'react-hook-form'
-import type { AddAddressFormShape } from '../../types'
+import type { AddressInputDto } from '@/services/address/types'
 
 /**
  * Recursively constructs a union type of dot-separated keys for a given object type T.
@@ -12,7 +12,7 @@ type DotNestedKeys<T> = {
 }[keyof T & string]
 
 type FormField = {
-  name: DotNestedKeys<AddAddressFormShape>
+  name: DotNestedKeys<AddressFormShape>
   label: string
   component: React.FC<any>
   isRequired?: boolean
@@ -20,4 +20,11 @@ type FormField = {
   validationRules?: RegisterOptions
 }
 
-export type { DotNestedKeys, FormField }
+type AddressFormShape = Omit<AddressInputDto, 'tags'> & {
+  id?: string
+  tags?: string
+}
+
+type FormAction = 'edit' | 'add'
+
+export type { DotNestedKeys, FormField, AddressFormShape, FormAction }

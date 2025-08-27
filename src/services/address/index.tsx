@@ -2,7 +2,6 @@ import apiClient from '@/lib/axios'
 import type {
   AddAddressApiResponse,
   DeleteAddressApiResponse,
-  AddressDto,
   GetAddressByIdApiResponse,
   UpdateAddressApiResponse,
   UpdateIsDefaultAddressApiResponse,
@@ -12,17 +11,18 @@ import type {
 
 const COMMON_KEYS = ['address']
 
-const getAddressById = () => ({
-  queryKey: [...COMMON_KEYS, 'getAddressById'],
-  queryFn: async (addressId: string): Promise<GetAddressByIdApiResponse> => {
+const getAddressById = (addressId?: string) => ({
+  queryKey: [...COMMON_KEYS, 'getAddressById', addressId],
+  queryFn: async (): Promise<GetAddressByIdApiResponse> => {
     const response = await apiClient.get(`/address/${addressId}`)
     return response.data
-  }
+  },
+  enabled: !!addressId
 })
 
 const addAddress = () => ({
   mutationKey: [...COMMON_KEYS, 'addAddress'],
-  mutationFn: async (data: AddressInputDto): Promise<AddAddressApiResponse> => {
+  mutationFn: async ({ data }: { data: AddressInputDto }): Promise<AddAddressApiResponse> => {
     const response = await apiClient.post('/address', data)
     return response.data
   }
@@ -30,7 +30,15 @@ const addAddress = () => ({
 
 const updateAddress = () => ({
   mutationKey: [...COMMON_KEYS, 'updateAddress'],
-  mutationFn: async (addressId: string, data: AddressDto): Promise<UpdateAddressApiResponse> => {
+  mutationFn: async ({
+    addressId,
+    data
+  }: {
+    addressId?: string
+    data: AddressInputDto
+  }): Promise<UpdateAddressApiResponse> => {
+    if (!addressId) return Promise.reject(new Error('Address ID is required'))
+
     const response = await apiClient.put(`/address/${addressId}`, data)
     return response.data
   }

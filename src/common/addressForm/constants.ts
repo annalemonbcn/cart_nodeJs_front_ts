@@ -1,11 +1,10 @@
 import TextFormField from '@/common/form/textFormField'
-import type { AddAddressFormShape } from '../../types'
-import { IsDefaultField } from '../isDefaultField'
-import type { FormField } from './types'
+import { IsDefaultField } from './components/isDefaultField'
+import type { AddressFormShape, FormField } from './types'
 import { countries } from 'countries-list'
 import { regex } from '@/utils/constants'
 
-const defaultValues: AddAddressFormShape = {
+const formDefaultValues: AddressFormShape = {
   firstName: '',
   lastName: '',
   deliveryAddress: {
@@ -131,4 +130,4 @@ const formFields: FormField[] = [
   }
 ]
 
-export { defaultValues, formFields }
+export { formDefaultValues, formFields }

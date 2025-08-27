@@ -1,10 +1,10 @@
 import Input from '@/components/input'
 import Text from '@/components/text'
 import { useFormContext } from 'react-hook-form'
-import type { AddAddressFormShape } from '../../types'
+import type { AddressFormShape } from '../../types'
 
 const IsDefaultField = () => {
-  const { register } = useFormContext<AddAddressFormShape>()
+  const { register } = useFormContext<AddressFormShape>()
 
   return (
     <>

@@ -6,6 +6,8 @@ import { toast } from 'sonner'
 import type { AxiosError } from 'axios'
 import type { ActionButton } from '../types'
 import { useLoadUser } from '@/hooks/useLoadUser'
+import { useNavigate } from 'react-router-dom'
+import { routeMap } from '@/routes/utils'
 
 const useDeleteAddress = () => {
   const { refetch } = useLoadUser()
@@ -25,10 +27,13 @@ const useDeleteAddress = () => {
   return { mutate, isPending }
 }
 
-const useEditAddress = () => ({
-  mutate: () => console.log('edit'),
-  isPending: false
-})
+const useEditAddress = () => {
+  const navigate = useNavigate()
+
+  return {
+    mutate: (addressId: string) => navigate(routeMap.addressEdit.path.replace(':addressId', addressId))
+  }
+}
 
 const useSetAsDefault = () => {
   const { refetch } = useLoadUser()
@@ -52,14 +57,14 @@ const useSetAsDefault = () => {
 
 const useGetActionButtons = (addressId: string, isDefault: boolean) => {
   const { mutate: deleteAddress, isPending: deletePending } = useDeleteAddress()
-  const { mutate: editAddress, isPending: editPending } = useEditAddress()
+  const { mutate: editAddress } = useEditAddress()
   const { mutate: setAsDefault, isPending: setAsDefaultPending } = useSetAsDefault()
 
   const actionButtons: ActionButton[] = [
     {
       action: 'edit',
       label: 'Edit',
-      onClick: () => editAddress()
+      onClick: () => editAddress(addressId)
     },
     {
       action: 'delete',
@@ -73,7 +78,7 @@ const useGetActionButtons = (addressId: string, isDefault: boolean) => {
     }
   ]
 
-  const isPending = deletePending || editPending || setAsDefaultPending
+  const isPending = deletePending || setAsDefaultPending
 
   return { actionButtons, isPending }
 }

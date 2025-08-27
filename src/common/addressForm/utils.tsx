@@ -1,4 +1,4 @@
-import type { AddAddressFormShape } from '../../types'
+import { noop } from '@tanstack/react-query'
 import { formFields } from './constants'
 import {
   AdditionalInfo,
@@ -14,9 +14,10 @@ import {
   Tags,
   ZipCode
 } from './styles'
-import type { DotNestedKeys } from './types'
+import type { AddressFormShape, DotNestedKeys } from './types'
 
-const wrapperMap: Record<DotNestedKeys<AddAddressFormShape>, React.FC<any>> = {
+const wrapperMap: Record<DotNestedKeys<AddressFormShape>, React.FC<any>> = {
+  id: noop,
   firstName: FirstName,
   lastName: LastName,
   'deliveryAddress.street': StreetAddress,
@@ -33,7 +34,7 @@ const wrapperMap: Record<DotNestedKeys<AddAddressFormShape>, React.FC<any>> = {
 const renderForm = () => (
   <FormWrapper>
     {formFields.map(({ component: FieldComponent, name, label, ...rest }) => {
-      const Wrapper = wrapperMap[name as DotNestedKeys<AddAddressFormShape>]
+      const Wrapper = wrapperMap[name as DotNestedKeys<AddressFormShape>]
 
       return (
         <Wrapper key={name}>

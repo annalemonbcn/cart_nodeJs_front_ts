@@ -1,3 +1,4 @@
+// TODO: is this useful?
 const authRoutes = {
   registerUser: '/auth/register',
   loginUser: '/auth/login'

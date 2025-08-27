@@ -5,12 +5,12 @@ type DeliveryAddressDto = components['schemas']['DeliveryAddress']
 type DefaultAddressDto = components['schemas']['AddressDefaultInput']
 
 // input
-type AddressInputDto = components['schemas']['AddressBase']
-
-// TODO: remove ?
-type AddressDto = components['schemas']['Address']
+type AddressInputDto = components['schemas']['AddressAddInput']
 
 // output
+type AddressOutputDto = components['schemas']['AddressOutput']
+
+// responses
 type GetAddressByIdApiResponse = components['responses']['AddressFound']['content']['application/json']
 type AddAddressApiResponse = components['responses']['AddressCreated']['content']['application/json']
 type UpdateAddressApiResponse = components['responses']['AddressUpdated']['content']['application/json']
@@ -19,9 +19,9 @@ type UpdateIsDefaultAddressApiResponse = components['responses']['AddressDefault
 
 export type {
   AddressInputDto,
+  AddressOutputDto,
   UserAddressDto,
   DeliveryAddressDto,
-  AddressDto,
   DefaultAddressDto,
   GetAddressByIdApiResponse,
   AddAddressApiResponse,

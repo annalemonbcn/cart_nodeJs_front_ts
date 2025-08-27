@@ -15,6 +15,7 @@ type RouteName =
   | 'signOut'
   | 'address'
   | 'addressAdd'
+  | 'addressEdit'
 
 /**
  * @description Routes data
@@ -91,6 +92,11 @@ const routesData: Omit<PageRoute, 'component'>[] = [
             name: 'addressAdd',
             path: 'add',
             title: 'Add New Address'
+          },
+          {
+            name: 'addressEdit',
+            path: 'edit/:addressId',
+            title: 'Edit Address'
           }
         ]
       }
