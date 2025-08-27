@@ -6,7 +6,8 @@ import type {
   GetAddressByIdApiResponse,
   UpdateAddressApiResponse,
   UpdateIsDefaultAddressApiResponse,
-  DefaultAddressDto
+  DefaultAddressDto,
+  AddressInputDto
 } from './types'
 
 const COMMON_KEYS = ['address']
@@ -21,7 +22,7 @@ const getAddressById = () => ({
 
 const addAddress = () => ({
   mutationKey: [...COMMON_KEYS, 'addAddress'],
-  mutationFn: async (data: AddressDto): Promise<AddAddressApiResponse> => {
+  mutationFn: async (data: AddressInputDto): Promise<AddAddressApiResponse> => {
     const response = await apiClient.post('/address', data)
     return response.data
   }

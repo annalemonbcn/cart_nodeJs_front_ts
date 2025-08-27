@@ -43,7 +43,7 @@ const useSetAsDefault = () => {
       refetch()
     },
     onError: (error: AxiosError<ApiErrorResponse>) => {
-      toast.error(getErrorMessage(error, true))
+      toast.error(getErrorMessage(error))
     }
   })
 

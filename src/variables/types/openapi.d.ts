@@ -803,12 +803,7 @@ export interface components {
             /** @example Springfield */
             country: string;
         };
-        Address: {
-            /**
-             * @description ObjectId referencing the user
-             * @example 64f1a2cfe2a83c0012345679
-             */
-            user: string;
+        AddressBase: {
             /** @example Jane */
             firstName: string;
             /** @example Doe */
@@ -822,6 +817,13 @@ export interface components {
              */
             isDefault: boolean;
             tags?: string[];
+        };
+        Address: components["schemas"]["AddressBase"] & {
+            /**
+             * @description ObjectId referencing the user
+             * @example 64f1a2cfe2a83c0012345679
+             */
+            user: string;
         };
         RegisterUserInput: {
             /** @example Jane */
@@ -868,7 +870,7 @@ export interface components {
             /** @description ObjectId referencing an address */
             addresses?: string[];
         };
-        AddressAddInput: components["schemas"]["Address"];
+        AddressAddInput: components["schemas"]["AddressBase"];
         AddressDefaultInput: {
             /** @example true */
             isDefault: boolean;

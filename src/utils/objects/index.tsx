@@ -5,11 +5,12 @@ const getNestedValue = (obj: any, path: string) => path.split('.').reduce((acc, 
 
 const isAxiosError = <T,>(error: unknown): error is AxiosError<T> => !!(error as AxiosError<T>)?.isAxiosError
 
-const getErrorMessage = (error: unknown, useFallback = false, fallback = 'An unexpected error occurred'): string => {
-  if (useFallback) return fallback
-
+const getErrorMessage = (error: unknown, fallback = 'An unexpected error occurred'): string => {
   if (isAxiosError<ApiErrorResponse>(error)) {
-    return error.response?.data?.message || fallback
+    if (error.response?.data?.message) {
+      return error.response.data.message
+    }
+    return fallback
   }
 
   if (error instanceof Error) {

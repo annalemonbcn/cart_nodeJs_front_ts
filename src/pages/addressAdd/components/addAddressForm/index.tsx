@@ -5,41 +5,35 @@ import { renderForm } from './utils'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import Button from '@/components/button'
-import { useAddressServices } from '@/services/address'
-import { useMutation } from '@tanstack/react-query'
-import type { AddressDto } from '@/services/address/types'
+import { defaultValues } from './constants'
+import { useAddAddress } from '../../hooks'
+import type { AddressInputDto } from '@/services/address/types'
+import { useGetAddress } from '@/hooks/useGetAddress'
+import { toast } from 'sonner'
+import { validateUserAddresses } from './validations'
 
 const AddAddressForm = () => {
   const methods = useForm<AddAddressFormShape>({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      deliveryAddress: {
-        street: '',
-        zipCode: '',
-        city: '',
-        province: '',
-        country: '',
-        additionalInfo: ''
-      },
-      phoneNumber: '',
-      isDefault: false,
-      tags: ''
-    }
+    defaultValues
   })
   const { handleSubmit } = methods
 
-  const { addAddress } = useAddressServices()
+  const { mutate, isPending } = useAddAddress()
 
-  const { mutate } = useMutation(addAddress())
+  const { data: addresses } = useGetAddress()
 
   const onSubmit: SubmitHandler<AddAddressFormShape> = (data) => {
-    const convertedData = {
-      ...data,
-      tags: data.tags?.split(',').map((tag) => tag.trim()),
-      user: '6866924897deb033bba8e284'
+    const errorMessage = validateUserAddresses(data, addresses)
+    if (errorMessage) {
+      toast.error(errorMessage)
+      return
     }
-    mutate(convertedData as AddressDto)
+
+    const convertedData: AddressInputDto = {
+      ...data,
+      tags: !data.tags ? undefined : data.tags?.split(',').map((tag) => tag.trim())
+    }
+    mutate(convertedData)
   }
 
   return (
@@ -47,7 +41,7 @@ const AddAddressForm = () => {
       {renderForm()}
 
       <FlexContainer alignItems="center" gap={tokens.space.xl}>
-        <Button fontWeight="medium" onClick={handleSubmit(onSubmit)}>
+        <Button fontWeight="medium" onClick={handleSubmit(onSubmit)} disabled={isPending}>
           Save
         </Button>
         <Button variant="tertiary">Cancel</Button>

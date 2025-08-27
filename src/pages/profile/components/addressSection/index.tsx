@@ -1,5 +1,4 @@
 import FlexContainer from '@/components/flexContainer'
-import { useGetAddress } from './hooks'
 import { tokens } from '@/variables/styles'
 import { SingleAddressItem } from './components/singleAddressItem'
 import { StyledContainer } from './styles'
@@ -8,6 +7,7 @@ import { routeMap } from '@/routes/utils'
 import { SubTitle } from '@/common/titles/subTitle'
 import type { UserAddressDto } from '@/services/address/types'
 import ErrorState from '@/common/errorState'
+import { useGetAddress } from '@/hooks/useGetAddress'
 
 const AddressRender = ({ data }: { data: UserAddressDto[] }) => {
   const noData = !data || data.length === 0
