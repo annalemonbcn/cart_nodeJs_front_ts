@@ -22,7 +22,7 @@ const useLoadUser = () => {
 const useGetUserId = () => {
   const { data } = useLoadUser()
 
-  return data?._id || ''
+  return data?.id || ''
 }
 
 export { useLoadUser, useGetUserId }

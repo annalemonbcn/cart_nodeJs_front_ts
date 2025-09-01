@@ -2,7 +2,7 @@ import type { AddressOutputDto } from '@/services/address/types'
 import type { AddressFormShape } from '../types'
 
 const mapAddressDtoToFormShape = (dto: AddressOutputDto): AddressFormShape => ({
-  id: dto._id,
+  id: dto.id,
   firstName: dto.firstName,
   lastName: dto.lastName,
   deliveryAddress: {

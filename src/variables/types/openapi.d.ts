@@ -531,9 +531,25 @@ export interface paths {
             };
         };
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user/soft": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
         /**
-         * Delete user profile
-         * @description Deletes the authenticated user's profile.
+         * Soft delete user profile
+         * @description Soft deletes the authenticated user's profile, adding deletedAt field with current date
          */
         delete: {
             parameters: {
@@ -547,6 +563,48 @@ export interface paths {
                 200: components["responses"]["UserProfileDeleted"];
                 400: components["responses"]["BadRequest"];
                 401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user/delete/{userId}/hard": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Permanently delete a user profile (admin only)
+         * @description Permanently deletes the specified user profile from the database.
+         *     This action is irreversible and requires **admin** privileges.
+         *
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the user to delete */
+                    userId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["UserProfileDeleted"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
                 404: components["responses"]["NotFound"];
                 500: components["responses"]["InternalServerError"];
             };
@@ -593,7 +651,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/adress/{addressId}": {
+    "/api/address/{addressId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -676,7 +734,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/adress/{addressId}/default": {
+    "/api/address/{addressId}/default": {
         parameters: {
             query?: never;
             header?: never;
@@ -788,6 +846,11 @@ export interface components {
             cart?: string;
             /** @description ObjectId referencing an address */
             addresses?: string[];
+            /**
+             * Format: date-time
+             * @example 2023-06-01T12:34:56.789Z
+             */
+            deletedAt?: string;
         };
         DeliveryAddress: {
             /** @example 123 Main St */
@@ -858,7 +921,7 @@ export interface components {
              * @description ObjectId of the user
              * @example 64f1a2cfe2a83c0012345679
              */
-            _id: string;
+            id?: string;
             /** @example Jane */
             firstName?: string;
             /** @example Doe */
@@ -894,7 +957,7 @@ export interface components {
              * @description ObjectId of the user
              * @example 64f1a2cfe2a83c0012345679
              */
-            _id: string;
+            id?: string;
             /** @example Jane */
             firstName: string;
             /** @example Doe */
@@ -910,7 +973,7 @@ export interface components {
              * @description ObjectId of the user
              * @example 64f1a2cfe2a83c0012345679
              */
-            _id: string;
+            id?: string;
             /** @example jane.doe@example.com */
             email: string;
             /**
@@ -937,13 +1000,18 @@ export interface components {
              * @example 2024-01-01T00:00:00.000Z
              */
             updatedAt: string;
+            /**
+             * Format: date-time
+             * @example 2024-01-01T00:00:00.000Z
+             */
+            deletedAt?: string;
         };
         AddressOutput: components["schemas"]["Address"] & {
             /**
              * @description ObjectId of the address
              * @example 64f1a2cfe2a83c0012345680
              */
-            _id: string;
+            id: string;
         };
         BaseResponse: {
             /** @example success */
@@ -1007,6 +1075,15 @@ export interface components {
         };
         /** @description Unauthorized */
         Unauthorized: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Forbidden */
+        Forbidden: {
             headers: {
                 [name: string]: unknown;
             };

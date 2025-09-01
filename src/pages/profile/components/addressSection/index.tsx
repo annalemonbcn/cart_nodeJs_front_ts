@@ -17,7 +17,7 @@ const AddressRender = ({ data }: { data: UserAddressDto[] }) => {
   return (
     <StyledContainer>
       {data?.map((address) => (
-        <SingleAddressItem key={`address-${address._id}`} {...address} />
+        <SingleAddressItem key={`address-${address.id}`} {...address} />
       ))}
     </StyledContainer>
   )

@@ -6,7 +6,7 @@ import { DeliveryAddress } from '../deliveryAddress'
 import type { UserAddressDto } from '@/services/address/types'
 
 const SingleAddressItem = ({
-  _id,
+  id,
   firstName,
   lastName,
   phoneNumber,
@@ -34,7 +34,7 @@ const SingleAddressItem = ({
     </TagsArea>
 
     <ActionsArea>
-      <ActionButtons id={_id} isDefault={isDefault} />
+      <ActionButtons id={id} isDefault={isDefault} />
     </ActionsArea>
   </StyledAddressContainer>
 )

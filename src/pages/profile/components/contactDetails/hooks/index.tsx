@@ -58,7 +58,7 @@ const useContactDetailsFrom = () => {
         ...acc,
         [field]: data[field]
       }),
-      { _id: data._id }
+      { id: data.id }
     )
   }
 
