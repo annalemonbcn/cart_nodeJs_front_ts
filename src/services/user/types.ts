@@ -6,4 +6,6 @@ type UserResponseDto = components['responses']['UserProfileFound']['content']['a
 type UpdateUserDto = components['schemas']['UserProfileInput']
 type UpdateUserResponseDto = components['responses']['UserProfileUpdated']['content']['application/json']
 
-export type { UserProfileDto, UserResponseDto, UpdateUserDto, UpdateUserResponseDto }
+type DeleteUserResponseDto = components['responses']['UserProfileDeleted']['content']['application/json']
+
+export type { UserProfileDto, UserResponseDto, UpdateUserDto, UpdateUserResponseDto, DeleteUserResponseDto }

@@ -52,19 +52,20 @@ const useContactDetailsFrom = () => {
   } = methods
 
   const buildPayload = (data: ProfileFormType): UpdateUserDto => {
-    const updatedFields = Object.keys(dirtyFields) as (keyof UpdateUserDto)[]
+    const updatedFields = Object.keys(dirtyFields) as (keyof ProfileFormType)[]
+
     return updatedFields.reduce<UpdateUserDto>(
       (acc, field) => ({
         ...acc,
         [field]: data[field]
       }),
-      { id: data.id }
+      {}
     )
   }
 
-  const onSubmit: SubmitHandler<ProfileFormType> = (data) => {
-    mutate(buildPayload(data))
-  }
+  const onSubmit: SubmitHandler<ProfileFormType> = (data) => mutate(buildPayload(data))
+
+  const updateUserInfo = handleSubmit(onSubmit)
 
   const shouldDisable = !isDirty || isPending
 
@@ -73,8 +74,7 @@ const useContactDetailsFrom = () => {
     noData,
     refetch,
     methods,
-    handleSubmit,
-    onSubmit,
+    handleSubmit: updateUserInfo,
     shouldDisable,
     isPending
   }

@@ -1,7 +1,7 @@
 import type { UserProfileDto } from '@/services/user/types'
 import type { RegisterOptions } from 'react-hook-form'
 
-type ProfileFormType = UserProfileDto
+type ProfileFormType = Pick<UserProfileDto, 'firstName' | 'lastName' | 'email' | 'phoneNumber'>
 
 type FormField = {
   name: keyof ProfileFormType

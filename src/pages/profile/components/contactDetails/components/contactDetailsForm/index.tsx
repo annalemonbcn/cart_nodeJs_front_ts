@@ -8,7 +8,7 @@ import { useContactDetailsFrom } from '../../hooks'
 import ErrorState from '@/common/errorState'
 
 const ContactDetailsForm = () => {
-  const { isLoading, noData, refetch, methods, handleSubmit, onSubmit, shouldDisable, isPending } =
+  const { isLoading, noData, refetch, methods, handleSubmit, shouldDisable, isPending } =
     useContactDetailsFrom()
 
   if (isLoading) return <Loader />
@@ -29,7 +29,7 @@ const ContactDetailsForm = () => {
       <CustomForm methods={methods}>{renderFormFields()}</CustomForm>
 
       <FlexContainer justifyContent="flex-start">
-        <Button onClick={handleSubmit(onSubmit)} disabled={shouldDisable}>
+        <Button onClick={handleSubmit} disabled={shouldDisable}>
           {isPending ? 'Saving...' : 'Save'}
         </Button>
       </FlexContainer>

@@ -4,6 +4,7 @@ import { ChangePassword } from './components/changePassword'
 import { tokens } from '@/variables/styles'
 import { AddressSection } from './components/addressSection'
 import { ContactDetails } from './components/contactDetails'
+import { DeleteAccount } from './components/deleteAccount'
 
 const ProfilePage = () => (
   <MyAccountOutletLayout title="My Info">
@@ -11,6 +12,7 @@ const ProfilePage = () => (
       <ContactDetails />
       <ChangePassword />
       <AddressSection />
+      <DeleteAccount />
     </FlexContainer>
   </MyAccountOutletLayout>
 )

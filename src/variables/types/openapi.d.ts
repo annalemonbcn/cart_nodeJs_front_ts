@@ -17,50 +17,24 @@ export interface paths {
          */
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description Page number (starts at 1) */
+                    page?: number;
+                    /** @description Number of products per page */
+                    limit?: number;
+                    /** @description Search term to filter products (e.g. by title, brand, etc.) */
+                    query?: string;
+                    /** @description Sort order by price or other criteria */
+                    sort?: "asc" | "desc";
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
             };
             requestBody?: never;
             responses: {
-                /** @description A list of products */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example success */
-                            status?: string;
-                            /** @example 200 */
-                            code?: number;
-                            payload?: components["schemas"]["Product"][];
-                            /** @description Pagination context */
-                            pageContext?: {
-                                page?: number;
-                                totalPages?: number;
-                                totalDocs?: number;
-                            };
-                        };
-                    };
-                };
-                /** @description Internal server error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example error */
-                            status?: string;
-                            /** @example 500 */
-                            code?: number;
-                            /** @example Internal server error */
-                            message?: string;
-                        };
-                    };
-                };
+                200: components["responses"]["AllProductsFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         put?: never;
@@ -83,6 +57,8 @@ export interface paths {
             responses: {
                 201: components["responses"]["ProductCreated"];
                 400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
                 500: components["responses"]["InternalServerError"];
             };
         };
@@ -143,6 +119,8 @@ export interface paths {
             responses: {
                 200: components["responses"]["ProductUpdated"];
                 400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
                 404: components["responses"]["NotFound"];
                 500: components["responses"]["InternalServerError"];
             };
@@ -166,6 +144,8 @@ export interface paths {
             responses: {
                 200: components["responses"]["ProductDeleted"];
                 400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
                 404: components["responses"]["NotFound"];
                 500: components["responses"]["InternalServerError"];
             };
@@ -268,28 +248,7 @@ export interface paths {
             };
         };
         post?: never;
-        /**
-         * Delete cart by ID
-         * @description Deletes a cart by ID
-         */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description The ID of the cart */
-                    cid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                200: components["responses"]["CartDeleted"];
-                400: components["responses"]["BadRequest"];
-                404: components["responses"]["NotFound"];
-                500: components["responses"]["InternalServerError"];
-            };
-        };
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -573,7 +532,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/user/delete/{userId}/hard": {
+    "/api/user/{userId}/hard": {
         parameters: {
             query?: never;
             header?: never;
@@ -779,22 +738,39 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        ProductFeatures: {
+            /** @enum {string} */
+            fabric: "cotton" | "polyester" | "wool" | "linen" | "denim" | "leather";
+            /** @enum {string} */
+            pattern: "solid" | "striped" | "printed" | "floral";
+            /** @enum {string} */
+            fit: "regular" | "slim" | "loose";
+            /** @enum {string} */
+            neck: "round" | "v-neck";
+            /** @enum {string} */
+            sleeve: "short" | "long";
+            /** @enum {string} */
+            style: "classic" | "casual" | "business" | "sport" | "elegant" | "formal";
+        };
         Product: {
+            code: string;
             title: string;
             description: string;
-            code: string;
-            price: number;
-            /**
-             * @default in_stock
-             * @enum {string}
-             */
-            status: "in_stock" | "out_of_stock";
-            stock: number;
             /** @enum {string} */
-            category: "electronics" | "fashion" | "home" | "sports" | "beauty" | "games" | "books" | "music";
-            thumbnails: {
-                url?: string;
+            brand: "naikis" | "adwidas" | "poma" | "rwebook";
+            features: components["schemas"]["ProductFeatures"];
+            sizes: ("XS" | "S" | "M" | "L" | "XL")[];
+            colours: {
+                /** @enum {string} */
+                name?: "black" | "yellow" | "pink" | "red";
+                available?: boolean;
             }[];
+            /** @example 39.99 */
+            price: number;
+            /** @example 10 */
+            stock: number;
+            categories: ("electronics" | "fashion" | "home" | "sports" | "beauty" | "games" | "books" | "music")[];
+            thumbnails: string[];
         };
         CartProduct: {
             /**
@@ -807,6 +783,11 @@ export interface components {
         };
         Cart: {
             products: components["schemas"]["CartProduct"][];
+            /**
+             * Format: date-time
+             * @example 2024-01-01T00:00:00.000Z
+             */
+            deletedAt?: string;
         };
         User: {
             /** @example Jane */
@@ -880,6 +861,11 @@ export interface components {
              */
             isDefault: boolean;
             tags?: string[];
+            /**
+             * Format: date-time
+             * @example 2023-06-01T12:34:56.789Z
+             */
+            deletedAt?: string;
         };
         Address: components["schemas"]["AddressBase"] & {
             /**
@@ -917,11 +903,6 @@ export interface components {
             password: string;
         };
         UserProfileInput: {
-            /**
-             * @description ObjectId of the user
-             * @example 64f1a2cfe2a83c0012345679
-             */
-            id?: string;
             /** @example Jane */
             firstName?: string;
             /** @example Doe */
@@ -943,14 +924,14 @@ export interface components {
              * @description ObjectId of the product
              * @example 64e3cfc2b567b3c5fcd36b92
              */
-            _id: string;
+            id: string;
         };
         CartOutput: components["schemas"]["Cart"] & {
             /**
              * @description ObjectId of the cart
              * @example 64e3cfc2b567b3c5fcd36b92
              */
-            _id: string;
+            id: string;
         };
         UserProfileOutput: {
             /**
@@ -1021,6 +1002,28 @@ export interface components {
             /** @example Operation successful */
             message?: string;
         };
+        PageContextResponse: {
+            pageContext?: {
+                /** @example 1 */
+                page?: number;
+                /** @example 1 */
+                totalPages?: number;
+                /** @example 1 */
+                prevPage?: number;
+                /** @example 1 */
+                nextPage?: number;
+                /** @example true */
+                hasPrevPage?: boolean;
+                /** @example true */
+                hasNextPage?: boolean;
+                /** @example null */
+                prevLink?: string;
+                /** @example http://localhost:3000/api/products?page=2 */
+                nextLink?: string;
+                /** @example 1 */
+                totalDocs?: number;
+            };
+        } & components["schemas"]["BaseResponse"];
         DeleteResponse: components["schemas"]["BaseResponse"];
         ErrorResponse: {
             /** @example error */
@@ -1029,6 +1032,9 @@ export interface components {
             code: number;
             /** @example Something went wrong */
             message: string;
+        };
+        AllProductsResponse: components["schemas"]["PageContextResponse"] & {
+            payload: components["schemas"]["ProductOutput"][];
         };
         ProductResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["ProductOutput"];
@@ -1116,6 +1122,15 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description All products found */
+        AllProductsFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AllProductsResponse"];
             };
         };
         /** @description Product successfully created */

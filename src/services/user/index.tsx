@@ -1,5 +1,5 @@
 import apiClient from '@/lib/axios'
-import type { UpdateUserDto, UpdateUserResponseDto, UserResponseDto } from './types'
+import type { DeleteUserResponseDto, UpdateUserDto, UpdateUserResponseDto, UserResponseDto } from './types'
 
 const COMMON_KEYS = ['user']
 
@@ -19,11 +19,18 @@ const updateUserInfo = () => ({
   }
 })
 
-// TODO: delete user
+const deleteUser = () => ({
+  mutationKey: [...COMMON_KEYS, 'deleteUser'],
+  mutationFn: async (): Promise<DeleteUserResponseDto> => {
+    const response = await apiClient.delete(`/user/soft`)
+    return response.data
+  }
+})
 
 const useUserServices = () => ({
   getUserInfo,
-  updateUserInfo
+  updateUserInfo,
+  deleteUser
 })
 
 export { useUserServices }
