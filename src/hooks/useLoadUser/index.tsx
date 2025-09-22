@@ -8,7 +8,7 @@ const useLoadUser = () => {
   const { isAuthenticated } = useAuthContext()
 
   const { getUserInfo } = useUserServices()
-  const { data, isLoading } = useQuery({ ...getUserInfo(), enabled: isAuthenticated })
+  const { data, isLoading, refetch, isError } = useQuery({ ...getUserInfo(), enabled: isAuthenticated })
 
   const userData: UserProfileDto | undefined = useMemo(() => {
     if (!data || isLoading) return undefined
@@ -16,13 +16,13 @@ const useLoadUser = () => {
     return data.payload
   }, [data, isLoading])
 
-  return { data: userData, isLoading }
+  return { data: userData, isLoading, isError, refetch }
 }
 
 const useGetUserId = () => {
   const { data } = useLoadUser()
 
-  return data?._id || ''
+  return data?.id || ''
 }
 
 export { useLoadUser, useGetUserId }

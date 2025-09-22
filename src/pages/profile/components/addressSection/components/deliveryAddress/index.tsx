@@ -1,10 +1,10 @@
 import Text from '@/components/text'
 import FlexContainer from '@/components/flexContainer'
-import type { TDeliveryAddress } from '../../types'
+import type { DeliveryAddressDto } from '@/services/address/types'
 
-const DeliveryAddress = ({ road, additionalInfo, zipCode, city, province, country }: TDeliveryAddress) => (
+const DeliveryAddress = ({ street, additionalInfo, zipCode, city, province, country }: DeliveryAddressDto) => (
   <div>
-    <Text>{road}</Text>
+    <Text>{street}</Text>
     {additionalInfo && <Text>{additionalInfo}</Text>}
     <FlexContainer>
       <Text>

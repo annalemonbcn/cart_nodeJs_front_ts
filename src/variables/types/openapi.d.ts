@@ -17,50 +17,24 @@ export interface paths {
          */
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description Page number (starts at 1) */
+                    page?: number;
+                    /** @description Number of products per page */
+                    limit?: number;
+                    /** @description Search term to filter products (e.g. by title, brand, etc.) */
+                    query?: string;
+                    /** @description Sort order by price or other criteria */
+                    sort?: "asc" | "desc";
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
             };
             requestBody?: never;
             responses: {
-                /** @description A list of products */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example success */
-                            status?: string;
-                            /** @example 200 */
-                            code?: number;
-                            payload?: components["schemas"]["Product"][];
-                            /** @description Pagination context */
-                            pageContext?: {
-                                page?: number;
-                                totalPages?: number;
-                                totalDocs?: number;
-                            };
-                        };
-                    };
-                };
-                /** @description Internal server error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @example error */
-                            status?: string;
-                            /** @example 500 */
-                            code?: number;
-                            /** @example Internal server error */
-                            message?: string;
-                        };
-                    };
-                };
+                200: components["responses"]["AllProductsFound"];
+                500: components["responses"]["InternalServerError"];
             };
         };
         put?: never;
@@ -83,6 +57,8 @@ export interface paths {
             responses: {
                 201: components["responses"]["ProductCreated"];
                 400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
                 500: components["responses"]["InternalServerError"];
             };
         };
@@ -143,6 +119,8 @@ export interface paths {
             responses: {
                 200: components["responses"]["ProductUpdated"];
                 400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
                 404: components["responses"]["NotFound"];
                 500: components["responses"]["InternalServerError"];
             };
@@ -166,6 +144,8 @@ export interface paths {
             responses: {
                 200: components["responses"]["ProductDeleted"];
                 400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
                 404: components["responses"]["NotFound"];
                 500: components["responses"]["InternalServerError"];
             };
@@ -268,28 +248,7 @@ export interface paths {
             };
         };
         post?: never;
-        /**
-         * Delete cart by ID
-         * @description Deletes a cart by ID
-         */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description The ID of the cart */
-                    cid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                200: components["responses"]["CartDeleted"];
-                400: components["responses"]["BadRequest"];
-                404: components["responses"]["NotFound"];
-                500: components["responses"]["InternalServerError"];
-            };
-        };
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -497,7 +456,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/user/{uid}": {
+    "/api/user": {
         parameters: {
             query?: never;
             header?: never;
@@ -513,10 +472,7 @@ export interface paths {
             parameters: {
                 query?: never;
                 header?: never;
-                path: {
-                    /** @description The ID of the user */
-                    uid: string;
-                };
+                path?: never;
                 cookie?: never;
             };
             requestBody: {
@@ -529,11 +485,89 @@ export interface paths {
                 400: components["responses"]["BadRequest"];
                 401: components["responses"]["Unauthorized"];
                 404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
                 500: components["responses"]["InternalServerError"];
             };
         };
         post?: never;
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user/soft": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Soft delete user profile
+         * @description Soft deletes the authenticated user's profile, adding deletedAt field with current date
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["UserProfileDeleted"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user/{userId}/hard": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Permanently delete a user profile (admin only)
+         * @description Permanently deletes the specified user profile from the database.
+         *     This action is irreversible and requires **admin** privileges.
+         *
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the user to delete */
+                    userId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["UserProfileDeleted"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -546,23 +580,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * Get all addresses
-         * @description Returns all addresses from all users in DB
-         */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                200: components["responses"]["AllAddressFound"];
-                500: components["responses"]["InternalServerError"];
-            };
-        };
+        get?: never;
         put?: never;
         /**
          * Create a new address
@@ -592,7 +610,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/adress/{addressId}": {
+    "/api/address/{addressId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -621,34 +639,138 @@ export interface paths {
                 500: components["responses"]["InternalServerError"];
             };
         };
+        /**
+         * Update address by ID
+         * @description Updates an address by ID
+         */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the address */
+                    addressId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AddressAddInput"];
+                };
+            };
+            responses: {
+                200: components["responses"]["AddressUpdated"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        post?: never;
+        /**
+         * Delete address by ID
+         * @description Deletes an address by ID
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the address */
+                    addressId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["AddressDeleted"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/address/{addressId}/default": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
         put?: never;
         post?: never;
         delete?: never;
         options?: never;
         head?: never;
-        patch?: never;
+        /**
+         * Update default address
+         * @description Updates an address as default for the authenticated user
+         */
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the address */
+                    addressId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AddressDefaultInput"];
+                };
+            };
+            responses: {
+                200: components["responses"]["AddressDefaultSet"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
         trace?: never;
     };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        ProductFeatures: {
+            /** @enum {string} */
+            fabric: "cotton" | "polyester" | "wool" | "linen" | "denim" | "leather";
+            /** @enum {string} */
+            pattern: "solid" | "striped" | "printed" | "floral";
+            /** @enum {string} */
+            fit: "regular" | "slim" | "loose";
+            /** @enum {string} */
+            neck: "round" | "v-neck";
+            /** @enum {string} */
+            sleeve: "short" | "long";
+            /** @enum {string} */
+            style: "classic" | "casual" | "business" | "sport" | "elegant" | "formal";
+        };
         Product: {
+            code: string;
             title: string;
             description: string;
-            code: string;
-            price: number;
-            /**
-             * @default in_stock
-             * @enum {string}
-             */
-            status: "in_stock" | "out_of_stock";
-            stock: number;
             /** @enum {string} */
-            category: "electronics" | "fashion" | "home" | "sports" | "beauty" | "games" | "books" | "music";
-            thumbnails: {
-                url?: string;
+            brand: "naikis" | "adwidas" | "poma" | "rwebook";
+            features: components["schemas"]["ProductFeatures"];
+            sizes: ("XS" | "S" | "M" | "L" | "XL")[];
+            colours: {
+                /** @enum {string} */
+                name?: "black" | "yellow" | "pink" | "red";
+                available?: boolean;
             }[];
+            /** @example 39.99 */
+            price: number;
+            /** @example 10 */
+            stock: number;
+            categories: ("electronics" | "fashion" | "home" | "sports" | "beauty" | "games" | "books" | "music")[];
+            thumbnails: string[];
         };
         CartProduct: {
             /**
@@ -661,6 +783,11 @@ export interface components {
         };
         Cart: {
             products: components["schemas"]["CartProduct"][];
+            /**
+             * Format: date-time
+             * @example 2024-01-01T00:00:00.000Z
+             */
+            deletedAt?: string;
         };
         User: {
             /** @example Jane */
@@ -700,6 +827,11 @@ export interface components {
             cart?: string;
             /** @description ObjectId referencing an address */
             addresses?: string[];
+            /**
+             * Format: date-time
+             * @example 2023-06-01T12:34:56.789Z
+             */
+            deletedAt?: string;
         };
         DeliveryAddress: {
             /** @example 123 Main St */
@@ -715,12 +847,7 @@ export interface components {
             /** @example Springfield */
             country: string;
         };
-        Address: {
-            /**
-             * @description ObjectId referencing the user
-             * @example 64f1a2cfe2a83c0012345679
-             */
-            user: string;
+        AddressBase: {
             /** @example Jane */
             firstName: string;
             /** @example Doe */
@@ -734,6 +861,18 @@ export interface components {
              */
             isDefault: boolean;
             tags?: string[];
+            /**
+             * Format: date-time
+             * @example 2023-06-01T12:34:56.789Z
+             */
+            deletedAt?: string;
+        };
+        Address: components["schemas"]["AddressBase"] & {
+            /**
+             * @description ObjectId referencing the user
+             * @example 64f1a2cfe2a83c0012345679
+             */
+            user: string;
         };
         RegisterUserInput: {
             /** @example Jane */
@@ -764,42 +903,42 @@ export interface components {
             password: string;
         };
         UserProfileInput: {
-            /**
-             * @description ObjectId of the user
-             * @example 64f1a2cfe2a83c0012345679
-             */
-            _id: string;
             /** @example Jane */
-            firstName: string;
+            firstName?: string;
             /** @example Doe */
-            lastName: string;
+            lastName?: string;
             /** @example jane.doe@example.com */
-            email: string;
+            email?: string;
             /** @example 666666666 */
             phoneNumber?: string;
             /** @description ObjectId referencing an address */
-            addresses: string[];
+            addresses?: string[];
+        };
+        AddressAddInput: components["schemas"]["AddressBase"];
+        AddressDefaultInput: {
+            /** @example true */
+            isDefault: boolean;
         };
         ProductOutput: components["schemas"]["Product"] & {
             /**
              * @description ObjectId of the product
              * @example 64e3cfc2b567b3c5fcd36b92
              */
-            _id: string;
+            id: string;
         };
         CartOutput: components["schemas"]["Cart"] & {
             /**
              * @description ObjectId of the cart
              * @example 64e3cfc2b567b3c5fcd36b92
              */
-            _id: string;
+            id: string;
         };
         UserProfileOutput: {
             /**
              * @description ObjectId of the user
              * @example 64f1a2cfe2a83c0012345679
              */
-            _id: string;
+            id?: string;
             /** @example Jane */
             firstName: string;
             /** @example Doe */
@@ -808,15 +947,14 @@ export interface components {
             email: string;
             /** @example 666666666 */
             phoneNumber?: string;
-            /** @description ObjectId referencing an address */
-            addresses: string[];
+            addresses: components["schemas"]["AddressOutput"][];
         };
         UserInternalOutput: {
             /**
              * @description ObjectId of the user
              * @example 64f1a2cfe2a83c0012345679
              */
-            _id: string;
+            id?: string;
             /** @example jane.doe@example.com */
             email: string;
             /**
@@ -843,15 +981,19 @@ export interface components {
              * @example 2024-01-01T00:00:00.000Z
              */
             updatedAt: string;
+            /**
+             * Format: date-time
+             * @example 2024-01-01T00:00:00.000Z
+             */
+            deletedAt?: string;
         };
         AddressOutput: components["schemas"]["Address"] & {
             /**
              * @description ObjectId of the address
              * @example 64f1a2cfe2a83c0012345680
              */
-            _id: string;
+            id: string;
         };
-        AllAddressOutput: components["schemas"]["AddressOutput"][];
         BaseResponse: {
             /** @example success */
             status: string;
@@ -860,6 +1002,28 @@ export interface components {
             /** @example Operation successful */
             message?: string;
         };
+        PageContextResponse: {
+            pageContext?: {
+                /** @example 1 */
+                page?: number;
+                /** @example 1 */
+                totalPages?: number;
+                /** @example 1 */
+                prevPage?: number;
+                /** @example 1 */
+                nextPage?: number;
+                /** @example true */
+                hasPrevPage?: boolean;
+                /** @example true */
+                hasNextPage?: boolean;
+                /** @example null */
+                prevLink?: string;
+                /** @example http://localhost:3000/api/products?page=2 */
+                nextLink?: string;
+                /** @example 1 */
+                totalDocs?: number;
+            };
+        } & components["schemas"]["BaseResponse"];
         DeleteResponse: components["schemas"]["BaseResponse"];
         ErrorResponse: {
             /** @example error */
@@ -868,6 +1032,9 @@ export interface components {
             code: number;
             /** @example Something went wrong */
             message: string;
+        };
+        AllProductsResponse: components["schemas"]["PageContextResponse"] & {
+            payload: components["schemas"]["ProductOutput"][];
         };
         ProductResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["ProductOutput"];
@@ -888,9 +1055,6 @@ export interface components {
         };
         LoginResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["LoginPayload"];
-        };
-        AllAddressResponse: components["schemas"]["BaseResponse"] & {
-            payload: components["schemas"]["AllAddressOutput"];
         };
         AddressResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["AddressOutput"];
@@ -924,6 +1088,15 @@ export interface components {
                 "application/json": components["schemas"]["ErrorResponse"];
             };
         };
+        /** @description Forbidden */
+        Forbidden: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
         /** @description Bad request – invalid or missing data */
         RegisterBadRequest: {
             headers: {
@@ -940,6 +1113,24 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description Conflict */
+        Conflict: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["ErrorResponse"];
+            };
+        };
+        /** @description All products found */
+        AllProductsFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AllProductsResponse"];
             };
         };
         /** @description Product successfully created */
@@ -1077,13 +1268,13 @@ export interface components {
                 "application/json": components["schemas"]["UserResponse"];
             };
         };
-        /** @description Address found */
-        AllAddressFound: {
+        /** @description User profile successfully deleted */
+        UserProfileDeleted: {
             headers: {
                 [name: string]: unknown;
             };
             content: {
-                "application/json": components["schemas"]["AllAddressResponse"];
+                "application/json": components["schemas"]["DeleteResponse"];
             };
         };
         /** @description Address found */
@@ -1102,6 +1293,33 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["AddressResponse"];
+            };
+        };
+        /** @description Address successfully updated */
+        AddressUpdated: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AddressResponse"];
+            };
+        };
+        /** @description Default address successfully updated */
+        AddressDefaultSet: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["AddressResponse"];
+            };
+        };
+        /** @description Address successfully deleted */
+        AddressDeleted: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["DeleteResponse"];
             };
         };
     };

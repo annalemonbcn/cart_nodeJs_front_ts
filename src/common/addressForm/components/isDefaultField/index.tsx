@@ -1,17 +1,17 @@
-import Input from '@/components/input'
 import Text from '@/components/text'
 import { useFormContext } from 'react-hook-form'
-import type { AddAddressFormShape } from '../../types'
+import type { AddressFormShape } from '../../types'
+import { StyledCheckbox } from './styles'
 
 const IsDefaultField = () => {
-  const { register } = useFormContext<AddAddressFormShape>()
+  const { register } = useFormContext<AddressFormShape>()
 
   return (
     <>
       <Text size="s3" weight="medium" color="darkNeutral">
         Set as default address
       </Text>
-      <Input type="checkbox" fitContent {...register('isDefault')} />
+      <StyledCheckbox type="checkbox" fitContent {...register('isDefault')} />
     </>
   )
 }

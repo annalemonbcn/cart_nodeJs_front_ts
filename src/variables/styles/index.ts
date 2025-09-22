@@ -1,7 +1,7 @@
 const dangerShades = {
   100: '#FDE8EE',
   200: '#FCD2DC',
-  800: '#EE1D52'
+  800: '#D61A4A'
 }
 
 const colors = {

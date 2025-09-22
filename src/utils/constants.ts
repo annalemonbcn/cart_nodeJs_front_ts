@@ -19,5 +19,13 @@ const socialPlatforms: SocialPlatform[] = [
   }
 ]
 
-export { socialPlatforms }
+const zipCodeRegex = /^[A-Za-z0-9\- ]{3,10}$/
+const phoneNumberRegex = /^\+\d{6,15}$/
+
+const regex = {
+  zipCodeRegex,
+  phoneNumberRegex
+}
+
+export { socialPlatforms, regex }
 export type { SocialPlatform }

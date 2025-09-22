@@ -1,32 +1,20 @@
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
-import { capitalize } from '@/utils/string'
 import Button from '@/components/button'
 import Text from '@/components/text'
+import { useGetActionButtons } from './hooks'
 
-type ActionButton = 'edit' | 'delete' | 'setAsDefault'
-
-const getActionButtons = (isDefault: boolean): ActionButton[] => {
-  const baseActions: ActionButton[] = ['edit', 'delete']
-
-  const extraActions: ActionButton[] = !isDefault ? ['setAsDefault'] : []
-
-  const actionButtons: ActionButton[] = [...baseActions, ...extraActions]
-
-  return actionButtons
-}
-
-const ActionButtons = ({ isDefault }: { isDefault: boolean }) => {
-  const buttons = getActionButtons(isDefault)
+const ActionButtons = ({ id, isDefault }: { id: string; isDefault: boolean }) => {
+  const { actionButtons, isPending } = useGetActionButtons(id, isDefault)
 
   return (
     <FlexContainer alignItems="center" gap={tokens.space.sm2}>
-      {buttons.map((button, idx) => (
+      {actionButtons.map((button, idx) => (
         <>
-          <Button key={`address-action-${button}`} variant="text">
-            {capitalize(button)}
+          <Button key={`address-action-${button.action}`} variant="text" onClick={button.onClick} disabled={isPending}>
+            {button.label}
           </Button>
-          {idx !== buttons.length - 1 && <Text color='offWhite'>|</Text>}
+          {idx !== actionButtons.length - 1 && <Text color="offWhite">|</Text>}
         </>
       ))}
     </FlexContainer>

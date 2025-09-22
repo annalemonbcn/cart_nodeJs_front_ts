@@ -4,14 +4,19 @@ import { ChangePassword } from './components/changePassword'
 import { tokens } from '@/variables/styles'
 import { AddressSection } from './components/addressSection'
 import { ContactDetails } from './components/contactDetails'
+import { DeleteAccount } from './components/deleteAccount'
+import { MultiModalProvider } from '@/hooks/useMultiModal/provider'
 
 const ProfilePage = () => (
   <MyAccountOutletLayout title="My Info">
-    <FlexContainer flexDirection="column" gap={tokens.space.xl}>
-      <ContactDetails />
-      <ChangePassword />
-      <AddressSection />
-    </FlexContainer>
+    <MultiModalProvider>
+      <FlexContainer flexDirection="column" gap={tokens.space.xl}>
+        <ContactDetails />
+        <ChangePassword />
+        <AddressSection />
+        <DeleteAccount />
+      </FlexContainer>
+    </MultiModalProvider>
   </MyAccountOutletLayout>
 )
 

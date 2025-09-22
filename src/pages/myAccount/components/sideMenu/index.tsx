@@ -21,7 +21,7 @@ const SideMenu = () => {
     <StyledSideMenu flexDirection="column" gap={tokens.space.xl2}>
       <FlexContainer flexDirection="column" gap={tokens.space.sm}>
         <VerticalBarDecorator>
-          <Title title={`Hello, ${data.payload?.firstName}`} />
+          <Title title={`Hello, ${data.firstName}`} />
         </VerticalBarDecorator>
 
         <Text>Welcome to your account</Text>
