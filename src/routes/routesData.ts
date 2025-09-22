@@ -7,6 +7,7 @@ type RouteName =
   | 'login'
   | 'signUp'
   | 'changePassword'
+  | 'resetPassword'
   | 'authSuccess'
   | 'myAccount'
   | 'profile'
@@ -51,6 +52,11 @@ const routesData: Omit<PageRoute, 'component'>[] = [
     name: 'changePassword',
     path: '/change-password',
     title: 'Change Password'
+  },
+  {
+    name: 'resetPassword',
+    path: '/reset-password',
+    title: 'Reset Password'
   },
   {
     name: 'authSuccess',

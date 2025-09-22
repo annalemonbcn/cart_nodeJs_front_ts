@@ -7,6 +7,7 @@ import { SignInBtn } from '../signInBtn'
 import EmailFormField from '@/common/form/emailFormField'
 import PasswordFormField from '@/common/form/passwordFormField'
 import Link from '@/components/link'
+import { routeMap } from '@/routes/utils'
 
 const LoginForm = () => {
   const methods = useForm<LoginFormShape>()
@@ -17,7 +18,7 @@ const LoginForm = () => {
         <EmailFormField<LoginFormShape> />
         <PasswordFormField<LoginFormShape> />
 
-        <Link to="_void">Forget your password?</Link>
+        <Link to={routeMap.resetPassword.path}>Forget your password?</Link>
 
         <SignInBtn />
       </FlexContainer>
