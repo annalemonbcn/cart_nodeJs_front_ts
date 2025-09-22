@@ -62,8 +62,6 @@ const useAddressForm = () => {
 
   const { mutate, isPending } = useAddressMutation(action)
 
-  const { addressId } = useParams()
-
   const onSubmit: SubmitHandler<AddressFormShape> = (data) => {
     const errorMessage = validateUserAddresses(data, userAddresses)
     if (errorMessage) {
@@ -71,15 +69,19 @@ const useAddressForm = () => {
       return
     }
 
+    const { id, ...rest } = data
+
     const convertedData: AddressInputDto = {
-      ...data,
+      ...rest,
       tags: !data.tags ? [] : data.tags?.split(',').map((tag) => tag.trim())
     }
 
-    mutate({ addressId, data: convertedData })
+    mutate({ addressId: id, data: convertedData })
 
     return false
   }
+
+  const updateAddress = () => handleSubmit(onSubmit)()
 
   const shouldDisableBtn = !isDirty || isPending
 
@@ -87,11 +89,11 @@ const useAddressForm = () => {
   const goToProfile = () => navigate(routeMap.profile.path)
 
   return {
-    isLoading: isLoading || isPending,
+    isLoading,
+    isPending,
     isError,
     methods,
-    handleSubmit,
-    onSubmit,
+    handleSubmit: updateAddress,
     shouldDisableBtn,
     goToProfile
   }

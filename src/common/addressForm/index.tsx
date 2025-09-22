@@ -7,7 +7,7 @@ import { useAddressForm } from './hooks'
 import Loader from '@/components/loader'
 
 const AddressForm = () => {
-  const { methods, handleSubmit, onSubmit, shouldDisableBtn, isLoading, goToProfile } = useAddressForm()
+  const { methods, handleSubmit, shouldDisableBtn, isLoading, isPending, goToProfile } = useAddressForm()
 
   if (isLoading) return <Loader />
 
@@ -16,8 +16,8 @@ const AddressForm = () => {
       {renderForm()}
 
       <FlexContainer alignItems="center" gap={tokens.space.xl}>
-        <Button fontWeight="medium" onClick={handleSubmit(onSubmit)} disabled={shouldDisableBtn}>
-          Save
+        <Button fontWeight="medium" onClick={handleSubmit} disabled={shouldDisableBtn}>
+          {isPending ? 'Saving...' : 'Save'}
         </Button>
         <Button variant="tertiary" onClick={goToProfile}>
           Cancel
