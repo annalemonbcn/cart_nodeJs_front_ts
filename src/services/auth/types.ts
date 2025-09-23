@@ -6,4 +6,19 @@ type SignUpApiResponse = components['responses']['AuthRegister']['content']['app
 type LoginType = components['schemas']['LoginUserInput']
 type LoginApiResponse = components['responses']['AuthLogin']['content']['application/json']
 
-export type { SignUpType, SignUpApiResponse, LoginType, LoginApiResponse }
+type ForgotPasswordType = components['schemas']['ForgotPasswordInput']
+type ForgotPasswordApiResponse = components['responses']['AuthForgotPassword']['content']['application/json']
+
+type ResetPasswordType = components['schemas']['ResetPasswordInput']
+type ResetPasswordApiResponse = components['responses']['AuthResetPassword']['content']['application/json']
+
+export type {
+  SignUpType,
+  SignUpApiResponse,
+  LoginType,
+  LoginApiResponse,
+  ForgotPasswordType,
+  ForgotPasswordApiResponse,
+  ResetPasswordType,
+  ResetPasswordApiResponse
+}

@@ -6,7 +6,7 @@ type RouteName =
   | 'cart'
   | 'login'
   | 'signUp'
-  | 'changePassword'
+  | 'forgotPassword'
   | 'resetPassword'
   | 'authSuccess'
   | 'myAccount'
@@ -49,9 +49,9 @@ const routesData: Omit<PageRoute, 'component'>[] = [
     title: 'Sign Up'
   },
   {
-    name: 'changePassword',
-    path: '/change-password',
-    title: 'Change Password'
+    name: 'forgotPassword',
+    path: '/forgot-password',
+    title: 'Forgot Password'
   },
   {
     name: 'resetPassword',

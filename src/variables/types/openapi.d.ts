@@ -421,6 +421,83 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/auth/forgot-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Request password reset
+         * @description Sends a password reset email to the user
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ForgotPasswordInput"];
+                };
+            };
+            responses: {
+                200: components["responses"]["AuthForgotPassword"];
+                400: components["responses"]["BadRequest"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/auth/reset-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Reset password
+         * @description Resets the user's password
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ResetPasswordInput"];
+                };
+            };
+            responses: {
+                200: components["responses"]["AuthResetPassword"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/user/me": {
         parameters: {
             query?: never;
@@ -494,6 +571,45 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/api/user/change-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Change user password
+         * @description Changes the authenticated user's password
+         */
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ChangePasswordInput"];
+                };
+            };
+            responses: {
+                200: components["responses"]["UserPasswordChange"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
         trace?: never;
     };
     "/api/user/soft": {
@@ -902,6 +1018,33 @@ export interface components {
              */
             password: string;
         };
+        ForgotPasswordInput: {
+            /**
+             * Format: email
+             * @example alice@example.com
+             */
+            email: string;
+        };
+        ResetPasswordInput: {
+            /**
+             * Format: jwt
+             * @description JWT token
+             * @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+             */
+            token: string;
+            /**
+             * Format: password
+             * @example StrongPass123!
+             */
+            password: string;
+        };
+        ChangePasswordInput: {
+            /**
+             * Format: password
+             * @example StrongPass123!
+             */
+            password: string;
+        };
         UserProfileInput: {
             /** @example Jane */
             firstName?: string;
@@ -1250,6 +1393,42 @@ export interface components {
                 "application/json": components["schemas"]["LoginResponse"];
             };
         };
+        /** @description Password reset email sent successfully */
+        AuthForgotPassword: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": {
+                    /** @example success */
+                    status?: string;
+                    /** @example 200 */
+                    code?: number;
+                    /** @example Password reset email sent successfully */
+                    message?: string;
+                    payload?: {
+                        /** @example https://example.com/reset-password?token=123456 */
+                        previewURL?: string;
+                    };
+                };
+            };
+        };
+        /** @description Password successfully reset */
+        AuthResetPassword: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": {
+                    /** @example success */
+                    status?: string;
+                    /** @example 200 */
+                    code?: number;
+                    /** @example Password successfully reset */
+                    message?: string;
+                };
+            };
+        };
         /** @description User profile found */
         UserProfileFound: {
             headers: {
@@ -1266,6 +1445,22 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["UserResponse"];
+            };
+        };
+        /** @description User password successfully changed */
+        UserPasswordChange: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": {
+                    /** @example success */
+                    status?: string;
+                    /** @example 200 */
+                    code?: number;
+                    /** @example Password successfully reset */
+                    message?: string;
+                };
             };
         };
         /** @description User profile successfully deleted */
