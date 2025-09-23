@@ -8,4 +8,15 @@ type UpdateUserResponseDto = components['responses']['UserProfileUpdated']['cont
 
 type DeleteUserResponseDto = components['responses']['UserProfileDeleted']['content']['application/json']
 
-export type { UserProfileDto, UserResponseDto, UpdateUserDto, UpdateUserResponseDto, DeleteUserResponseDto }
+type ChangePasswordType = components['schemas']['ChangePasswordInput']
+type ChangePasswordApiResponse = components['responses']['UserPasswordChange']['content']['application/json']
+
+export type {
+  UserProfileDto,
+  UserResponseDto,
+  UpdateUserDto,
+  UpdateUserResponseDto,
+  DeleteUserResponseDto,
+  ChangePasswordType,
+  ChangePasswordApiResponse
+}

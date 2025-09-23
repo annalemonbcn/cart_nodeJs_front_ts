@@ -5,6 +5,7 @@ import Link from '@/components/link'
 import { type SubmitHandler } from 'react-hook-form'
 import type { SignUpFormShape } from '../signUpForm/types'
 import { useRegisterUser } from '../../hooks'
+import { routeMap } from '@/routes/utils'
 
 const SignUpBtn = () => {
   const { handleSubmit } = useFormContext<SignUpFormShape>()
@@ -19,7 +20,7 @@ const SignUpBtn = () => {
         {isPending ? 'Registering...' : 'Sign Up'}
       </StyledButton>
       <Text size="s3" color="darkNeutral">
-        Already have an account? <Link to="/login">Log In</Link>
+        Already have an account? <Link to={routeMap.login.path}>Log In</Link>
       </Text>
     </>
   )

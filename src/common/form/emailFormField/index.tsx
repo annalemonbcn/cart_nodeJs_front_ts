@@ -1,6 +1,7 @@
 import type { FormFieldVariant } from '@/components/formField/types'
 import { type FieldValues, type Path } from 'react-hook-form'
 import BaseFormField from '../baseFormField'
+import { regex } from '@/utils/constants'
 
 const EmailFormField = <T extends FieldValues>(props: {
   isRequired?: boolean
@@ -19,7 +20,7 @@ const EmailFormField = <T extends FieldValues>(props: {
       {...props}
       validationRules={{
         pattern: {
-          value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+          value: regex.emailRegex,
           message: 'Enter a valid email address'
         }
       }}

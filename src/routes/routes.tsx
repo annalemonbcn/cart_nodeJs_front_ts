@@ -2,13 +2,15 @@ import type { PageRoute } from './types'
 import { HomePage } from '@/pages/home'
 import { LoginPage } from '@/pages/loginPage'
 import { SignUpPage } from '@/pages/signUp'
-import { ChangePasswordPage } from '@/pages/changePasswordPage'
+import { ResetPasswordPage } from '@/pages/resetPassword'
 import { AuthSuccess } from '@/pages/authSuccess'
 import { MyAccountPage } from '@/pages/myAccount'
 import { ProfilePage } from '@/pages/profile'
 import { routesData, type RouteName } from './routesData'
 import { AddressAdd } from '@/pages/addressAdd'
 import { AddressEdit } from '@/pages/addressEdit'
+import { SignOutPage } from '@/pages/signOut'
+import { ForgotPasswordPage } from '@/pages/forgotPassword'
 
 const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   home: <HomePage />,
@@ -16,13 +18,14 @@ const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   cart: <div>Cart</div>,
   login: <LoginPage />,
   signUp: <SignUpPage />,
-  changePassword: <ChangePasswordPage />,
+  forgotPassword: <ForgotPasswordPage />,
+  resetPassword: <ResetPasswordPage />,
   authSuccess: <AuthSuccess />,
   myAccount: <MyAccountPage />,
   profile: <ProfilePage />,
   wishlist: <div>Wishlist</div>,
   orders: <div>Orders</div>,
-  signOut: <div>Sign Out</div>,
+  signOut: <SignOutPage />,
   address: <div>Not to be rendered</div>,
   addressAdd: <AddressAdd />,
   addressEdit: <AddressEdit />
