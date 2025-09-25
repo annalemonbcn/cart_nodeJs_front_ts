@@ -1,19 +1,20 @@
 const auth = {
-  registerUser: '/auth/register',
-  loginUser: '/auth/login',
-  forgotPassword: '/auth/forgot-password',
-  resetPassword: '/auth/reset-password'
+  registerUser: () => '/auth/register',
+  loginUser: () => '/auth/login',
+  forgotPassword: () => '/auth/forgot-password',
+  resetPassword: () => '/auth/reset-password'
 } as const
 
 const user = {
-  getUserProfile: '/user/me',
-  changePassword: '/user/change-password',
-  deleteUser: '/user/soft'
+  getUserProfile: () => '/user/me',
+  changePassword: () => '/user/change-password',
+  updateUser: () => '/user',
+  deleteUser: () => '/user/soft'
 } as const
 
 const address = {
-  getAddresses: (id: string) => `/address/${id}`,
-  addAddress: '/address',
+  getAddressById: (id: string) => `/address/${id}`,
+  addAddress: () => '/address',
   updateAddress: (id: string) => `/address/${id}`,
   updateIsDefault: (id: string) => `/address/${id}/default`,
   deleteAddress: (id: string) => `/address/${id}`

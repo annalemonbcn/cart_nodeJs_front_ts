@@ -1,22 +1,25 @@
 import type { PageRoute } from './types'
 
-type RouteName =
-  | 'home'
-  | 'products'
-  | 'cart'
-  | 'login'
-  | 'signUp'
-  | 'forgotPassword'
-  | 'resetPassword'
-  | 'authSuccess'
-  | 'myAccount'
-  | 'profile'
-  | 'wishlist'
-  | 'orders'
-  | 'signOut'
-  | 'address'
-  | 'addressAdd'
-  | 'addressEdit'
+const routeNames = [
+  'home',
+  'products',
+  'cart',
+  'login',
+  'signUp',
+  'forgotPassword',
+  'resetPassword',
+  'authSuccess',
+  'myAccount',
+  'profile',
+  'wishlist',
+  'orders',
+  'signOut',
+  'address',
+  'addressAdd',
+  'addressEdit'
+] as const
+
+type RouteName = (typeof routeNames)[number]
 
 /**
  * @description Routes data
@@ -110,5 +113,5 @@ const routesData: Omit<PageRoute, 'component'>[] = [
   }
 ]
 
-export { routesData }
+export { routeNames, routesData }
 export type { RouteName }

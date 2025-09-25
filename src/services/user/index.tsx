@@ -14,7 +14,7 @@ const COMMON_KEYS = ['user']
 const getUserInfo = () => ({
   queryKey: [...COMMON_KEYS, 'getUserInfo'],
   queryFn: async (): Promise<UserResponseDto> => {
-    const response = await apiClient.get(API_ROUTES.user.getUserProfile)
+    const response = await apiClient.get(API_ROUTES.user.getUserProfile())
     return response.data
   }
 })
@@ -22,7 +22,7 @@ const getUserInfo = () => ({
 const updateUserInfo = () => ({
   mutationKey: [...COMMON_KEYS, 'updateUserInfo'],
   mutationFn: async (data: UpdateUserDto): Promise<UpdateUserResponseDto> => {
-    const response = await apiClient.put(API_ROUTES.user.getUserProfile, data)
+    const response = await apiClient.put(API_ROUTES.user.updateUser(), data)
     return response.data
   }
 })
@@ -30,7 +30,7 @@ const updateUserInfo = () => ({
 const changePassword = () => ({
   mutationKey: [...COMMON_KEYS, 'changePassword'],
   mutationFn: async (data: ChangePasswordType): Promise<ChangePasswordApiResponse> => {
-    const response = await apiClient.patch(API_ROUTES.user.changePassword, data)
+    const response = await apiClient.patch(API_ROUTES.user.changePassword(), data)
     return response.data
   }
 })
@@ -38,7 +38,7 @@ const changePassword = () => ({
 const deleteUser = () => ({
   mutationKey: [...COMMON_KEYS, 'deleteUser'],
   mutationFn: async (): Promise<DeleteUserResponseDto> => {
-    const response = await apiClient.delete(API_ROUTES.user.deleteUser)
+    const response = await apiClient.delete(API_ROUTES.user.deleteUser())
     return response.data
   }
 })

@@ -18,7 +18,7 @@ const LoginForm = () => {
         <EmailFormField<LoginFormShape> />
         <PasswordFormField<LoginFormShape> />
 
-        <Link to={routeMap.resetPassword.path}>Forget your password?</Link>
+        <Link to={routeMap.forgotPassword.path}>Forget your password?</Link>
 
         <SignInBtn />
       </FlexContainer>
