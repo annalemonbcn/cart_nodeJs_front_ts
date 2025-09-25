@@ -24,7 +24,7 @@ const HomePage = () => {
   }
 
   return (
-    <BaseLayout showBreadcrumb={false}>
+    <BaseLayout showBreadcrumb={false} isHome>
       <FlexContainer flexDirection="column" gap={tokens.space.xl4}>
         <Banner {...bannerProps} />
         <Content flexDirection="column" gap={tokens.space.xl4}>

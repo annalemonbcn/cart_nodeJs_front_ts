@@ -25,4 +25,10 @@ const useGetUserId = () => {
   return data?.id || ''
 }
 
-export { useLoadUser, useGetUserId }
+const useGetUserCartId = () => {
+  const { data } = useLoadUser()
+
+  return data?.cart || ''
+}
+
+export { useLoadUser, useGetUserId, useGetUserCartId }

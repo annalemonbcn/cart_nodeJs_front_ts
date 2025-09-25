@@ -1091,6 +1091,11 @@ export interface components {
             /** @example 666666666 */
             phoneNumber?: string;
             addresses: components["schemas"]["AddressOutput"][];
+            /**
+             * @description ObjectId of the cart
+             * @example 64f1a2cfe2a83c0012345679
+             */
+            cart?: string;
         };
         UserInternalOutput: {
             /**

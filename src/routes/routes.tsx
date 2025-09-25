@@ -11,11 +11,12 @@ import { AddressAdd } from '@/pages/addressAdd'
 import { AddressEdit } from '@/pages/addressEdit'
 import { SignOutPage } from '@/pages/signOut'
 import { ForgotPasswordPage } from '@/pages/forgotPassword'
+import { Cart } from '@/pages/cart'
 
 const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   home: <HomePage />,
   products: <div>Products</div>,
-  cart: <div>Cart</div>,
+  cart: <Cart />,
   login: <LoginPage />,
   signUp: <SignUpPage />,
   forgotPassword: <ForgotPasswordPage />,
