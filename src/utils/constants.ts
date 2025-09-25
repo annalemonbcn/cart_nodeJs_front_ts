@@ -1,3 +1,5 @@
+import { API_ROUTES } from '@/services/constants'
+
 type SocialPlatforms = 'google' | 'github'
 
 type SocialPlatform = {
@@ -6,11 +8,12 @@ type SocialPlatform = {
   link: string
 }
 
+// TODO: implement github login or delete
 const socialPlatforms: SocialPlatform[] = [
   {
     name: 'google',
     icon: '/icons/google.svg',
-    link: 'http://localhost:8080/api/auth/google'
+    link: `http://localhost:8080/api/${API_ROUTES.auth.googleLogin()}`
   },
   {
     name: 'github',

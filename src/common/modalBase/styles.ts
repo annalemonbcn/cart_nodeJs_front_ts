@@ -15,11 +15,10 @@ const StyledCloseIcon = styled(FlexContainer)`
   cursor: pointer;
 `
 
-// TODO: check this
 const StyledModalBody = styled(FlexContainer)`
   gap: ${tokens.space.md};
   padding: ${tokens.space.md} 0px;
-  height: ${({ height }) => height || '100%'};
+  height: 100%;
   overflow-y: auto;
 `
 

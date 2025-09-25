@@ -2,7 +2,8 @@ const auth = {
   registerUser: () => '/auth/register',
   loginUser: () => '/auth/login',
   forgotPassword: () => '/auth/forgot-password',
-  resetPassword: () => '/auth/reset-password'
+  resetPassword: () => '/auth/reset-password',
+  googleLogin: () => 'auth/google'
 } as const
 
 const user = {
