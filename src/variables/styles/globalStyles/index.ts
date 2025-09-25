@@ -34,4 +34,7 @@ const GlobalStyles = createGlobalStyle`
   }
 `
 
+const MAX_VIEW_WIDTH = '1440px'
+
 export default GlobalStyles
+export { MAX_VIEW_WIDTH }

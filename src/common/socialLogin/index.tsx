@@ -6,14 +6,16 @@ import { tokens } from '@/variables/styles'
 import { StyledIcon } from './styles'
 import { capitalize } from '@/utils/string'
 import Text from '@/components/text'
+import Link from '@/components/link'
 
-// TODO: make this link to be opened in a popup
 const SocialBtn = ({ socialPlatform: { icon, link, name } }: ISocialBtnProps) => (
-  <Button variant="secondary" onClick={() => window.open(link, '_blank')}>
-    <FlexContainer justifyContent="center" alignItems="center" gap={tokens.space.sm}>
-      <StyledIcon src={icon} alt={`${name}-icon`} />
-      <Text as="span">Continue with {capitalize(name)}</Text>
-    </FlexContainer>
+  <Button variant="secondary">
+    <Link to={link} underline={false}>
+      <FlexContainer justifyContent="center" alignItems="center" gap={tokens.space.sm}>
+        <StyledIcon src={icon} alt={`${name}-icon`} />
+        <Text as="span">Continue with {capitalize(name)}</Text>
+      </FlexContainer>
+    </Link>
   </Button>
 )
 

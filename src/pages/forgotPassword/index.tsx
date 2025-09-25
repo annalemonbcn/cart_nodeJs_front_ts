@@ -1,10 +1,10 @@
 import EmailFormField from '@/common/form/emailFormField'
 import { AuthLayout } from '@/common/layouts/authLayout'
-import CustomForm from '@/components/customForm'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { StyledButton } from './styles'
 import type { ForgotPasswordType } from '@/services/auth/types'
 import { useForgotPassword } from './hooks'
+import { StandardForm } from '@/components/customForm/standardForm'
+import { StyledFormButton } from '@/components/customForm/standardForm/styles'
 
 type ForgotPasswordFormShape = ForgotPasswordType
 
@@ -22,13 +22,13 @@ const ForgotPasswordPage = () => {
       headerText="Forgot Your Password?"
       headerDescription="Enter your email address and we'll send you a link to reset your password."
     >
-      <CustomForm methods={methods}>
+      <StandardForm methods={methods}>
         <EmailFormField isRequired />
 
-        <StyledButton variant="primary" onClick={handleSubmit(onSubmit)} disabled={isPending}>
+        <StyledFormButton variant="primary" onClick={handleSubmit(onSubmit)} disabled={isPending}>
           Send
-        </StyledButton>
-      </CustomForm>
+        </StyledFormButton>
+      </StandardForm>
     </AuthLayout>
   )
 }

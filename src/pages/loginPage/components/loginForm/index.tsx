@@ -1,28 +1,23 @@
 import { useForm } from 'react-hook-form'
 import type { LoginFormShape } from './types'
-import CustomForm from '@/components/customForm'
-import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
 import { SignInBtn } from '../signInBtn'
 import EmailFormField from '@/common/form/emailFormField'
-import PasswordFormField from '@/common/form/passwordFormField'
 import Link from '@/components/link'
 import { routeMap } from '@/routes/utils'
+import { StandardForm } from '@/components/customForm/standardForm'
+import { PasswordFormField } from '@/common/form/passwordFormField'
 
 const LoginForm = () => {
   const methods = useForm<LoginFormShape>()
 
   return (
-    <CustomForm methods={methods}>
-      <FlexContainer flexDirection="column" gap={tokens.space.md}>
-        <EmailFormField<LoginFormShape> />
-        <PasswordFormField<LoginFormShape> />
+    <StandardForm methods={methods}>
+      <EmailFormField<LoginFormShape> />
+      <PasswordFormField<LoginFormShape> label="Password" isRequired variant="primary" />
 
-        <Link to={routeMap.forgotPassword.path}>Forget your password?</Link>
-
-        <SignInBtn />
-      </FlexContainer>
-    </CustomForm>
+      <Link to={routeMap.forgotPassword.path}>Forget your password?</Link>
+      <SignInBtn />
+    </StandardForm>
   )
 }
 
