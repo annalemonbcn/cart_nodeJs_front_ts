@@ -1,10 +1,10 @@
 import type { UserProfileDto } from '@/services/user/types'
 import type { RegisterOptions } from 'react-hook-form'
 
-type ProfileFormType = Pick<UserProfileDto, 'firstName' | 'lastName' | 'email' | 'phoneNumber'>
+type ProfileDetailsFormType = Pick<UserProfileDto, 'firstName' | 'lastName' | 'email' | 'phoneNumber'>
 
 type FormField = {
-  name: keyof ProfileFormType
+  name: keyof ProfileDetailsFormType
   label: string
   component: React.FC<any>
   isRequired?: boolean
@@ -12,4 +12,4 @@ type FormField = {
   validationRules?: RegisterOptions
 }
 
-export type { ProfileFormType, FormField }
+export type { ProfileDetailsFormType, FormField }

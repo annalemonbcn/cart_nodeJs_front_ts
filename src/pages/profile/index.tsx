@@ -3,7 +3,7 @@ import { MyAccountOutletLayout } from '../../common/layouts/myAccountOutletLayou
 import { ChangePassword } from './components/changePassword'
 import { tokens } from '@/variables/styles'
 import { AddressSection } from './components/addressSection'
-import { ContactDetails } from './components/contactDetails'
+import { ProfileDetails } from './components/profileDetails'
 import { DeleteAccount } from './components/deleteAccount'
 import { MultiModalProvider } from '@/hooks/useMultiModal/provider'
 
@@ -11,7 +11,7 @@ const ProfilePage = () => (
   <MyAccountOutletLayout title="My Info">
     <MultiModalProvider>
       <FlexContainer flexDirection="column" gap={tokens.space.xl}>
-        <ContactDetails />
+        <ProfileDetails />
         <ChangePassword />
         <AddressSection />
         <DeleteAccount />

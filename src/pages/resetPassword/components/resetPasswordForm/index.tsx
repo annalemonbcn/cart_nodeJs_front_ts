@@ -1,17 +1,14 @@
-import { NewPasswordFormField } from '@/common/form/passwordFormField'
-import CustomForm from '@/components/customForm'
-import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
+import { PasswordFormField } from '@/common/form/passwordFormField'
 import { useForm } from 'react-hook-form'
-import { StyledButton } from './styles'
 import type { IResetPasswordFormProps, ResetPasswordFormShape } from './types'
 import type { SubmitHandler } from 'react-hook-form'
 import { useGetValidationRules } from './utils'
 import { useChangePassword, useResetPassword } from '../../hooks'
 import { useSearchParams } from 'react-router-dom'
 import type { ResetPasswordType } from '@/services/auth/types'
+import { StyledFormButton } from '@/components/customForm/standardForm/styles'
+import { StandardForm } from '@/components/customForm/standardForm'
 
-// TODO: refactor ?
 const ResetPasswordForm = ({ mode }: IResetPasswordFormProps) => {
   const methods = useForm<ResetPasswordFormShape>()
   const { handleSubmit, watch } = methods
@@ -30,32 +27,24 @@ const ResetPasswordForm = ({ mode }: IResetPasswordFormProps) => {
     }
   }
 
-  const { passwordRule, confirmPasswordRule } = useGetValidationRules(watch)
+  const { confirmPasswordRule } = useGetValidationRules(watch)
 
   const shouldDisable = !methods.formState.isValid || isResetPending || isChangePending
 
   return (
-    <CustomForm methods={methods}>
-      <FlexContainer flexDirection="column" gap={tokens.space.md}>
-        <NewPasswordFormField<ResetPasswordFormShape>
-          label="Password"
-          inputName="password"
-          isRequired
-          validationRules={passwordRule}
-          variant="primary"
-        />
-        <NewPasswordFormField<ResetPasswordFormShape>
-          label="Confirm Password"
-          inputName="confirmPassword"
-          isRequired
-          validationRules={confirmPasswordRule}
-        />
+    <StandardForm methods={methods}>
+      <PasswordFormField<ResetPasswordFormShape> label="Password" isRequired variant="primary" />
+      <PasswordFormField<ResetPasswordFormShape>
+        label="Confirm Password"
+        inputName="confirmPassword"
+        isRequired
+        validationRules={confirmPasswordRule}
+      />
 
-        <StyledButton variant="primary" onClick={handleSubmit(onSubmit)} disabled={shouldDisable}>
-          Reset Password
-        </StyledButton>
-      </FlexContainer>
-    </CustomForm>
+      <StyledFormButton variant="primary" onClick={handleSubmit(onSubmit)} disabled={shouldDisable}>
+        Reset Password
+      </StyledFormButton>
+    </StandardForm>
   )
 }
 

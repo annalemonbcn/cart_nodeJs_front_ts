@@ -1,5 +1,5 @@
 import { useLoadUser } from '@/hooks/useLoadUser'
-import type { ProfileFormType } from '../components/contactDetailsForm/types'
+import type { ProfileDetailsFormType } from '../components/profileDetailsForm/types'
 import { useUserServices } from '@/services/user'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
@@ -14,7 +14,7 @@ const useGetDefaultValues = () => {
 
   return {
     isLoading,
-    data: !data ? ({} as ProfileFormType) : data,
+    data: !data ? ({} as ProfileDetailsFormType) : data,
     isError,
     refetch
   }
@@ -38,21 +38,21 @@ const useUpdateUser = () => {
   return { mutate, isPending }
 }
 
-const useContactDetailsFrom = () => {
+const useProfileDetailsFrom = () => {
   const { isLoading, data: defaultValues, isError, refetch } = useGetDefaultValues()
   const { mutate, isPending } = useUpdateUser()
 
   const noData = isError || !defaultValues || Object.keys(defaultValues).length === 0
 
-  const methods = useForm<ProfileFormType>({ values: defaultValues })
+  const methods = useForm<ProfileDetailsFormType>({ values: defaultValues })
 
   const {
     handleSubmit,
     formState: { isDirty, dirtyFields }
   } = methods
 
-  const buildPayload = (data: ProfileFormType): UpdateUserDto => {
-    const updatedFields = Object.keys(dirtyFields) as (keyof ProfileFormType)[]
+  const buildPayload = (data: ProfileDetailsFormType): UpdateUserDto => {
+    const updatedFields = Object.keys(dirtyFields) as (keyof ProfileDetailsFormType)[]
 
     return updatedFields.reduce<UpdateUserDto>(
       (acc, field) => ({
@@ -63,7 +63,7 @@ const useContactDetailsFrom = () => {
     )
   }
 
-  const onSubmit: SubmitHandler<ProfileFormType> = (data) => mutate(buildPayload(data))
+  const onSubmit: SubmitHandler<ProfileDetailsFormType> = (data) => mutate(buildPayload(data))
 
   const updateUserInfo = handleSubmit(onSubmit)
 
@@ -80,4 +80,4 @@ const useContactDetailsFrom = () => {
   }
 }
 
-export { useContactDetailsFrom }
+export { useProfileDetailsFrom }

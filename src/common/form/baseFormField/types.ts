@@ -11,7 +11,8 @@ type BaseFormFieldProps<T extends FieldValues> = {
   disabled?: boolean
   inputRef?: React.RefObject<HTMLInputElement>
   showIcon?: boolean
-  validationRules?: RegisterOptions
+  validationRules?: RegisterOptions<T, Path<T>>
+
   placeholderText?: string
 }
 
