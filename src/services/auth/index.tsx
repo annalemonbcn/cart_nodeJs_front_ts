@@ -16,7 +16,7 @@ const COMMON_KEYS = ['auth']
 const registerUser = () => ({
   mutationKey: [...COMMON_KEYS, 'registerUser'],
   mutationFn: async (data: SignUpType): Promise<SignUpApiResponse> => {
-    const response = await apiClient.post(API_ROUTES.auth.registerUser, data)
+    const response = await apiClient.post(API_ROUTES.auth.registerUser(), data)
     return response.data
   }
 })
@@ -24,7 +24,7 @@ const registerUser = () => ({
 const loginUser = () => ({
   mutationKey: [...COMMON_KEYS, 'loginUser'],
   mutationFn: async (data: LoginType): Promise<LoginApiResponse> => {
-    const response = await apiClient.post(API_ROUTES.auth.loginUser, data)
+    const response = await apiClient.post(API_ROUTES.auth.loginUser(), data)
     return response.data
   }
 })
@@ -32,7 +32,7 @@ const loginUser = () => ({
 const forgotPassword = () => ({
   mutationKey: [...COMMON_KEYS, 'forgotPassword'],
   mutationFn: async (data: ForgotPasswordType): Promise<ForgotPasswordApiResponse> => {
-    const response = await apiClient.post(API_ROUTES.auth.forgotPassword, data)
+    const response = await apiClient.post(API_ROUTES.auth.forgotPassword(), data)
     return response.data
   }
 })
@@ -40,7 +40,7 @@ const forgotPassword = () => ({
 const resetPassword = () => ({
   mutationKey: [...COMMON_KEYS, 'resetPassword'],
   mutationFn: async (data: ResetPasswordType): Promise<ResetPasswordApiResponse> => {
-    const response = await apiClient.post(API_ROUTES.auth.resetPassword, data)
+    const response = await apiClient.post(API_ROUTES.auth.resetPassword(), data)
     return response.data
   }
 })
