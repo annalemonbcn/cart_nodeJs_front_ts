@@ -2,7 +2,8 @@ import type { PageRoute } from './types'
 
 const routeNames = [
   'home',
-  'products',
+  'men',
+  'women',
   'cart',
   'login',
   'signUp',
@@ -32,9 +33,14 @@ const routesData: Omit<PageRoute, 'component'>[] = [
     title: 'Home'
   },
   {
-    name: 'products',
-    path: '/products',
-    title: 'Products'
+    name: 'men',
+    path: '/shop/men',
+    title: 'Men'
+  },
+  {
+    name: 'women',
+    path: '/shop/women',
+    title: 'Women'
   },
   {
     name: 'cart',

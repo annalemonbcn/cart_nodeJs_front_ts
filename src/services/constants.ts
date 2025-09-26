@@ -21,10 +21,15 @@ const address = {
   deleteAddress: (id: string) => `/address/${id}`
 } as const
 
+const cart = {
+  getCartById: (id: string) => `/carts/${id}`,
+}
+
 const API_ROUTES = {
   auth,
   user,
-  address
+  address,
+  cart
 } as const
 
 export { API_ROUTES }

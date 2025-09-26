@@ -38,7 +38,9 @@ const fontSize = {
   s5: '1.25rem', // 20px
   s6: '1.5rem', // 24px
   s7: '2.125rem', // 34px
-  s8: '2.5rem' // 40px
+  s8: '2.5rem', // 40px
+  s9: '3rem', // 48px
+  s10: '4rem', // 64px
 }
 
 const fontWeight = {

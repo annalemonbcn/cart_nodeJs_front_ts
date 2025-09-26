@@ -1,6 +1,7 @@
 import { AppContainer, MainContainer } from './styles'
 import { Toaster } from 'sonner'
 import AppRouter from './routes/Router'
+import Footer from './common/footer'
 
 const App = () => (
   <AppContainer>
@@ -8,6 +9,7 @@ const App = () => (
     <MainContainer>
       <AppRouter />
     </MainContainer>
+    <Footer />
   </AppContainer>
 )
 

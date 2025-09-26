@@ -1,21 +1,18 @@
-import type { NavLink } from "./types";
+import { routeMap } from '@/routes/utils'
+import type { NavLink } from './types'
 
 const navLinks: NavLink[] = [
   {
-    label: 'Shop',
-    path: '/shop'
+    label: routeMap.home.title,
+    path: routeMap.home.path
   },
   {
-    label: 'Men',
-    path: '/men'
+    label: routeMap.men.title,
+    path: routeMap.men.path
   },
   {
-    label: 'Women',
-    path: '/women'
-  },
-  {
-    label: 'Kids',
-    path: '/kids'
+    label: routeMap.women.title,
+    path: routeMap.women.path
   }
 ]
 
