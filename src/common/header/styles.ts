@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { colors, tokens } from '@/variables/styles'
+import { media } from '@/theme'
 
 const StyledHeader = styled.header`
   grid-area: header;
@@ -13,6 +14,26 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   gap: ${tokens.space.xl2};
+
+  ${media.mobile(`display: none;`)}
 `
 
-export { StyledHeader }
+const StyledMobileHeader = styled.header`
+  grid-area: header;
+  background-color: ${colors.white};
+  padding: ${tokens.space.md} ${tokens.space.lg};
+
+  display: flex;
+  align-items: center;
+
+  ${media.tablet(`display: none;`)}
+  ${media.desktop(`display: none;`)}
+`
+
+const Child = styled.div<{ align?: 'flex-start' | 'center' | 'flex-end' }>`
+  flex: 1 0 0;
+  display: flex;
+  justify-content: ${({ align }) => align || 'flex-start'};
+`
+
+export { StyledHeader, StyledMobileHeader, Child }

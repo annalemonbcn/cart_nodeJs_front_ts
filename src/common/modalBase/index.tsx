@@ -5,6 +5,7 @@ import type { JSX } from 'react'
 import { getChildrenDisplayName, validateChildren } from './utils'
 import Modal from 'react-modal'
 import CloseIcon from '@/icons/close.svg?react'
+import { colors } from '@/variables/styles'
 
 const Header = ({ title, description, ...rest }: HeaderProps) => (
   <StyledHeader {...rest}>
@@ -52,7 +53,7 @@ const ModalBase = ({ handleClose, isOpen, children, width }: IModalBaseProps) =>
     <Modal isOpen={isOpen} onRequestClose={handleClose} style={defaultStyles}>
       <StyledModalWrapper width={width}>
         <StyledCloseIcon justifyContent="flex-end" alignItems="center" onClick={handleClose}>
-          <CloseIcon />
+          <CloseIcon color={colors.darkNeutral} />
         </StyledCloseIcon>
         {header}
         {body}

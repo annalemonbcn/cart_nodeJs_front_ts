@@ -1,9 +1,9 @@
 import { useAuthContext } from '@/auth/provider/useAuthContext'
-import Button from '@/components/button'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import { useNavigate } from 'react-router-dom'
 import { routeMap } from '@/routes/utils'
+import { StyledButton } from './styles'
 
 const Buttons = () => {
   const { isAuthenticated, logout } = useAuthContext()
@@ -15,15 +15,15 @@ const Buttons = () => {
   return (
     <FlexContainer justifyContent="flex-end" gap={tokens.space.md}>
       {!isAuthenticated && (
-        <Button variant="primary" onClick={goToLogin}>
+        <StyledButton variant="primary" onClick={goToLogin}>
           Login
-        </Button>
+        </StyledButton>
       )}
 
       {isAuthenticated && (
-        <Button variant="secondary" onClick={logout}>
+        <StyledButton variant="secondary" onClick={logout}>
           Logout
-        </Button>
+        </StyledButton>
       )}
     </FlexContainer>
   )
