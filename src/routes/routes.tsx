@@ -12,10 +12,15 @@ import { AddressEdit } from '@/pages/addressEdit'
 import { SignOutPage } from '@/pages/signOut'
 import { ForgotPasswordPage } from '@/pages/forgotPassword'
 import { Cart } from '@/pages/cart'
+import { Wishlist } from '@/pages/wishlist'
+import { Orders } from '@/pages/orders'
+import { MenPage } from '@/pages/men'
+import { WomenPage } from '@/pages/women'
 
 const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   home: <HomePage />,
-  products: <div>Products</div>,
+  men: <MenPage />,
+  women: <WomenPage />,
   cart: <Cart />,
   login: <LoginPage />,
   signUp: <SignUpPage />,
@@ -24,8 +29,8 @@ const routeComponentMap: Record<RouteName, React.JSX.Element> = {
   authSuccess: <AuthSuccess />,
   myAccount: <MyAccountPage />,
   profile: <ProfilePage />,
-  wishlist: <div>Wishlist</div>,
-  orders: <div>Orders</div>,
+  wishlist: <Wishlist />,
+  orders: <Orders />,
   signOut: <SignOutPage />,
   address: <div>Not to be rendered</div>,
   addressAdd: <AddressAdd />,

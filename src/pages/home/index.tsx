@@ -13,13 +13,18 @@ const HomePage = () => {
   const navigate = useNavigate()
 
   const bannerProps: IBannerProps = {
-    imgSrc: '/images/home_banner.jpg',
-    h1: 'Summer Value Pack',
-    description: 'Go to your profile to start the demo.\nThis is a sample home page.',
-    topText: 'T-Shirt / Tops',
+    content: {
+      imgSrc: '/images/home_banner.jpg',
+      h1: 'Summer Value Pack',
+      description: 'Go to your profile to start the demo.\nThis is a sample home page.',
+      topText: 'T-Shirt / Tops'
+    },
     button: {
       label: 'Go to Profile',
       onClick: () => navigate(routeMap.profile.path)
+    },
+    bannerProps: {
+      textColor: 'darkNeutral'
     }
   }
 

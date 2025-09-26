@@ -1,14 +1,26 @@
+import type { TextColor } from '@/components/text/types'
+
 type ButtonProps = {
   label: string
   onClick: () => void
 }
 
-interface IBannerProps {
+type BannerContent = {
   imgSrc: string
   h1: string
   description: string
   topText?: string
-  button: ButtonProps
 }
 
-export type { IBannerProps }
+type BannerProps = {
+  textColor?: TextColor
+  align?: 'left' | 'right'
+}
+
+interface IBannerProps {
+  content: BannerContent
+  button: ButtonProps
+  bannerProps?: BannerProps
+}
+
+export type { IBannerProps, BannerProps }
