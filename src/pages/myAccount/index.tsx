@@ -16,7 +16,7 @@ const MyAccountPage = () => {
   if (location.pathname === routeMap.myAccount.path) return <Navigate to={routeMap.profile.path} replace />
 
   return (
-    <BaseLayout isMyAccount>
+    <BaseLayout>
       <FlexContainer gap={tokens.space.xl3}>
         <SideMenu />
         <Outlet />

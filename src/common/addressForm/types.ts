@@ -20,7 +20,7 @@ type FormField = {
   validationRules?: RegisterOptions
 }
 
-type AddressFormShape = Omit<AddressInputDto, 'tags'> & {
+type AddressFormShape = Omit<AddressInputDto, 'tags' | 'deletedAt'> & {
   id?: string
   tags?: string
 }

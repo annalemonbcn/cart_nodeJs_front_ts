@@ -4,7 +4,7 @@ import type { AddressFormShape } from './types'
 const maxAddresses = 5
 
 const isDefaultUnique = (data: AddressFormShape, addresses: UserAddressDto[]) =>
-  data.isDefault && addresses.filter((addr) => addr._id !== data.id).some((addr) => addr.isDefault)
+  data.isDefault && addresses.filter((addr) => addr.id !== data.id).some((addr) => addr.isDefault)
     ? 'You already have a default address'
     : null
 

@@ -3,7 +3,7 @@ const auth = {
   loginUser: () => '/auth/login',
   forgotPassword: () => '/auth/forgot-password',
   resetPassword: () => '/auth/reset-password',
-  googleLogin: () => 'auth/google'
+  googleLogin: () => '/auth/google'
 } as const
 
 const user = {

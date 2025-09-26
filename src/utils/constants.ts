@@ -8,12 +8,14 @@ type SocialPlatform = {
   link: string
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 // TODO: implement github login or delete
 const socialPlatforms: SocialPlatform[] = [
   {
     name: 'google',
     icon: '/icons/google.svg',
-    link: `http://localhost:8080/api/${API_ROUTES.auth.googleLogin()}`
+    link: `${API_BASE_URL}${API_ROUTES.auth.googleLogin()}`
   },
   {
     name: 'github',
