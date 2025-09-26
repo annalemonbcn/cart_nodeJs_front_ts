@@ -1,6 +1,6 @@
 import { AppContainer, MainContainer } from './styles'
 import { Toaster } from 'sonner'
-import AppRouter from './routes/Router'
+import AppRouter from './routes/router.tsx'
 import Footer from './common/footer'
 
 const App = () => (
