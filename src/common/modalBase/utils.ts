@@ -1,15 +1,13 @@
 import { Children, isValidElement, type ReactNode } from 'react'
 
-const validateChildren = (keys: string[], children: ReactNode | ReactNode[], componentName: string) => {
+const validateChildren = (allowed: string[], children: ReactNode | ReactNode[], componentName: string) => {
   const notMatched = Children.toArray(children)
     .map((child) => {
       if (!isValidElement(child)) return typeof child
-
-      if (typeof child.type !== 'function') return child.type
-
-      return child.type.name
+      const type = child.type as any
+      return type.displayName || type.name || typeof child
     })
-    .filter((child) => !keys.includes(child))
+    .filter((childName) => !allowed.includes(childName))
 
   if (notMatched.length > 0) {
     throw new Error(
