@@ -1,8 +1,8 @@
 import { tokens } from '@/variables/styles'
-import { StyledMenuItem } from './styles'
+import { StyledMenuItem } from '../styles'
 import type { VerticalMenuOption } from './types'
-import Text from '../text'
-import Link from '../link'
+import Link from '@/components/link'
+import Text from '@/components/text'
 
 const MenuItem = ({ icon: Icon, label, path, isActive }: VerticalMenuOption) => (
   <Link to={path} underline={false}>

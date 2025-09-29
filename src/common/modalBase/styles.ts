@@ -13,6 +13,7 @@ const StyledHeader = styled.div<Partial<HeaderProps>>`
 
 const StyledCloseIcon = styled(FlexContainer)`
   cursor: pointer;
+  align-self: flex-end;
 `
 
 const StyledModalBody = styled(FlexContainer)`

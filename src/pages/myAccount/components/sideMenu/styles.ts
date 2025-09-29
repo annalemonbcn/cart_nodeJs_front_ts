@@ -1,7 +1,13 @@
 import FlexContainer from '@/components/flexContainer'
-import styled from 'styled-components'
+import { media } from '@/theme'
+import styled, { css } from 'styled-components'
 
 const StyledSideMenu = styled(FlexContainer)`
+  ${media.mobile(
+    css`
+      width: 100%;
+    `
+  )}
   width: 295px;
 `
 

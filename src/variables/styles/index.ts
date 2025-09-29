@@ -40,7 +40,7 @@ const fontSize = {
   s7: '2.125rem', // 34px
   s8: '2.5rem', // 40px
   s9: '3rem', // 48px
-  s10: '4rem', // 64px
+  s10: '4rem' // 64px
 }
 
 const fontWeight = {
@@ -65,6 +65,10 @@ const borderRadius = {
   full: '100%'
 }
 
+const shadows = {
+  basic: 'rgba(45, 45, 45, 0.12) 0px 2px 5px 0px'
+}
+
 const tokens = {
   font: {
     size: fontSize,
@@ -74,7 +78,8 @@ const tokens = {
     size: borderSize,
     radius: borderRadius
   },
-  space
+  space,
+  shadows
 }
 
 export { colors, dangerShades, tokens }

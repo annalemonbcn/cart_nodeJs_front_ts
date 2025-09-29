@@ -2,9 +2,9 @@ import { useAuthContext } from '@/auth/provider/useAuthContext'
 import BaseLayout from '@/common/layouts/baseLayout'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { SideMenu } from './components/sideMenu'
-import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import { routeMap } from '@/routes/utils'
+import { StyledFlexContainer } from './styles'
 
 const MyAccountPage = () => {
   const { isAuthenticated } = useAuthContext()
@@ -17,10 +17,10 @@ const MyAccountPage = () => {
 
   return (
     <BaseLayout>
-      <FlexContainer gap={tokens.space.xl3}>
+      <StyledFlexContainer gap={tokens.space.xl3}>
         <SideMenu />
         <Outlet />
-      </FlexContainer>
+      </StyledFlexContainer>
     </BaseLayout>
   )
 }

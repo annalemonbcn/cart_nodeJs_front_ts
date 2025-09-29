@@ -1,10 +1,11 @@
 import Text from '@/components/text'
 import type { BodyProps, FooterProps, HeaderProps, IModalBaseProps } from './types'
 import { StyledCloseIcon, StyledFooter, StyledHeader, StyledModalBody, StyledModalWrapper } from './styles'
-import type { JSX } from 'react'
+import type { FC, JSX } from 'react'
 import { getChildrenDisplayName, validateChildren } from './utils'
 import Modal from 'react-modal'
 import CloseIcon from '@/icons/close.svg?react'
+import { colors } from '@/variables/styles'
 
 const Header = ({ title, description, ...rest }: HeaderProps) => (
   <StyledHeader {...rest}>
@@ -26,8 +27,17 @@ Body.displayName = 'ModalBody'
 const Footer = ({ children }: FooterProps) => <StyledFooter>{children}</StyledFooter>
 Footer.displayName = 'ModalFooter'
 
-const ModalBase = ({ handleClose, isOpen, children, width }: IModalBaseProps) => {
-  validateChildren(Object.keys(ModalBase), children, ModalBase.name)
+interface ModalBaseType extends FC<IModalBaseProps> {
+  Header: typeof Header
+  Body: typeof Body
+  Footer: typeof Footer
+  displayNames?: string[]
+}
+
+const ModalBase: ModalBaseType = ({ handleClose, isOpen, children, width }) => {
+  ModalBase.displayNames = ['ModalHeader', 'ModalBody', 'ModalFooter']
+  validateChildren(ModalBase.displayNames, children, 'ModalBase')
+
   const header = getChildrenDisplayName(children, Header.name)
   const body = getChildrenDisplayName(children, Body.name)
   const footer = getChildrenDisplayName(children, Footer.name)
@@ -52,7 +62,7 @@ const ModalBase = ({ handleClose, isOpen, children, width }: IModalBaseProps) =>
     <Modal isOpen={isOpen} onRequestClose={handleClose} style={defaultStyles}>
       <StyledModalWrapper width={width}>
         <StyledCloseIcon justifyContent="flex-end" alignItems="center" onClick={handleClose}>
-          <CloseIcon />
+          <CloseIcon color={colors.darkNeutral} />
         </StyledCloseIcon>
         {header}
         {body}

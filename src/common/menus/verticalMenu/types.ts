@@ -1,8 +1,7 @@
-type VerticalMenuOption = {
+import type { MenuOption } from '../types'
+
+type VerticalMenuOption = MenuOption & {
   icon: React.FC<React.SVGProps<SVGSVGElement>>
-  path: string
-  label: string
-  isActive: boolean
 }
 
 export type { VerticalMenuOption }

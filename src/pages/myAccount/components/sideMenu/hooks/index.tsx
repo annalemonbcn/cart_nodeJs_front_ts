@@ -1,4 +1,4 @@
-import type { VerticalMenuOption } from '@/components/verticalMenu/types'
+import type { VerticalMenuOption } from '@/common/menus/verticalMenu/types'
 import HeartIcon from '@/icons/heart.svg?react'
 import ProfileIcon from '@/icons/profile.svg?react'
 import OrdersIcon from '@/icons/orders.svg?react'

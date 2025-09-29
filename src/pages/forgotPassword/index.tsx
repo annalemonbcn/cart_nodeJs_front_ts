@@ -16,6 +16,8 @@ const ForgotPasswordPage = () => {
 
   const onSubmit: SubmitHandler<ForgotPasswordFormShape> = (data) => mutate(data)
 
+  const shouldDisable = !methods.formState.isValid || isPending
+
   return (
     <AuthLayout
       imgSrc="/images/reset_password.png"
@@ -25,7 +27,7 @@ const ForgotPasswordPage = () => {
       <StandardForm methods={methods}>
         <EmailFormField isRequired />
 
-        <StyledFormButton variant="primary" onClick={handleSubmit(onSubmit)} disabled={isPending}>
+        <StyledFormButton variant="primary" onClick={handleSubmit(onSubmit)} disabled={shouldDisable}>
           Send
         </StyledFormButton>
       </StandardForm>

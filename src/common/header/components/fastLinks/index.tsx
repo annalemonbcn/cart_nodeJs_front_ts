@@ -2,12 +2,9 @@ import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
 import type { IHighlightedItem } from './types'
 import { useLocation, useNavigate } from 'react-router-dom'
-import HeartIcon from '@/icons/heart.svg?react'
-import ProfileIcon from '@/icons/profile.svg?react'
-import CartIcon from '@/icons/cart.svg?react'
 import { StyledButton } from './styles'
 import type { ButtonVariant } from '@/components/button/types'
-import { routeMap } from '@/routes/utils'
+import { getHighlights } from './utils'
 
 const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {
   const navigate = useNavigate()
@@ -31,21 +28,8 @@ const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {
   )
 }
 
-const FastLinks = () => {
-  const highlights: IHighlightedItem[] = [
-    {
-      icon: HeartIcon,
-      path: routeMap.wishlist.path
-    },
-    {
-      icon: ProfileIcon,
-      path: routeMap.profile.path
-    },
-    {
-      icon: CartIcon,
-      path: routeMap.cart.path
-    }
-  ]
+const FastLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
+  const highlights = getHighlights(isMobile)
 
   return (
     <FlexContainer alignItems="center" gap={tokens.space.sm}>
