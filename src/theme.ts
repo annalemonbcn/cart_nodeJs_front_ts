@@ -1,3 +1,5 @@
+import styled from "styled-components"
+
 const theme = {
   breakpoints: {
     mobile: '767px',
@@ -24,4 +26,13 @@ const media = {
   `
 }
 
-export { media }
+const StyledDesktopWrapper = styled.div`
+  ${media.mobile(`display: none;`)}
+`
+
+const StyledMobileWrapper = styled.div`
+  ${media.tablet(`display: none;`)}
+  ${media.desktop(`display: none;`)}
+`
+
+export { media, StyledDesktopWrapper, StyledMobileWrapper }

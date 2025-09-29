@@ -5,6 +5,7 @@ import { media } from '@/theme'
 
 const Content = styled(FlexContainer)`
   ${media.mobile(`padding: 0 ${tokens.space.lg};`)}
+  ${media.tablet(`padding: 0 ${tokens.space.xl3};`)}
   padding: 0 ${tokens.space.xl6};
 `
 

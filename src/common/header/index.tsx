@@ -1,13 +1,11 @@
-import { Child, StyledHeader, StyledMobileHeader } from './styles'
+import { Child, StyledDesktopHeaderLinksWrapper, StyledHeader, StyledMobileHeader } from './styles'
 import { Navbar } from './components/navbar'
 import { Buttons } from './components/buttons'
 import { FastLinks } from './components/fastLinks'
-import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
-import { Link } from 'react-router-dom'
 import { routeMap } from '@/routes/utils'
 import { useState } from 'react'
 import { Menu } from './components/menu'
+import Link from '@/components/link'
 
 const DesktopHeader = () => (
   <StyledHeader>
@@ -15,13 +13,13 @@ const DesktopHeader = () => (
       <img src="/images/euphoria-logo.svg" alt="euphoria-logo" />
     </Link>
 
-    <FlexContainer alignItems="center" gap={tokens.space.xl5}>
+    <StyledDesktopHeaderLinksWrapper alignItems="center">
       <Navbar />
 
       <FastLinks />
 
       <Buttons />
-    </FlexContainer>
+    </StyledDesktopHeaderLinksWrapper>
   </StyledHeader>
 )
 

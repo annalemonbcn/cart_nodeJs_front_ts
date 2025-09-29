@@ -1,15 +1,29 @@
 import Section from '@/common/section'
-import FlexContainer from '@/components/flexContainer'
 import Tile from '@/components/tile'
 import type { ITileProps } from '@/components/tile/types'
 import { getMensCategories, getWomensCategories } from './utils'
+import { StyledDesktopWrapper, StyledMobileWrapper } from '@/theme'
+import Carousel from '@/common/carousel'
+import { StyledFlexContainer } from './styles'
 
-const CategoriesRender = ({ categories }: { categories: ITileProps[] }) => (
-  <FlexContainer justifyContent="space-between">
-    {categories.map((category, index) => (
-      <Tile key={index} {...category} tileStyle="rectangular" />
-    ))}
-  </FlexContainer>
+const MensCategoriesDesktop = ({ categories }: { categories: ITileProps[] }) => (
+  <StyledDesktopWrapper>
+    <StyledFlexContainer justifyContent="space-between">
+      {categories.map((category, index) => (
+        <Tile key={index} {...category} tileStyle="rectangular" />
+      ))}
+    </StyledFlexContainer>
+  </StyledDesktopWrapper>
+)
+
+const MensCategoriesMobile = ({ categories }: { categories: ITileProps[] }) => (
+  <StyledMobileWrapper>
+    <Carousel>
+      {categories.map((category, index) => (
+        <Tile key={index} {...category} tileStyle="rectangular" />
+      ))}
+    </Carousel>
+  </StyledMobileWrapper>
 )
 
 const MensCategories = () => {
@@ -21,10 +35,31 @@ const MensCategories = () => {
 
   return (
     <Section title="Categories For Men">
-      <CategoriesRender categories={mensCategories} />
+      <MensCategoriesDesktop categories={mensCategories} />
+      <MensCategoriesMobile categories={mensCategories} />
     </Section>
   )
 }
+
+const WomensCategoriesDesktop = ({ categories }: { categories: ITileProps[] }) => (
+  <StyledDesktopWrapper>
+    <StyledFlexContainer justifyContent="space-between">
+      {categories.map((category, index) => (
+        <Tile key={index} {...category} tileStyle="rectangular" />
+      ))}
+    </StyledFlexContainer>
+  </StyledDesktopWrapper>
+)
+
+const WomensCategoriesMobile = ({ categories }: { categories: ITileProps[] }) => (
+  <StyledMobileWrapper>
+    <Carousel>
+      {categories.map((category, index) => (
+        <Tile key={index} {...category} tileStyle="rectangular" />
+      ))}
+    </Carousel>
+  </StyledMobileWrapper>
+)
 
 const WomensCategories = () => {
   const womensCategories = getWomensCategories().map((item) => ({
@@ -35,7 +70,8 @@ const WomensCategories = () => {
 
   return (
     <Section title="Categories For Women">
-      <CategoriesRender categories={womensCategories} />
+      <WomensCategoriesDesktop categories={womensCategories} />
+      <WomensCategoriesMobile categories={womensCategories} />
     </Section>
   )
 }

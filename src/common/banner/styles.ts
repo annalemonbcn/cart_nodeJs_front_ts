@@ -26,8 +26,12 @@ const StyledTextContainer = styled(FlexContainer)<Pick<BannerProps, 'align'>>`
     width: 100%;
     padding: ${tokens.space.lg}
     `)}
+  ${media.tablet(`
+    width: 70%;
+    padding: ${tokens.space.xl4}
+    `)}
   width: 50%;
-  padding: 4rem;
+  padding: ${tokens.space.xl4};
 `
 
 const StyledButtonContainer = styled.div`

@@ -1,17 +1,17 @@
-import FlexContainer from '@/components/flexContainer'
 import { generateTiles } from './utils'
 import Section from '@/common/section'
 import Tile from '@/components/tile'
 import Carousel from '@/common/carousel'
-import { StyledDesktopWrapper, StyledMobileWrapper } from './styles'
+import { StyledDesktopWrapper, StyledMobileWrapper } from '@/theme'
+import { StyledFlexContainer } from './styles'
 
 const NewArrivalsDesktop = () => (
   <StyledDesktopWrapper>
-    <FlexContainer justifyContent="space-between">
+    <StyledFlexContainer justifyContent="space-between">
       {generateTiles().map((tile, index) => (
         <Tile key={index} {...tile} />
       ))}
-    </FlexContainer>
+    </StyledFlexContainer>
   </StyledDesktopWrapper>
 )
 
