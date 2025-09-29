@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
 import type { IAuthLayoutProps } from './types'
 import { tokens } from '@/variables/styles'
+import { media } from '@/theme'
 
 const StyledAuthLayout = styled(FlexContainer)`
   height: 100%;
@@ -12,6 +13,11 @@ const StyledInnerContent = styled(FlexContainer)`
 `
 
 const ImageContainer = styled.div<Pick<IAuthLayoutProps, 'imgSrc'>>`
+  ${media.mobile(
+    css`
+      display: none;
+    `
+  )}
   width: 50%;
   background-image: url('${({ imgSrc }) => imgSrc}');
   background-size: cover;
@@ -20,8 +26,19 @@ const ImageContainer = styled.div<Pick<IAuthLayoutProps, 'imgSrc'>>`
 `
 
 const FormContainer = styled(FlexContainer)`
-  flex: 0 0 50%;
+  ${media.mobile(
+    css`
+      flex: 0 0 100%;
+      padding: ${tokens.space.xl2};
+    `
+  )}
+  ${media.tablet(
+    css`
+      padding: ${tokens.space.xl2};
+    `
+  )}
 
+  flex: 0 0 50%;
   padding: ${tokens.space.xl2} ${tokens.space.xl5};
 `
 

@@ -1,5 +1,5 @@
 import FlexContainer from '@/components/flexContainer'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import type { BannerProps } from './types'
 import { media } from '@/theme'
 import { tokens } from '@/variables/styles'
@@ -22,20 +22,22 @@ const StyledTextContainer = styled(FlexContainer)<Pick<BannerProps, 'align'>>`
   top: 0;
   ${({ align }) => align === 'right' && 'right: 0;'};
 
-  ${media.mobile(`
+  ${media.mobile(css`
     width: 100%;
-    padding: ${tokens.space.lg}
-    `)}
-  ${media.tablet(`
+    padding: ${tokens.space.lg};
+  `)}
+  ${media.tablet(css`
     width: 70%;
-    padding: ${tokens.space.xl4}
-    `)}
+    padding: ${tokens.space.xl4};
+  `)}
   width: 50%;
   padding: ${tokens.space.xl4};
 `
 
 const StyledButtonContainer = styled.div`
-  ${media.mobile(`width: 100%;`)}
+  ${media.mobile(css`
+    width: 100%;
+  `)}
   width: 50%;
 
   & > button {

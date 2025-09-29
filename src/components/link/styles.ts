@@ -28,6 +28,8 @@ const StyledLink = styled(Link).withConfig({
   &:hover {
     opacity: 0.8;
   }
+
+  white-space: nowrap;
 `
 
 export { StyledLink }

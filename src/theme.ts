@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css, type RuleSet } from 'styled-components'
 
 const theme = {
   breakpoints: {
@@ -9,17 +9,17 @@ const theme = {
 }
 
 const media = {
-  mobile: (styles: string) => `
+  mobile: (styles: RuleSet<object>) => css`
     @media (max-width: ${theme.breakpoints.mobile}) {
       ${styles}
     }
   `,
-  tablet: (styles: string) => `
+  tablet: (styles: RuleSet<object>) => css`
     @media (min-width: ${theme.breakpoints.mobile}) and (max-width: ${theme.breakpoints.tablet}) {
       ${styles}
     }
   `,
-  desktop: (styles: string) => `
+  desktop: (styles: RuleSet<object>) => css`
     @media (min-width: ${theme.breakpoints.desktop}) {
       ${styles}
     }
@@ -27,12 +27,24 @@ const media = {
 }
 
 const StyledDesktopWrapper = styled.div`
-  ${media.mobile(`display: none;`)}
+  ${media.mobile(
+    css`
+      display: none;
+    `
+  )}
 `
 
 const StyledMobileWrapper = styled.div`
-  ${media.tablet(`display: none;`)}
-  ${media.desktop(`display: none;`)}
+  ${media.tablet(
+    css`
+      display: none;
+    `
+  )}
+  ${media.desktop(
+    css`
+      display: none;
+    `
+  )}
 `
 
 export { media, StyledDesktopWrapper, StyledMobileWrapper }

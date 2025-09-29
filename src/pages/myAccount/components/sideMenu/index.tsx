@@ -4,14 +4,30 @@ import Text from '@/components/text'
 import VerticalBarDecorator from '@/components/verticalBarDecorator'
 import { tokens } from '@/variables/styles'
 import { useGenerateMenuOptions } from './hooks'
-import { VerticalMenu } from '@/components/verticalMenu'
+import { VerticalMenu } from '@/common/menus/verticalMenu'
 import { useLoadUser } from '@/hooks/useLoadUser'
 import { StyledSideMenu } from './styles'
 import Title from '@/common/titles/title'
+import { HorizontalMenu } from '@/common/menus/horizontalMenu'
+import { StyledDesktopWrapper, StyledMobileWrapper } from '@/theme'
+
+const Menu = () => {
+  const options = useGenerateMenuOptions()
+
+  return (
+    <>
+      <StyledDesktopWrapper>
+        <VerticalMenu options={options} />
+      </StyledDesktopWrapper>
+      <StyledMobileWrapper>
+        <HorizontalMenu options={options} />
+      </StyledMobileWrapper>
+    </>
+  )
+}
 
 const SideMenu = () => {
   const { data, isLoading } = useLoadUser()
-  const options = useGenerateMenuOptions()
 
   if (isLoading) return <Loader />
 
@@ -27,7 +43,7 @@ const SideMenu = () => {
         <Text>Welcome to your account</Text>
       </FlexContainer>
 
-      <VerticalMenu options={options} />
+      <Menu />
     </StyledSideMenu>
   )
 }

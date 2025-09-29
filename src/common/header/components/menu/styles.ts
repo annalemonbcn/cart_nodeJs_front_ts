@@ -1,7 +1,7 @@
 import FlexContainer from '@/components/flexContainer'
 import { media } from '@/theme'
 import { colors, tokens } from '@/variables/styles'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const StyledCloseIcon = styled(FlexContainer)`
   cursor: pointer;
@@ -18,7 +18,11 @@ const Overlay = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   z-index: 1000;
 
-  ${media.desktop(`display: none;`)}
+  ${media.desktop(
+    css`
+      display: none;
+    `
+  )}
 `
 
 const StyledSidebar = styled(FlexContainer)`

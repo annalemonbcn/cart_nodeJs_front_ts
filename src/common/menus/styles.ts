@@ -1,8 +1,9 @@
 import FlexContainer from '@/components/flexContainer'
+import { media } from '@/theme'
 import { colors, tokens } from '@/variables/styles'
 import styled, { css } from 'styled-components'
 
-const isActiveStyles = css`
+const activeStyles = css`
   background-color: ${colors.whiteSmoke};
   border-top-right-radius: ${tokens.borders.radius.sm};
   border-bottom-right-radius: ${tokens.borders.radius.sm};
@@ -18,11 +19,22 @@ const isActiveStyles = css`
   }
 `
 
+const activeStylesMobile = css`
+  background-color: ${colors.whiteSmoke};
+  border-radius: ${tokens.borders.radius.sm};
+`
+
 const StyledMenuItem = styled(FlexContainer)<{ isActive: boolean }>`
   padding: ${tokens.space.sm} ${tokens.space.xl2};
   position: relative;
 
-  ${({ isActive }) => isActive && isActiveStyles}
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      ${media.mobile(activeStylesMobile)}
+      ${media.tablet(activeStyles)}
+      ${media.desktop(activeStyles)}
+    `}
 `
 
 export { StyledMenuItem }

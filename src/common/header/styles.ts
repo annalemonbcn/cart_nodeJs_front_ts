@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { colors, tokens } from '@/variables/styles'
 import { media } from '@/theme'
 import FlexContainer from '@/components/flexContainer'
@@ -8,7 +8,11 @@ const StyledHeader = styled.header`
   background-color: ${colors.white};
 
   padding: 30px 100px;
-  ${media.tablet(`padding: ${tokens.space.md} ${tokens.space.lg};`)}
+  ${media.tablet(
+    css`
+      padding: ${tokens.space.md} ${tokens.space.lg};
+    `
+  )}
 
   border-bottom: ${tokens.borders.size.xs} solid ${colors.lightNeutral};
 
@@ -18,11 +22,19 @@ const StyledHeader = styled.header`
   align-items: center;
   gap: ${tokens.space.xl2};
 
-  ${media.mobile(`display: none;`)}
+  ${media.mobile(
+    css`
+      display: none;
+    `
+  )}
 `
 
 const StyledDesktopHeaderLinksWrapper = styled(FlexContainer)`
-  ${media.tablet(`gap: ${tokens.space.xl2};`)}
+  ${media.tablet(
+    css`
+      gap: ${tokens.space.xl2};
+    `
+  )}
   gap: ${tokens.space.xl5};
 `
 
@@ -34,8 +46,16 @@ const StyledMobileHeader = styled.header`
   display: flex;
   align-items: center;
 
-  ${media.tablet(`display: none;`)}
-  ${media.desktop(`display: none;`)}
+  ${media.tablet(
+    css`
+      display: none;
+    `
+  )}
+  ${media.desktop(
+    css`
+      display: none;
+    `
+  )}
 `
 
 const Child = styled.div<{ align?: 'flex-start' | 'center' | 'flex-end' }>`
