@@ -20,7 +20,7 @@ const getHighlights = (isMobile: boolean) => {
     }
   ]
 
-  return isMobile ? highlights.slice(0, 2) : highlights
+  return isMobile ? highlights.slice(1, 2) : highlights
 }
 
 export { getHighlights }
