@@ -8,7 +8,7 @@ import { routeMap } from '@/routes/utils'
 import type { RouteName } from '@/routes/routesData'
 
 type MenuOption = Extract<RouteName, 'wishlist' | 'orders' | 'profile' | 'signOut'>
-const menuOptions = ['wishlist', 'orders', 'profile', 'signOut'] as const satisfies readonly MenuOption[]
+const menuOptions = ['profile', 'orders', 'wishlist', 'signOut'] as const satisfies readonly MenuOption[]
 
 const getOptionIcon = (option: MenuOption) => {
   const iconsMap: Record<MenuOption, VerticalMenuOption['icon']> = {
@@ -33,4 +33,12 @@ const useGenerateMenuOptions = () => {
   return options
 }
 
-export { useGenerateMenuOptions }
+const useDisplayBackButton = () => {
+  const options = useGenerateMenuOptions()
+  const { pathname } = useLocation()
+
+  const existsInOptions = !options.some((option) => option.path === pathname)
+  return existsInOptions
+}
+
+export { useGenerateMenuOptions, useDisplayBackButton }

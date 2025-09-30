@@ -11,4 +11,30 @@ const StyledSideMenu = styled(FlexContainer)`
   width: 295px;
 `
 
-export { StyledSideMenu }
+const MobileOnly = styled.div`
+  display: none;
+
+  ${media.mobile(
+    css`
+      display: block;
+    `
+  )}
+`
+
+const TabletDesktopOnly = styled.div`
+  display: none;
+
+  ${media.tablet(
+    css`
+      display: block;
+    `
+  )}
+
+  ${media.desktop(
+    css`
+      display: block;
+    `
+  )}
+`
+
+export { StyledSideMenu, MobileOnly, TabletDesktopOnly }

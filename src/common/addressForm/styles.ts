@@ -1,5 +1,6 @@
+import { media } from '@/theme'
 import { tokens } from '@/variables/styles'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const FormWrapper = styled.div`
   display: grid;
@@ -14,6 +15,13 @@ const FormWrapper = styled.div`
     'province country'
     'phoneNumber tags'
     'isDefault .';
+
+  ${media.mobile(
+    css`
+      display: flex;
+      flex-direction: column;
+    `
+  )}
 `
 
 const FirstName = styled.div`
