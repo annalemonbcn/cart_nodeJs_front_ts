@@ -1,20 +1,23 @@
 import EmailFormField from '@/common/form/emailFormField'
 import { AuthLayout } from '@/common/layouts/authLayout'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import type { ForgotPasswordType } from '@/services/auth/types'
 import { useForgotPassword } from './hooks'
 import { StandardForm } from '@/components/customForm/standardForm'
 import { StyledFormButton } from '@/components/customForm/standardForm/styles'
-
-type ForgotPasswordFormShape = ForgotPasswordType
+import type { ForgotPasswordFormShape } from './types'
+import { forgotPasswordDefaultValues } from './constants'
 
 const ForgotPasswordPage = () => {
-  const methods = useForm<ForgotPasswordFormShape>()
-  const { handleSubmit } = methods
+  const methods = useForm<ForgotPasswordFormShape>({
+    defaultValues: forgotPasswordDefaultValues
+  })
+  const { handleSubmit, reset } = methods
 
-  const { mutate, isPending } = useForgotPassword()
+  const { mutate, isPending } = useForgotPassword(reset)
 
-  const onSubmit: SubmitHandler<ForgotPasswordFormShape> = (data) => mutate(data)
+  const onSubmit: SubmitHandler<ForgotPasswordFormShape> = (data) => {
+    mutate(data)
+  }
 
   const shouldDisable = !methods.formState.isValid || isPending
 
@@ -28,7 +31,7 @@ const ForgotPasswordPage = () => {
         <EmailFormField isRequired />
 
         <StyledFormButton variant="primary" onClick={handleSubmit(onSubmit)} disabled={shouldDisable}>
-          Send
+          {isPending ? 'Sending...' : 'Send'}
         </StyledFormButton>
       </StandardForm>
     </AuthLayout>
