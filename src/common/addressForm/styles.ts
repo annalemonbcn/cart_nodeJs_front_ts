@@ -20,6 +20,7 @@ const FormWrapper = styled.div`
     css`
       display: flex;
       flex-direction: column;
+      gap: ${tokens.space.md};
     `
   )}
 `
