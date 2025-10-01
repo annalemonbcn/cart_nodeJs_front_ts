@@ -8,10 +8,13 @@ import { useSearchParams } from 'react-router-dom'
 import type { ResetPasswordType } from '@/services/auth/types'
 import { StyledFormButton } from '@/components/customForm/standardForm/styles'
 import { StandardForm } from '@/components/customForm/standardForm'
+import { resetPasswordDefaultValues } from './constants'
 
 const ResetPasswordForm = ({ mode }: IResetPasswordFormProps) => {
-  const methods = useForm<ResetPasswordFormShape>()
-  const { handleSubmit, watch } = methods
+  const methods = useForm<ResetPasswordFormShape>({
+    defaultValues: resetPasswordDefaultValues
+  })
+  const { handleSubmit, watch, reset: resetForm } = methods
 
   const { mutate: resetPassword, isPending: isResetPending } = useResetPassword()
   const { mutate: changePassword, isPending: isChangePending } = useChangePassword()
@@ -25,6 +28,8 @@ const ResetPasswordForm = ({ mode }: IResetPasswordFormProps) => {
     } else {
       changePassword({ password: data.password })
     }
+
+    resetForm()
   }
 
   const { confirmPasswordRule } = useGetValidationRules(watch)

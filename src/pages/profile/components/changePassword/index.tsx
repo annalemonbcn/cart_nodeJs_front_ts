@@ -6,7 +6,7 @@ import { routeMap } from '@/routes/utils'
 const ChangePassword = () => (
   <FlexContainer justifyContent="space-between" alignItems="center">
     <SubTitle title="Password" />
-    <Link to={routeMap.resetPassword.path} weight="bold" color="darkNeutral" underline={false}>
+    <Link to={`${routeMap.resetPassword.path}?mode=change`} weight="bold" color="darkNeutral" underline={false}>
       Change password
     </Link>
   </FlexContainer>
