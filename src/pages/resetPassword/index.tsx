@@ -11,7 +11,7 @@ const ResetPasswordPage = () => {
       headerText="Create New Password"
       headerDescription="Reset your password. Remember, passwords must match."
     >
-      <ResetPasswordForm mode={searchParams.get('mode') as 'reset' | 'change'} />
+      <ResetPasswordForm mode={(searchParams.get('mode') as 'reset') ?? 'change'} />
     </AuthLayout>
   )
 }

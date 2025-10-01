@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import type { HeaderProps, ModalWidth } from './types'
 import { tokens } from '@/variables/styles'
 import FlexContainer from '@/components/flexContainer'
+import { media } from '@/theme'
 
 const StyledHeader = styled.div<Partial<HeaderProps>>`
   display: flex;
@@ -56,6 +57,12 @@ const StyledModalWrapper = styled.div<{ width?: ModalWidth }>`
   box-sizing: content-box;
   display: flex;
   flex-direction: column;
+
+  ${media.mobile(
+    css`
+      width: 300px;
+    `
+  )}
 `
 
 export { StyledHeader, StyledCloseIcon, StyledModalBody, StyledFooter, StyledModalWrapper }
