@@ -8,10 +8,14 @@ const StyledFooter = styled(FlexContainer)`
     css`
       margin-top: ${tokens.space.sm2};
       flex-direction: column;
-      gap: ${tokens.space.sm2};
     `
   )}
   flex-direction: row;
+  gap: ${tokens.space.md};
+
+  & * {
+    flex: 1 0 0;
+  }
 `
 
 export { StyledFooter }

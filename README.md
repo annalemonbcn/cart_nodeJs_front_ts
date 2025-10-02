@@ -25,6 +25,10 @@ Currently, it allows registering users, logging in, edit your profile (change pa
 
 ---
 
+## ⚡️ Backend project
+
+The backend project is available at [https://github.com/annalemonbcn/cart_nodeJs](https://github.com/annalemonbcn/cart_nodeJs).
+
 ## 📦 Key Dependencies
 
 Some highlighted packages and libraries used:

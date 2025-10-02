@@ -5,4 +5,10 @@ const StyledIcon = styled.img`
   height: 20px;
 `
 
-export { StyledIcon }
+const StyledSocialButtonWrapper = styled.div`
+  & > button {
+    width: 100%;
+  }
+`
+
+export { StyledIcon, StyledSocialButtonWrapper }

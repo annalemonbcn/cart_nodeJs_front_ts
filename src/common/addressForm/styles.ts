@@ -2,6 +2,12 @@ import { media } from '@/theme'
 import { tokens } from '@/variables/styles'
 import styled, { css } from 'styled-components'
 
+const responsiveStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: ${tokens.space.md};
+`
+
 const FormWrapper = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
@@ -16,13 +22,8 @@ const FormWrapper = styled.div`
     'phoneNumber tags'
     'isDefault .';
 
-  ${media.mobile(
-    css`
-      display: flex;
-      flex-direction: column;
-      gap: ${tokens.space.md};
-    `
-  )}
+  ${media.mobile(responsiveStyles)}
+  ${media.tablet(responsiveStyles)}
 `
 
 const FirstName = styled.div`
