@@ -1,5 +1,15 @@
 # 🛒 E-commerce fullstack
 
+## 📋 Table of Contents
+1. [Description](#-description)
+2. [Main Features](#-main-features)
+3. [Backend project](#-backend-project)
+4. [Key Dependencies](#-key-dependencies)
+5. [Suggested App Tours](#-suggested-app-tours)
+6. [Code Style & Practices](#-code-style--practices)
+7. [Future Improvements](#-future-improvements)
+8. [Contact](#-contact)
+
 ## 🚀 Description
 
 This project is a full‑stack e-commerce with a Node.js backend and a TypeScript frontend developed with React.  
@@ -26,6 +36,9 @@ Currently, it allows registering users, logging in, edit your profile (change pa
 ---
 
 ## ⚡️ Backend project
+
+The backend has been developed with NodeJS, MongoDB and Express.
+Also implements `passport` for authentication and `jwt tokens` for authorization.
 
 The backend project is available at [https://github.com/annalemonbcn/cart_nodeJs](https://github.com/annalemonbcn/cart_nodeJs).
 
