@@ -1,14 +1,17 @@
 # 🛒 E-commerce fullstack
 
-## 📋 Table of Contents
-1. [Description](#-description)
-2. [Main Features](#-main-features)
-3. [Backend project](#-backend-project)
-4. [Key Dependencies](#-key-dependencies)
-5. [Suggested App Tours](#-suggested-app-tours)
-6. [Code Style & Practices](#-code-style--practices)
-7. [Future Improvements](#-future-improvements)
-8. [Contact](#-contact)
+## 📚 Table of Contents
+
+1. [🚀 Description](#-description)
+2. [🧩 Main Features](#-main-features)
+3. [⚡️ Backend project](#️-backend-project)
+4. [📦 Key Dependencies](#-key-dependencies)
+5. [🎯 Suggested App Tours](#-suggested-app-tours)
+    - [🧑‍💻 Tour 1: User Registration & Profile Management](#-tour-1-user-registration--profile-management)
+    - [🔑 Tour 2: Password Recovery Flow](#-tour-2-password-recovery-flow)
+6. [🧠 Code Style & Practices](#-code-style--practices)
+7. [📈 Future Improvements](#-future-improvements)
+8. [📞 Contact](#-contact)
 
 ## 🚀 Description
 
