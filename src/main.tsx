@@ -9,6 +9,7 @@ import { StyleSheetManager } from 'styled-components'
 import type { ComponentType } from 'react'
 import { AuthProvider } from './auth/provider/authContext.tsx'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { FiltersStateProvider } from './common/filters/index.tsx'
 
 const queryClient = new QueryClient()
 
@@ -28,8 +29,10 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <AuthProvider>
           <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-            <GlobalStyles />
-            <App />
+            <FiltersStateProvider>
+              <GlobalStyles />
+              <App />
+            </FiltersStateProvider>
           </StyleSheetManager>
         </AuthProvider>
       </BrowserRouter>

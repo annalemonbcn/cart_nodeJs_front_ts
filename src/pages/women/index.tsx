@@ -1,37 +1,32 @@
-import Banner from '@/common/banner'
-import type { IBannerProps } from '@/common/banner/types'
-import BaseLayout from '@/common/layouts/baseLayout'
-import FlexContainer from '@/components/flexContainer'
-import { routeMap } from '@/routes/utils'
-import { tokens } from '@/variables/styles'
-import { useNavigate } from 'react-router-dom'
+import CategoryPage from '@/common/categoryPage'
+import type { Product } from '@/common/categoryPage/types'
 
 const WomenPage = () => {
-  const navigate = useNavigate()
-
-  const bannerProps: IBannerProps = {
-    content: {
-      imgSrc: '/images/women_banner.jpg',
-      h1: 'Summer Value Pack',
-      description: 'Go to your profile to start the demo.\nThis is a sample home page.',
-      topText: 'T-Shirt / Tops'
+  const mockWomensData: Product[] = [
+    {
+      id: '1',
+      name: 'T-Shirt',
+      description: 'A comfortable T-Shirt',
+      price: 19.99,
+      image: '/images/sample_product.png'
     },
-    button: {
-      label: 'Go to Profile',
-      onClick: () => navigate(routeMap.profile.path)
+    {
+      id: '2',
+      name: 'T-Shirt',
+      description: 'A comfortable T-Shirt',
+      price: 19.99,
+      image: '/images/sample_product.png'
     },
-    bannerProps: {
-      align: 'right'
+    {
+      id: '3',
+      name: 'T-Shirt',
+      description: 'A comfortable T-Shirt',
+      price: 19.99,
+      image: '/images/sample_product.png'
     }
-  }
+  ]
 
-  return (
-    <BaseLayout showBreadcrumb={false} isHome>
-      <FlexContainer flexDirection="column" gap={tokens.space.xl4}>
-        <Banner {...bannerProps} />
-      </FlexContainer>
-    </BaseLayout>
-  )
+  return <CategoryPage title="Women's clothing" products={mockWomensData} />
 }
 
 export { WomenPage }

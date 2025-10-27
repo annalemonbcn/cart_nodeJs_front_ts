@@ -20,7 +20,15 @@ export default tseslint.config([
       globals: globals.browser
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_'
+        }
+      ],
       'no-console': ['error', { allow: ['warn', 'error'] }],
       'arrow-body-style': ['error', 'as-needed'],
       'prefer-const': 'error'
