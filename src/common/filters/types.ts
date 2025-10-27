@@ -1,5 +1,5 @@
-// const filters = ['category', 'priceRange'] as const
-// type Filters = (typeof filters)[number]
+const filters = ['category', 'minPrice', 'maxPrice', 'color']
+type Filters = (typeof filters)[number]
 
 type Value = string | number | boolean | (string | number)[]
 
@@ -11,4 +11,4 @@ type FiltersStateProps = {
   getAll: () => Record<string, string | string[]>
 }
 
-export type { FiltersStateProps, Value }
+export type { FiltersStateProps, Value, Filters }

@@ -1,35 +1,60 @@
 import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
-import { StyledBody, StyledHeading } from './styles'
-import type { IFilterSectionProps, HeadingProps } from './types'
+import { StyledBody, StyledHeading, StyledIcon, StyledIndicator } from './styles'
+import type { IFilterSectionProps } from './types'
+import { tokens } from '@/variables/styles'
+import { useState } from 'react'
 
-const Heading = ({ title, isOpen = false, customIcon, toggleOpen }: HeadingProps) => {
+const FilterSection = ({
+  title,
+  children,
+  customIcon,
+  defaultOpen = false,
+  numberOfSelected,
+  onClear
+}: IFilterSectionProps) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen)
+  const [hovered, setHovered] = useState<boolean>(false)
+
   const icon = isOpen ? '/icons/chevron-up.svg' : '/icons/chevron-right.svg'
 
-  return (
-    <StyledHeading justifyContent="space-between" alignItems="center">
-      <Text weight="medium" size="s5">
-        {title}
-      </Text>
+  const isFilterActive = !!(numberOfSelected && numberOfSelected > 0)
 
-      <img
-        src={customIcon || icon}
-        alt="arrow"
-        width={20}
-        height={20}
-        onClick={toggleOpen}
-        style={{ cursor: 'pointer' }}
-      />
-    </StyledHeading>
+  return (
+    <FlexContainer flexDirection="column">
+      <StyledHeading justifyContent="space-between" alignItems="center" onClick={() => setIsOpen(!isOpen)}>
+        <Text weight="medium" size="s5">
+          {title}
+        </Text>
+
+        <FlexContainer justifyContent="space-between" alignItems="center" gap={tokens.space.sm}>
+          {isFilterActive && (
+            <StyledIndicator
+              justifyContent="center"
+              alignItems="center"
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+              hovered={hovered}
+              onClick={(e) => {
+                e.stopPropagation()
+                if (onClear) {
+                  onClear()
+                }
+              }}
+            >
+              <Text size="s2" color="white">
+                {hovered ? 'Clear' : numberOfSelected}
+              </Text>
+            </StyledIndicator>
+          )}
+
+          <StyledIcon src={customIcon || icon} alt="chevron" />
+        </FlexContainer>
+      </StyledHeading>
+
+      {isOpen && <StyledBody>{children}</StyledBody>}
+    </FlexContainer>
   )
 }
-
-const FilterSection = ({ children, ...rest }: IFilterSectionProps) => (
-  <FlexContainer flexDirection="column">
-    <Heading {...rest} />
-
-    {rest.isOpen && <StyledBody>{children}</StyledBody>}
-  </FlexContainer>
-)
 
 export { FilterSection }

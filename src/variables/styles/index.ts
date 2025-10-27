@@ -12,6 +12,7 @@ const colors = {
   offWhite: '#EDEEF2',
   whiteSmoke: '#F6F6F6',
   primary: '#8A33FD',
+  lightPrimary: '#f3eafe',
   danger: dangerShades
 }
 
