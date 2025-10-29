@@ -1,7 +1,7 @@
-import { tokens } from '@/variables/styles'
-import Text from '@/components/text'
 import FlexContainer from '@/components/flexContainer'
 import { Tag } from '@/components/tag'
+import Text from '@/components/text'
+import { tokens } from '@/variables/styles'
 import { NoImage, StyledImageContainer, StyledImg, StyledProduct, StyledTextContainer } from './styles'
 import type { IProductRenderProps } from './types'
 
@@ -17,7 +17,8 @@ const NoImageRender = () => (
 const ProductRender = ({ product }: IProductRenderProps) => {
   const displayNoImage = product.thumbnails.length === 0
 
-  const handleClick = () => console.log('open productPage')
+  // eslint-disable-next-line no-console
+  const handleClick = () => console.log('open productPageeee')
 
   return (
     <StyledProduct flexDirection="column" gap={tokens.space.xl} onClick={handleClick}>
