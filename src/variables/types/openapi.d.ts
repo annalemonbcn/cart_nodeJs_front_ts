@@ -878,14 +878,14 @@ export interface components {
             sizes: ("XS" | "S" | "M" | "L" | "XL")[];
             colours: {
                 /** @enum {string} */
-                name?: "black" | "yellow" | "pink" | "red";
+                name?: "purple" | "black" | "red" | "orange" | "navy" | "white" | "broom" | "green" | "yellow" | "grey" | "pink" | "blue";
                 available?: boolean;
             }[];
             /** @example 39.99 */
             price: number;
             /** @example 10 */
             stock: number;
-            categories: ("electronics" | "fashion" | "home" | "sports" | "beauty" | "games" | "books" | "music")[];
+            categories: ("tops" | "t-shirts" | "jeans" | "shoes" | "skirts" | "dresses" | "bags" | "accessories")[];
             thumbnails: string[];
         };
         CartProduct: {
@@ -1411,10 +1411,6 @@ export interface components {
                     code?: number;
                     /** @example Password reset email sent successfully */
                     message?: string;
-                    payload?: {
-                        /** @example https://example.com/reset-password?token=123456 */
-                        previewURL?: string;
-                    };
                 };
             };
         };

@@ -1,14 +1,11 @@
-type Product = {
-  id: string
-  name: string
-  description: string
-  price: number
-  image: string
-}
+import type { ProductOutput } from '@/services/products/types'
+
+type Product = ProductOutput
 
 interface ICategoryPageProps {
   title: string
   products: Product[]
+  isLoading: boolean
 }
 
 export type { Product, ICategoryPageProps }

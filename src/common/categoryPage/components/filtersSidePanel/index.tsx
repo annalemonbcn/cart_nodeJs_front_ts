@@ -4,6 +4,7 @@ import { PriceFilter } from '@/common/filters/components/priceFilter'
 import { StyledFiltersSidePanel } from './styles'
 import { SizeFilter } from '@/common/filters/components/sizeFilter'
 
+// TODO: add brand selector
 const FiltersSidePanel = () => (
   <StyledFiltersSidePanel flexDirection="column">
     <CategoriesFilter />

@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import type { PriceRangeProps } from './types'
 import { ActiveRange, RangeInput, Track, Wrapper } from './styles'
 
+// TODO: add 1-2 sec delay before updating value so query wont be triggered immediately
 const PriceRange = ({ min, max, valueMin, valueMax, onChange }: PriceRangeProps) => {
   const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b)
   const toPercent = (v: number) => ((v - min) / (max - min)) * 100

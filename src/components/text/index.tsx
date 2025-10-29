@@ -8,9 +8,10 @@ const Text = ({
   color,
   as = 'p',
   underline = false,
+  clamp = false,
   ...rest
 }: ITextProps) => (
-  <StyledText as={as} size={size} weight={weight} color={color} underline={underline} {...rest}>
+  <StyledText as={as} size={size} weight={weight} color={color} underline={underline} clamp={clamp} {...rest}>
     {children}
   </StyledText>
 )
