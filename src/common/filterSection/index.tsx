@@ -1,9 +1,9 @@
+import { useState } from 'react'
 import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
+import { tokens } from '@/variables/styles'
 import { StyledBody, StyledHeading, StyledIcon, StyledIndicator } from './styles'
 import type { IFilterSectionProps } from './types'
-import { tokens } from '@/variables/styles'
-import { useState } from 'react'
 
 const FilterSection = ({
   title,

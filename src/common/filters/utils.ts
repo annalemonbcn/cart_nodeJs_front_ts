@@ -1,43 +1,52 @@
 import type { Value } from './types'
 
-const getSingleValue = (v: Value) => (Array.isArray(v) ? v[0] ?? '' : v)
+const getSingleValue = (value: Value) => {
+  const valueIsArray = Array.isArray(value)
 
-const decodeUrlParams = (sp: URLSearchParams) => {
-  const out: Record<string, string | string[]> = {}
-  for (const [k, v] of sp.entries()) {
-    if (k in out) {
-      const prev = out[k]
-      out[k] = Array.isArray(prev) ? [...prev, v] : [prev as string, v]
-    } else {
-      out[k] = v
-    }
-  }
-  return out
+  if (valueIsArray) return value[0] || ''
+  return value
 }
 
+const decodeUrlParams = (searchParams: URLSearchParams) => {
+  const decodedParams: Record<string, string | string[]> = {}
+
+  for (const [k, v] of searchParams.entries()) {
+    if (k in decodedParams) {
+      const prev = decodedParams[k]
+      const prevIsArray = Array.isArray(prev)
+      decodedParams[k] = prevIsArray ? [...prev, v] : [prev, v]
+    } else {
+      decodedParams[k] = v
+    }
+  }
+
+  return decodedParams
+}
+
+// TODO: understand this function
 const makeSetUrlParams = (order: string[]) => (prev: URLSearchParams, patch: Record<string, Value>) => {
-  const sp = new URLSearchParams(prev)
+  const searchParams = new URLSearchParams(prev)
 
   for (const key of Object.keys(patch)) {
     const val = patch[key]
-    sp.delete(key)
+    searchParams.delete(key)
     if (Array.isArray(val)) {
-      val.forEach((v) => sp.append(key, String(v)))
+      val.forEach((v) => searchParams.append(key, String(v)))
     } else if (val === null || val === undefined || val === '') {
       // no reinsertar -> elimina
     } else {
-      sp.set(key, String(val))
+      searchParams.set(key, String(val))
     }
   }
 
   const ordered = new URLSearchParams()
   for (const k of order) {
-    const values = sp.getAll(k)
+    const values = searchParams.getAll(k)
     if (!values.length) continue
     values.forEach((v) => ordered.append(k, v))
   }
 
-  for (const [k, v] of sp.entries()) {
+  for (const [k, v] of searchParams.entries()) {
     if (!order.includes(k)) ordered.append(k, v)
   }
 

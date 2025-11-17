@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useCallback } from 'react'
 import { useFiltersState } from './useFiltersState'
 import { normalizeWithAll, splitCsv, toCsv, toggleWithAll } from '../multiselect'
+import type { Params } from '@/domain/params/types'
 
 type MultiSelectParamProps = {
-  param: string
+  param: Params
   allKey?: string | null
   defaultCsv?: string
   normalizeCase?: 'lower' | 'none'
 }
 
+// TODO: understand this
 const useMultiSelectParam = ({
   param,
   allKey = 'all',

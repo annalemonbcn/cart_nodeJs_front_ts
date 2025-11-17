@@ -1,9 +1,9 @@
 import { FilterSection } from '@/common/filterSection'
 import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
-import { StyledColor, StyledContainer } from './styles'
 import Text from '@/components/text'
 import { capitalize } from '@/utils/string'
+import { tokens } from '@/variables/styles'
+import { StyledColor, StyledContainer } from './styles'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
 
 const ColorsFilter = () => {
@@ -15,8 +15,10 @@ const ColorsFilter = () => {
     defaultCsv: 'all'
   })
 
+  const numberOfSelected = selected.filter((item) => item !== 'all').length
+
   return (
-    <FilterSection title="Colors" numberOfSelected={selected.length} onClear={reset}>
+    <FilterSection title="Colors" numberOfSelected={numberOfSelected} onClear={reset}>
       <StyledContainer>
         {colorsMock.map((color) => {
           const slug = color.toLowerCase()

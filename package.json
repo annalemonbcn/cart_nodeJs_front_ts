@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "./scripts/dev.sh",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -24,6 +24,7 @@
     "react-hook-form": "^7.58.1",
     "react-modal": "^3.16.3",
     "react-router-dom": "^7.7.0",
+    "react-select": "^5.10.2",
     "react-spinners": "^0.17.0",
     "sonner": "^2.0.5",
     "styled-components": "^6.1.19"

@@ -1,14 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from 'react'
-import type { PriceRangeProps } from './types'
 import { ActiveRange, RangeInput, Track, Wrapper } from './styles'
+import type { PriceRangeProps } from './types'
 
-// TODO: add 1-2 sec delay before updating value so query wont be triggered immediately
-const PriceRange = ({ min, max, valueMin, valueMax, onChange }: PriceRangeProps) => {
+const PriceRange = ({ min, max, valueMin, valueMax, onChange, onChangeCommitted }: PriceRangeProps) => {
   const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b)
   const toPercent = (v: number) => ((v - min) / (max - min)) * 100
 
   const leftPct = useMemo(() => toPercent(valueMin), [valueMin, min, max])
   const rightPct = useMemo(() => 100 - toPercent(valueMax), [valueMax, min, max])
+
+  const handleMouseUp = () => {
+    if (onChangeCommitted) onChangeCommitted(valueMin, valueMax)
+  }
 
   return (
     <Wrapper>
@@ -27,6 +31,8 @@ const PriceRange = ({ min, max, valueMin, valueMax, onChange }: PriceRangeProps)
           const next = Number(e.target.value)
           onChange(clamp(next, min, valueMax), valueMax)
         }}
+        onMouseUp={handleMouseUp}
+        onTouchEnd={handleMouseUp}
       />
 
       <RangeInput
@@ -40,6 +46,8 @@ const PriceRange = ({ min, max, valueMin, valueMax, onChange }: PriceRangeProps)
           const next = Number(e.target.value)
           onChange(valueMin, clamp(next, valueMin, max))
         }}
+        onMouseUp={handleMouseUp}
+        onTouchEnd={handleMouseUp}
       />
     </Wrapper>
   )

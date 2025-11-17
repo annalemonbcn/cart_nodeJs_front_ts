@@ -1,9 +1,9 @@
 import { createContext, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { ORDER } from './constants'
+import { decodeUrlParams, getSingleValue, makeSetUrlParams } from './utils'
 import type { FiltersStateProps, Value } from './types'
 import type { PropsWithChildren } from '@/variables/types/global.types'
-import { useSearchParams } from 'react-router-dom'
-import { decodeUrlParams, getSingleValue, makeSetUrlParams } from './utils'
-import { ORDER } from './constants'
 
 const FiltersStateContext = createContext<FiltersStateProps | null>(null)
 

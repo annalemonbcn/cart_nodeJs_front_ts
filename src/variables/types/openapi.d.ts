@@ -876,11 +876,7 @@ export interface components {
             brand: "naikis" | "adwidas" | "poma" | "rwebook";
             features: components["schemas"]["ProductFeatures"];
             sizes: ("XS" | "S" | "M" | "L" | "XL")[];
-            colours: {
-                /** @enum {string} */
-                name?: "purple" | "black" | "red" | "orange" | "navy" | "white" | "broom" | "green" | "yellow" | "grey" | "pink" | "blue";
-                available?: boolean;
-            }[];
+            colors: ("purple" | "black" | "red" | "orange" | "navy" | "white" | "broom" | "green" | "yellow" | "grey" | "pink" | "blue")[];
             /** @example 39.99 */
             price: number;
             /** @example 10 */

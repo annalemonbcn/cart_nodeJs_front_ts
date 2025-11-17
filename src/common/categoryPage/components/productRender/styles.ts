@@ -1,6 +1,6 @@
+import styled from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
-import styled from 'styled-components'
 
 const StyledProduct = styled(FlexContainer)`
   min-width: 0;

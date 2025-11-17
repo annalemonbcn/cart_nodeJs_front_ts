@@ -1,19 +1,30 @@
 import FlexContainer from '@/components/flexContainer'
-import Text from '@/components/text'
-import type { ICategoryPageProps, Product } from './types'
-import { StyledCategoryBody, StyledHeader, StyledProductList } from './styles'
-import { ProductRender } from './components/productRender'
-import BaseLayout from '../layouts/baseLayout'
-import { FiltersSidePanel } from './components/filtersSidePanel'
 import SkeletonLoader from '@/components/skeleton'
+import Text from '@/components/text'
+import { ProductRender } from './components/productRender'
+import { StyledCategoryBody, StyledHeader, StyledProductList } from './styles'
+import BaseLayout from '../layouts/baseLayout'
+import NoDataRender from '../noDataRender'
+import { FiltersSidePanel } from './components/filtersSidePanel'
+import type { ICategoryPageProps } from './types'
 
-const ProductList = ({ products }: { products: Product[] }) => (
-  <StyledProductList>
-    {products.map((product) => (
-      <ProductRender key={`product-${product.id}`} product={product} />
-    ))}
-  </StyledProductList>
-)
+const ProductList = ({ products }: Pick<ICategoryPageProps, 'products'>) => {
+  if (products.length === 0)
+    return (
+      <NoDataRender
+        title="No products found"
+        description="We couldn't find any products matching your search criteria. Please try again with different keywords."
+      />
+    )
+
+  return (
+    <StyledProductList>
+      {products.map((product) => (
+        <ProductRender key={`product-${product.id}`} product={product} />
+      ))}
+    </StyledProductList>
+  )
+}
 
 const CategoryHeader = ({ title }: Pick<ICategoryPageProps, 'title'>) => (
   <StyledHeader>

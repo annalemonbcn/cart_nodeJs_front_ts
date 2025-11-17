@@ -1,5 +1,6 @@
-const filters = ['category', 'minPrice', 'maxPrice', 'color']
-type Filters = (typeof filters)[number]
+import { type UrlParams } from '@/domain/params/types'
+
+type Filters = UrlParams
 
 type Value = string | number | boolean | (string | number)[]
 

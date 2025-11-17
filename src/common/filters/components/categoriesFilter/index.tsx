@@ -1,22 +1,24 @@
-import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
-import Text from '@/components/text'
 import { FilterSection } from '@/common/filterSection'
+import FlexContainer from '@/components/flexContainer'
+import Text from '@/components/text'
+import { tokens } from '@/variables/styles'
+import { StyledCategory } from './styles'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
 import type { ITextProps } from '@/components/text/types'
-import { StyledCategory } from './styles'
 
 const CategoriesFilter = () => {
   const mockCategoriesList = ['All', 'Tops', 'Joggers', 'Jeans']
 
   const { toggle, isActive, selected, reset } = useMultiSelectParam({ param: 'category', allKey: 'all' })
 
+  const numberOfSelected = selected.filter((item) => item !== 'all').length
+
   return (
     <FilterSection
       title="Categories"
       defaultOpen
       customIcon="/icons/filter.svg"
-      numberOfSelected={selected.length}
+      numberOfSelected={numberOfSelected}
       onClear={reset}
     >
       <FlexContainer flexDirection="column" gap={tokens.space.md}>

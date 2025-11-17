@@ -1,11 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import PriceRange from '@/common/filters/components/priceRange'
 import { useFiltersState } from '@/common/filters/hooks/useFiltersState'
 import { FilterSection } from '@/common/filterSection'
 import FlexContainer from '@/components/flexContainer'
-import { StyledContainer } from './styles'
 import Text from '@/components/text'
 import { tokens } from '@/variables/styles'
+import { StyledContainer } from './styles'
 import { type IPriceFilterProps, type IValueRenderProps } from './types'
 
 const ValueRender = ({ value, isActive }: IValueRenderProps) => (
@@ -27,9 +27,16 @@ const PriceFilter = ({ minPrice = 18, maxPrice = 340 }: IPriceFilterProps) => {
   const valueMin = Number(getStateValue('minPrice', String(minPrice)))
   const valueMax = Number(getStateValue('maxPrice', String(maxPrice)))
 
+  const [localMin, setLocalMin] = useState(valueMin)
+  const [localMax, setLocalMax] = useState(valueMax)
+
+  useEffect(() => {
+    setLocalMin(valueMin)
+    setLocalMax(valueMax)
+  }, [valueMin, valueMax])
+
   const isMinFilterActive = valueMin !== minPrice
   const isMaxFilterActive = valueMax !== maxPrice
-
   const isFilterActive = isMinFilterActive || isMaxFilterActive
 
   return (
@@ -43,13 +50,17 @@ const PriceFilter = ({ minPrice = 18, maxPrice = 340 }: IPriceFilterProps) => {
         <PriceRange
           min={minPrice}
           max={maxPrice}
-          valueMin={valueMin}
-          valueMax={valueMax}
-          onChange={(nextMin, nextMax) => setMany({ minPrice: nextMin, maxPrice: nextMax })}
+          valueMin={localMin}
+          valueMax={localMax}
+          onChange={(nextMin, nextMax) => {
+            setLocalMin(nextMin)
+            setLocalMax(nextMax)
+          }}
+          onChangeCommitted={(nextMin, nextMax) => setMany({ minPrice: String(nextMin), maxPrice: String(nextMax) })}
         />
         <FlexContainer justifyContent="space-between" alignItems="center" gap={tokens.space.md}>
-          <ValueRender value={valueMin} isActive={isMinFilterActive} />
-          <ValueRender value={valueMax} isActive={isMaxFilterActive} />
+          <ValueRender value={localMin} isActive={isMinFilterActive} />
+          <ValueRender value={localMax} isActive={isMaxFilterActive} />
         </FlexContainer>
       </FlexContainer>
     </FilterSection>
