@@ -11,8 +11,7 @@ const ColorsFilter = () => {
 
   const { toggle, isActive, selected, reset } = useMultiSelectParam({
     param: 'color',
-    allKey: 'all',
-    defaultCsv: 'all'
+    allKey: 'all'
   })
 
   const numberOfSelected = selected.filter((item) => item !== 'all').length

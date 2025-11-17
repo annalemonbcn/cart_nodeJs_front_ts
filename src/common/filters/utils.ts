@@ -1,4 +1,5 @@
-import type { Value } from './types'
+import { ORDER } from './constants'
+import type { FiltersURL, Value } from './types'
 
 const getSingleValue = (value: Value) => {
   const valueIsArray = Array.isArray(value)
@@ -7,7 +8,7 @@ const getSingleValue = (value: Value) => {
   return value
 }
 
-const decodeUrlParams = (searchParams: URLSearchParams) => {
+const decodeUrlParams = (searchParams: URLSearchParams): Record<string, string | string[]> => {
   const decodedParams: Record<string, string | string[]> = {}
 
   for (const [k, v] of searchParams.entries()) {
@@ -23,34 +24,37 @@ const decodeUrlParams = (searchParams: URLSearchParams) => {
   return decodedParams
 }
 
-// TODO: understand this function
-const makeSetUrlParams = (order: string[]) => (prev: URLSearchParams, patch: Record<string, Value>) => {
+const setUrlParams = (prev: URLSearchParams, patch: Record<string, Value>) => {
   const searchParams = new URLSearchParams(prev)
 
   for (const key of Object.keys(patch)) {
-    const val = patch[key]
     searchParams.delete(key)
-    if (Array.isArray(val)) {
-      val.forEach((v) => searchParams.append(key, String(v)))
-    } else if (val === null || val === undefined || val === '') {
-      // no reinsertar -> elimina
+
+    const value = patch[key]
+    if (Array.isArray(value)) {
+      value.forEach((v) => searchParams.append(key, String(v)))
+    } else if (value === null || value === undefined || value === '') {
+      searchParams.delete(key)
     } else {
-      searchParams.set(key, String(val))
+      searchParams.set(key, String(value))
     }
   }
 
   const ordered = new URLSearchParams()
-  for (const k of order) {
-    const values = searchParams.getAll(k)
+
+  for (const key of ORDER) {
+    const values = searchParams.getAll(key)
     if (!values.length) continue
-    values.forEach((v) => ordered.append(k, v))
+    values.forEach((v) => ordered.append(key, v))
   }
 
   for (const [k, v] of searchParams.entries()) {
-    if (!order.includes(k)) ordered.append(k, v)
+    if (!ORDER.includes(k as FiltersURL)) {
+      ordered.append(k, v)
+    }
   }
 
   return ordered
 }
 
-export { getSingleValue, decodeUrlParams, makeSetUrlParams }
+export { getSingleValue, decodeUrlParams, setUrlParams }

@@ -1,6 +1,8 @@
 import { type UrlParams } from '@/domain/params/types'
 
-type Filters = UrlParams
+type FiltersURL = UrlParams
+
+type FiltersUI = Exclude<FiltersURL, 'minPrice' | 'maxPrice'> | 'price'
 
 type Value = string | number | boolean | (string | number)[]
 
@@ -12,4 +14,4 @@ type FiltersStateProps = {
   getAll: () => Record<string, string | string[]>
 }
 
-export type { FiltersStateProps, Value, Filters }
+export type { FiltersStateProps, Value, FiltersURL, FiltersUI }

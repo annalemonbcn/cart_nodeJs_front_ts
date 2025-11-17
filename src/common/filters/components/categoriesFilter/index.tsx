@@ -9,7 +9,11 @@ import type { ITextProps } from '@/components/text/types'
 const CategoriesFilter = () => {
   const mockCategoriesList = ['All', 'Tops', 'Joggers', 'Jeans']
 
-  const { toggle, isActive, selected, reset } = useMultiSelectParam({ param: 'category', allKey: 'all' })
+  const { toggle, isActive, selected, reset } = useMultiSelectParam({
+    param: 'category',
+    allKey: 'all',
+    defaultCsv: 'all'
+  })
 
   const numberOfSelected = selected.filter((item) => item !== 'all').length
 

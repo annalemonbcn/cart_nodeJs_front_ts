@@ -1,7 +1,6 @@
 import { createContext, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { ORDER } from './constants'
-import { decodeUrlParams, getSingleValue, makeSetUrlParams } from './utils'
+import { decodeUrlParams, getSingleValue, setUrlParams } from './utils'
 import type { FiltersStateProps, Value } from './types'
 import type { PropsWithChildren } from '@/variables/types/global.types'
 
@@ -10,7 +9,6 @@ const FiltersStateContext = createContext<FiltersStateProps | null>(null)
 const FiltersStateProvider = ({ children }: PropsWithChildren) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const decodedSearchParams = useMemo(() => decodeUrlParams(searchParams), [searchParams])
-  const setUrlParams = useMemo(() => makeSetUrlParams(ORDER), [])
 
   const registerState = (path: string, value: Value, force = false) => {
     const isInitialized = decodedSearchParams[path] !== undefined

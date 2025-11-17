@@ -1,5 +1,5 @@
-import type { Filters } from './types'
+import type { FiltersURL } from './types'
 
-const ORDER: Filters[] = ['category', 'minPrice', 'maxPrice', 'color', 'size']
+const ORDER: FiltersURL[] = ['category', 'minPrice', 'maxPrice', 'color', 'size']
 
 export { ORDER }
