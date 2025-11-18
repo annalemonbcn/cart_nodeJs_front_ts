@@ -1,6 +1,6 @@
+import styled, { css } from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
 import { colors, tokens } from '@/variables/styles'
-import styled, { css } from 'styled-components'
 
 const isActiveStyles = css`
   border: ${tokens.borders.size.xs} solid ${colors.darkNeutral};

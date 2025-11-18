@@ -1,4 +1,5 @@
 import { type UrlParams } from '@/domain/params/types'
+import type { FilterSectionBaseProps } from '../filterSection/types'
 
 type FiltersURL = UrlParams
 
@@ -14,4 +15,19 @@ type FiltersStateProps = {
   getAll: () => Record<string, string | string[]>
 }
 
-export type { FiltersStateProps, Value, FiltersURL, FiltersUI }
+type CommonFilterProps = FilterSectionBaseProps & {
+  filterName: FiltersURL
+  noDataText: string
+}
+
+type ListFilterProps = CommonFilterProps & {
+  list: string[]
+  useAll?: boolean
+}
+
+type RangeFilterProps = CommonFilterProps & {
+  minPrice: number
+  maxPrice: number
+}
+
+export type { FiltersStateProps, Value, FiltersURL, FiltersUI, CommonFilterProps, ListFilterProps, RangeFilterProps }

@@ -1,9 +1,9 @@
 import type { JSX } from 'react'
-import { BrandSelector } from '@/common/filters/components/brandSelector'
-import { CategoriesFilter } from '@/common/filters/components/categoriesFilter'
-import { ColorsFilter } from '@/common/filters/components/colorFilter'
-import { PriceFilter } from '@/common/filters/components/priceFilter'
-import { SizeFilter } from '@/common/filters/components/sizeFilter'
+import { BrandSelector } from './components/brandSelector'
+import { CategoriesFilter } from './components/categoriesFilter'
+import { ColorsFilter } from './components/colorsFilter'
+import { PriceFilter } from './components/priceFilter'
+import { SizeFilter } from './components/sizeFilter'
 import type { FiltersUI } from '@/common/filters/types'
 
 const getFiltersRender = (filter: FiltersUI) => {

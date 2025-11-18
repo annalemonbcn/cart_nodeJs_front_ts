@@ -1,5 +1,5 @@
-import { colors, tokens } from '@/variables/styles'
 import styled, { css } from 'styled-components'
+import { colors, tokens } from '@/variables/styles'
 
 const whiteColorStyles = css`
   border: ${tokens.borders.size.xs} solid ${colors.lightNeutral};

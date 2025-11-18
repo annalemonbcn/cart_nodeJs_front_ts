@@ -4,30 +4,39 @@ import Text from '@/components/text'
 import { tokens } from '@/variables/styles'
 import { StyledCategory } from './styles'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
+import type { ITextListFilter } from './types'
 import type { ITextProps } from '@/components/text/types'
 
-const CategoriesFilter = () => {
-  const mockCategoriesList = ['All', 'Tops', 'Joggers', 'Jeans']
-
+const TextListFilter = ({
+  filterName,
+  title,
+  list,
+  noDataText,
+  useAll = true,
+  defaultOpen,
+  customIcon = '/icons/filter.svg'
+}: ITextListFilter) => {
   const { toggle, isActive, selected, reset } = useMultiSelectParam({
-    param: 'category',
-    allKey: 'all',
-    defaultCsv: 'all'
+    param: filterName,
+    allKey: useAll ? 'all' : null,
+    defaultCsv: useAll ? 'all' : ''
   })
 
   const numberOfSelected = selected.filter((item) => item !== 'all').length
 
   return (
     <FilterSection
-      title="Categories"
-      defaultOpen
-      customIcon="/icons/filter.svg"
+      title={title}
+      defaultOpen={defaultOpen}
+      customIcon={customIcon}
       numberOfSelected={numberOfSelected}
       onClear={reset}
     >
       <FlexContainer flexDirection="column" gap={tokens.space.md}>
-        {mockCategoriesList.map((category) => {
-          const slug = category.toLowerCase()
+        {list.length === 0 && <Text size="s3">{noDataText}</Text>}
+
+        {list.map((textItem) => {
+          const slug = textItem.toLowerCase()
           const active = isActive(slug)
 
           const textProps: Partial<ITextProps> = {
@@ -36,8 +45,8 @@ const CategoriesFilter = () => {
           }
 
           return (
-            <StyledCategory key={`category-${category}`} onClick={() => toggle(slug)}>
-              <Text {...textProps}>{category}</Text>
+            <StyledCategory key={`item-${textItem}`} onClick={() => toggle(slug)}>
+              <Text {...textProps}>{textItem}</Text>
             </StyledCategory>
           )
         })}
@@ -46,4 +55,4 @@ const CategoriesFilter = () => {
   )
 }
 
-export { CategoriesFilter }
+export { TextListFilter }

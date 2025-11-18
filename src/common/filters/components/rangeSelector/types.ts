@@ -1,4 +1,4 @@
-type PriceRangeProps = {
+type RangeSelectorProps = {
   min: number
   max: number
   valueMin: number
@@ -7,4 +7,4 @@ type PriceRangeProps = {
   onChangeCommitted?: (nextMin: number, nextMax: number) => void
 }
 
-export type { PriceRangeProps }
+export type { RangeSelectorProps }

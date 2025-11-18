@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from 'react'
 import { ActiveRange, RangeInput, Track, Wrapper } from './styles'
-import type { PriceRangeProps } from './types'
+import type { RangeSelectorProps } from './types'
 
-const PriceRange = ({ min, max, valueMin, valueMax, onChange, onChangeCommitted }: PriceRangeProps) => {
+const RangeSelector = ({ min, max, valueMin, valueMax, onChange, onChangeCommitted }: RangeSelectorProps) => {
   const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b)
   const toPercent = (v: number) => ((v - min) / (max - min)) * 100
 
@@ -53,4 +53,4 @@ const PriceRange = ({ min, max, valueMin, valueMax, onChange, onChangeCommitted 
   )
 }
 
-export default PriceRange
+export default RangeSelector
