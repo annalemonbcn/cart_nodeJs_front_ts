@@ -26,10 +26,13 @@ const ProductList = ({ products }: Pick<ICategoryPageProps, 'products'>) => {
   )
 }
 
-const CategoryHeader = ({ title }: Pick<ICategoryPageProps, 'title'>) => (
+const CategoryHeader = ({
+  title,
+  numberOfProducts
+}: Pick<ICategoryPageProps, 'title'> & { numberOfProducts: number }) => (
   <StyledHeader>
     <Text size="s5" weight="bold" color="darkNeutral">
-      {title}
+      {title} ({numberOfProducts})
     </Text>
   </StyledHeader>
 )
@@ -40,7 +43,7 @@ const CategoryPage = ({ isLoading, title, products }: ICategoryPageProps) => (
       <FiltersSidePanel />
 
       <StyledCategoryBody flexDirection="column">
-        <CategoryHeader title={title} />
+        <CategoryHeader title={title} numberOfProducts={products.length} />
 
         {isLoading && <SkeletonLoader />}
         {!isLoading && <ProductList products={products} />}

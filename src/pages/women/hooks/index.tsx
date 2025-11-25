@@ -4,15 +4,25 @@ import { useFiltersState } from '@/common/filters/hooks/useFiltersState'
 import { searchParamsToParamsRecord } from '@/domain/params/utils'
 import { productServices } from '@/services/products'
 import type { Product } from '@/common/categoryPage/types'
+import type { GenderParam } from '@/domain/params/types'
 
-const useGetWomenProducts = () => {
+const withGenderParam = (params: Record<string, string | string[]>, gender: GenderParam) => ({
+  ...params,
+  gender
+})
+
+const useWomenProductsQuery = () => {
   const { getAll } = useFiltersState()
-
   const urlFilters = getAll()
-  const safeParams = searchParamsToParamsRecord(urlFilters)
+  const safeParams = withGenderParam(searchParamsToParamsRecord(urlFilters), 'women')
 
   const { getAllProducts } = productServices()
-  const { data, isLoading, isError } = useQuery(getAllProducts(safeParams))
+
+  return useQuery(getAllProducts(safeParams))
+}
+
+const useGetWomenProducts = () => {
+  const { data, isLoading, isError } = useWomenProductsQuery()
 
   const womenProducts: Product[] = useMemo(() => {
     if (!data || isLoading || isError) return []
@@ -23,4 +33,4 @@ const useGetWomenProducts = () => {
   return { products: womenProducts, isLoading }
 }
 
-export { useGetWomenProducts }
+export { useWomenProductsQuery, useGetWomenProducts }

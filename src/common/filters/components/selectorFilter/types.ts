@@ -1,13 +1,13 @@
 import type { CommonFilterProps } from '../../types'
 
-type Option = {
+type SelectorOption = {
   value: string
   label: string
   id: string
 }
 
 type SelectorFilterProps = Pick<CommonFilterProps, 'title' | 'filterName' | 'noDataText'> & {
-  options: Option[]
+  options: SelectorOption[]
 }
 
-export type { Option, SelectorFilterProps }
+export type { SelectorOption, SelectorFilterProps }

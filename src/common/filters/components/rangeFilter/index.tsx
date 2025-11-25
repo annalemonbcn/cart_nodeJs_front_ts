@@ -19,35 +19,43 @@ const ValueRender = ({ value, isActive }: IValueRenderProps) => (
 const RangeFilter = ({ minPrice, maxPrice, noDataText }: IRangeFilterProps) => {
   const { registerState, getStateValue, setMany } = useFiltersState()
 
-  useEffect(() => {
-    registerState('minPrice', String(minPrice))
-    registerState('maxPrice', String(maxPrice))
-  }, [registerState, minPrice, maxPrice])
-
-  const valueMin = Number(getStateValue('minPrice', String(minPrice)))
-  const valueMax = Number(getStateValue('maxPrice', String(maxPrice)))
-
-  const [localMin, setLocalMin] = useState(valueMin)
-  const [localMax, setLocalMax] = useState(valueMax)
+  const minPriceStr = String(minPrice)
+  const maxPriceStr = String(maxPrice)
 
   useEffect(() => {
-    setLocalMin(valueMin)
-    setLocalMax(valueMax)
+    registerState('minPrice', minPriceStr)
+    registerState('maxPrice', maxPriceStr)
+  }, [registerState, minPriceStr, maxPriceStr])
+
+  const valueMin = Number(getStateValue('minPrice', minPriceStr))
+  const valueMax = Number(getStateValue('maxPrice', maxPriceStr))
+
+  const [[localMin, localMax], setLocalRange] = useState<[number, number]>([valueMin, valueMax])
+
+  useEffect(() => {
+    setLocalRange([valueMin, valueMax])
   }, [valueMin, valueMax])
 
   const isMinFilterActive = valueMin !== minPrice
   const isMaxFilterActive = valueMax !== maxPrice
   const isFilterActive = isMinFilterActive || isMaxFilterActive
 
-  const shouldRenderNoData = minPrice > maxPrice || minPrice === 0 || maxPrice === 0
+  const shouldRenderNoData = minPrice > maxPrice || maxPrice === 0
+
+  const handleClear = () => {
+    setMany({ minPrice: minPriceStr, maxPrice: maxPriceStr })
+  }
+
+  const handleCommit = (nextMin: number, nextMax: number) => {
+    setMany({ minPrice: String(nextMin), maxPrice: String(nextMax) })
+  }
+
+  const handleChange = (nextMin: number, nextMax: number) => {
+    setLocalRange([nextMin, nextMax])
+  }
 
   return (
-    <FilterSection
-      title="Price"
-      defaultOpen
-      numberOfSelected={isFilterActive ? 1 : 0}
-      onClear={() => setMany({ minPrice: String(minPrice), maxPrice: String(maxPrice) })}
-    >
+    <FilterSection title="Price" defaultOpen numberOfSelected={isFilterActive ? 1 : 0} onClear={handleClear}>
       {shouldRenderNoData && <Text size="s3">{noDataText}</Text>}
 
       {!shouldRenderNoData && (
@@ -57,11 +65,8 @@ const RangeFilter = ({ minPrice, maxPrice, noDataText }: IRangeFilterProps) => {
             max={maxPrice}
             valueMin={localMin}
             valueMax={localMax}
-            onChange={(nextMin, nextMax) => {
-              setLocalMin(nextMin)
-              setLocalMax(nextMax)
-            }}
-            onChangeCommitted={(nextMin, nextMax) => setMany({ minPrice: String(nextMin), maxPrice: String(nextMax) })}
+            onChange={handleChange}
+            onChangeCommitted={handleCommit}
           />
           <FlexContainer justifyContent="space-between" alignItems="center" gap={tokens.space.md}>
             <ValueRender value={localMin} isActive={isMinFilterActive} />

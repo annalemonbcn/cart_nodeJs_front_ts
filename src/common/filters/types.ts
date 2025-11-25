@@ -3,7 +3,7 @@ import type { FilterSectionBaseProps } from '../filterSection/types'
 
 type FiltersURL = UrlParams
 
-type FiltersUI = Exclude<FiltersURL, 'minPrice' | 'maxPrice'> | 'price'
+type FiltersUI = Exclude<FiltersURL, 'minPrice' | 'maxPrice' | 'gender'> | 'price'
 
 type Value = string | number | boolean | (string | number)[]
 

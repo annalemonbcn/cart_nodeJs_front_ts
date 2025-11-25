@@ -68,6 +68,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/products/filters": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get filters
+         * @description Returns a list of filters (optional gender filter)
+         */
+        get: {
+            parameters: {
+                query?: {
+                    /** @description Gender filter */
+                    gender?: "men" | "women";
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["FiltersFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/products/{pid}": {
         parameters: {
             query?: never;
@@ -873,10 +908,11 @@ export interface components {
             title: string;
             description: string;
             /** @enum {string} */
-            brand: "naikis" | "adwidas" | "poma" | "rwebook";
+            gender: "men" | "women";
+            brand: components["schemas"]["Brand"];
             features: components["schemas"]["ProductFeatures"];
-            sizes: ("XS" | "S" | "M" | "L" | "XL")[];
-            colors: ("purple" | "black" | "red" | "orange" | "navy" | "white" | "broom" | "green" | "yellow" | "grey" | "pink" | "blue")[];
+            sizes: components["schemas"]["Size"][];
+            colors: components["schemas"]["Color"][];
             /** @example 39.99 */
             price: number;
             /** @example 10 */
@@ -986,6 +1022,12 @@ export interface components {
              */
             user: string;
         };
+        /** @enum {string} */
+        Size: "XS" | "S" | "M" | "L" | "XL";
+        /** @enum {string} */
+        Color: "purple" | "black" | "red" | "orange" | "navy" | "white" | "broom" | "green" | "yellow" | "grey" | "pink" | "blue";
+        /** @enum {string} */
+        Brand: "naikis" | "adwidas" | "poma" | "rwebook";
         RegisterUserInput: {
             /** @example Jane */
             firstName: string;
@@ -1064,6 +1106,18 @@ export interface components {
              * @example 64e3cfc2b567b3c5fcd36b92
              */
             id: string;
+        };
+        FiltersOutput: {
+            categories: string[];
+            brands: components["schemas"]["Brand"][];
+            colors: components["schemas"]["Color"][];
+            sizes: components["schemas"]["Size"][];
+            prices: {
+                /** @example 10 */
+                min: number;
+                /** @example 100 */
+                max: number;
+            };
         };
         CartOutput: components["schemas"]["Cart"] & {
             /**
@@ -1182,6 +1236,9 @@ export interface components {
         };
         ProductResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["ProductOutput"];
+        };
+        FiltersResponse: components["schemas"]["BaseResponse"] & {
+            payload: components["schemas"]["FiltersOutput"];
         };
         CartResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["CartOutput"];
@@ -1311,6 +1368,15 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["DeleteResponse"];
+            };
+        };
+        /** @description Filters found */
+        FiltersFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["FiltersResponse"];
             };
         };
         /** @description Cart successfully created */

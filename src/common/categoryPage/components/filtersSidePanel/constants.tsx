@@ -4,15 +4,16 @@ import { CategoriesFilter } from './components/categoriesFilter'
 import { ColorsFilter } from './components/colorsFilter'
 import { PriceFilter } from './components/priceFilter'
 import { SizeFilter } from './components/sizeFilter'
+import type { CleanedFiltersData } from './types'
 import type { FiltersUI } from '@/common/filters/types'
 
-const getFiltersRender = (filter: FiltersUI) => {
+const getFiltersRender = (filter: FiltersUI, { categories, prices, brands, colors, sizes }: CleanedFiltersData) => {
   const filtersRendermap: Record<FiltersUI, JSX.Element> = {
-    category: <CategoriesFilter />,
-    price: <PriceFilter />,
-    brand: <BrandSelector />,
-    color: <ColorsFilter />,
-    size: <SizeFilter />
+    category: <CategoriesFilter categories={categories} />,
+    price: <PriceFilter priceRange={prices} />,
+    brand: <BrandSelector brands={brands} />,
+    color: <ColorsFilter colors={colors} />,
+    size: <SizeFilter sizes={sizes} />
   }
 
   return filtersRendermap[filter]

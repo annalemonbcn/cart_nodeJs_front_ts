@@ -26,7 +26,8 @@ const cart = {
 }
 
 const products = {
-  getAllProducts: () => '/products'
+  getAllProducts: () => '/products',
+  getFilters: () => '/products/filters'
 }
 
 const API_ROUTES = {

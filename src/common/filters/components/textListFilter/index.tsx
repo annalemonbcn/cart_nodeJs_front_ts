@@ -3,6 +3,7 @@ import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
 import { tokens } from '@/variables/styles'
 import { StyledCategory } from './styles'
+import { ALL_KEY } from '../../constants'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
 import type { ITextListFilter } from './types'
 import type { ITextProps } from '@/components/text/types'
@@ -24,6 +25,8 @@ const TextListFilter = ({
 
   const numberOfSelected = selected.filter((item) => item !== 'all').length
 
+  const finalList = useAll ? [ALL_KEY, ...list] : list
+
   return (
     <FilterSection
       title={title}
@@ -35,7 +38,7 @@ const TextListFilter = ({
       <FlexContainer flexDirection="column" gap={tokens.space.md}>
         {list.length === 0 && <Text size="s3">{noDataText}</Text>}
 
-        {list.map((textItem) => {
+        {finalList.map((textItem) => {
           const slug = textItem.toLowerCase()
           const active = isActive(slug)
 
