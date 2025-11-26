@@ -1,8 +1,8 @@
-import { Fragment } from 'react'
 import Loader from '@/components/loader'
-import { DEFAULT_FILTERS, getFiltersRender } from './constants'
+import { DesktopRender } from './components/desktopRender'
+import { MobileRender } from './components/mobileRender'
+import { DEFAULT_FILTERS } from './constants'
 import { useGetFiltersData } from './hooks'
-import { StyledFiltersSidePanel } from './styles'
 import { cleanFiltersData } from './utils'
 import type { IFiltersSidePanelProps } from './types'
 import type { FiltersUI } from '@/common/filters/types'
@@ -20,11 +20,10 @@ const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: IFiltersSidePanelProps)
   if (isLoading) return <Loader />
 
   return (
-    <StyledFiltersSidePanel flexDirection="column">
-      {uniqueFilters.map((filter) => (
-        <Fragment key={`filter-${filter}`}>{getFiltersRender(filter, cleanedData)}</Fragment>
-      ))}
-    </StyledFiltersSidePanel>
+    <>
+      <MobileRender />
+      <DesktopRender uniqueFilters={uniqueFilters} cleanedData={cleanedData} />
+    </>
   )
 }
 

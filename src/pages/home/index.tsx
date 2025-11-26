@@ -1,13 +1,13 @@
-import BaseLayout from '@/common/layouts/baseLayout'
-import { routeMap } from '@/routes/utils'
 import { useNavigate } from 'react-router-dom'
-import { NewArrivals } from './components/newArrivals'
-import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
 import Banner from '@/common/banner'
-import type { IBannerProps } from '@/common/banner/types'
+import BaseLayout from '@/common/layouts/baseLayout'
+import FlexContainer from '@/components/flexContainer'
+import { routeMap } from '@/routes/utils'
+import { tokens } from '@/variables/styles'
 import { MensCategories, WomensCategories } from './components/categoriesRender'
+import { NewArrivals } from './components/newArrivals'
 import { Content } from './styles'
+import type { IBannerProps } from '@/common/banner/types'
 
 const HomePage = () => {
   const navigate = useNavigate()

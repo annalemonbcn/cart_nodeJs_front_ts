@@ -1,8 +1,8 @@
-import { AppContainer, MainContainer } from './styles'
 import { Toaster } from 'sonner'
-import AppRouter from './routes/router.tsx'
 import Footer from './common/footer'
 import Header from './common/header'
+import AppRouter from './routes/router.tsx'
+import { AppContainer, MainContainer } from './styles'
 
 const App = () => (
   <AppContainer>

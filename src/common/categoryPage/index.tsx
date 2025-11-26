@@ -1,8 +1,14 @@
-import FlexContainer from '@/components/flexContainer'
 import SkeletonLoader from '@/components/skeleton'
 import Text from '@/components/text'
 import { ProductRender } from './components/productRender'
-import { StyledCategoryBody, StyledHeader, StyledProductList } from './styles'
+import {
+  StyledBodyArea,
+  StyledCategoryLayout,
+  StyledFiltersArea,
+  StyledHeader,
+  StyledHeaderArea,
+  StyledProductList
+} from './styles'
 import BaseLayout from '../layouts/baseLayout'
 import NoDataRender from '../noDataRender'
 import { FiltersSidePanel } from './components/filtersSidePanel'
@@ -39,16 +45,20 @@ const CategoryHeader = ({
 
 const CategoryPage = ({ isLoading, title, products }: ICategoryPageProps) => (
   <BaseLayout showBreadcrumb={false}>
-    <FlexContainer>
-      <FiltersSidePanel />
-
-      <StyledCategoryBody flexDirection="column">
+    <StyledCategoryLayout>
+      <StyledHeaderArea>
         <CategoryHeader title={title} numberOfProducts={products.length} />
+      </StyledHeaderArea>
 
+      <StyledFiltersArea>
+        <FiltersSidePanel />
+      </StyledFiltersArea>
+
+      <StyledBodyArea>
         {isLoading && <SkeletonLoader />}
         {!isLoading && <ProductList products={products} />}
-      </StyledCategoryBody>
-    </FlexContainer>
+      </StyledBodyArea>
+    </StyledCategoryLayout>
   </BaseLayout>
 )
 

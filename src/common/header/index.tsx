@@ -1,11 +1,11 @@
-import { Child, StyledDesktopHeaderLinksWrapper, StyledHeader, StyledMobileHeader } from './styles'
-import { Navbar } from './components/navbar'
+import { useState } from 'react'
+import Link from '@/components/link'
+import { routeMap } from '@/routes/utils'
 import { Buttons } from './components/buttons'
 import { FastLinks } from './components/fastLinks'
-import { routeMap } from '@/routes/utils'
-import { useState } from 'react'
 import { Menu } from './components/menu'
-import Link from '@/components/link'
+import { Navbar } from './components/navbar'
+import { Child, StyledDesktopHeaderLinksWrapper, StyledHeader, StyledMobileHeader } from './styles'
 
 const DesktopHeader = () => (
   <StyledHeader>

@@ -1,8 +1,8 @@
+import CartIcon from '@/icons/cart.svg?react'
 import HeartIcon from '@/icons/heart.svg?react'
 import ProfileIcon from '@/icons/profile.svg?react'
-import CartIcon from '@/icons/cart.svg?react'
-import type { IHighlightedItem } from './types'
 import { routeMap } from '@/routes/utils'
+import type { IHighlightedItem } from './types'
 
 const getHighlights = (isMobile: boolean) => {
   const highlights: IHighlightedItem[] = [

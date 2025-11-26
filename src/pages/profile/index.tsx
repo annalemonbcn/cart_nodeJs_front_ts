@@ -1,11 +1,11 @@
 import FlexContainer from '@/components/flexContainer'
-import { MyAccountOutletLayout } from '../../common/layouts/myAccountOutletLayout'
-import { ChangePassword } from './components/changePassword'
+import { MultiModalProvider } from '@/hooks/useMultiModal/provider'
 import { tokens } from '@/variables/styles'
 import { AddressSection } from './components/addressSection'
-import { ProfileDetails } from './components/profileDetails'
+import { ChangePassword } from './components/changePassword'
 import { DeleteAccount } from './components/deleteAccount'
-import { MultiModalProvider } from '@/hooks/useMultiModal/provider'
+import { ProfileDetails } from './components/profileDetails'
+import { MyAccountOutletLayout } from '../../common/layouts/myAccountOutletLayout'
 
 const ProfilePage = () => (
   <MyAccountOutletLayout title="My Info">
