@@ -9,6 +9,7 @@ import { StyleSheetManager } from 'styled-components'
 import App from './App.tsx'
 import { AuthProvider } from './auth/provider/authContext.tsx'
 import { FiltersStateProvider } from './common/filters/index.tsx'
+import { MultiModalProvider } from './hooks/useMultiModal/provider.tsx'
 import GlobalStyles from './variables/styles/globalStyles/index.ts'
 
 const queryClient = new QueryClient()
@@ -31,7 +32,9 @@ createRoot(document.getElementById('root')!).render(
           <StyleSheetManager shouldForwardProp={shouldForwardProp}>
             <FiltersStateProvider>
               <GlobalStyles />
-              <App />
+              <MultiModalProvider>
+                <App />
+              </MultiModalProvider>
             </FiltersStateProvider>
           </StyleSheetManager>
         </AuthProvider>

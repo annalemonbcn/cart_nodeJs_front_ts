@@ -1,6 +1,6 @@
-import type { PropsWithChildren } from '@/variables/types/global.types'
 import type { ComponentProps, ReactElement } from 'react'
 import type { StyledModalBody } from './styles'
+import type { PropsWithChildren } from '@/variables/types/global.types'
 
 type ModalWidth = 'sm' | 'md' | 'lg' | 'auto' | 'full'
 

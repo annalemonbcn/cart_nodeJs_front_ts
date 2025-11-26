@@ -1,5 +1,4 @@
 import FlexContainer from '@/components/flexContainer'
-import { MultiModalProvider } from '@/hooks/useMultiModal/provider'
 import { tokens } from '@/variables/styles'
 import { AddressSection } from './components/addressSection'
 import { ChangePassword } from './components/changePassword'
@@ -9,14 +8,12 @@ import { MyAccountOutletLayout } from '../../common/layouts/myAccountOutletLayou
 
 const ProfilePage = () => (
   <MyAccountOutletLayout title="My Info">
-    <MultiModalProvider>
-      <FlexContainer flexDirection="column" gap={tokens.space.xl}>
-        <ProfileDetails />
-        <ChangePassword />
-        <AddressSection />
-        <DeleteAccount />
-      </FlexContainer>
-    </MultiModalProvider>
+    <FlexContainer flexDirection="column" gap={tokens.space.xl}>
+      <ProfileDetails />
+      <ChangePassword />
+      <AddressSection />
+      <DeleteAccount />
+    </FlexContainer>
   </MyAccountOutletLayout>
 )
 

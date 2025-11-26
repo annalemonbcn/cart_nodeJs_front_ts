@@ -1,4 +1,5 @@
 import Loader from '@/components/loader'
+import { DrawerProvider } from '@/hooks/useDrawerContext/provider'
 import { DesktopRender } from './components/desktopRender'
 import { MobileRender } from './components/mobileRender'
 import { DEFAULT_FILTERS } from './constants'
@@ -21,7 +22,9 @@ const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: IFiltersSidePanelProps)
 
   return (
     <>
-      <MobileRender />
+      <DrawerProvider>
+        <MobileRender />
+      </DrawerProvider>
       <DesktopRender uniqueFilters={uniqueFilters} cleanedData={cleanedData} />
     </>
   )

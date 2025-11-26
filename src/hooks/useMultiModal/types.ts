@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 type MultiModalsState = Record<string, { open: boolean }>
 
 interface ModalContextProps {

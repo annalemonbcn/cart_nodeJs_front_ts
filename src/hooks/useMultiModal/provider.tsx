@@ -1,6 +1,6 @@
-import type { PropsWithChildren } from '@/variables/types/global.types'
 import { createContext, useState } from 'react'
 import type { ModalContextProps, MultiModalsState } from './types'
+import type { PropsWithChildren } from '@/variables/types/global.types'
 
 const DefaultStateContext: ModalContextProps = {
   modals: {},

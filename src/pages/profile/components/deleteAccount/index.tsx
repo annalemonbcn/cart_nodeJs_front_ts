@@ -1,11 +1,11 @@
+import ModalBase from '@/common/modalBase'
 import { SubTitle } from '@/common/titles/subTitle'
 import Button from '@/components/button'
 import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
-import { useDeleteAccount } from './hooks'
-import ModalBase from '@/common/modalBase'
 import { useMultiModal } from '@/hooks/useMultiModal'
 import { DELETE_ACCOUNT_MODAL_ID } from './constants'
+import { useDeleteAccount } from './hooks'
 import { StyledFooter } from './styles'
 
 const DeleteAccountModal = () => {

@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
-import type { HeaderProps, ModalWidth } from './types'
-import { tokens } from '@/variables/styles'
 import FlexContainer from '@/components/flexContainer'
 import { media } from '@/theme'
+import { tokens } from '@/variables/styles'
+import type { HeaderProps, ModalWidth } from './types'
 
 const StyledHeader = styled.div<Partial<HeaderProps>>`
   display: flex;
