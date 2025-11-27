@@ -4,6 +4,7 @@ const validateChildren = (allowed: string[], children: ReactNode | ReactNode[], 
   const notMatched = Children.toArray(children)
     .map((child) => {
       if (!isValidElement(child)) return typeof child
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const type = child.type as any
       return type.displayName || type.name || typeof child
     })
@@ -16,6 +17,7 @@ const validateChildren = (allowed: string[], children: ReactNode | ReactNode[], 
   }
 }
 
+// TODO: move this and modal/types to common file
 const getChildrenDisplayName = (children: ReactNode, displayName: string) =>
   Children.toArray(children).filter(
     (child) => !(!isValidElement(child) || typeof child.type !== 'function' || child.type.name !== displayName)

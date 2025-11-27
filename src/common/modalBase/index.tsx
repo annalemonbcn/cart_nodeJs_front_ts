@@ -2,10 +2,10 @@ import type { FC, JSX } from 'react'
 import Modal from 'react-modal'
 import Text from '@/components/text'
 import CloseIcon from '@/icons/close.svg?react'
+import { getChildrenDisplayName, validateChildren } from '@/utils/children'
 import { colors } from '@/variables/styles'
 import { DEFAULT_STYLES } from './constants'
 import { StyledCloseIcon, StyledFooter, StyledHeader, StyledModalBody, StyledModalWrapper } from './styles'
-import { getChildrenDisplayName, validateChildren } from './utils'
 import type { BodyProps, FooterProps, HeaderProps, IModalBaseProps } from './types'
 
 const Header = ({ title, description, ...rest }: HeaderProps) => (
@@ -38,7 +38,6 @@ interface ModalBaseType extends FC<IModalBaseProps> {
 const ModalBase: ModalBaseType = ({ handleClose, isOpen, children, width }) => {
   ModalBase.displayNames = ['ModalHeader', 'ModalBody', 'ModalFooter']
   validateChildren(ModalBase.displayNames, children, 'ModalBase')
-
   const header = getChildrenDisplayName(children, Header.name)
   const body = getChildrenDisplayName(children, Body.name)
   const footer = getChildrenDisplayName(children, Footer.name)

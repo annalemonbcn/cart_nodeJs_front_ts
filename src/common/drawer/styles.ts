@@ -1,11 +1,12 @@
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css, keyframes, type RuleSet } from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
 import { media } from '@/theme'
 import { tokens } from '@/variables/styles'
+import type { SlideFrom, StyledContainerProps } from './types'
 
-const slideIn = keyframes`
+const slideIn = (from: SlideFrom) => keyframes`
   from {
-    transform: translateX(100%);
+    transform: translateX(${from === 'right' ? '100%' : '-100%'});
   }
   to {
     transform: translateX(0);
@@ -19,9 +20,10 @@ const StyledOverlay = styled.div`
   z-index: 100;
 `
 
-const mobileStyles = css`
+const mobileStyles = css<StyledContainerProps>`
   border-radius: 0;
-  width: 100%;
+  width: ${({ mobileWidth }) =>
+    mobileWidth ? (typeof mobileWidth === 'number' ? `${mobileWidth}px` : mobileWidth) : '100%'};
 `
 
 const desktopStyles = css`
@@ -30,7 +32,7 @@ const desktopStyles = css`
   width: 400px;
 `
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<StyledContainerProps>`
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: ${tokens.space.lg};
@@ -40,17 +42,30 @@ const StyledContainer = styled.div`
 
   position: absolute;
   top: 0;
-  right: 0;
+  ${({ slideFrom }) => (slideFrom === 'left' ? 'left: 0;' : 'right: 0;')}
   z-index: 9999;
 
   background-color: white;
   box-shadow: ${tokens.shadows.basic};
 
-  ${media.mobile(mobileStyles)};
+  ${media.mobile(mobileStyles as RuleSet<object>)};
   ${media.tablet(desktopStyles)};
   ${media.desktop(desktopStyles)};
 
-  animation: ${slideIn} 0.3s ease-out;
+  animation: ${({ slideFrom }) => slideIn(slideFrom)} 0.3s ease-out;
+`
+
+const StyledHeaderWrapper = styled(FlexContainer)`
+  padding: ${tokens.space.md};
+  position: relative;
+`
+
+const StyledIconWrapper = styled.div`
+  cursor: pointer;
+  position: absolute;
+  left: auto;
+  right: 0;
+  top: 0;
 `
 
 const StyledBody = styled(FlexContainer)`
@@ -68,4 +83,4 @@ const StyledFooter = styled(FlexContainer)`
   }
 `
 
-export { StyledOverlay, StyledContainer, StyledBody, StyledFooter }
+export { StyledOverlay, StyledContainer, StyledHeaderWrapper, StyledIconWrapper, StyledBody, StyledFooter }
