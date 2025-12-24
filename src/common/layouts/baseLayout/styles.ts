@@ -23,8 +23,6 @@ const StyledBaseLayout = styled(FlexContainer)<Pick<IBaseLayoutProps, 'isHome'>>
   max-width: ${MAX_VIEW_WIDTH};
   margin: 0 auto;
 
-  flex-direction: column;
-
   ${({ isHome }) =>
     isHome
       ? css`
