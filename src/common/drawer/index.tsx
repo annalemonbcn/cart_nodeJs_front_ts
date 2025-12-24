@@ -18,9 +18,11 @@ const DrawerProducer = ({ children }: PropsWithChildren) => createPortal(<>{chil
 
 const Header = ({ title, handleClose }: HeaderProps) => (
   <StyledHeaderWrapper gap={tokens.space.md}>
-    <Text color="darkNeutral" size="s5" weight="bold">
-      {title}
-    </Text>
+    {title && (
+      <Text color="darkNeutral" size="s5" weight="bold">
+        {title}
+      </Text>
+    )}
 
     <StyledIconWrapper onClick={handleClose}>
       <CloseIcon color={colors.darkNeutral} />

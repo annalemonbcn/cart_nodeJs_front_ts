@@ -12,7 +12,7 @@ const MenuDrawer = () => {
 
   return (
     <Drawer isOpen={isOpen} handleClose={handleClose} slideFrom="left" mobileWidth="80%">
-      <Drawer.Header handleClose={handleClose} title="Menu" />
+      <Drawer.Header handleClose={handleClose} />
       <Drawer.Body>
         <FlexContainer flexDirection="column" gap={tokens.space.xl} style={{ gap: '32px' }}>
           <NavLinks>

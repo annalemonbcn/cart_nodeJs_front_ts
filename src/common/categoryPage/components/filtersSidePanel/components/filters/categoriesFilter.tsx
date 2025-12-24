@@ -1,6 +1,10 @@
 import { TextListFilter } from '@/common/filters/components/textListFilter'
 
-const CategoriesFilter = ({ categories }: { categories: string[] }) => (
+type CategoriesFilterProps = {
+  categories: string[]
+}
+
+const CategoriesFilter = ({ categories }: CategoriesFilterProps) => (
   <TextListFilter
     filterName="category"
     title="Categories"

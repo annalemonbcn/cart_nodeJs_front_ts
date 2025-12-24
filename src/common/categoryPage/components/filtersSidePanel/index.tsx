@@ -3,19 +3,15 @@ import { DrawerProvider } from '@/hooks/useDrawerContext/provider'
 import { DesktopRender } from './components/desktopRender'
 import { MobileRender } from './components/mobileRender'
 import { DEFAULT_FILTERS } from './constants'
-import { useGetFiltersData } from './hooks'
-import { cleanFiltersData } from './utils'
-import type { IFiltersSidePanelProps } from './types'
-import type { FiltersUI } from '@/common/filters/types'
+import { useGetFiltersData, useGetUniqueFilters } from './hooks'
+import type { FiltersSidePanelProps } from './types'
 
-const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: IFiltersSidePanelProps) => {
-  const { data, isLoading } = useGetFiltersData()
-  const cleanedData = cleanFiltersData(data)
-
-  const withCategory: FiltersUI[] =
-    filters.length === 0 || !filters.includes('category') ? ['category', ...filters] : filters
-
-  const uniqueFilters = Array.from(new Set(withCategory))
+// TODO: don't duplicate tree elements for mobile and desktop ! 
+// use useIsMobile instead
+// change everywhere
+const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: FiltersSidePanelProps) => {
+  const { isLoading } = useGetFiltersData()
+  const uniqueFilters = useGetUniqueFilters(filters)
 
   // TODO: replace loader for skeleton
   if (isLoading) return <Loader />
@@ -23,9 +19,9 @@ const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: IFiltersSidePanelProps)
   return (
     <>
       <DrawerProvider>
-        <MobileRender />
+        <MobileRender filters={uniqueFilters} />
       </DrawerProvider>
-      <DesktopRender uniqueFilters={uniqueFilters} cleanedData={cleanedData} />
+      <DesktopRender filters={uniqueFilters} />
     </>
   )
 }

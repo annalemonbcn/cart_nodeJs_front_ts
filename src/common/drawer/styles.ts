@@ -56,7 +56,7 @@ const StyledContainer = styled.div<StyledContainerProps>`
 `
 
 const StyledHeaderWrapper = styled(FlexContainer)`
-  padding: ${tokens.space.md};
+  padding: ${tokens.space.md} 0;
   position: relative;
 `
 

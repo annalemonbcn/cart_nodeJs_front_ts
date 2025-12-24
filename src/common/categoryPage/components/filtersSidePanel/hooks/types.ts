@@ -1,7 +1,7 @@
-import type { FiltersData } from '@/domain/filters/types'
+import type { CleanedFiltersData } from '../types'
 
 interface UseGetFiltersDataReturn {
-  data: FiltersData
+  data: CleanedFiltersData
   isLoading: boolean
 }
 

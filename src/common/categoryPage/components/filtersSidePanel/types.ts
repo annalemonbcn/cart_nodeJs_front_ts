@@ -2,7 +2,7 @@ import type { SelectorOption } from '@/common/filters/components/selectorFilter/
 import type { FiltersUI } from '@/common/filters/types'
 import type { PriceRange, Size } from '@/domain/filters/types'
 
-interface IFiltersSidePanelProps {
+interface FiltersSidePanelProps {
   filters?: FiltersUI[] | undefined
 }
 
@@ -14,4 +14,10 @@ type CleanedFiltersData = {
   sizes: Size[]
 }
 
-export type { IFiltersSidePanelProps, CleanedFiltersData }
+// TODO: ?
+interface CommonFilterRenderProps {
+  filters: FiltersUI[]
+  // cleanedData: CleanedFiltersData
+}
+
+export type { FiltersSidePanelProps, CleanedFiltersData, CommonFilterRenderProps }

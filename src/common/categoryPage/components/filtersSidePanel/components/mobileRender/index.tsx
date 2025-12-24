@@ -5,9 +5,13 @@ import { useDrawerContext } from '@/hooks/useDrawerContext'
 import { tokens } from '@/variables/styles'
 import { FiltersDrawer } from './filtersDrawer'
 import { StyledFilterIcon, StyledMobileFiltersSidePanel } from './styles'
+import { useGetFiltersData } from '../../hooks'
+import type { CommonFilterRenderProps } from '../../types'
 
-const MobileRender = () => {
+const MobileRender = ({ filters }: CommonFilterRenderProps) => {
   const { handleOpen } = useDrawerContext()
+
+  const { data } = useGetFiltersData()
 
   return (
     <>
@@ -22,7 +26,7 @@ const MobileRender = () => {
         </Button>
       </StyledMobileFiltersSidePanel>
 
-      <FiltersDrawer />
+      <FiltersDrawer filters={filters} data={data} />
     </>
   )
 }
