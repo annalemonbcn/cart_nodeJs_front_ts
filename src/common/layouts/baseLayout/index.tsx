@@ -1,5 +1,5 @@
-import { StyledBaseLayout } from './styles'
 import Breadcrumb from '@/components/breadcrumb'
+import { StyledBaseLayout } from './styles'
 import type { IBaseLayoutProps } from './types'
 
 const BaseLayout = ({ showBreadcrumb = true, children, isHome }: IBaseLayoutProps) => (

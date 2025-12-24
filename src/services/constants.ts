@@ -22,14 +22,20 @@ const address = {
 } as const
 
 const cart = {
-  getCartById: (id: string) => `/carts/${id}`,
+  getCartById: (id: string) => `/carts/${id}`
+}
+
+const products = {
+  getAllProducts: () => '/products',
+  getFilters: () => '/products/filters'
 }
 
 const API_ROUTES = {
   auth,
   user,
   address,
-  cart
+  cart,
+  products
 } as const
 
 export { API_ROUTES }

@@ -1,11 +1,12 @@
-import Text from '@/components/text'
-import type { BodyProps, FooterProps, HeaderProps, IModalBaseProps } from './types'
-import { StyledCloseIcon, StyledFooter, StyledHeader, StyledModalBody, StyledModalWrapper } from './styles'
 import type { FC, JSX } from 'react'
-import { getChildrenDisplayName, validateChildren } from './utils'
 import Modal from 'react-modal'
+import Text from '@/components/text'
 import CloseIcon from '@/icons/close.svg?react'
+import { getChildrenDisplayName, validateChildren } from '@/utils/children'
 import { colors } from '@/variables/styles'
+import { DEFAULT_STYLES } from './constants'
+import { StyledCloseIcon, StyledFooter, StyledHeader, StyledModalBody, StyledModalWrapper } from './styles'
+import type { BodyProps, FooterProps, HeaderProps, IModalBaseProps } from './types'
 
 const Header = ({ title, description, ...rest }: HeaderProps) => (
   <StyledHeader {...rest}>
@@ -37,29 +38,12 @@ interface ModalBaseType extends FC<IModalBaseProps> {
 const ModalBase: ModalBaseType = ({ handleClose, isOpen, children, width }) => {
   ModalBase.displayNames = ['ModalHeader', 'ModalBody', 'ModalFooter']
   validateChildren(ModalBase.displayNames, children, 'ModalBase')
-
   const header = getChildrenDisplayName(children, Header.name)
   const body = getChildrenDisplayName(children, Body.name)
   const footer = getChildrenDisplayName(children, Footer.name)
 
-  const defaultStyles: Modal.Styles = {
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.25)',
-      zIndex: 100
-    },
-    content: {
-      inset: '50% auto auto 50%',
-      border: 'none',
-      borderRadius: '16px',
-      padding: '0px',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      maxHeight: '90vh'
-    }
-  }
-
   return (
-    <Modal isOpen={isOpen} onRequestClose={handleClose} style={defaultStyles}>
+    <Modal isOpen={isOpen} onRequestClose={handleClose} style={DEFAULT_STYLES}>
       <StyledModalWrapper width={width}>
         <StyledCloseIcon justifyContent="flex-end" alignItems="center" onClick={handleClose}>
           <CloseIcon color={colors.darkNeutral} />

@@ -1,10 +1,10 @@
+import { useLocation, useNavigate } from 'react-router-dom'
 import FlexContainer from '@/components/flexContainer'
 import { tokens } from '@/variables/styles'
-import type { IHighlightedItem } from './types'
-import { useLocation, useNavigate } from 'react-router-dom'
 import { StyledButton } from './styles'
-import type { ButtonVariant } from '@/components/button/types'
 import { getHighlights } from './utils'
+import type { IHighlightedItem } from './types'
+import type { ButtonVariant } from '@/components/button/types'
 
 const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {
   const navigate = useNavigate()

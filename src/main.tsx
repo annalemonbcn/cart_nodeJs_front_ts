@@ -1,14 +1,16 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { BrowserRouter } from 'react-router-dom'
-import GlobalStyles from './variables/styles/globalStyles/index.ts'
-import isPropValid from '@emotion/is-prop-valid'
-import { StyleSheetManager } from 'styled-components'
 import type { ComponentType } from 'react'
-import { AuthProvider } from './auth/provider/authContext.tsx'
+import isPropValid from '@emotion/is-prop-valid'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { StyleSheetManager } from 'styled-components'
+import App from './App.tsx'
+import { AuthProvider } from './auth/provider/authContext.tsx'
+import { FiltersStateProvider } from './common/filters/index.tsx'
+import { MultiModalProvider } from './hooks/useMultiModal/provider.tsx'
+import GlobalStyles from './variables/styles/globalStyles/index.ts'
 
 const queryClient = new QueryClient()
 
@@ -28,8 +30,12 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <AuthProvider>
           <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-            <GlobalStyles />
-            <App />
+            <FiltersStateProvider>
+              <GlobalStyles />
+              <MultiModalProvider>
+                <App />
+              </MultiModalProvider>
+            </FiltersStateProvider>
           </StyleSheetManager>
         </AuthProvider>
       </BrowserRouter>

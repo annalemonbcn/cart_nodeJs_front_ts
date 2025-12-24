@@ -1,6 +1,12 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { colors, dangerShades, tokens } from '@/variables/styles'
 import type { ITextProps } from './types'
+
+const clampStyles = css`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
 
 const StyledText = styled.p<Partial<ITextProps>>`
   font-size: ${({ size }) => size && tokens.font.size[size]};
@@ -18,6 +24,8 @@ const StyledText = styled.p<Partial<ITextProps>>`
   }};
 
   ${({ underline }) => underline && 'text-decoration: underline'};
+
+  ${({ clamp }) => clamp && clampStyles}
 `
 
 export { StyledText }

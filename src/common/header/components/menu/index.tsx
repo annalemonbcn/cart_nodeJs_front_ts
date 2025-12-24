@@ -1,35 +1,40 @@
-import { NavLinks, Overlay, StyledSidebar, StyledCloseIcon } from './styles'
-import CloseIcon from '@/icons/close.svg?react'
-import type { MenuProps } from './types'
-import { routeMap } from '@/routes/utils'
+import { Drawer } from '@/common/drawer'
+import FlexContainer from '@/components/flexContainer'
 import { Separator } from '@/components/separator'
+import { useDrawerContext } from '@/hooks/useDrawerContext'
+import { routeMap } from '@/routes/utils'
 import { tokens } from '@/variables/styles'
+import { NavLinks } from './styles'
 import { Buttons } from '../buttons'
 
-const Menu = ({ isOpen, onClose }: MenuProps) => (
-  <Overlay isOpen={isOpen} onClick={onClose}>
-    <StyledSidebar onClick={(e) => e.stopPropagation()} flexDirection="column" gap={tokens.space.xl}>
-      <StyledCloseIcon onClick={onClose}>
-        <CloseIcon />
-      </StyledCloseIcon>
+const MenuDrawer = () => {
+  const { isOpen, handleClose } = useDrawerContext()
 
-      <NavLinks>
-        <a href={routeMap.home.path}>Home</a>
-        <a href={routeMap.men.path}>Men</a>
-        <a href={routeMap.women.path}>Women</a>
-      </NavLinks>
+  return (
+    <Drawer isOpen={isOpen} handleClose={handleClose} slideFrom="left" mobileWidth="80%">
+      <Drawer.Header handleClose={handleClose} />
+      <Drawer.Body>
+        <FlexContainer flexDirection="column" gap={tokens.space.xl} style={{ gap: '32px' }}>
+          <NavLinks>
+            <a href={routeMap.home.path}>Home</a>
+            <a href={routeMap.men.path}>Men</a>
+            <a href={routeMap.women.path}>Women</a>
+          </NavLinks>
 
-      <Separator />
+          <Separator />
 
-      <NavLinks>
-        <a href={routeMap.wishlist.path}>Wishlist</a>
-        <a href={routeMap.profile.path}>Profile</a>
-        <a href={routeMap.cart.path}>Cart</a>
-      </NavLinks>
+          <NavLinks>
+            <a href={routeMap.wishlist.path}>Wishlist</a>
+            <a href={routeMap.profile.path}>Profile</a>
+            <a href={routeMap.cart.path}>Cart</a>
+          </NavLinks>
 
-      <Buttons />
-    </StyledSidebar>
-  </Overlay>
-)
+          <Buttons />
+        </FlexContainer>
+      </Drawer.Body>
+      <Drawer.Footer>Footer here</Drawer.Footer>
+    </Drawer>
+  )
+}
 
-export { Menu }
+export { MenuDrawer }

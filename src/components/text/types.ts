@@ -15,6 +15,7 @@ interface ITextProps extends PropsWithChildren {
   color?: TextColor
   as?: keyof HTMLElementTagNameMap
   underline?: boolean
+  clamp?: boolean
 }
 
 export type { ITextProps, FontSize, FontWeight, TextColor }

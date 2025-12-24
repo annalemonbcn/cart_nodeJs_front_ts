@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
-import type { IButtonProps } from './types'
 import { StyledButton } from './styles'
+import type { IButtonProps } from './types'
 
 const Button = forwardRef<HTMLButtonElement, IButtonProps>(
   ({ variant = 'primary', isRounded = false, fitContent = false, children, ...props }, ref) => (
