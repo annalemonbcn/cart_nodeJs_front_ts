@@ -5,6 +5,7 @@ import { tokens } from '@/variables/styles'
 import { StyledBody, StyledHeading, StyledIcon, StyledIndicator } from './styles'
 import type { IFilterSectionProps, IHeaderProps } from './types'
 
+// TODO: fix FilterSection styles to match mobile + desktop design
 const Header = ({ title, isOpen, setIsOpen, isFilterActive, onClear, customIcon, numberOfSelected }: IHeaderProps) => {
   const [hovered, setHovered] = useState<boolean>(false)
 
