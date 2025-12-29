@@ -1,9 +1,14 @@
-import { tokens } from '@/variables/styles'
-import FlexContainer from '../flexContainer'
+import { ClipLoader } from 'react-spinners'
 import styled from 'styled-components'
+import { t } from '@/styles/themeHelpers'
+import FlexContainer from '../flexContainer'
 
 const StyledLoaderContainer = styled(FlexContainer)`
-  margin-top: ${tokens.space.xl6};
+  margin-top: ${t.space('xl6')};
 `
 
-export { StyledLoaderContainer }
+const StyledClipLoader = styled(ClipLoader)`
+  color: ${t.color('primary')};
+`
+
+export { StyledLoaderContainer, StyledClipLoader }

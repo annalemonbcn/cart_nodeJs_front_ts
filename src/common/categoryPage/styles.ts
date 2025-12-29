@@ -1,12 +1,11 @@
 import styled, { css } from 'styled-components'
-import { media } from '@/theme'
-import { tokens } from '@/variables/styles'
+import { media, t } from '@/styles/themeHelpers'
 
 const StyledHeader = styled.div`
-  padding: ${tokens.space.xl2} 0;
+  padding: ${t.space('md')} 0;
 
-  ${media.mobile(css`
-    padding: ${tokens.space.md} 0;
+  ${media.tablet(css`
+    padding: ${t.space('xl2')} 0;
   `)}
 `
 
@@ -21,8 +20,8 @@ const desktopGridColumns = css`
 const StyledProductList = styled.div`
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  column-gap: ${tokens.space.lg};
-  row-gap: ${tokens.space.xl2};
+  column-gap: ${t.space('lg')};
+  row-gap: ${t.space('xl2')};
 
   ${media.tablet(tabletGridColumns)}
   ${media.desktop(desktopGridColumns)}
@@ -46,12 +45,11 @@ const desktopGridStyles = css`
 
 const StyledCategoryLayout = styled.div`
   display: grid;
-  gap: ${tokens.space.md};
+  gap: ${t.space('md')};
   align-items: flex-start;
 
-  ${media.mobile(mobileGridStyles)};
+  ${mobileGridStyles};
   ${media.tablet(desktopGridStyles)};
-  ${media.desktop(desktopGridStyles)};
 `
 
 const StyledHeaderArea = styled.div`

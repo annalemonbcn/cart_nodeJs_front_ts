@@ -1,13 +1,13 @@
-import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
 import styled from 'styled-components'
+import FlexContainer from '@/components/flexContainer'
+import { t } from '@/styles/themeHelpers'
 
 const StyledMenuWrapper = styled(FlexContainer)`
   overflow-x: auto;
-  max-width: calc(100vw - (${tokens.space.lg}*2));
+  max-width: calc(100vw - (${t.space('lg')}*2));
   -webkit-overflow-scrolling: touch;
 
-  padding-bottom: ${tokens.space.xs};
+  padding-bottom: ${t.space('xs')};
 `
 
 export { StyledMenuWrapper }

@@ -9,8 +9,9 @@ import { StyleSheetManager, ThemeProvider } from 'styled-components'
 import App from './App.tsx'
 import { AuthProvider } from './auth/provider/authContext.tsx'
 import { FiltersStateProvider } from './common/filters/index.tsx'
+import { DrawerProvider } from './hooks/useDrawerContext/provider.tsx'
 import { MultiModalProvider } from './hooks/useMultiModal/provider.tsx'
-import { theme2 } from './theme.ts'
+import { theme } from './theme.ts'
 import GlobalStyles from './variables/styles/globalStyles/index.ts'
 
 const queryClient = new QueryClient()
@@ -34,8 +35,10 @@ createRoot(document.getElementById('root')!).render(
             <FiltersStateProvider>
               <GlobalStyles />
               <MultiModalProvider>
-                <ThemeProvider theme={theme2}>
-                  <App />
+                <ThemeProvider theme={theme}>
+                  <DrawerProvider>
+                    <App />
+                  </DrawerProvider>
                 </ThemeProvider>
               </MultiModalProvider>
             </FiltersStateProvider>

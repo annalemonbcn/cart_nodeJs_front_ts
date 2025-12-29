@@ -1,14 +1,12 @@
-import type { PropsWithChildren } from "@/variables/types/global.types";
-import FlexContainer from "../flexContainer";
-import { tokens } from "@/variables/styles";
-import { StyledDecorator } from "./styles";
+import FlexContainer from '../flexContainer'
+import { StyledDecorator } from './styles'
+import type { PropsWithChildren } from '@/variables/types/global.types'
 
 const VerticalBarDecorator = ({ children }: PropsWithChildren) => (
-  <FlexContainer gap={tokens.space.md}>
+  <FlexContainer gap="md">
     <StyledDecorator />
     {children}
   </FlexContainer>
 )
-
 
 export default VerticalBarDecorator

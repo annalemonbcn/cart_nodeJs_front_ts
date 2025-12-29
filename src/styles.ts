@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { tokens } from './variables/styles'
+import { t } from './styles/themeHelpers'
 
 const AppContainer = styled.div`
   display: grid;
@@ -12,7 +12,7 @@ const AppContainer = styled.div`
 
 const MainContainer = styled.div`
   grid-area: main;
-  padding-bottom: ${tokens.space.xl3};
+  padding-bottom: ${t.space('xl3')};
 `
 
 export { AppContainer, MainContainer }

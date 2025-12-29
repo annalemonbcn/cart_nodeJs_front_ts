@@ -1,7 +1,7 @@
-import styled, { css, keyframes, type RuleSet } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
-import { media } from '@/theme'
-import { tokens } from '@/variables/styles'
+import CloseIcon from '@/icons/close.svg?react'
+import { media, t } from '@/styles/themeHelpers'
 import type { SlideFrom, StyledContainerProps } from './types'
 
 const slideIn = (from: SlideFrom) => keyframes`
@@ -27,18 +27,18 @@ const mobileStyles = css<StyledContainerProps>`
 `
 
 const desktopStyles = css`
-  border-top-left-radius: ${tokens.borders.radius.md};
-  border-bottom-left-radius: ${tokens.borders.radius.md};
+  border-top-left-radius: ${t.borderRadius('md')};
+  border-bottom-left-radius: ${t.borderRadius('md')};
   width: 400px;
 `
 
 const StyledContainer = styled.div<StyledContainerProps>`
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: ${tokens.space.lg};
+  gap: ${t.space('lg')};
 
   height: 100dvh;
-  padding: ${tokens.space.lg};
+  padding: ${t.space('lg')};
 
   position: absolute;
   top: 0;
@@ -46,17 +46,16 @@ const StyledContainer = styled.div<StyledContainerProps>`
   z-index: 9999;
 
   background-color: white;
-  box-shadow: ${tokens.shadows.basic};
+  box-shadow: ${t.shadows('basic')};
 
-  ${media.mobile(mobileStyles as RuleSet<object>)};
+  ${mobileStyles};
   ${media.tablet(desktopStyles)};
-  ${media.desktop(desktopStyles)};
 
   animation: ${({ slideFrom }) => slideIn(slideFrom)} 0.3s ease-out;
 `
 
 const StyledHeaderWrapper = styled(FlexContainer)`
-  padding: ${tokens.space.md} 0;
+  padding: ${t.space('md')} 0;
   position: relative;
 `
 
@@ -72,7 +71,7 @@ const StyledBody = styled(FlexContainer)`
   flex-direction: column;
   justify-content: flex-start;
 
-  padding-right: ${tokens.space.xs};
+  padding-right: ${t.space('xs')};
 
   overflow-x: hidden;
 `
@@ -83,4 +82,16 @@ const StyledFooter = styled(FlexContainer)`
   }
 `
 
-export { StyledOverlay, StyledContainer, StyledHeaderWrapper, StyledIconWrapper, StyledBody, StyledFooter }
+const StyledCloseIcon = styled(CloseIcon)`
+  color: ${t.color('darkNeutral')};
+`
+
+export {
+  StyledOverlay,
+  StyledContainer,
+  StyledHeaderWrapper,
+  StyledIconWrapper,
+  StyledBody,
+  StyledFooter,
+  StyledCloseIcon
+}

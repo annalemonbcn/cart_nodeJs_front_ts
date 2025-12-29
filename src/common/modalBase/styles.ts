@@ -1,32 +1,36 @@
 import styled, { css } from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
-import { media } from '@/theme'
-import { tokens } from '@/variables/styles'
+import CloseIcon from '@/icons/close.svg?react'
+import { media, t } from '@/styles/themeHelpers'
 import type { HeaderProps, ModalWidth } from './types'
 
 const StyledHeader = styled.div<Partial<HeaderProps>>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: ${tokens.space.sm};
+  gap: ${t.space('sm')};
   align-items: ${({ alignCenter }) => alignCenter && 'center'};
 `
 
-const StyledCloseIcon = styled(FlexContainer)`
+const StyledCloseIconContainer = styled(FlexContainer)`
   cursor: pointer;
   align-self: flex-end;
 `
 
+const StyledCloseIcon = styled(CloseIcon)`
+  color: ${t.color('darkNeutral')};
+`
+
 const StyledModalBody = styled(FlexContainer)`
-  gap: ${tokens.space.md};
-  padding: ${tokens.space.md} 0px;
+  gap: ${t.space('md')};
+  padding: ${t.space('md')} 0px;
   height: 100%;
   overflow-y: auto;
 `
 
 const StyledFooter = styled.div`
   display: flex;
-  gap: ${tokens.space.md};
+  gap: ${t.space('md')};
 
   & * {
     flex-grow: 1;
@@ -49,20 +53,17 @@ const HeightStyles: Record<ModalWidth, string> = {
   auto: 'auto'
 }
 
-const StyledModalWrapper = styled.div<{ width?: ModalWidth }>`
-  width: ${({ width }) => WidthStyles[width || 'auto']};
+const StyledModalWrapper = styled(FlexContainer)<{ width?: ModalWidth }>`
+  width: 300px;
   height: ${({ width }) => HeightStyles[width || 'auto']};
   max-height: 700px;
-  padding: ${tokens.space.lg};
+  padding: ${t.space('lg')};
   box-sizing: content-box;
-  display: flex;
-  flex-direction: column;
 
-  ${media.mobile(
-    css`
-      width: 300px;
-    `
-  )}
+  ${({ width }) =>
+    media.tablet(css`
+      width: ${WidthStyles[width ?? 'auto']};
+    `)}
 `
 
-export { StyledHeader, StyledCloseIcon, StyledModalBody, StyledFooter, StyledModalWrapper }
+export { StyledHeader, StyledCloseIconContainer, StyledCloseIcon, StyledModalBody, StyledFooter, StyledModalWrapper }

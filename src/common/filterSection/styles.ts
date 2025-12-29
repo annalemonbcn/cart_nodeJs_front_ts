@@ -55,13 +55,13 @@ const StyledBody = styled.div`
 const hoveredStyles = css`
   width: auto;
   padding: ${t.space('xs2')};
-  border-radius: ${t.radius('md')};
+  border-radius: ${t.borderRadius('md')};
   opacity: 0.8;
 `
 
 const StyledIndicator = styled(FlexContainer)<{ hovered: boolean }>`
   background-color: ${t.color('primary')};
-  border-radius: ${t.radius('full')};
+  border-radius: ${t.borderRadius('full')};
   width: 20px;
   height: 20px;
 

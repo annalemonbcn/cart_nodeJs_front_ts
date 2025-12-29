@@ -1,14 +1,13 @@
-import { tokens } from '@/variables/styles'
-import { StyledBanner, ImageContainer, StyledTextContainer, StyledButtonContainer } from './styles'
-import Text from '@/components/text'
-import type { IBannerProps } from './types'
-import { withLineBreaks } from './utils'
 import Button from '@/components/button'
+import Text from '@/components/text'
+import { StyledBanner, ImageContainer, StyledTextContainer, StyledButtonContainer } from './styles'
+import { withLineBreaks } from './utils'
+import type { IBannerProps } from './types'
 
 const Banner = ({ content, button, bannerProps }: IBannerProps) => (
   <StyledBanner>
     <ImageContainer imgSrc={content.imgSrc} />
-    <StyledTextContainer flexDirection="column" gap={tokens.space.xl2} align={bannerProps?.align}>
+    <StyledTextContainer flexDirection="column" gap="xl2" align={bannerProps?.align}>
       <Text as="p" size="s6" color={bannerProps?.textColor}>
         {content.topText}
       </Text>

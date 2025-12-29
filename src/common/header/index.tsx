@@ -1,58 +1,64 @@
+import FlexContainer from '@/components/flexContainer'
 import Link from '@/components/link'
 import { useDrawerContext } from '@/hooks/useDrawerContext'
-import { DrawerProvider } from '@/hooks/useDrawerContext/provider'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { routeMap } from '@/routes/utils'
+import { theme } from '@/theme'
 import { Buttons } from './components/buttons'
 import { FastLinks } from './components/fastLinks'
 import { MenuDrawer } from './components/menu'
 import { Navbar } from './components/navbar'
-import { Child, StyledDesktopHeaderLinksWrapper, StyledHeader, StyledMobileHeader } from './styles'
+import { Child, StyledHeader } from './styles'
 
-const DesktopHeader = () => (
-  <StyledHeader>
-    <Link to={routeMap.home.path}>
-      <img src="/images/euphoria-logo.svg" alt="euphoria-logo" />
-    </Link>
+const DesktopHeader = () => {
+  const isDesktop = useMediaQuery(theme.mq.js.up('md'))
 
-    <StyledDesktopHeaderLinksWrapper alignItems="center">
-      <Navbar />
-
-      <FastLinks />
-
-      <Buttons />
-    </StyledDesktopHeaderLinksWrapper>
-  </StyledHeader>
-)
+  return (
+    <>
+      <Logo />
+      <FlexContainer alignItems="center" gap={isDesktop ? 'xl5' : 'xl2'}>
+        <Navbar />
+        <FastLinks />
+        <Buttons />
+      </FlexContainer>
+    </>
+  )
+}
 
 const MobileHeader = () => {
   const { handleOpen } = useDrawerContext()
 
   return (
-    <StyledMobileHeader>
+    <>
       <Child align="flex-start" onClick={handleOpen}>
         <img src="/icons/hamburger-menu.svg" alt="hamburger-menu" style={{ width: '24px', height: '24px' }} />
       </Child>
-
       <Child align="center">
-        <Link to={routeMap.home.path}>
-          <img src="/images/euphoria-logo.svg" alt="euphoria-logo" />
-        </Link>
+        <Logo />
       </Child>
-
       <Child align="flex-end">
         <FastLinks isMobile />
       </Child>
-
-      <MenuDrawer />
-    </StyledMobileHeader>
+    </>
   )
 }
 
-const Header = () => (
-  <DrawerProvider>
-    <DesktopHeader />
-    <MobileHeader />
-  </DrawerProvider>
+const Logo = () => (
+  <Link to={routeMap.home.path}>
+    <img src="/images/euphoria-logo.svg" alt="euphoria-logo" />
+  </Link>
 )
+
+const Header = () => {
+  const isDesktop = useMediaQuery(theme.mq.js.up('md'))
+
+  return (
+    <>
+      <StyledHeader>{isDesktop ? <DesktopHeader /> : <MobileHeader />}</StyledHeader>
+
+      {!isDesktop && <MenuDrawer />}
+    </>
+  )
+}
 
 export default Header

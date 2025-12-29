@@ -1,43 +1,43 @@
 import styled, { css } from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 import type { IButtonProps } from './types'
-import { colors, tokens } from '@/variables/styles'
 
 const primaryStyles = css`
-  background-color: ${colors.primary};
-  color: ${colors.white};
+  background-color: ${t.color('primary')};
+  color: ${t.color('white')};
 `
 
 const secondaryStyles = css`
-  background-color: ${colors.white};
-  border: 1px solid ${colors.darkNeutral};
-  color: ${colors.primary};
+  background-color: ${t.color('white')};
+  border: 1px solid ${t.color('darkNeutral')};
+  color: ${t.color('primary')};
 `
 
 const tertiaryStyles = css`
   border: none;
-  background-color: ${colors.whiteSmoke};
-  font-weight: ${tokens.font.weight.medium};
+  background-color: ${t.color('whiteSmoke')};
+  font-weight: ${t.fontWeight('medium')};
 `
 
 const textStyles = css`
-  font-weight: ${tokens.font.weight.bold};
+  font-weight: ${t.fontWeight('bold')};
   padding: 0;
   min-width: fit-content;
 `
 
 const fitContentStyles = css`
   min-width: fit-content;
-  padding: ${tokens.space.md};
+  padding: ${t.space('md')};
 `
 
 const StyledButton = styled.button<Partial<IButtonProps>>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: ${tokens.borders.radius.sm};
+  border-radius: ${t.borderRadius('sm')};
 
   min-width: 140px;
-  padding: ${tokens.space.sm} ${tokens.space.xl2};
+  padding: ${t.space('sm')} ${t.space('xl2')};
 
   ${({ variant }) => variant === 'primary' && primaryStyles};
   ${({ variant }) => variant === 'secondary' && secondaryStyles};
@@ -45,8 +45,8 @@ const StyledButton = styled.button<Partial<IButtonProps>>`
   ${({ variant }) => variant === 'text' && textStyles};
 
   ${({ fitContent }) => fitContent && fitContentStyles}
-  ${({ isRounded }) => isRounded && `border-radius: ${tokens.borders.radius.full}`}
-  font-weight: ${({ fontWeight }) => fontWeight && tokens.font.weight[fontWeight]};
+  ${({ isRounded }) => isRounded && `border-radius: ${t.borderRadius('full')}`}
+  font-weight: ${({ fontWeight }) => fontWeight && t.fontWeight(fontWeight)};
 
   &:hover {
     opacity: 0.8;

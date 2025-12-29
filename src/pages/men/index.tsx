@@ -1,10 +1,9 @@
+import { useNavigate } from 'react-router-dom'
 import Banner from '@/common/banner'
-import type { IBannerProps } from '@/common/banner/types'
 import BaseLayout from '@/common/layouts/baseLayout'
 import FlexContainer from '@/components/flexContainer'
 import { routeMap } from '@/routes/utils'
-import { tokens } from '@/variables/styles'
-import { useNavigate } from 'react-router-dom'
+import type { IBannerProps } from '@/common/banner/types'
 
 const MenPage = () => {
   const navigate = useNavigate()
@@ -24,7 +23,7 @@ const MenPage = () => {
 
   return (
     <BaseLayout showBreadcrumb={false} isHome>
-      <FlexContainer flexDirection="column" gap={tokens.space.xl4}>
+      <FlexContainer flexDirection="column" gap="xl4">
         <Banner {...bannerProps} bannerProps={{ textColor: 'darkNeutral' }} />
       </FlexContainer>
     </BaseLayout>

@@ -14,10 +14,4 @@ type CleanedFiltersData = {
   sizes: Size[]
 }
 
-// TODO: ?
-interface CommonFilterRenderProps {
-  filters: FiltersUI[]
-  // cleanedData: CleanedFiltersData
-}
-
-export type { FiltersSidePanelProps, CleanedFiltersData, CommonFilterRenderProps }
+export type { FiltersSidePanelProps, CleanedFiltersData }

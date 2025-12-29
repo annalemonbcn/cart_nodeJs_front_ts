@@ -1,11 +1,14 @@
+import type { CSSProperties } from 'react'
+import type { SpaceToken } from '@/theme'
+
 interface IFlexContainerProps {
-  flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
-  wrap?: 'nowrap' | 'wrap'
-  alignContent?: 'center' | 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'stretch'
-  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-around' | 'space-between' | 'space-evenly'
-  alignItems?: 'center' | 'flex-start' | 'flex-end' | 'stretch' | 'baseline'
-  gap?: string
-  rowGap?: string
+  flexDirection?: CSSProperties['flexDirection']
+  wrap?: CSSProperties['flexWrap']
+  alignContent?: CSSProperties['alignContent']
+  justifyContent?: CSSProperties['justifyContent']
+  alignItems?: CSSProperties['alignItems']
+  gap?: SpaceToken
+  rowGap?: SpaceToken
 }
 
 export type { IFlexContainerProps }

@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
+import { media, t } from '@/styles/themeHelpers'
 import type { IAuthLayoutProps } from './types'
-import { tokens } from '@/variables/styles'
-import { media } from '@/theme'
 
 const StyledAuthLayout = styled(FlexContainer)`
   height: 100%;
@@ -13,33 +12,32 @@ const StyledInnerContent = styled(FlexContainer)`
 `
 
 const ImageContainer = styled.div<Pick<IAuthLayoutProps, 'imgSrc'>>`
-  ${media.mobile(
-    css`
-      display: none;
-    `
-  )}
-  width: 50%;
+  display: none;
+
   background-image: url('${({ imgSrc }) => imgSrc}');
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
+
+  ${media.tablet(css`
+    display: block;
+    width: 50%;
+  `)}
 `
 
 const FormContainer = styled(FlexContainer)`
-  ${media.mobile(
-    css`
-      flex: 0 0 100%;
-      padding: ${tokens.space.xl2};
-    `
-  )}
+  flex: 0 0 100%;
+  padding: ${t.space('xl2')};
+
   ${media.tablet(
     css`
-      padding: ${tokens.space.xl2};
+      padding: ${t.space('xl2')};
     `
   )}
-
-  flex: 0 0 50%;
-  padding: ${tokens.space.xl2} ${tokens.space.xl5};
+  ${media.desktop(css`
+    flex: 0 0 50%;
+    padding: ${t.space('xl2')} ${t.space('xl5')};
+  `)}
 `
 
 export { StyledAuthLayout, StyledInnerContent, ImageContainer, FormContainer }

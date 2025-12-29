@@ -1,14 +1,15 @@
 import styled, { css } from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
-import { media } from '@/theme'
+import { media } from '@/styles/themeHelpers'
 
 const StyledFlexContainer = styled(FlexContainer)`
-  ${media.mobile(
+  flex-direction: column;
+
+  ${media.tablet(
     css`
-      flex-direction: column;
+      flex-direction: row;
     `
   )}
-  flex-direction: row;
 `
 
 export { StyledFlexContainer }

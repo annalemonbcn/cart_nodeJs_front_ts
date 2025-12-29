@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { colors, tokens } from '@/variables/styles'
+import { t } from '@/styles/themeHelpers'
 
 const StyledWrapper = styled.div`
   position: relative;
 `
 
 const StyledDisabler = styled.div`
-  background-color: ${colors.lightNeutral};
+  background-color: ${t.color('lightNeutral')};
 
   &:hover {
     cursor: not-allowed;
@@ -18,7 +18,7 @@ const StyledDisabler = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
-  border-radius: ${tokens.borders.radius.sm};
+  border-radius: ${t.borderRadius('sm')};
 `
 
 export { StyledWrapper, StyledDisabler }

@@ -1,11 +1,11 @@
-import { colors, tokens } from '@/variables/styles'
 import styled from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 
 const StyledTag = styled.div`
   text-align: center;
-  padding: ${tokens.space.sm2} ${tokens.space.md};
-  background-color: ${colors.whiteSmoke};
-  border-radius: ${tokens.borders.radius.sm};
+  padding: ${t.space('sm2')} ${t.space('md')};
+  background-color: ${t.color('whiteSmoke')};
+  border-radius: ${t.borderRadius('sm')};
 `
 
 export { StyledTag }

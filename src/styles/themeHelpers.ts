@@ -8,12 +8,19 @@ const fromTheme =
 
 const t = {
   space: (key: keyof DefaultTheme['tokens']['space']) => fromTheme((th) => th.tokens.space[key]),
-
   borderSize: (key: keyof DefaultTheme['tokens']['borders']['size']) => fromTheme((th) => th.tokens.borders.size[key]),
-
-  radius: (key: keyof DefaultTheme['tokens']['borders']['radius']) => fromTheme((th) => th.tokens.borders.radius[key]),
-
-  color: (key: keyof DefaultTheme['colors']) => fromTheme((th) => th.colors[key])
+  borderRadius: (key: keyof DefaultTheme['tokens']['borders']['radius']) =>
+    fromTheme((th) => th.tokens.borders.radius[key]),
+  fontSize: (key: keyof DefaultTheme['tokens']['font']['size']) => fromTheme((th) => th.tokens.font.size[key]),
+  fontWeight: (key: keyof DefaultTheme['tokens']['font']['weight']) => fromTheme((th) => th.tokens.font.weight[key]),
+  shadows: (key: keyof DefaultTheme['tokens']['shadows']) => fromTheme((th) => th.tokens.shadows[key]),
+  color: <K extends keyof DefaultTheme['colors']>(
+    key: K,
+    shade?: K extends 'danger' ? keyof DefaultTheme['colors']['danger'] : undefined
+  ) =>
+    fromTheme((th) =>
+      key === 'danger' ? th.colors.danger[shade as keyof DefaultTheme['colors']['danger']] : th.colors[key]
+    )
 }
 
 const media = {

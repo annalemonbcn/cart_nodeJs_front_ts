@@ -1,9 +1,9 @@
-import { tokens } from "@/variables/styles";
-import styled from "styled-components";
+import styled from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 
 const StyledIconContainer = styled.div`
-    width: ${tokens.space.md};
-    height: ${tokens.space.md};
+  width: ${t.space('md')};
+  height: ${t.space('md')};
 `
 
 export { StyledIconContainer }

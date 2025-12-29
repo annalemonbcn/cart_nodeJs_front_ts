@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import { type MultiValue } from 'react-select'
 import { FilterSection } from '@/common/filterSection'
 import Text from '@/components/text'
-import { customStyles } from './constants'
 import { StyledSelect } from './styles'
+import { useGetCustomStyles } from './useGetCustomStyles'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
 import type { SelectorOption } from './types'
 import type { SelectorFilterProps } from './types'
@@ -29,6 +29,8 @@ const SelectorFilter = ({ options, title, filterName, noDataText }: SelectorFilt
     const list = value.map((option) => String(option.value))
     write(list)
   }
+
+  const customStyles = useGetCustomStyles()
 
   return (
     <FilterSection {...{ title, numberOfSelected: selected.length, onClear: reset }}>

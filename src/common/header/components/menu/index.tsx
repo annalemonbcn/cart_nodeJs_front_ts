@@ -3,7 +3,6 @@ import FlexContainer from '@/components/flexContainer'
 import { Separator } from '@/components/separator'
 import { useDrawerContext } from '@/hooks/useDrawerContext'
 import { routeMap } from '@/routes/utils'
-import { tokens } from '@/variables/styles'
 import { NavLinks } from './styles'
 import { Buttons } from '../buttons'
 
@@ -14,7 +13,7 @@ const MenuDrawer = () => {
     <Drawer isOpen={isOpen} handleClose={handleClose} slideFrom="left" mobileWidth="80%">
       <Drawer.Header handleClose={handleClose} />
       <Drawer.Body>
-        <FlexContainer flexDirection="column" gap={tokens.space.xl} style={{ gap: '32px' }}>
+        <FlexContainer flexDirection="column" gap="xl">
           <NavLinks>
             <a href={routeMap.home.path}>Home</a>
             <a href={routeMap.men.path}>Men</a>

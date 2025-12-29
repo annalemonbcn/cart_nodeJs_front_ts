@@ -1,6 +1,6 @@
+import React, { useMemo, useRef, useState } from 'react'
 import { ArrowButton, Container, Dot, Dots, Slide, Track, Viewport } from './styles'
 import type { ICarouselProps } from './types'
-import React, { useMemo, useRef, useState } from 'react'
 
 const Carousel = ({ children, initialIndex = 0 }: ICarouselProps) => {
   const slides = useMemo(() => React.Children.toArray(children), [children])

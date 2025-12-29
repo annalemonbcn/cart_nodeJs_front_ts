@@ -1,10 +1,10 @@
-import type { VerticalMenuOption } from '@/common/menus/verticalMenu/types'
-import HeartIcon from '@/icons/heart.svg?react'
-import ProfileIcon from '@/icons/profile.svg?react'
-import OrdersIcon from '@/icons/orders.svg?react'
-import SignOutIcon from '@/icons/sign-out.svg?react'
 import { useLocation } from 'react-router-dom'
+import HeartIcon from '@/icons/heart.svg?react'
+import OrdersIcon from '@/icons/orders.svg?react'
+import ProfileIcon from '@/icons/profile.svg?react'
+import SignOutIcon from '@/icons/sign-out.svg?react'
 import { routeMap } from '@/routes/utils'
+import type { VerticalMenuOption } from '@/common/menus/verticalMenu/types'
 import type { RouteName } from '@/routes/routesData'
 
 type MenuOption = Extract<RouteName, 'wishlist' | 'orders' | 'profile' | 'signOut'>

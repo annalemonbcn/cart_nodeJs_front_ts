@@ -4,10 +4,8 @@ import FlexContainer from '@/components/flexContainer'
 import Loader from '@/components/loader'
 import Text from '@/components/text'
 import { useDrawerContext } from '@/hooks/useDrawerContext'
-import { DrawerProvider } from '@/hooks/useDrawerContext/provider'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { theme2 } from '@/theme'
-import { tokens } from '@/variables/styles'
+import { theme } from '@/theme'
 import { FiltersDrawer } from './components/filtersDrawer'
 import { DEFAULT_FILTERS, getFiltersRender } from './constants'
 import { useGetFiltersData, useGetUniqueFilters } from './hooks'
@@ -21,7 +19,7 @@ const MobileTrigger = () => {
 
   return (
     <Button variant="text" onClick={handleOpen}>
-      <FlexContainer alignItems="center" gap={tokens.space.xs2}>
+      <FlexContainer alignItems="center" gap={'xs2'}>
         <Text size="s3" weight="bold">
           Filters
         </Text>
@@ -40,7 +38,7 @@ const FiltersRender = ({ filters, data }: { filters: FiltersUI[]; data: CleanedF
 )
 
 const FiltersShell = ({ children }: PropsWithChildren) => {
-  const isDesktop = useMediaQuery(theme2.mq.js.up('md'))
+  const isDesktop = useMediaQuery(theme.mq.js.up('md'))
 
   if (isDesktop) {
     return <StyledDesktopFiltersSidePanel flexDirection="column">{children}</StyledDesktopFiltersSidePanel>
@@ -62,11 +60,9 @@ const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: FiltersSidePanelProps) 
   if (isLoading) return <Loader />
 
   return (
-    <DrawerProvider>
-      <FiltersShell>
-        <FiltersRender filters={uniqueFilters} data={data} />
-      </FiltersShell>
-    </DrawerProvider>
+    <FiltersShell>
+      <FiltersRender filters={uniqueFilters} data={data} />
+    </FiltersShell>
   )
 }
 

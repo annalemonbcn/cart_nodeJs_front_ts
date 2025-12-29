@@ -1,5 +1,5 @@
-import { tokens } from '@/variables/styles'
 import styled, { css, keyframes } from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 
 const shimmer = keyframes`
   100% {
@@ -20,7 +20,7 @@ const animationStyles = css`
 
 const StyledSkeleton = styled.div`
   background-color: #e2e2e2;
-  border-radius: ${tokens.borders.radius.sm};
+  border-radius: ${t.borderRadius('sm')};
   width: 100%;
   height: 400px;
 
@@ -33,8 +33,8 @@ const StyledSkeleton = styled.div`
 const StyledSkeletonList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: ${tokens.space.lg};
-  row-gap: ${tokens.space.xl2};
+  column-gap: ${t.space('lg')};
+  row-gap: ${t.space('xl2')};
 `
 
 export { StyledSkeleton, StyledSkeletonList }

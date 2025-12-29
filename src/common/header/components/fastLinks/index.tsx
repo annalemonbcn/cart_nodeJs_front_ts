@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
 import { StyledButton } from './styles'
 import { getHighlights } from './utils'
 import type { IHighlightedItem } from './types'
@@ -32,7 +31,7 @@ const FastLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
   const highlights = getHighlights(isMobile)
 
   return (
-    <FlexContainer alignItems="center" gap={tokens.space.sm}>
+    <FlexContainer alignItems="center" gap="sm">
       {highlights.map((highlight) => {
         const path = highlight.path.split('/')
         const lastPath = path[path.length - 1]

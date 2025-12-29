@@ -1,9 +1,9 @@
-import type { IFormFieldProps } from './types'
 import Text from '@/components/text'
 import { capitalize } from '@/utils/string'
 import FlexContainer from '../flexContainer'
 import { ShowPasswordIcon } from './components/showPasswordIcon'
 import { StyledErrorTextContainer, StyledLabel } from './styles'
+import type { IFormFieldProps } from './types'
 
 const FormField = ({
   label,

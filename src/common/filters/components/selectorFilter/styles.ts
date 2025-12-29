@@ -1,10 +1,10 @@
 import Select from 'react-select'
 import styled from 'styled-components'
-import { tokens } from '@/variables/styles'
+import { t } from '@/styles/themeHelpers'
 
 const StyledSelect = styled(Select)`
   & * {
-    font-size: ${tokens.font.size.s3};
+    font-size: ${t.fontSize('s3')};
   }
 `
 

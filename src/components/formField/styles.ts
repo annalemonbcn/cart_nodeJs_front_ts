@@ -1,26 +1,26 @@
-import { colors, tokens } from '@/variables/styles'
 import styled, { css } from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 import type { FormFieldVariant } from './types'
 
 const primaryStyles = css`
-  color: ${colors.darkNeutral};
+  color: ${t.color('darkNeutral')};
 `
 
 const secondaryStyles = css`
-  font-weight: ${tokens.font.weight.medium};
+  font-weight: ${t.fontWeight('medium')};
 `
 
 const tertiaryStyles = css`
-  color: ${colors.darkNeutral};
-  font-weight: ${tokens.font.weight.medium};
+  color: ${t.color('darkNeutral')};
+  font-weight: ${t.fontWeight('medium')};
 `
 
 const errorStyles = css`
-  color: ${colors.danger[800]};
+  color: ${t.color('danger', 800)};
 `
 
 const StyledLabel = styled.label<{ variant: FormFieldVariant; hasError?: boolean }>`
-  font-size: ${tokens.font.size.s3};
+  font-size: ${t.fontSize('s3')};
 
   ${({ variant }) => variant === 'primary' && primaryStyles};
   ${({ variant }) => variant === 'secondary' && secondaryStyles};
@@ -30,7 +30,7 @@ const StyledLabel = styled.label<{ variant: FormFieldVariant; hasError?: boolean
 `
 
 const StyledErrorTextContainer = styled.div`
-  margin-top: ${tokens.space.xs2};
+  margin-top: ${t.space('xs2')};
 `
 
 export { StyledLabel, StyledErrorTextContainer }

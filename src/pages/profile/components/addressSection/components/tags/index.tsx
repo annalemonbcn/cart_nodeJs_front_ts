@@ -1,6 +1,5 @@
 import FlexContainer from '@/components/flexContainer'
 import { capitalize } from '@/utils/string'
-import { tokens } from '@/variables/styles'
 import { StyledTag } from './styles'
 
 const Tag = ({ label }: { label: string }) => (
@@ -10,7 +9,7 @@ const Tag = ({ label }: { label: string }) => (
 )
 
 const Tags = ({ isDefault, tags }: { isDefault: boolean; tags?: string[] }) => (
-  <FlexContainer gap={tokens.space.sm}>
+  <FlexContainer gap="sm">
     {isDefault && <Tag label="Default" />}
     {tags?.map((tag) => (
       <Tag key={`address-${tag}`} label={capitalize(tag)} />

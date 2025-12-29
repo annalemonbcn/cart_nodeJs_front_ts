@@ -1,12 +1,11 @@
-import FlexContainer from '@/components/flexContainer'
-import { media } from '@/theme'
-import { colors, tokens } from '@/variables/styles'
 import styled, { css } from 'styled-components'
+import FlexContainer from '@/components/flexContainer'
+import { media, t } from '@/styles/themeHelpers'
 
 const activeStyles = css`
-  background-color: ${colors.whiteSmoke};
-  border-top-right-radius: ${tokens.borders.radius.sm};
-  border-bottom-right-radius: ${tokens.borders.radius.sm};
+  background-color: ${t.color('whiteSmoke')};
+  border-top-right-radius: ${t.borderRadius('sm')};
+  border-bottom-right-radius: ${t.borderRadius('sm')};
 
   &::before {
     content: '';
@@ -14,26 +13,25 @@ const activeStyles = css`
     left: 0;
     top: 0;
     bottom: 0;
-    width: ${tokens.borders.size.sm};
-    background-color: ${colors.darkNeutral};
+    width: ${t.borderSize('sm')};
+    background-color: ${t.color('darkNeutral')};
   }
 `
 
 const activeStylesMobile = css`
-  background-color: ${colors.whiteSmoke};
-  border-radius: ${tokens.borders.radius.sm};
+  background-color: ${t.color('whiteSmoke')};
+  border-radius: ${t.borderRadius('sm')};
 `
 
 const StyledMenuItem = styled(FlexContainer)<{ isActive: boolean }>`
-  padding: ${tokens.space.sm} ${tokens.space.xl2};
+  padding: ${t.space('sm')} ${t.space('xl2')};
   position: relative;
 
   ${({ isActive }) =>
     isActive &&
     css`
-      ${media.mobile(activeStylesMobile)}
-      ${media.tablet(activeStyles)}
-      ${media.desktop(activeStyles)}
+      ${activeStylesMobile};
+      ${media.tablet(activeStyles)};
     `}
 `
 

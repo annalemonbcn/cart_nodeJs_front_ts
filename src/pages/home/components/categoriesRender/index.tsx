@@ -1,79 +1,47 @@
+import Carousel from '@/common/carousel'
 import Section from '@/common/section'
 import Tile from '@/components/tile'
-import type { ITileProps } from '@/components/tile/types'
-import { getMensCategories, getWomensCategories } from './utils'
-import { StyledDesktopWrapper, StyledMobileWrapper } from '@/theme'
-import Carousel from '@/common/carousel'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { theme } from '@/theme'
 import { StyledFlexContainer } from './styles'
+import { getMensCategories, getWomensCategories } from './utils'
+import type { CategoriesSectionProps } from './types'
+import type { ITileProps } from '@/components/tile/types'
 
-const MensCategoriesDesktop = ({ categories }: { categories: ITileProps[] }) => (
-  <StyledDesktopWrapper>
-    <StyledFlexContainer justifyContent="space-between">
-      {categories.map((category, index) => (
-        <Tile key={index} {...category} tileStyle="rectangular" />
-      ))}
-    </StyledFlexContainer>
-  </StyledDesktopWrapper>
+const CategoriesRender = ({ categories }: { categories: ITileProps[] }) => (
+  <>
+    {categories.map((category) => (
+      <Tile key={`key-${category.title}`} {...category} tileStyle="rectangular" />
+    ))}
+  </>
 )
 
-const MensCategoriesMobile = ({ categories }: { categories: ITileProps[] }) => (
-  <StyledMobileWrapper>
-    <Carousel>
-      {categories.map((category, index) => (
-        <Tile key={index} {...category} tileStyle="rectangular" />
-      ))}
-    </Carousel>
-  </StyledMobileWrapper>
-)
-
-const MensCategories = () => {
-  const mensCategories = getMensCategories().map((item) => ({
+const CategoriesSection = ({ title, getCategories }: CategoriesSectionProps) => {
+  const categories = getCategories().map((item) => ({
     ...item,
     description: 'Explore Now!',
     showArrow: true
   }))
 
+  const isDesktop = useMediaQuery(theme.mq.js.up('md'))
+
   return (
-    <Section title="Categories For Men">
-      <MensCategoriesDesktop categories={mensCategories} />
-      <MensCategoriesMobile categories={mensCategories} />
+    <Section title={title}>
+      {isDesktop ? (
+        <StyledFlexContainer justifyContent="space-between">
+          <CategoriesRender categories={categories} />
+        </StyledFlexContainer>
+      ) : (
+        <Carousel>
+          <CategoriesRender categories={categories} />
+        </Carousel>
+      )}
     </Section>
   )
 }
 
-const WomensCategoriesDesktop = ({ categories }: { categories: ITileProps[] }) => (
-  <StyledDesktopWrapper>
-    <StyledFlexContainer justifyContent="space-between">
-      {categories.map((category, index) => (
-        <Tile key={index} {...category} tileStyle="rectangular" />
-      ))}
-    </StyledFlexContainer>
-  </StyledDesktopWrapper>
-)
+const MensCategories = () => <CategoriesSection title="Categories For Men" getCategories={getMensCategories} />
 
-const WomensCategoriesMobile = ({ categories }: { categories: ITileProps[] }) => (
-  <StyledMobileWrapper>
-    <Carousel>
-      {categories.map((category, index) => (
-        <Tile key={index} {...category} tileStyle="rectangular" />
-      ))}
-    </Carousel>
-  </StyledMobileWrapper>
-)
-
-const WomensCategories = () => {
-  const womensCategories = getWomensCategories().map((item) => ({
-    ...item,
-    description: 'Explore Now!',
-    showArrow: true
-  }))
-
-  return (
-    <Section title="Categories For Women">
-      <WomensCategoriesDesktop categories={womensCategories} />
-      <WomensCategoriesMobile categories={womensCategories} />
-    </Section>
-  )
-}
+const WomensCategories = () => <CategoriesSection title="Categories For Women" getCategories={getWomensCategories} />
 
 export { MensCategories, WomensCategories }
