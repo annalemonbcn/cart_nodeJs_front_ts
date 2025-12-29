@@ -1,17 +1,14 @@
-import { media } from '@/theme'
-import { tokens } from '@/variables/styles'
 import styled, { css } from 'styled-components'
+import { media, t } from '@/styles/themeHelpers'
 
 const StyledContainer = styled.div`
   display: grid;
-  gap: ${tokens.space.lg};
+  gap: ${t.space('lg')};
 
-  ${media.mobile(
-    css`
-      grid-template-columns: 1fr;
-    `
-  )}
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
+  ${media.tablet(css`
+    grid-template-columns: repeat(2, 1fr);
+  `)}
 `
 
 export { StyledContainer }

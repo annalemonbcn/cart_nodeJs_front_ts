@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
-import { colors, tokens } from '@/variables/styles'
+import { t } from '@/styles/themeHelpers'
 
 const StyledContainer = styled(FlexContainer)`
-  padding: ${tokens.space.xl};
-  border: ${tokens.borders.size.sm} dashed ${colors.lightNeutral};
+  padding: ${t.borderSize('sm')} dashed ${t.color('lightNeutral')};
   align-items: center;
 `
 

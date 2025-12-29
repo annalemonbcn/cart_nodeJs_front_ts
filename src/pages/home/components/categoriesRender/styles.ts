@@ -1,14 +1,16 @@
-import FlexContainer from '@/components/flexContainer'
-import { media } from '@/theme'
-import { tokens } from '@/variables/styles'
 import styled, { css } from 'styled-components'
+import FlexContainer from '@/components/flexContainer'
+import { media, t } from '@/styles/themeHelpers'
 
 const StyledFlexContainer = styled(FlexContainer)`
-  ${media.tablet(
+  flex-wrap: wrap;
+  gap: ${t.space('lg')};
+  justify-content: center;
+
+  ${media.desktop(
     css`
-      flex-wrap: wrap;
-      gap: ${tokens.space.lg};
-      justify-content: center;
+      gap: auto;
+      justify-content: space-between;
     `
   )}
 `

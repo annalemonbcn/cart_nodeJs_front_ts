@@ -1,10 +1,10 @@
-import { colors, tokens } from '@/variables/styles'
 import styled from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 
 const StyledAddressContainer = styled.div`
-  background-color: ${colors.whiteSmoke};
-  padding: ${tokens.space.lg} ${tokens.space.xl2};
-  border-radius: ${tokens.borders.radius.md};
+  background-color: ${t.color('whiteSmoke')};
+  padding: ${t.space('lg')} ${t.space('xl2')};
+  border-radius: ${t.borderRadius('md')};
 
   display: grid;
   grid-template-areas:
@@ -13,7 +13,7 @@ const StyledAddressContainer = styled.div`
     'address'
     'tags'
     'actions';
-  gap: ${tokens.space.md};
+  gap: ${t.space('md')};
 `
 
 const NameArea = styled.div`

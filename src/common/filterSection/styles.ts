@@ -1,42 +1,71 @@
 import styled, { css } from 'styled-components'
-import { colors, tokens } from '@/variables/styles'
 import FlexContainer from '@/components/flexContainer'
+import { media, t } from '@/styles/themeHelpers'
 
 const borders = css`
-  border: ${tokens.borders.size.xs} solid ${colors.lightNeutral};
-  border-top: 0;
+  border: 0;
+
+  ${media.desktop(css`
+    border: 1px solid ${t.color('lightNeutral')};
+    border-top: 0;
+  `)};
+`
+
+const mobilePadding = css`
+  padding: 0 ${({ theme }) => theme.tokens.space.xl};
+`
+
+const paddingHeader = css`
+  ${mobilePadding};
+
+  ${media.desktop(css`
+    padding: ${t.space('md')} ${t.space('xl')};
+  `)};
 `
 
 const StyledHeading = styled(FlexContainer)`
-  padding: ${tokens.space.md} ${tokens.space.xl};
+  ${paddingHeader};
   ${borders};
   cursor: pointer;
 `
 
 const StyledIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  display: none;
+
+  ${media.desktop(css`
+    display: block;
+    width: 20px;
+    height: 20px;
+  `)};
+`
+
+const paddingBody = css`
+  ${mobilePadding};
+
+  ${media.desktop(css`
+    padding: ${t.space('xl2')} ${t.space('xl')};
+  `)};
 `
 
 const StyledBody = styled.div`
-  padding: ${tokens.space.xl2} ${tokens.space.xl};
-  ${borders}
+  ${borders};
+  ${paddingBody};
 `
 
 const hoveredStyles = css`
   width: auto;
-  padding: ${tokens.space.xs2};
-  border-radius: ${tokens.borders.radius.md};
+  padding: ${t.space('xs2')};
+  border-radius: ${t.borderRadius('md')};
   opacity: 0.8;
 `
 
 const StyledIndicator = styled(FlexContainer)<{ hovered: boolean }>`
-  background-color: ${colors.primary};
-  border-radius: ${tokens.borders.radius.full};
+  background-color: ${t.color('primary')};
+  border-radius: ${t.borderRadius('full')};
   width: 20px;
   height: 20px;
 
-  ${({ hovered }) => hovered && hoveredStyles}
+  ${({ hovered }) => hovered && hoveredStyles};
 `
 
 export { StyledHeading, StyledBody, StyledIcon, StyledIndicator }

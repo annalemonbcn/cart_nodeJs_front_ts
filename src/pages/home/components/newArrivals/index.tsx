@@ -1,35 +1,35 @@
-import { generateTiles } from './utils'
+import Carousel from '@/common/carousel'
 import Section from '@/common/section'
 import Tile from '@/components/tile'
-import Carousel from '@/common/carousel'
-import { StyledDesktopWrapper, StyledMobileWrapper } from '@/theme'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { theme } from '@/theme'
 import { StyledFlexContainer } from './styles'
+import { generateTiles } from './utils'
 
-const NewArrivalsDesktop = () => (
-  <StyledDesktopWrapper>
-    <StyledFlexContainer justifyContent="space-between">
-      {generateTiles().map((tile, index) => (
-        <Tile key={index} {...tile} />
-      ))}
-    </StyledFlexContainer>
-  </StyledDesktopWrapper>
+const NewArrivalsRender = () => (
+  <>
+    {generateTiles().map((tile, index) => (
+      <Tile key={index} {...tile} />
+    ))}
+  </>
 )
 
-const NewArrivalsMobile = () => (
-  <StyledMobileWrapper>
-    <Carousel>
-      {generateTiles().map((tile, index) => (
-        <Tile key={index} {...tile} />
-      ))}
-    </Carousel>
-  </StyledMobileWrapper>
-)
+const NewArrivals = () => {
+  const isDesktop = useMediaQuery(theme.mq.js.up('md'))
 
-const NewArrivals = () => (
-  <Section title="New Arrivals">
-    <NewArrivalsDesktop />
-    <NewArrivalsMobile />
-  </Section>
-)
+  return (
+    <Section title="New Arrivals">
+      {isDesktop ? (
+        <StyledFlexContainer justifyContent="space-between">
+          <NewArrivalsRender />
+        </StyledFlexContainer>
+      ) : (
+        <Carousel>
+          <NewArrivalsRender />
+        </Carousel>
+      )}
+    </Section>
+  )
+}
 
 export { NewArrivals }

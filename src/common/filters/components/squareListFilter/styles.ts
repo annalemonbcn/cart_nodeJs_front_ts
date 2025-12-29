@@ -1,19 +1,19 @@
 import styled, { css } from 'styled-components'
-import { colors, tokens } from '@/variables/styles'
+import { t } from '@/styles/themeHelpers'
 
 const whiteColorStyles = css`
-  border: ${tokens.borders.size.xs} solid ${colors.lightNeutral};
+  border: ${t.borderSize("xs")} solid ${t.color("lightNeutral")};
 `
 
 const isActiveStyles = css`
-  border: ${tokens.borders.size.xs} solid ${colors.darkNeutral};
+  border: ${t.borderSize("xs")} solid ${t.color("darkNeutral")};
 `
 
 const StyledColor = styled.div<{ color: string; isActive: boolean }>`
-  width: ${tokens.space.xl};
-  height: ${tokens.space.xl};
+  width: ${t.space("xl")};
+  height: ${t.space("xl")};
   background-color: ${({ color }) => color && color};
-  border-radius: ${tokens.borders.radius.md};
+  border-radius: ${t.borderRadius("md")};
 
   ${({ color }) => (color === 'all' || color === 'white') && whiteColorStyles};
   ${({ isActive }) => isActive && isActiveStyles};
@@ -26,7 +26,7 @@ const StyledContainer = styled.div`
   grid-auto-columns: 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
-  gap: 20px ${tokens.space.md};
+  gap: 20px ${t.space('md')};
 `
 
 export { StyledColor, StyledContainer }

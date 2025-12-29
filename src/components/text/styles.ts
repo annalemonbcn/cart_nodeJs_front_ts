@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { colors, dangerShades, tokens } from '@/variables/styles'
-import type { ITextProps } from './types'
+import { t } from '@/styles/themeHelpers'
+import type { StyledTextProps } from './types'
 
 const clampStyles = css`
   white-space: nowrap;
@@ -8,19 +8,20 @@ const clampStyles = css`
   text-overflow: ellipsis;
 `
 
-const StyledText = styled.p<Partial<ITextProps>>`
-  font-size: ${({ size }) => size && tokens.font.size[size]};
-  font-weight: ${({ weight }) => weight && tokens.font.weight[weight]};
+const StyledText = styled.p<StyledTextProps>`
+  font-size: ${({ size }) => size && t.fontSize(size)};
+  font-weight: ${({ weight }) => weight && t.fontWeight(weight)};
   margin: 0;
-  color: ${({ color }) => {
-    if (!color) return 'inherit'
+
+  color: ${({ theme, color }) => {
+    if (!color || color === 'inherit') return 'inherit'
 
     if (color.startsWith('danger.')) {
-      const shade = color.split('.')[1] as unknown as keyof typeof dangerShades
-      return dangerShades[shade]
+      const shade = Number(color.split('.')[1]) as keyof typeof theme.colors.danger
+      return theme.colors.danger[shade]
     }
 
-    return colors[color as keyof typeof colors]
+    return theme.colors[color as keyof typeof theme.colors] as string
   }};
 
   ${({ underline }) => underline && 'text-decoration: underline'};

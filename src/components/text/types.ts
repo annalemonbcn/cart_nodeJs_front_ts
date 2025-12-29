@@ -1,21 +1,21 @@
+import type { ColorToken, FontSizeToken, FontWeightToken } from '@/theme'
 import type { PropsWithChildren } from '@/variables/types/global.types'
-import { tokens, colors } from '@/variables/styles'
-
-type FontSize = keyof typeof tokens.font.size
-type FontWeight = keyof typeof tokens.font.weight
-type TextColor =
-  | keyof typeof colors
-  | `${keyof typeof colors}.100`
-  | `${keyof typeof colors}.200`
-  | `${keyof typeof colors}.800`
 
 interface ITextProps extends PropsWithChildren {
-  size?: FontSize
-  weight?: FontWeight
-  color?: TextColor
+  size?: FontSizeToken
+  weight?: FontWeightToken
+  color?: ColorToken | 'inherit'
   as?: keyof HTMLElementTagNameMap
   underline?: boolean
   clamp?: boolean
 }
 
-export type { ITextProps, FontSize, FontWeight, TextColor }
+type StyledTextProps = {
+  size?: FontSizeToken
+  weight?: FontWeightToken
+  color?: ColorToken | 'inherit'
+  underline?: boolean
+  clamp?: boolean
+}
+
+export type { ITextProps, StyledTextProps }

@@ -1,28 +1,68 @@
+import { Fragment } from 'react'
+import Button from '@/components/button'
+import FlexContainer from '@/components/flexContainer'
 import Loader from '@/components/loader'
-import { DrawerProvider } from '@/hooks/useDrawerContext/provider'
-import { DesktopRender } from './components/desktopRender'
-import { MobileRender } from './components/mobileRender'
-import { DEFAULT_FILTERS } from './constants'
+import Text from '@/components/text'
+import { useDrawerContext } from '@/hooks/useDrawerContext'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { theme } from '@/theme'
+import { FiltersDrawer } from './components/filtersDrawer'
+import { DEFAULT_FILTERS, getFiltersRender } from './constants'
 import { useGetFiltersData, useGetUniqueFilters } from './hooks'
-import type { FiltersSidePanelProps } from './types'
+import { StyledDesktopFiltersSidePanel, StyledFilterIcon } from './styles'
+import type { CleanedFiltersData, FiltersSidePanelProps } from './types'
+import type { FiltersUI } from '@/common/filters/types'
+import type { PropsWithChildren } from '@/variables/types/global.types'
 
-// TODO: don't duplicate tree elements for mobile and desktop ! 
-// use useIsMobile instead
-// change everywhere
+const MobileTrigger = () => {
+  const { handleOpen } = useDrawerContext()
+
+  return (
+    <Button variant="text" onClick={handleOpen}>
+      <FlexContainer alignItems="center" gap={'xs2'}>
+        <Text size="s3" weight="bold">
+          Filters
+        </Text>
+        <StyledFilterIcon width={16} height={16} />
+      </FlexContainer>
+    </Button>
+  )
+}
+
+const FiltersRender = ({ filters, data }: { filters: FiltersUI[]; data: CleanedFiltersData }) => (
+  <>
+    {filters.map((filter) => (
+      <Fragment key={`filter-${filter}`}>{getFiltersRender(filter, data)}</Fragment>
+    ))}
+  </>
+)
+
+const FiltersShell = ({ children }: PropsWithChildren) => {
+  const isDesktop = useMediaQuery(theme.mq.js.up('md'))
+
+  if (isDesktop) {
+    return <StyledDesktopFiltersSidePanel flexDirection="column">{children}</StyledDesktopFiltersSidePanel>
+  }
+
+  return (
+    <>
+      <MobileTrigger />
+      <FiltersDrawer>{children}</FiltersDrawer>
+    </>
+  )
+}
+
 const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: FiltersSidePanelProps) => {
-  const { isLoading } = useGetFiltersData()
+  const { data, isLoading } = useGetFiltersData()
   const uniqueFilters = useGetUniqueFilters(filters)
 
   // TODO: replace loader for skeleton
   if (isLoading) return <Loader />
 
   return (
-    <>
-      <DrawerProvider>
-        <MobileRender filters={uniqueFilters} />
-      </DrawerProvider>
-      <DesktopRender filters={uniqueFilters} />
-    </>
+    <FiltersShell>
+      <FiltersRender filters={uniqueFilters} data={data} />
+    </FiltersShell>
   )
 }
 

@@ -1,11 +1,16 @@
 import type { FC, JSX } from 'react'
 import Modal from 'react-modal'
 import Text from '@/components/text'
-import CloseIcon from '@/icons/close.svg?react'
 import { getChildrenDisplayName, validateChildren } from '@/utils/children'
-import { colors } from '@/variables/styles'
 import { DEFAULT_STYLES } from './constants'
-import { StyledCloseIcon, StyledFooter, StyledHeader, StyledModalBody, StyledModalWrapper } from './styles'
+import {
+  StyledCloseIcon,
+  StyledCloseIconContainer,
+  StyledFooter,
+  StyledHeader,
+  StyledModalBody,
+  StyledModalWrapper
+} from './styles'
 import type { BodyProps, FooterProps, HeaderProps, IModalBaseProps } from './types'
 
 const Header = ({ title, description, ...rest }: HeaderProps) => (
@@ -44,10 +49,10 @@ const ModalBase: ModalBaseType = ({ handleClose, isOpen, children, width }) => {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={handleClose} style={DEFAULT_STYLES}>
-      <StyledModalWrapper width={width}>
-        <StyledCloseIcon justifyContent="flex-end" alignItems="center" onClick={handleClose}>
-          <CloseIcon color={colors.darkNeutral} />
-        </StyledCloseIcon>
+      <StyledModalWrapper width={width} flexDirection="column">
+        <StyledCloseIconContainer justifyContent="flex-end" alignItems="center" onClick={handleClose}>
+          <StyledCloseIcon />
+        </StyledCloseIconContainer>
         {header}
         {body}
         {footer}

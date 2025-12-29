@@ -1,5 +1,5 @@
-import FlexContainer from '@/components/flexContainer'
 import { SubTitle } from '@/common/titles/subTitle'
+import FlexContainer from '@/components/flexContainer'
 import Link from '@/components/link'
 import { routeMap } from '@/routes/utils'
 

@@ -1,13 +1,17 @@
+import styled, { css } from 'styled-components'
 import Button from '@/components/button'
-import { colors } from '@/variables/styles'
-import styled from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 
 const StyledButton = styled(Button)<{ isActive: boolean }>`
   max-width: 44px;
   max-height: 44px;
 
   & path {
-    ${({ isActive }) => isActive && `stroke: ${colors.white};`}
+    ${({ isActive }) =>
+      isActive &&
+      css`
+        stroke: ${t.color('white')};
+      `}
   }
 `
 

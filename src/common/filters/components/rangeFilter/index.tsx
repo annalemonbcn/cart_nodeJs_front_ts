@@ -4,7 +4,6 @@ import { useFiltersState } from '@/common/filters/hooks/useFiltersState'
 import { FilterSection } from '@/common/filterSection'
 import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
-import { tokens } from '@/variables/styles'
 import { StyledContainer } from './styles'
 import { type IRangeFilterProps, type IValueRenderProps } from './types'
 
@@ -59,7 +58,7 @@ const RangeFilter = ({ minPrice, maxPrice, noDataText }: IRangeFilterProps) => {
       {shouldRenderNoData && <Text size="s3">{noDataText}</Text>}
 
       {!shouldRenderNoData && (
-        <FlexContainer flexDirection="column" gap={tokens.space.md}>
+        <FlexContainer flexDirection="column" gap="md">
           <PriceRange
             min={minPrice}
             max={maxPrice}
@@ -68,7 +67,7 @@ const RangeFilter = ({ minPrice, maxPrice, noDataText }: IRangeFilterProps) => {
             onChange={handleChange}
             onChangeCommitted={handleCommit}
           />
-          <FlexContainer justifyContent="space-between" alignItems="center" gap={tokens.space.md}>
+          <FlexContainer justifyContent="space-between" alignItems="center" gap="md">
             <ValueRender value={localMin} isActive={isMinFilterActive} />
             <ValueRender value={localMax} isActive={isMaxFilterActive} />
           </FlexContainer>

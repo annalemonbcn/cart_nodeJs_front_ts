@@ -1,52 +1,52 @@
 import styled, { css } from 'styled-components'
-import { tokens, colors } from '@/variables/styles'
+import { t } from '@/styles/themeHelpers'
 import type { IInputProps } from './types'
 
 const primaryStyles = css`
-  border-radius: ${tokens.borders.radius.sm};
-  border: ${tokens.borders.size.xs} solid ${colors.darkNeutral};
+  border-radius: ${t.borderRadius('sm')};
+  border: ${t.borderSize('xs')} solid ${t.color('darkNeutral')};
 `
 
 const secondaryStyles = (hasError?: boolean) => css`
   border: none;
   padding-left: 0;
-  font-size: ${tokens.font.size.s4};
-  font-weight: ${tokens.font.weight.bold};
+  font-size: ${t.fontSize('s4')};
+  font-weight: ${t.fontWeight('bold')};
 
   transition: all 0.2s ease-in-out;
 
   ${hasError && secondaryErrorStyles}
 
   &:focus {
-    background-color: ${colors.whiteSmoke};
-    padding-left: ${tokens.space.sm2};
+    background-color: ${t.color('whiteSmoke')};
+    padding-left: ${t.space('sm2')};
   }
 `
 
 const secondaryErrorStyles = css`
-  padding-left: ${tokens.space.sm2};
-  background: linear-gradient(65deg, ${colors.danger[100]} 0%, ${colors.white} 100%);
-  color: ${colors.danger[800]};
+  padding-left: ${t.space('sm2')};
+  background: linear-gradient(65deg, ${t.color('danger', 100)} 0%, ${t.color('white')} 100%);
+  color: ${t.color('danger', 800)};
 `
 
 const tertiaryStyles = (hasError?: boolean) => css`
   border: none;
-  background-color: ${colors.whiteSmoke};
-  padding-left: ${tokens.space.sm2};
+  background-color: ${t.color('whiteSmoke')};
+  padding-left: ${t.space('sm2')};
 
   ${hasError && tertiaryErrorStyles}
 `
 
 const tertiaryErrorStyles = css`
-  border-bottom: ${tokens.borders.size.xs} solid ${colors.danger[800]};
-  background-color: ${colors.danger[100]};
+  border-bottom: ${t.borderSize('xs')} solid ${t.color('danger', 800)};
+  background-color: ${t.color('danger', 100)};
 `
 
 const StyledInput = styled.input<Pick<IInputProps, 'variant' | 'fitContent' | 'hasError'>>`
   min-width: 140px;
-  padding: ${tokens.space.sm};
-  color: ${colors.darkNeutral};
-  background-color: ${colors.white};
+  padding: ${t.space('sm')};
+  color: ${t.color('darkNeutral')};
+  background-color: ${t.color('white')};
 
   ${({ variant }) => variant === 'primary' && primaryStyles};
   ${({ variant, hasError }) => variant === 'secondary' && secondaryStyles(hasError)};

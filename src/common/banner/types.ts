@@ -1,4 +1,4 @@
-import type { TextColor } from '@/components/text/types'
+import type { ColorToken } from '@/theme'
 
 type ButtonProps = {
   label: string
@@ -13,7 +13,7 @@ type BannerContent = {
 }
 
 type BannerProps = {
-  textColor?: TextColor
+  textColor?: ColorToken
   align?: 'left' | 'right'
 }
 

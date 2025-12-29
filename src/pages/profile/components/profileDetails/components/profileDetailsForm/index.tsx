@@ -1,10 +1,9 @@
-import { tokens } from '@/variables/styles'
-import FlexContainer from '@/components/flexContainer'
-import { renderFormFields } from './utils'
-import Loader from '@/components/loader'
 import ErrorState from '@/common/errorState'
 import { StandardForm } from '@/components/customForm/standardForm'
 import { StyledFormButton } from '@/components/customForm/standardForm/styles'
+import FlexContainer from '@/components/flexContainer'
+import Loader from '@/components/loader'
+import { renderFormFields } from './utils'
 import { useProfileDetailsFrom } from '../../hooks'
 
 const ProfileDetailsForm = () => {
@@ -24,8 +23,8 @@ const ProfileDetailsForm = () => {
   }
 
   return (
-    <FlexContainer flexDirection="column" gap={tokens.space.md}>
-      <StandardForm methods={methods} gap={tokens.space.xs}>
+    <FlexContainer flexDirection="column" gap="md">
+      <StandardForm methods={methods} gap="xs">
         {renderFormFields()}
       </StandardForm>
 

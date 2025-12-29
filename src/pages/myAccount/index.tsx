@@ -1,9 +1,8 @@
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuthContext } from '@/auth/provider/useAuthContext'
 import BaseLayout from '@/common/layouts/baseLayout'
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { SideMenu } from './components/sideMenu'
-import { tokens } from '@/variables/styles'
 import { routeMap } from '@/routes/utils'
+import { SideMenu } from './components/sideMenu'
 import { StyledFlexContainer } from './styles'
 
 const MyAccountPage = () => {
@@ -17,7 +16,7 @@ const MyAccountPage = () => {
 
   return (
     <BaseLayout>
-      <StyledFlexContainer gap={tokens.space.xl3}>
+      <StyledFlexContainer gap="xl3">
         <SideMenu />
         <Outlet />
       </StyledFlexContainer>

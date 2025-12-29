@@ -1,7 +1,6 @@
 import { FilterSection } from '@/common/filterSection'
 import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
-import { tokens } from '@/variables/styles'
 import { StyledCategory } from './styles'
 import { ALL_KEY } from '../../constants'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
@@ -35,7 +34,7 @@ const TextListFilter = ({
       numberOfSelected={numberOfSelected}
       onClear={reset}
     >
-      <FlexContainer flexDirection="column" gap={tokens.space.md}>
+      <FlexContainer flexDirection="column" gap="md">
         {list.length === 0 && <Text size="s3">{noDataText}</Text>}
 
         {finalList.map((textItem) => {

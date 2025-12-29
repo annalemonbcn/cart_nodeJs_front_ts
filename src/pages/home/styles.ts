@@ -1,20 +1,18 @@
-import { tokens } from '@/variables/styles'
 import styled, { css } from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
-import { media } from '@/theme'
+import { media, t } from '@/styles/themeHelpers'
 
 const Content = styled(FlexContainer)`
-  ${media.mobile(
-    css`
-      padding: 0 ${tokens.space.lg};
-    `
-  )}
+  padding: 0 ${t.space('lg')};
+
   ${media.tablet(
     css`
-      padding: 0 ${tokens.space.xl3};
+      padding: 0 ${t.space('xl3')};
     `
   )}
-  padding: 0 ${tokens.space.xl6};
+  ${media.desktop(css`
+    padding: 0 ${t.space('xl6')};
+  `)}
 `
 
 export { Content }

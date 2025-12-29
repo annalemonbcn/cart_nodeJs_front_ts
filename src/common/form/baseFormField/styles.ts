@@ -1,9 +1,9 @@
-import Input from '@/components/input'
 import styled from 'styled-components'
-import { tokens } from '@/variables/styles'
+import Input from '@/components/input'
+import { t } from '@/styles/themeHelpers'
 
 const StyledInput = styled(Input)<{ hasError?: boolean }>`
-  margin-top: ${tokens.space.xs};
+  margin-top: ${t.space('xs')};
 `
 
 export { StyledInput }

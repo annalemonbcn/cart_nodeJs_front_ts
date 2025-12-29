@@ -1,6 +1,5 @@
 type TileStyle = 'square' | 'rectangular'
 
-// TODO: style necessary ?
 interface ITileProps {
   imgSrc: string
   title: string

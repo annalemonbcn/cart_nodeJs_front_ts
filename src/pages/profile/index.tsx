@@ -1,5 +1,4 @@
 import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
 import { AddressSection } from './components/addressSection'
 import { ChangePassword } from './components/changePassword'
 import { DeleteAccount } from './components/deleteAccount'
@@ -8,7 +7,7 @@ import { MyAccountOutletLayout } from '../../common/layouts/myAccountOutletLayou
 
 const ProfilePage = () => (
   <MyAccountOutletLayout title="My Info">
-    <FlexContainer flexDirection="column" gap={tokens.space.xl}>
+    <FlexContainer flexDirection="column" gap="xl">
       <ProfileDetails />
       <ChangePassword />
       <AddressSection />

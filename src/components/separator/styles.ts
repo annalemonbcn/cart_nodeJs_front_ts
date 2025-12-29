@@ -1,6 +1,6 @@
 import styled from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 import FlexContainer from '../flexContainer'
-import { colors, tokens } from '@/variables/styles'
 import type { ISeparatorProps } from './types'
 
 const StyledSeparator = styled(FlexContainer)<ISeparatorProps>`
@@ -9,15 +9,15 @@ const StyledSeparator = styled(FlexContainer)<ISeparatorProps>`
   &::before {
     content: '';
     flex: 1;
-    border-bottom: ${tokens.borders.size.xs} solid ${colors.lightNeutral};
-    margin-right: ${({ displayText }) => (displayText ? `${tokens.space.sm2}` : '0')};
+    border-bottom: ${t.borderSize('xs')} solid ${t.color('lightNeutral')};
+    margin-right: ${({ displayText }) => (displayText ? `${t.space('sm2')}` : '0')};
   }
 
   &::after {
     content: '';
     flex: 1;
-    border-bottom: ${tokens.borders.size.xs} solid ${colors.lightNeutral};
-    margin-left: ${({ displayText }) => (displayText ? `${tokens.space.sm2}` : '0')};
+    border-bottom: ${t.borderSize('xs')} solid ${t.color('lightNeutral')};
+    margin-left: ${({ displayText }) => (displayText ? `${t.space('sm2')}` : '0')};
   }
 
   ${({ displayText }) =>

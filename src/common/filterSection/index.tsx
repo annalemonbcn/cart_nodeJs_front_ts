@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
-import { tokens } from '@/variables/styles'
 import { StyledBody, StyledHeading, StyledIcon, StyledIndicator } from './styles'
 import type { IFilterSectionProps, IHeaderProps } from './types'
 
+// TODO: fix FilterSection styles to match mobile + desktop design
 const Header = ({ title, isOpen, setIsOpen, isFilterActive, onClear, customIcon, numberOfSelected }: IHeaderProps) => {
   const [hovered, setHovered] = useState<boolean>(false)
 
@@ -19,7 +19,7 @@ const Header = ({ title, isOpen, setIsOpen, isFilterActive, onClear, customIcon,
         {title}
       </Text>
 
-      <FlexContainer justifyContent="space-between" alignItems="center" gap={tokens.space.sm}>
+      <FlexContainer justifyContent="space-between" alignItems="center" gap="sm">
         {isFilterActive && (
           <StyledIndicator
             justifyContent="center"

@@ -1,27 +1,26 @@
-import { colors, dangerShades, tokens } from '@/variables/styles'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import styled from 'styled-components'
-import type { LinkProps } from './types'
+import { t } from '@/styles/themeHelpers'
+import type { StyledLinkProps } from './types'
 
-const getColor = (color?: LinkProps['color']) => {
-  if (!color) return 'inherit'
-
-  const [key, shade] = color.split('.') as [keyof typeof colors, keyof typeof dangerShades]
-
-  if (shade && typeof colors[key] === 'object') {
-    return (colors[key] as any)[shade]
-  }
-
-  return colors[key as keyof typeof colors]
-}
-
-const StyledLink = styled(Link).withConfig({
+const StyledLink = styled(RouterLink).withConfig({
   shouldForwardProp: (prop) => prop !== 'underline'
-})<Partial<LinkProps>>`
+})<StyledLinkProps>`
   text-decoration: ${({ underline }) => (underline ? 'underline' : 'none')};
-  font-size: ${({ size }) => size && tokens.font.size[size]};
-  font-weight: ${({ weight }) => weight && tokens.font.weight[weight]};
-  color: ${({ color }) => (color && getColor(color)) || 'inherit'};
+  font-size: ${({ size }) => (size ? t.fontSize(size) : 'inherit')};
+  font-weight: ${({ weight }) => (weight ? t.fontWeight(weight) : 'inherit')};
+
+  color: ${({ theme, color }) => {
+    if (!color || color === 'inherit') return 'inherit'
+
+    if (color.startsWith('danger.')) {
+      const shade = Number(color.split('.')[1]) as keyof typeof theme.colors.danger
+      return theme.colors.danger[shade]
+    }
+
+    return theme.colors[color as keyof typeof theme.colors] as string
+  }};
+
   margin: 0;
   cursor: pointer;
 

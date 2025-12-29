@@ -1,5 +1,5 @@
-import { colors, tokens } from '@/variables/styles'
 import styled from 'styled-components'
+import { t } from '@/styles/themeHelpers'
 
 const Container = styled.div`
   position: relative;
@@ -30,13 +30,13 @@ const ArrowButton = styled.button<{ side: 'left' | 'right' }>`
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.8);
   border: none;
-  padding: ${tokens.space.sm};
+  padding: ${t.space('sm')};
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 150ms ease-in-out;
-  border-radius: ${tokens.borders.radius.full};
+  border-radius: ${t.borderRadius('full')};
 
   &:hover {
     background: rgba(255, 255, 255, 1);
@@ -53,15 +53,15 @@ const Dots = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${tokens.space.xs};
-  margin-top: ${tokens.space.md};
+  gap: ${t.space('xs')};
+  margin-top: ${t.space('md')};
 `
 
 const Dot = styled.button<{ active?: boolean }>`
   width: 8px;
   height: 8px;
-  border-radius: ${tokens.borders.radius.full};
-  background: ${(p) => (p.active ? colors.darkNeutral : colors.lightNeutral)};
+  border-radius: ${t.borderRadius('full')};
+  background: ${(p) => (p.active ? t.color('darkNeutral') : t.color('lightNeutral'))};
   border: none;
   padding: 0;
   cursor: pointer;

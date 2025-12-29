@@ -1,19 +1,19 @@
 import styled from 'styled-components'
-import { colors, tokens } from '@/variables/styles'
+import { t } from '@/styles/themeHelpers'
 
 const NavLinks = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: ${tokens.space.lg};
+  gap: ${t.space('lg')};
 
   a {
     text-decoration: none;
-    color: ${colors.mediumNeutral};
-    font-weight: ${tokens.font.weight.medium};
+    color: ${t.color('mediumNeutral')};
+    font-weight: ${t.fontWeight('medium')};
     transition: color 0.2s;
 
     &:hover {
-      color: ${colors.darkNeutral};
+      color: ${t.color('darkNeutral')};
     }
   }
 `

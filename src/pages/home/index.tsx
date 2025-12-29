@@ -3,7 +3,6 @@ import Banner from '@/common/banner'
 import BaseLayout from '@/common/layouts/baseLayout'
 import FlexContainer from '@/components/flexContainer'
 import { routeMap } from '@/routes/utils'
-import { tokens } from '@/variables/styles'
 import { MensCategories, WomensCategories } from './components/categoriesRender'
 import { NewArrivals } from './components/newArrivals'
 import { Content } from './styles'
@@ -30,9 +29,9 @@ const HomePage = () => {
 
   return (
     <BaseLayout showBreadcrumb={false} isHome>
-      <FlexContainer flexDirection="column" gap={tokens.space.xl4}>
+      <FlexContainer flexDirection="column" gap="xl4">
         <Banner {...bannerProps} />
-        <Content flexDirection="column" gap={tokens.space.xl4}>
+        <Content flexDirection="column" gap="xl4">
           <NewArrivals />
           <MensCategories />
           <WomensCategories />

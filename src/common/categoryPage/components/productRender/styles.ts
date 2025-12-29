@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
+import { t } from '@/styles/themeHelpers'
 
 const StyledProduct = styled(FlexContainer)`
   min-width: 0;
@@ -9,20 +9,20 @@ const StyledProduct = styled(FlexContainer)`
 const StyledImageContainer = styled.div`
   width: auto;
   height: auto;
-  border-radius: ${tokens.borders.radius.md};
+  border-radius: ${t.borderRadius('md')};
 `
 
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: ${tokens.borders.radius.md};
+  border-radius: ${t.borderRadius('md')};
 `
 
 const NoImage = styled.div`
   width: 100%;
   height: 400px;
-  border-radius: ${tokens.borders.radius.md};
+  border-radius: ${t.borderRadius('md')};
   background-color: #e2e2e2;
 
   display: flex;

@@ -1,7 +1,6 @@
 import FlexContainer from '@/components/flexContainer'
 import { Tag } from '@/components/tag'
 import Text from '@/components/text'
-import { tokens } from '@/variables/styles'
 import { NoImage, StyledImageContainer, StyledImg, StyledProduct, StyledTextContainer } from './styles'
 import type { IProductRenderProps } from './types'
 
@@ -21,13 +20,13 @@ const ProductRender = ({ product }: IProductRenderProps) => {
   const handleClick = () => console.log('open productPageeee')
 
   return (
-    <StyledProduct flexDirection="column" gap={tokens.space.xl} onClick={handleClick}>
+    <StyledProduct flexDirection="column" gap="xl" onClick={handleClick}>
       <StyledImageContainer>
         {displayNoImage ? <NoImageRender /> : <StyledImg src={product.thumbnails.at(0)} />}
       </StyledImageContainer>
 
-      <FlexContainer justifyContent="space-between" alignItems="center" gap={tokens.space.xl}>
-        <StyledTextContainer flexDirection="column" gap={tokens.space.xs2}>
+      <FlexContainer justifyContent="space-between" alignItems="center" gap="xl">
+        <StyledTextContainer flexDirection="column" gap="xs2">
           <Text weight="bold" color="darkNeutral" clamp>
             {product.title}
           </Text>

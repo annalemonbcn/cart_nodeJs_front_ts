@@ -1,20 +1,19 @@
-import { socialPlatforms } from '@/utils/constants'
-import type { ISocialBtnProps } from './types'
 import Button from '@/components/button'
-import FlexContainer from '@/components/flexContainer'
-import { tokens } from '@/variables/styles'
-import { StyledIcon, StyledSocialButtonWrapper } from './styles'
-import { capitalize } from '@/utils/string'
-import Text from '@/components/text'
-import Link from '@/components/link'
 import Disabler from '@/components/disabler'
+import FlexContainer from '@/components/flexContainer'
+import Link from '@/components/link'
+import Text from '@/components/text'
+import { socialPlatforms } from '@/utils/constants'
+import { capitalize } from '@/utils/string'
+import { StyledIcon, StyledSocialButtonWrapper } from './styles'
+import type { ISocialBtnProps } from './types'
 
 const SocialBtn = ({ socialPlatform: { icon, link, name } }: ISocialBtnProps) => (
   <Disabler>
     <StyledSocialButtonWrapper>
       <Button variant="secondary">
         <Link to={link} underline={false}>
-          <FlexContainer justifyContent="center" alignItems="center" gap={tokens.space.sm}>
+          <FlexContainer justifyContent="center" alignItems="center" gap="sm">
             <StyledIcon src={icon} alt={`${name}-icon`} />
             <Text as="span">Continue with {capitalize(name)}</Text>
           </FlexContainer>
@@ -25,7 +24,7 @@ const SocialBtn = ({ socialPlatform: { icon, link, name } }: ISocialBtnProps) =>
 )
 
 const SocialLogin = () => (
-  <FlexContainer flexDirection="column" gap={tokens.space.md}>
+  <FlexContainer flexDirection="column" gap="md">
     {socialPlatforms.map((platform) => (
       <SocialBtn key={`platform-${platform.name}`} socialPlatform={platform} />
     ))}

@@ -2,7 +2,6 @@ import { FilterSection } from '@/common/filterSection'
 import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
 import { capitalize } from '@/utils/string'
-import { tokens } from '@/variables/styles'
 import { StyledColor, StyledContainer } from './styles'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
 import type { ISquareListFilter } from './types'
@@ -25,7 +24,7 @@ const SquareListFilter = ({ list, filterName, title, useAll, noDataText }: ISqua
           const active = isActive(slug)
 
           return (
-            <FlexContainer key={`item-${item}`} flexDirection="column" gap={tokens.space.md} alignItems="center">
+            <FlexContainer key={`item-${item}`} flexDirection="column" gap="md" alignItems="center">
               <StyledColor onClick={() => toggle(slug)} color={item} isActive={active} />
               <Text size="s3" weight={active ? 'bold' : 'medium'} color={active ? 'darkNeutral' : 'mediumNeutral'}>
                 {capitalize(item)}
