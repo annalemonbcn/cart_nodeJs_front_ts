@@ -1,48 +1,82 @@
 import { useState } from 'react'
 import FlexContainer from '@/components/flexContainer'
 import Text from '@/components/text'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { theme } from '@/theme'
 import { StyledBody, StyledHeading, StyledIcon, StyledIndicator } from './styles'
-import type { IFilterSectionProps, IHeaderProps } from './types'
+import type { FilterSectionProps, HeaderProps, SelectionIndicatorProps } from './types'
 
-// TODO: fix FilterSection styles to match mobile + desktop design
-const Header = ({ title, isOpen, setIsOpen, isFilterActive, onClear, customIcon, numberOfSelected }: IHeaderProps) => {
-  const [hovered, setHovered] = useState<boolean>(false)
+const SelectionIndicator = ({
+  hovered,
+  setHovered,
+  numberOfSelected,
+  showClearOnHover = false,
+  onClick
+}: SelectionIndicatorProps) => (
+  <StyledIndicator
+    justifyContent="center"
+    alignItems="center"
+    onMouseEnter={() => setHovered(true)}
+    onMouseLeave={() => setHovered(false)}
+    hovered={hovered}
+    onClick={onClick}
+  >
+    <Text size="s2" color="white">
+      {showClearOnHover && hovered ? 'Clear' : numberOfSelected}
+    </Text>
+  </StyledIndicator>
+)
 
-  const getIcon = () => {
-    if (customIcon) return customIcon
-    return isOpen ? '/icons/chevron-up.svg' : '/icons/chevron-right.svg'
+const Header = ({ variant, title, isFilterActive, numberOfSelected, onClear, customIcon, onToggle }: HeaderProps) => {
+  const [hovered, setHovered] = useState(false)
+
+  const handleClear = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    onClear?.()
+  }
+
+  if (variant === 'desktop') {
+    return (
+      <StyledHeading justifyContent="space-between" alignItems="center" onClick={onToggle}>
+        <Text weight="medium" size="s5">
+          {title}
+        </Text>
+
+        <FlexContainer justifyContent="space-between" alignItems="center" gap="sm">
+          {isFilterActive && (
+            <SelectionIndicator
+              hovered={hovered}
+              setHovered={setHovered}
+              numberOfSelected={numberOfSelected}
+              showClearOnHover
+              onClick={handleClear}
+            />
+          )}
+
+          <StyledIcon src={customIcon} alt="chevron" />
+        </FlexContainer>
+      </StyledHeading>
+    )
   }
 
   return (
-    <StyledHeading justifyContent="space-between" alignItems="center" onClick={() => setIsOpen(!isOpen)}>
-      <Text weight="medium" size="s5">
+    <FlexContainer justifyContent="space-between" alignItems="center">
+      <Text weight="medium" size="s5" color="darkNeutral">
         {title}
       </Text>
 
-      <FlexContainer justifyContent="space-between" alignItems="center" gap="sm">
-        {isFilterActive && (
-          <StyledIndicator
-            justifyContent="center"
-            alignItems="center"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            hovered={hovered}
-            onClick={(e) => {
-              e.stopPropagation()
-              if (onClear) {
-                onClear()
-              }
-            }}
-          >
-            <Text size="s2" color="white">
-              {hovered ? 'Clear' : numberOfSelected}
-            </Text>
-          </StyledIndicator>
-        )}
+      {isFilterActive && (
+        <FlexContainer alignItems="center" gap="xs">
+          <SelectionIndicator hovered={hovered} setHovered={setHovered} numberOfSelected={numberOfSelected} />
 
-        <StyledIcon src={getIcon()} alt="chevron" />
-      </FlexContainer>
-    </StyledHeading>
+          <div onClick={handleClear}>
+            <Text size="s2" color="darkNeutral" weight="medium">
+              Clear
+            </Text>
+          </div>
+        </FlexContainer>
+      )}
+    </FlexContainer>
   )
 }
 
@@ -53,23 +87,34 @@ const FilterSection = ({
   defaultOpen = false,
   numberOfSelected,
   onClear
-}: IFilterSectionProps) => {
+}: FilterSectionProps) => {
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
-  const isFilterActive = !!(numberOfSelected && numberOfSelected > 0)
+  const isFilterActive = Boolean(numberOfSelected && numberOfSelected > 0)
+  const isMobile = useMediaQuery(theme.mq.js.down('md'))
+
+  const iconSrc = () => {
+    if (customIcon) return customIcon
+    return isOpen ? '/icons/chevron-up.svg' : '/icons/chevron-right.svg'
+  }
+
+  const toggle = () => setIsOpen((prev) => !prev)
 
   return (
-    <FlexContainer flexDirection="column">
+    <FlexContainer flexDirection="column" {...(isMobile ? { gap: 'md' } : {})}>
       <Header
+        variant={isMobile ? 'mobile' : 'desktop'}
         title={title}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         isFilterActive={isFilterActive}
         onClear={onClear}
-        customIcon={customIcon}
+        customIcon={iconSrc()}
         numberOfSelected={numberOfSelected}
+        onToggle={!isMobile ? toggle : undefined}
       />
-      {isOpen && <StyledBody>{children}</StyledBody>}
+
+      {(isOpen || isMobile) && <StyledBody>{children}</StyledBody>}
     </FlexContainer>
   )
 }

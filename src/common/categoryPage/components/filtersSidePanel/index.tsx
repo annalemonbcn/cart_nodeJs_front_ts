@@ -10,8 +10,7 @@ import { FiltersDrawer } from './components/filtersDrawer'
 import { DEFAULT_FILTERS, getFiltersRender } from './constants'
 import { useGetFiltersData, useGetUniqueFilters } from './hooks'
 import { StyledDesktopFiltersSidePanel, StyledFilterIcon } from './styles'
-import type { CleanedFiltersData, FiltersSidePanelProps } from './types'
-import type { FiltersUI } from '@/common/filters/types'
+import type { FiltersSidePanelProps } from './types'
 import type { PropsWithChildren } from '@/variables/types/global.types'
 
 const MobileTrigger = () => {
@@ -28,14 +27,6 @@ const MobileTrigger = () => {
     </Button>
   )
 }
-
-const FiltersRender = ({ filters, data }: { filters: FiltersUI[]; data: CleanedFiltersData }) => (
-  <>
-    {filters.map((filter) => (
-      <Fragment key={`filter-${filter}`}>{getFiltersRender(filter, data)}</Fragment>
-    ))}
-  </>
-)
 
 const FiltersShell = ({ children }: PropsWithChildren) => {
   const isDesktop = useMediaQuery(theme.mq.js.up('md'))
@@ -61,7 +52,9 @@ const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: FiltersSidePanelProps) 
 
   return (
     <FiltersShell>
-      <FiltersRender filters={uniqueFilters} data={data} />
+      {uniqueFilters.map((filter) => (
+        <Fragment key={`filter-${filter}`}>{getFiltersRender(filter, data)}</Fragment>
+      ))}
     </FiltersShell>
   )
 }

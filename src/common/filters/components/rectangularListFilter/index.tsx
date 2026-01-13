@@ -1,31 +1,38 @@
 import { FilterSection } from '@/common/filterSection'
+import { Tag } from '@/components/tag'
 import Text from '@/components/text'
-import { StyledContainer, StyledSize } from './styles'
+import { StyledContainer } from './styles'
+import { ALL_KEY } from '../../constants'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
 import type { IRectangularListFilter } from './types'
 
-const RectangularListFilter = ({ list, title, filterName, useAll, noDataText }: IRectangularListFilter) => {
+const RectangularListFilter = ({
+  list,
+  title,
+  filterName,
+  useAll,
+  noDataText,
+  defaultOpen
+}: IRectangularListFilter) => {
   const { toggle, isActive, selected, reset } = useMultiSelectParam({
     param: filterName,
     allKey: useAll ? 'all' : null
   })
 
+  const numberOfSelected = selected.filter((item) => item !== 'all').length
+
+  const finalList = useAll ? [ALL_KEY, ...list] : list
+
   return (
-    <FilterSection title={title} numberOfSelected={selected.length} onClear={reset}>
+    <FilterSection title={title} numberOfSelected={numberOfSelected} onClear={reset} defaultOpen={defaultOpen}>
       <StyledContainer>
         {list.length === 0 && <Text size="s3">{noDataText}</Text>}
 
-        {list.map((item) => {
+        {finalList.map((item) => {
           const slug = item.toLowerCase()
           const active = isActive(slug)
 
-          return (
-            <StyledSize key={`size-${item}`} justifyContent="center" onClick={() => toggle(slug)} isActive={active}>
-              <Text size="s3" weight={active ? 'bold' : 'medium'} color="darkNeutral">
-                {item.toUpperCase()}
-              </Text>
-            </StyledSize>
-          )
+          return <Tag key={`size-${item}`} variant="white" text={item} onClick={() => toggle(slug)} isActive={active} />
         })}
       </StyledContainer>
     </FilterSection>

@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components'
-import { t } from '@/styles/themeHelpers'
+import { media, t } from '@/styles/themeHelpers'
 
 const shimmer = keyframes`
   100% {
@@ -27,14 +27,21 @@ const StyledSkeleton = styled.div`
   position: relative;
   overflow: hidden;
 
-  ${animationStyles}
+  ${animationStyles};
 `
 
 const StyledSkeletonList = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: ${t.space('lg')};
   row-gap: ${t.space('xl2')};
+
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  ${media.tablet(css`
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  `)}
+  ${media.desktop(css`
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  `)}
 `
 
 export { StyledSkeleton, StyledSkeletonList }
