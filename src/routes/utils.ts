@@ -1,5 +1,5 @@
-import type { PageRoute } from './types'
 import { routesData } from './routesData'
+import type { PageRoute } from './types'
 
 type RouteEntry = {
   name: string

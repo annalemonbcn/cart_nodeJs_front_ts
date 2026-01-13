@@ -47,6 +47,7 @@ const StyledCategoryLayout = styled.div`
   display: grid;
   gap: ${t.space('md')};
   align-items: flex-start;
+  padding-bottom: ${t.space('xl2')};
 
   ${mobileGridStyles};
   ${media.tablet(desktopGridStyles)};
