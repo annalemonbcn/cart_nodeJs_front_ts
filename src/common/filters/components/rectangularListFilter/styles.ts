@@ -1,20 +1,5 @@
-import styled, { css } from 'styled-components'
-import FlexContainer from '@/components/flexContainer'
+import styled from 'styled-components'
 import { t } from '@/styles/themeHelpers'
-
-const isActiveStyles = css`
-  border: ${t.borderSize('xs')} solid ${t.color('darkNeutral')};
-  background-color: ${t.color('lightPrimary')};
-`
-
-const StyledSize = styled(FlexContainer)<{ isActive: boolean }>`
-  border: ${t.borderSize('xs')} solid ${t.color('lightNeutral')};
-  border-radius: ${t.borderRadius('sm')};
-  padding: ${t.space('xs')};
-  cursor: pointer;
-
-  ${({ isActive }) => isActive && isActiveStyles}
-`
 
 const StyledContainer = styled.div`
   display: grid;
@@ -24,4 +9,4 @@ const StyledContainer = styled.div`
   gap: 20px ${t.space('md')};
 `
 
-export { StyledSize, StyledContainer }
+export { StyledContainer }

@@ -1,5 +1,7 @@
 import SkeletonLoader from '@/components/skeleton'
 import Text from '@/components/text'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { theme } from '@/theme'
 import { ProductRender } from './components/productRender'
 import {
   StyledBodyArea,
@@ -19,7 +21,7 @@ const ProductList = ({ products }: Pick<ICategoryPageProps, 'products'>) => {
     return (
       <NoDataRender
         title="No products found"
-        description="We couldn't find any products matching your search criteria. Please try again with different keywords."
+        description="We couldn't find any products matching your search criteria. Please try again with different filters."
       />
     )
 
@@ -43,23 +45,30 @@ const CategoryHeader = ({
   </StyledHeader>
 )
 
-const CategoryPage = ({ isLoading, title, products }: ICategoryPageProps) => (
-  <BaseLayout showBreadcrumb={false}>
-    <StyledCategoryLayout>
-      <StyledHeaderArea>
-        <CategoryHeader title={title} numberOfProducts={products.length} />
-      </StyledHeaderArea>
+const CategoryPage = ({ isLoading, title, products }: ICategoryPageProps) => {
+  const isTablet = useMediaQuery(theme.mq.js.up('md'))
+  const isDesktop = useMediaQuery(theme.mq.js.up('lg'))
 
-      <StyledFiltersArea>
-        <FiltersSidePanel />
-      </StyledFiltersArea>
+  const skeletonCount = isDesktop ? 5 : isTablet ? 4 : 2
 
-      <StyledBodyArea>
-        {isLoading && <SkeletonLoader />}
-        {!isLoading && <ProductList products={products} />}
-      </StyledBodyArea>
-    </StyledCategoryLayout>
-  </BaseLayout>
-)
+  return (
+    <BaseLayout showBreadcrumb={false}>
+      <StyledCategoryLayout>
+        <StyledHeaderArea>
+          <CategoryHeader title={title} numberOfProducts={products.length} />
+        </StyledHeaderArea>
+
+        <StyledFiltersArea>
+          <FiltersSidePanel />
+        </StyledFiltersArea>
+
+        <StyledBodyArea>
+          {isLoading && <SkeletonLoader count={skeletonCount} />}
+          {!isLoading && <ProductList products={products} />}
+        </StyledBodyArea>
+      </StyledCategoryLayout>
+    </BaseLayout>
+  )
+}
 
 export default CategoryPage

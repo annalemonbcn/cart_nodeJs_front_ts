@@ -11,13 +11,7 @@ const borders = css`
   `)};
 `
 
-const mobilePadding = css`
-  padding: 0 ${({ theme }) => theme.tokens.space.xl};
-`
-
 const paddingHeader = css`
-  ${mobilePadding};
-
   ${media.desktop(css`
     padding: ${t.space('md')} ${t.space('xl')};
   `)};
@@ -40,8 +34,6 @@ const StyledIcon = styled.img`
 `
 
 const paddingBody = css`
-  ${mobilePadding};
-
   ${media.desktop(css`
     padding: ${t.space('xl2')} ${t.space('xl')};
   `)};

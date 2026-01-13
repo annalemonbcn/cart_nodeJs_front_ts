@@ -15,12 +15,12 @@ const HomePage = () => {
     content: {
       imgSrc: '/images/home_banner.jpg',
       h1: 'Summer Value Pack',
-      description: 'Go to your profile to start the demo.\nThis is a sample home page.',
+      description: 'Explore our collection of trendy and comfortable clothing for women.',
       topText: 'T-Shirt / Tops'
     },
     button: {
-      label: 'Go to Profile',
-      onClick: () => navigate(routeMap.profile.path)
+      label: "View Women's Products",
+      onClick: () => navigate(routeMap.women.path)
     },
     bannerProps: {
       textColor: 'darkNeutral'

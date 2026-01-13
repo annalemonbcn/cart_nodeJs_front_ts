@@ -8,12 +8,24 @@ type FilterSectionBaseProps = {
   onClear?: () => void
 }
 
-type IFilterSectionProps = PropsWithChildren<FilterSectionBaseProps>
+type FilterSectionProps = PropsWithChildren<FilterSectionBaseProps>
 
-type IHeaderProps = Pick<IFilterSectionProps, 'title' | 'customIcon' | 'numberOfSelected' | 'onClear'> & {
+type HeaderVariant = 'desktop' | 'mobile'
+
+type HeaderProps = Pick<FilterSectionProps, 'title' | 'customIcon' | 'numberOfSelected' | 'onClear'> & {
   isOpen: boolean
   setIsOpen: (value: boolean) => void
   isFilterActive: boolean
+  variant: HeaderVariant
+  onToggle?: () => void
 }
 
-export type { FilterSectionBaseProps, IFilterSectionProps, IHeaderProps }
+type SelectionIndicatorProps = {
+  hovered: boolean
+  setHovered: (v: boolean) => void
+  numberOfSelected?: number
+  showClearOnHover?: boolean
+  onClick?: (e: React.MouseEvent) => void
+}
+
+export type { FilterSectionBaseProps, FilterSectionProps, HeaderProps, HeaderVariant, SelectionIndicatorProps }

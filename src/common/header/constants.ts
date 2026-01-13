@@ -7,12 +7,12 @@ const navLinks: NavLink[] = [
     path: routeMap.home.path
   },
   {
-    label: routeMap.men.title,
-    path: routeMap.men.path
-  },
-  {
     label: routeMap.women.title,
     path: routeMap.women.path
+  },
+  {
+    label: routeMap.men.title,
+    path: routeMap.men.path
   }
 ]
 

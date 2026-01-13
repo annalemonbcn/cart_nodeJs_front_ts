@@ -35,7 +35,7 @@ const ProductRender = ({ product }: IProductRenderProps) => {
           </Text>
         </StyledTextContainer>
 
-        <Tag text={`$${String(product.price)}`} />
+        <Tag text={`$${String(product.price)}`} variant="grey" />
       </FlexContainer>
     </StyledProduct>
   )
