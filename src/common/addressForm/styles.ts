@@ -7,6 +7,12 @@ const responsiveStyles = css`
   gap: ${t.space('md')};
 `
 
+const responsiveStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: ${tokens.space.md};
+`
+
 const FormWrapper = styled.div`
   ${responsiveStyles};
 
