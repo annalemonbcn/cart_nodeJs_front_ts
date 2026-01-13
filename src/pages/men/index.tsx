@@ -12,7 +12,7 @@ const MenPage = () => {
     content: {
       imgSrc: '/images/men_banner.jpg',
       h1: 'Summer Value Pack',
-      description: 'Go to your profile to start the demo.\nThis is a sample home page.',
+      description: 'Register and login to your profile to start the demo.\nThis is a sample home page.',
       topText: 'T-Shirt / Tops'
     },
     button: {
