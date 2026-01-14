@@ -2,10 +2,10 @@ import type { ProductOutput } from '@/services/products/types'
 
 type Product = ProductOutput
 
-interface ICategoryPageProps {
+interface CategoryPageProps {
   title: string
   products: Product[]
   isLoading: boolean
 }
 
-export type { Product, ICategoryPageProps }
+export type { Product, CategoryPageProps }

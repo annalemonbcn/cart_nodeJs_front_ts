@@ -24,10 +24,10 @@ const useWomenProductsQuery = () => {
 const useGetWomenProducts = () => {
   const { data, isLoading, isError } = useWomenProductsQuery()
 
-  const womenProducts: Product[] = useMemo(() => {
+  const womenProducts: Product[] = useMemo<Product[]>(() => {
     if (!data || isLoading || isError) return []
 
-    return data.payload
+    return Array.isArray(data.payload) ? data.payload : []
   }, [data, isError, isLoading])
 
   return { products: womenProducts, isLoading }

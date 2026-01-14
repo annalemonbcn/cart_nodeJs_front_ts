@@ -14,9 +14,9 @@ import {
 import BaseLayout from '../layouts/baseLayout'
 import NoDataRender from '../noDataRender'
 import { FiltersSidePanel } from './components/filtersSidePanel'
-import type { ICategoryPageProps } from './types'
+import type { CategoryPageProps } from './types'
 
-const ProductList = ({ products }: Pick<ICategoryPageProps, 'products'>) => {
+const ProductList = ({ products }: Pick<CategoryPageProps, 'products'>) => {
   if (products.length === 0)
     return (
       <NoDataRender
@@ -37,7 +37,7 @@ const ProductList = ({ products }: Pick<ICategoryPageProps, 'products'>) => {
 const CategoryHeader = ({
   title,
   numberOfProducts
-}: Pick<ICategoryPageProps, 'title'> & { numberOfProducts: number }) => (
+}: Pick<CategoryPageProps, 'title'> & { numberOfProducts: number }) => (
   <StyledHeader>
     <Text size="s5" weight="bold" color="darkNeutral">
       {title} ({numberOfProducts})
@@ -45,7 +45,7 @@ const CategoryHeader = ({
   </StyledHeader>
 )
 
-const CategoryPage = ({ isLoading, title, products }: ICategoryPageProps) => {
+const CategoryPage = ({ products, isLoading, title }: CategoryPageProps) => {
   const isTablet = useMediaQuery(theme.mq.js.up('md'))
   const isDesktop = useMediaQuery(theme.mq.js.up('lg'))
 
@@ -55,7 +55,7 @@ const CategoryPage = ({ isLoading, title, products }: ICategoryPageProps) => {
     <BaseLayout showBreadcrumb={false}>
       <StyledCategoryLayout>
         <StyledHeaderArea>
-          <CategoryHeader title={title} numberOfProducts={products.length} />
+          <CategoryHeader title={title} numberOfProducts={products?.length ?? 0} />
         </StyledHeaderArea>
 
         <StyledFiltersArea>
