@@ -6,12 +6,15 @@
 2. [🧩 Main Features](#-main-features)
 3. [⚡️ Backend project](#️-backend-project)
 4. [📦 Key Dependencies](#-key-dependencies)
-5. [🎯 Suggested App Tours](#-suggested-app-tours)
+5. [🧰 Tech Stack](#-tech-stack)
+6. [🎯 Suggested App Tours](#-suggested-app-tours)
     - [🧑‍💻 Tour 1: User Registration & Profile Management](#-tour-1-user-registration--profile-management)
     - [🔑 Tour 2: Password Recovery Flow](#-tour-2-password-recovery-flow)
-6. [🧠 Code Style & Practices](#-code-style--practices)
-7. [📈 Future Improvements](#-future-improvements)
-8. [📞 Contact](#-contact)
+    - [👕 Tour 3: Navigate and filter products](#-tour-3-navigate-and-filter-products)
+7. [🧠 Code Style & Practices](#-code-style--practices)
+8. [✅ Requirements](#-requirements)
+9. [📈 Future Improvements](#-future-improvements)
+10. [📞 Contact](#-contact)
 
 ## 🚀 Description
 
@@ -19,6 +22,16 @@ This project is a full‑stack e-commerce with a Node.js backend and a TypeScrip
 Currently, it allows registering users, logging in, edit your profile (change password, add addressess), and delete an account.
 
 👉 **Live Demo:** [https://fullstack-cart.vercel.app/shop](https://fullstack-cart.vercel.app/shop)
+
+```md
+## ⚠️ Note about running locally
+
+This frontend depends on a backend API + database that currently live in my local environment.
+For that reason, cloning this repo will not work out-of-the-box unless you also run the compatible API locally and point the app to it.
+
+If you just want to explore the UI/flows, use the live demo instead:
+https://fullstack-cart.vercel.app/shop
+```
 
 ---
 
@@ -61,6 +74,18 @@ Some highlighted packages and libraries used:
 
 ---
 
+## 🧰 Tech Stack
+
+- **Frontend:** React + TypeScript + Vite
+- **Data fetching/cache:** TanStack Query
+- **Forms:** React Hook Form
+- **Styling:** styled-components
+- **Lint/format:** ESLint + Prettier
+- **Deploy:** Vercel (vercel.json)
+
+---
+
+
 ## 🎯 Suggested App Tours
 
 To better explore the main features of this app, here are two suggested flows you can try in the live demo:
@@ -82,6 +107,19 @@ To better explore the main features of this app, here are two suggested flows yo
 4. Open the link provided and update your password.
 5. Log in again with your new password.
 
+### 👕 Tour 3: Navigate and filter products
+
+1. Go to the [Women's category page](https://fullstack-cart.vercel.app/shop/women) page.
+2. Use the filters to narrow down your search.
+
+```md
+## 🛠️ Under construction:
+
+- Product page
+- Add to cart
+- Checkout
+```
+
 ---
 
 ## 🧠 Code Style & Practices
@@ -89,6 +127,13 @@ To better explore the main features of this app, here are two suggested flows yo
 - ESLint and Prettier enforce consistent code style.
 - Multiple `tsconfig.*.json` files separate client/server configs.
 - Modular structure for scalability.
+
+---
+
+## ✅ Requirements
+
+- Node.js (recommended: use the version in `.nvmrc`, aka `node v20.19.0`)
+- npm (or your preferred package manager)
 
 ---
 
