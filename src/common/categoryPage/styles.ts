@@ -3,10 +3,6 @@ import { media, t } from '@/styles/themeHelpers'
 
 const StyledHeader = styled.div`
   padding: ${t.space('md')} 0;
-
-  ${media.tablet(css`
-    padding: ${t.space('xl2')} 0;
-  `)}
 `
 
 const tabletGridColumns = css`

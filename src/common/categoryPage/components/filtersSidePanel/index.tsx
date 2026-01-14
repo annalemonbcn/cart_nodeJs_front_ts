@@ -1,7 +1,6 @@
 import { Fragment } from 'react'
 import Button from '@/components/button'
 import FlexContainer from '@/components/flexContainer'
-import Loader from '@/components/loader'
 import Text from '@/components/text'
 import { useDrawerContext } from '@/hooks/useDrawerContext'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
@@ -47,8 +46,7 @@ const FiltersSidePanel = ({ filters = DEFAULT_FILTERS }: FiltersSidePanelProps) 
   const { data, isLoading } = useGetFiltersData()
   const uniqueFilters = useGetUniqueFilters(filters)
 
-  // TODO: replace loader for skeleton
-  if (isLoading) return <Loader />
+  if (isLoading) return null
 
   return (
     <FiltersShell>

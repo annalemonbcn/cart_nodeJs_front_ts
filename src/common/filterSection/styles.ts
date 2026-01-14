@@ -5,14 +5,14 @@ import { media, t } from '@/styles/themeHelpers'
 const borders = css`
   border: 0;
 
-  ${media.desktop(css`
+  ${media.tablet(css`
     border: 1px solid ${t.color('lightNeutral')};
     border-top: 0;
   `)};
 `
 
 const paddingHeader = css`
-  ${media.desktop(css`
+  ${media.tablet(css`
     padding: ${t.space('md')} ${t.space('xl')};
   `)};
 `
@@ -26,7 +26,7 @@ const StyledHeading = styled(FlexContainer)`
 const StyledIcon = styled.img`
   display: none;
 
-  ${media.desktop(css`
+  ${media.tablet(css`
     display: block;
     width: 20px;
     height: 20px;
@@ -34,6 +34,10 @@ const StyledIcon = styled.img`
 `
 
 const paddingBody = css`
+  ${media.tablet(css`
+    padding: ${t.space('lg')};
+  `)};
+
   ${media.desktop(css`
     padding: ${t.space('xl2')} ${t.space('xl')};
   `)};
