@@ -91,7 +91,7 @@ const FilterSection = ({
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
   const isFilterActive = Boolean(numberOfSelected && numberOfSelected > 0)
-  const isDesktop = useMediaQuery(theme.mq.js.up('md'))
+  const isTablet = useMediaQuery(theme.mq.js.up('md'))
 
   const iconSrc = () => {
     if (customIcon) return customIcon
@@ -101,9 +101,9 @@ const FilterSection = ({
   const toggle = () => setIsOpen((prev) => !prev)
 
   return (
-    <FlexContainer flexDirection="column" {...(!isDesktop ? { gap: 'md' } : {})}>
+    <FlexContainer flexDirection="column" {...(!isTablet ? { gap: 'md' } : {})}>
       <Header
-        variant={!isDesktop ? 'mobile' : 'desktop'}
+        variant={!isTablet ? 'mobile' : 'desktop'}
         title={title}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -111,10 +111,10 @@ const FilterSection = ({
         onClear={onClear}
         customIcon={iconSrc()}
         numberOfSelected={numberOfSelected}
-        onToggle={isDesktop? toggle : undefined}
+        onToggle={isTablet? toggle : undefined}
       />
 
-      {(isOpen || !isDesktop) && <StyledBody>{children}</StyledBody>}
+      {(isOpen || !isTablet) && <StyledBody>{children}</StyledBody>}
     </FlexContainer>
   )
 }
