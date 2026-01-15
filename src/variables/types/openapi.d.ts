@@ -724,6 +724,78 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/user/favourites": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get all users favourites
+         * @description Get all users favourites
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["FavouritesFound"];
+                401: components["responses"]["Unauthorized"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user/favourites/:productId": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Patch favourite in user
+         * @description Toggle a favourite in the user favourites array
+         */
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description The ID of the product to toggle as favourite */
+                    productId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["FavouriteToggledResponse"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                404: components["responses"]["NotFound"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        trace?: never;
+    };
     "/api/address": {
         parameters: {
             query?: never;
@@ -889,6 +961,8 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** @example 691ca49a96dc98e40fa4391f */
+        ObjectId: string;
         ProductFeatures: {
             /** @enum {string} */
             fabric: "cotton" | "polyester" | "wool" | "linen" | "denim" | "leather";
@@ -1260,6 +1334,16 @@ export interface components {
         AddressResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["AddressOutput"];
         };
+        FavouritesResponse: components["schemas"]["BaseResponse"] & {
+            payload: components["schemas"]["ObjectId"][];
+        };
+        FavouriteToggled: components["schemas"]["BaseResponse"] & {
+            payload: components["schemas"]["ObjectId"][];
+            meta: {
+                /** @example added */
+                action?: string;
+            };
+        };
     };
     responses: {
         /** @description Bad request – invalid or missing data */
@@ -1533,6 +1617,24 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["DeleteResponse"];
+            };
+        };
+        /** @description User favourites found */
+        FavouritesFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["FavouritesResponse"];
+            };
+        };
+        /** @description User favourite toggled */
+        FavouriteToggledResponse: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["FavouriteToggled"];
             };
         };
         /** @description Address found */

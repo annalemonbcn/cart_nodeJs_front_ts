@@ -1,7 +1,7 @@
 import type { Product } from '../../types'
 
-interface IProductRenderProps {
+interface ProductRenderProps {
   product: Product
 }
 
-export type { IProductRenderProps }
+export type { ProductRenderProps }
