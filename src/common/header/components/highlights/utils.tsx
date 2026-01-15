@@ -2,10 +2,10 @@ import CartIcon from '@/icons/cart.svg?react'
 import HeartIcon from '@/icons/heart.svg?react'
 import ProfileIcon from '@/icons/profile.svg?react'
 import { routeMap } from '@/routes/utils'
-import type { IHighlightedItem } from './types'
+import type { SingleHighlightProps } from './types'
 
 const getHighlights = (isMobile: boolean) => {
-  const highlights: IHighlightedItem[] = [
+  const highlights: SingleHighlightProps[] = [
     {
       icon: HeartIcon,
       path: routeMap.wishlist.path
