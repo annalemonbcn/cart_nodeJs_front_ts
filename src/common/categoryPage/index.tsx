@@ -55,7 +55,7 @@ const CategoryPage = ({ products, isLoading, title }: CategoryPageProps) => {
     <BaseLayout showBreadcrumb={false}>
       <StyledCategoryLayout>
         <StyledHeaderArea>
-          <CategoryHeader title={title} numberOfProducts={products?.length || 0} />
+          <CategoryHeader title={title} numberOfProducts={products?.length ?? 0} />
         </StyledHeaderArea>
 
         <StyledFiltersArea>

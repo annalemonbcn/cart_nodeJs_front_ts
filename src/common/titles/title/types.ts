@@ -1,5 +1,5 @@
-interface ITitleProps {
+interface TitleProps {
     title: string
 }
 
-export type { ITitleProps }
+export type { TitleProps }

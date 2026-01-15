@@ -111,7 +111,7 @@ const FilterSection = ({
         onClear={onClear}
         customIcon={iconSrc()}
         numberOfSelected={numberOfSelected}
-        onToggle={isDesktop ? toggle : undefined}
+        onToggle={isDesktop? toggle : undefined}
       />
 
       {(isOpen || !isDesktop) && <StyledBody>{children}</StyledBody>}
