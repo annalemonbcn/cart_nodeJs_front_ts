@@ -732,12 +732,15 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Get all users favourites
-         * @description Get all users favourites
+         * Get user favourites
+         * @description Get user favourites
          */
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description If true, returns full Product objects instead of product ids. */
+                    populate?: boolean;
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -1334,8 +1337,11 @@ export interface components {
         AddressResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["AddressOutput"];
         };
-        FavouritesResponse: components["schemas"]["BaseResponse"] & {
+        FavouritesIdsResponse: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["ObjectId"][];
+        };
+        FavouritesPopulatedResponse: components["schemas"]["BaseResponse"] & {
+            payload: components["schemas"]["ProductOutput"][];
         };
         FavouriteToggled: components["schemas"]["BaseResponse"] & {
             payload: components["schemas"]["ObjectId"][];
@@ -1625,7 +1631,7 @@ export interface components {
                 [name: string]: unknown;
             };
             content: {
-                "application/json": components["schemas"]["FavouritesResponse"];
+                "application/json": components["schemas"]["FavouritesIdsResponse"] | components["schemas"]["FavouritesPopulatedResponse"];
             };
         };
         /** @description User favourite toggled */

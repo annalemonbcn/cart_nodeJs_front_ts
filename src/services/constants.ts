@@ -31,7 +31,8 @@ const products = {
 }
 
 const favourites = {
-  getFavourites: () => '/user/favourites',
+  getFavourites: (params?: { populate?: boolean }) =>
+    params?.populate ? '/user/favourites?populate=true' : '/user/favourites',
   toggleFavourite: (productId: string) => `/user/favourites/${productId}`
 }
 

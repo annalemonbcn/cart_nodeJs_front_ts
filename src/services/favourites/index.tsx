@@ -1,13 +1,21 @@
 import apiClient from '@/lib/axios'
 import { API_ROUTES } from '../constants'
-import type { FavouriteResponseDto, FavouriteToggledResponseDto } from './types'
+import type { FavouritesIdsResponseDto, FavouritesPopulatedResponseDto, FavouriteToggledResponseDto } from './types'
 
 const COMMON_KEYS = ['favourites']
 
-const getFavourites = () => ({
-  queryKey: [...COMMON_KEYS, 'getFavourites'],
-  queryFn: async (): Promise<FavouriteResponseDto> => {
+const getFavouriteIds = () => ({
+  queryKey: [...COMMON_KEYS, 'getFavourites', 'ids'],
+  queryFn: async (): Promise<FavouritesIdsResponseDto> => {
     const response = await apiClient.get(API_ROUTES.favourites.getFavourites())
+    return response.data
+  }
+})
+
+const getFavouriteProducts = () => ({
+  queryKey: [...COMMON_KEYS, 'getFavourites', 'products'],
+  queryFn: async (): Promise<FavouritesPopulatedResponseDto> => {
+    const response = await apiClient.get(API_ROUTES.favourites.getFavourites({ populate: true }))
     return response.data
   }
 })
@@ -21,7 +29,8 @@ const toggleFavourite = () => ({
 })
 
 const favouritesServices = () => ({
-  getFavourites,
+  getFavouriteIds,
+  getFavouriteProducts,
   toggleFavourite
 })
 

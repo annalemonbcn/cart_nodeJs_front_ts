@@ -10,21 +10,23 @@ const useToggleFavourite = () => {
   const { toggleFavourite } = favouritesServices()
 
   const queryClient = useQueryClient()
-  const { getFavourites } = favouritesServices()
+  const { getFavouriteIds, getFavouriteProducts } = favouritesServices()
 
   const { mutate, isPending } = useMutation({
     ...toggleFavourite(),
     onSuccess: (data) => {
-      const { queryKey } = getFavourites()
+      const { queryKey: getFavouriteIdsQueryKey } = getFavouriteIds()
+      const { queryKey: getFavouriteProductsQueryKey } = getFavouriteProducts()
       const action = data.meta?.action
-      toast.success(action === 'added' ? 'Favourite added' : 'Favourite removed')
+      toast.success(action === 'added' ? 'Product added to your wishlist' : 'Product removed from your wishlist')
 
-      queryClient.invalidateQueries({ queryKey })
+      queryClient.invalidateQueries({ queryKey: getFavouriteIdsQueryKey })
+      queryClient.invalidateQueries({ queryKey: getFavouriteProductsQueryKey })
     },
     onError: (error: AxiosError<ApiErrorResponse>) => {
       const errorCode = error.status
       if (errorCode === 401) {
-        toast.error('You need to be logged in to add a favourite')
+        toast.error('You need to be logged in to add a product to your wishlist')
         return
       }
       toast.error(getErrorMessage(error))
@@ -34,10 +36,10 @@ const useToggleFavourite = () => {
   return { toggleFavourite: mutate, isPending }
 }
 
-const useGetFavourites = () => {
-  const { getFavourites } = favouritesServices()
+const useGetFavouritesIds = () => {
+  const { getFavouriteIds } = favouritesServices()
 
-  const { data, isLoading } = useQuery(getFavourites())
+  const { data, isLoading } = useQuery(getFavouriteIds())
 
   const favourites: string[] = useMemo(() => {
     if (!data || isLoading) return []
@@ -48,4 +50,4 @@ const useGetFavourites = () => {
   return { favourites, isLoading }
 }
 
-export { useToggleFavourite, useGetFavourites }
+export { useToggleFavourite, useGetFavouritesIds }

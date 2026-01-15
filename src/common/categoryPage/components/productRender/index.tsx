@@ -2,6 +2,7 @@ import FlexContainer from '@/components/flexContainer'
 import { Tag } from '@/components/tag'
 import Text from '@/components/text'
 import HeartIcon from '@/icons/heart.svg?react'
+import { theme } from '@/theme'
 import {
   NoImage,
   StyledFavouriteButton,
@@ -10,7 +11,7 @@ import {
   StyledProduct,
   StyledTextContainer
 } from './styles'
-import { useGetFavourites, useToggleFavourite } from '../../hooks'
+import { useGetFavouritesIds, useToggleFavourite } from '../../hooks'
 import type { ProductRenderProps } from './types'
 
 const NoImageRender = () => (
@@ -23,7 +24,7 @@ const NoImageRender = () => (
 
 const Favourite = ({ productId }: { productId: string }) => {
   const { toggleFavourite, isPending } = useToggleFavourite()
-  const { favourites, isLoading } = useGetFavourites()
+  const { favourites, isLoading } = useGetFavouritesIds()
 
   const isFavourited = favourites.includes(productId)
 
@@ -36,7 +37,7 @@ const Favourite = ({ productId }: { productId: string }) => {
       onClick={handleToggleFavourite}
       disabled={isPending || isLoading}
     >
-      <HeartIcon width={16} height={16} fill={isFavourited ? '#807d7e' : '#ffffff'} />
+      <HeartIcon width={16} height={16} fill={isFavourited ? theme.colors.mediumNeutral : theme.colors.white} />
     </StyledFavouriteButton>
   )
 }

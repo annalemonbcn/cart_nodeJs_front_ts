@@ -1,7 +1,7 @@
 import Text from "@/components/text";
-import type { ITitleProps } from "./types";
+import type { TitleProps } from "./types";
 
-const Title = ({ title }: ITitleProps) => (
+const Title = ({ title }: TitleProps) => (
   <Text size="s6" weight="bold" color="darkNeutral">
     {title}
   </Text>
