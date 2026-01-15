@@ -1,11 +1,13 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import FlexContainer from '@/components/flexContainer'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { theme } from '@/theme'
 import { StyledButton } from './styles'
 import { getHighlights } from './utils'
-import type { IHighlightedItem } from './types'
+import type { SingleHighlightProps } from './types'
 import type { ButtonVariant } from '@/components/button/types'
 
-const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {
+const SingleHighlight = ({ icon: Icon, path }: SingleHighlightProps) => {
   const navigate = useNavigate()
 
   const location = useLocation()
@@ -27,7 +29,8 @@ const HighlightedItem = ({ icon: Icon, path }: IHighlightedItem) => {
   )
 }
 
-const FastLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
+const Highlights = () => {
+  const isMobile = useMediaQuery(theme.mq.js.down('md'))
   const highlights = getHighlights(isMobile)
 
   return (
@@ -36,10 +39,10 @@ const FastLinks = ({ isMobile = false }: { isMobile?: boolean }) => {
         const path = highlight.path.split('/')
         const lastPath = path[path.length - 1]
 
-        return <HighlightedItem key={`highlight-item-${lastPath}`} icon={highlight.icon} path={highlight.path} />
+        return <SingleHighlight key={`highlight-item-${lastPath}`} icon={highlight.icon} path={highlight.path} />
       })}
     </FlexContainer>
   )
 }
 
-export { FastLinks }
+export { Highlights }
