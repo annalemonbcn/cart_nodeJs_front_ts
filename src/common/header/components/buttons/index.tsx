@@ -12,7 +12,7 @@ const Buttons = () => {
   const goToLogin = () => navigate(routeMap.login.path)
 
   return (
-    <FlexContainer justifyContent="flex-end" gap="md">
+    <FlexContainer justifyContent="flex-end" gap="md" className="auth">
       {!isAuthenticated && (
         <StyledButton variant="primary" onClick={goToLogin}>
           Login

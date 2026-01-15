@@ -9,7 +9,7 @@ const Navbar = () => {
   const { pathname } = location
 
   return (
-    <FlexContainer alignItems="center" gap="xl2">
+    <FlexContainer alignItems="center" gap="xl2" className="nav">
       {navLinks.map((link, idx) => {
         const isActive = link.path === pathname
 
