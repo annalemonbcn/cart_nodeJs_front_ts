@@ -2,35 +2,23 @@ import { RectangularListFilter } from '@/common/filters/components/rectangularLi
 import { TextListFilter } from '@/common/filters/components/textListFilter'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { theme } from '@/theme'
+import type { RectangularListFilterProps } from '@/common/filters/components/rectangularListFilter/types'
 
-type CategoriesFilterProps = {
-  categories: string[]
-}
-
-const CategoriesFilter = ({ categories }: CategoriesFilterProps) => {
+const CategoriesFilter = ({ categories }: { categories: string[] }) => {
   const isMobile = useMediaQuery(theme.mq.js.down('md'))
 
-  if (isMobile)
-    return (
-      <RectangularListFilter
-        filterName="category"
-        list={categories}
-        title="Categories"
-        noDataText="No sizes available for this criteria"
-        defaultOpen
-        useAll
-      />
-    )
+  const commonProps: RectangularListFilterProps = {
+    filterName: 'category',
+    list: categories,
+    title: 'Categories',
+    noDataText: 'No categories available for this criteria',
+    defaultOpen: true,
+    useAll: isMobile ? true : false
+  }
 
-  return (
-    <TextListFilter
-      filterName="category"
-      title="Categories"
-      list={categories}
-      noDataText="No categories available for this criteria"
-      defaultOpen
-    />
-  )
+  if (isMobile) return <RectangularListFilter {...commonProps} />
+
+  return <TextListFilter {...commonProps} />
 }
 
 export { CategoriesFilter }
