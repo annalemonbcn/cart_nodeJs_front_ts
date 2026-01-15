@@ -4,7 +4,7 @@ import Text from '@/components/text'
 import { StyledContainer } from './styles'
 import { ALL_KEY } from '../../constants'
 import { useMultiSelectParam } from '../../hooks/useMultiSelectParam'
-import type { IRectangularListFilter } from './types'
+import type { RectangularListFilterProps } from './types'
 
 const RectangularListFilter = ({
   list,
@@ -13,7 +13,7 @@ const RectangularListFilter = ({
   useAll,
   noDataText,
   defaultOpen
-}: IRectangularListFilter) => {
+}: RectangularListFilterProps) => {
   const { toggle, isActive, selected, reset } = useMultiSelectParam({
     param: filterName,
     allKey: useAll ? 'all' : null

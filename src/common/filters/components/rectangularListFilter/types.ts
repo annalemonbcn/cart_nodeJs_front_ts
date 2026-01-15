@@ -1,5 +1,5 @@
 import type { ListFilterProps } from '../../types'
 
-type IRectangularListFilter = ListFilterProps
+type RectangularListFilterProps = ListFilterProps
 
-export type { IRectangularListFilter }
+export type { RectangularListFilterProps }

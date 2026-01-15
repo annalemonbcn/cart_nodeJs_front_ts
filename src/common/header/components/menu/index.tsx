@@ -31,7 +31,6 @@ const MenuDrawer = () => {
           <Buttons />
         </FlexContainer>
       </Drawer.Body>
-      <Drawer.Footer>Footer here</Drawer.Footer>
     </Drawer>
   )
 }
