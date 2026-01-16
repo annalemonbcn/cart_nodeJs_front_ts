@@ -1,6 +1,8 @@
-interface INoDataProps {
+type NoDataProps = {
   title: string
   description: string
+  children?: React.ReactNode
+  align?: 'center' | 'left'
 }
 
-export type { INoDataProps }
+export type { NoDataProps }

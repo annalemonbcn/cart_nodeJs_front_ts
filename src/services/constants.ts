@@ -30,12 +30,19 @@ const products = {
   getFilters: () => '/products/filters'
 }
 
+const favourites = {
+  getFavourites: (params?: { populate?: boolean }) =>
+    params?.populate ? '/user/favourites?populate=true' : '/user/favourites',
+  toggleFavourite: (productId: string) => `/user/favourites/${productId}`
+}
+
 const API_ROUTES = {
   auth,
   user,
   address,
   cart,
-  products
+  products,
+  favourites
 } as const
 
 export { API_ROUTES }

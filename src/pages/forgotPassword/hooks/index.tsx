@@ -1,11 +1,11 @@
-import { useAuthServices } from '@/services/auth'
-import { getErrorMessage } from '@/utils/objects'
-import type { ApiErrorResponse } from '@/variables/types/global.types'
 import { useMutation } from '@tanstack/react-query'
-import type { AxiosError } from 'axios'
 import { type UseFormReset } from 'react-hook-form'
 import { toast } from 'sonner'
+import { useAuthServices } from '@/services/auth'
+import { getErrorMessage } from '@/utils/objects'
 import type { ForgotPasswordFormShape } from '../types'
+import type { ApiErrorResponse } from '@/variables/types/global.types'
+import type { AxiosError } from 'axios'
 
 const useForgotPassword = (resetForm: UseFormReset<ForgotPasswordFormShape>) => {
   const { forgotPassword } = useAuthServices()

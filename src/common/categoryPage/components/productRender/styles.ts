@@ -1,9 +1,11 @@
 import styled from 'styled-components'
+import Button from '@/components/button'
 import FlexContainer from '@/components/flexContainer'
 import { t } from '@/styles/themeHelpers'
 
 const StyledProduct = styled(FlexContainer)`
   min-width: 0;
+  position: relative;
 `
 
 const StyledImageContainer = styled.div`
@@ -35,4 +37,13 @@ const StyledTextContainer = styled(FlexContainer)`
   flex: '1 1 auto';
 `
 
-export { StyledProduct, StyledImageContainer, StyledImg, StyledTextContainer, NoImage }
+const StyledFavouriteButton = styled(Button)`
+  max-width: ${t.space('xl2')};
+  max-height: ${t.space('xl2')};
+
+  position: absolute;
+  top: ${t.space('sm2')};
+  right: ${t.space('sm2')};
+`
+
+export { StyledProduct, StyledImageContainer, StyledImg, StyledTextContainer, NoImage, StyledFavouriteButton }

@@ -1,10 +1,19 @@
 import FlexContainer from '@/components/flexContainer'
 import { Tag } from '@/components/tag'
 import Text from '@/components/text'
-import { NoImage, StyledImageContainer, StyledImg, StyledProduct, StyledTextContainer } from './styles'
-import type { IProductRenderProps } from './types'
+import HeartIcon from '@/icons/heart.svg?react'
+import { theme } from '@/theme'
+import {
+  NoImage,
+  StyledFavouriteButton,
+  StyledImageContainer,
+  StyledImg,
+  StyledProduct,
+  StyledTextContainer
+} from './styles'
+import { useGetFavouritesIds, useToggleFavourite } from '../../hooks'
+import type { ProductRenderProps } from './types'
 
-// TODO: test noImageRender with more than 1 product in db
 const NoImageRender = () => (
   <NoImage>
     <Text size="s3" weight="medium">
@@ -13,14 +22,32 @@ const NoImageRender = () => (
   </NoImage>
 )
 
-const ProductRender = ({ product }: IProductRenderProps) => {
-  const displayNoImage = product.thumbnails.length === 0
+const Favourite = ({ productId }: { productId: string }) => {
+  const { toggleFavourite, isPending } = useToggleFavourite()
+  const { favourites, isLoading } = useGetFavouritesIds()
 
-  // eslint-disable-next-line no-console
-  const handleClick = () => console.log('open productPageeee')
+  const isFavourited = favourites.includes(productId)
+
+  const handleToggleFavourite = () => toggleFavourite(productId)
 
   return (
-    <StyledProduct flexDirection="column" gap="xl" onClick={handleClick}>
+    <StyledFavouriteButton
+      variant="tertiary"
+      fitContent
+      onClick={handleToggleFavourite}
+      disabled={isPending || isLoading}
+    >
+      <HeartIcon width={16} height={16} fill={isFavourited ? theme.colors.mediumNeutral : theme.colors.white} />
+    </StyledFavouriteButton>
+  )
+}
+
+const ProductRender = ({ product }: ProductRenderProps) => {
+  const displayNoImage = product.thumbnails.length === 0
+
+  return (
+    <StyledProduct flexDirection="column" gap="xl">
+      <Favourite productId={product.id} />
       <StyledImageContainer>
         {displayNoImage ? <NoImageRender /> : <StyledImg src={product.thumbnails.at(0)} />}
       </StyledImageContainer>
