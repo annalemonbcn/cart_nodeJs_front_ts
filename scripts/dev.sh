@@ -12,4 +12,4 @@ export NVM_DIR="$HOME/.nvm"
 nvm use --install
 
 # Arranca tu dev server
-vite
+vite --host

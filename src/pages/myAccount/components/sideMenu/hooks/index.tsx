@@ -4,14 +4,14 @@ import OrdersIcon from '@/icons/orders.svg?react'
 import ProfileIcon from '@/icons/profile.svg?react'
 import SignOutIcon from '@/icons/sign-out.svg?react'
 import { routeMap } from '@/routes/utils'
-import type { VerticalMenuOption } from '@/common/menus/verticalMenu/types'
+import type { ProfileMenuItem } from '../../profileMenu/types'
 import type { RouteName } from '@/routes/routesData'
 
 type MenuOption = Extract<RouteName, 'wishlist' | 'orders' | 'profile' | 'signOut'>
 const menuOptions = ['profile', 'orders', 'wishlist', 'signOut'] as const satisfies readonly MenuOption[]
 
 const getOptionIcon = (option: MenuOption) => {
-  const iconsMap: Record<MenuOption, VerticalMenuOption['icon']> = {
+  const iconsMap: Record<MenuOption, ProfileMenuItem['icon']> = {
     wishlist: HeartIcon,
     profile: ProfileIcon,
     orders: OrdersIcon,
@@ -23,7 +23,7 @@ const getOptionIcon = (option: MenuOption) => {
 const useGenerateMenuOptions = () => {
   const { pathname } = useLocation()
 
-  const options: VerticalMenuOption[] = menuOptions.map((option) => ({
+  const options: ProfileMenuItem[] = menuOptions.map((option) => ({
     icon: getOptionIcon(option),
     path: routeMap[option].path,
     label: routeMap[option].title,

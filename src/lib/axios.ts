@@ -1,5 +1,5 @@
-import { STORAGE_KEYS } from '@/variables/constants'
 import axios from 'axios'
+import { STORAGE_KEYS } from '@/variables/constants'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 

@@ -1,5 +1,3 @@
-import { HorizontalMenu } from '@/common/menus/horizontalMenu'
-import { VerticalMenu } from '@/common/menus/verticalMenu'
 import Title from '@/common/titles/title'
 import FlexContainer from '@/components/flexContainer'
 import Loader from '@/components/loader'
@@ -11,13 +9,12 @@ import { theme } from '@/theme'
 import { useDisplayBackButton, useGenerateMenuOptions } from './hooks'
 import { StyledSideMenu } from './styles'
 import { BackButton } from '../backButton'
+import { ProfileMenu } from '../profileMenu'
 
 const Menu = () => {
   const options = useGenerateMenuOptions()
 
-  const isDesktop = useMediaQuery(theme.mq.js.up('md'))
-
-  return <>{isDesktop ? <VerticalMenu options={options} /> : <HorizontalMenu options={options} />}</>
+  return <ProfileMenu {...{ options }} />
 }
 
 const SideMenu = () => {
